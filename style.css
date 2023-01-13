@@ -227,14 +227,14 @@ nav li a {
   font-family: 'Raleway';
   font-size: 20px;
   padding: 20px;
-  color: white ;
+  color: rgba(255, 255, 255, 0) !important;
   font-weight: bold;
   display: inline;
   max-width:100%;
 }
 .navbar-custom {
   background-color:#005E9f;
-  height: 150px;
+  height: 80px;
   max-width: 100%;
   padding-top: 30px;
   margin-left: auto;
