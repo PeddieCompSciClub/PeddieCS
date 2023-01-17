@@ -77,11 +77,12 @@ ot {
   
   p {
     color: #f5dbd1;
+    margin:0;
   }
   
   .logo {
     box-sizing: border-box;
-    max-width: 100%;
+    width:auto;
     height: 30px;
 
   }
@@ -207,7 +208,6 @@ ot {
 .navbar-brand {
   font-size: larger;
   color:white;
-  
 }
 .nav{
   padding:0px;
@@ -236,14 +236,11 @@ nav li a {
   background-color:#005E9f;
   height: 80px;
   max-width: 100%;
-  padding-top: 30px;
   margin-left: auto;
   margin-right: auto;
 }
 .navbar-box {
-  height: 150px;
   max-width: 100%;
-  padding-top: 30px;
   margin-left: auto;
   margin-right: auto;
 }
