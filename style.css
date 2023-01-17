@@ -208,6 +208,8 @@ ot {
 .navbar-brand {
   font-size: larger;
   color:white;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .nav{
   padding:0px;
@@ -219,8 +221,8 @@ nav ul {
   float: center;
   justify-content: space-between;
   list-style-type: none;
-max-width: 100%;
-margin:10px;
+  max-width: 100%;
+  align-items: center;
 }
 
 nav li a {
@@ -657,4 +659,31 @@ flex:30%;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.err404 {
+  margin-top: 4rem;
+  text-align:center;
+  font-style: normal;
+  font-family: 'Raleway',serif;
+  color: #f5dbd1
+}
+.err404 h1 {
+  font-weight: bold;
+  font-size: 20rem;
+  vertical-align: center;
+}
+.err404 h2 {
+  text-align: center;
+  font-style: normal;
+  font-weight:normal;
+  font-family: 'Raleway',serif;
+  font-size: 2rem;
+}
+.err404 h3 {
+  margin-top: 10rem;
+  font-size: 1rem;
+}
+.err404 h3 a{
+  color: #5fb7ff
 }
