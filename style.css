@@ -1,137 +1,4 @@
 
-:root{
-  /*Color variables*/
-  --background: #004a80;
-  --navbar: #005E9f;
-  --text: white;
-  --link: #5fb7ff
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  font-style: inherit;
-  list-style-type: none;
-  font-family: "Raleway", sans-serif;
-}
-
-body {
-  margin: 0px;
-  background-color: var(--background);
-}
-
-body,
-html {
-  height: 100%;
-  margin: 0;
-  overflow-x: hidden;
-}
-
-h2 {
-  text-align: center;
-  font-family: 'Raleway', serif;
-  font-size: 80px;
-  color: var(--text);
-  font-weight: bold;
-  padding: 15px;
-}
-
-a {
-  transition: 0.2s;
-  text-decoration: none;
-  color: var(--text);
-}
-
-a:hover {
-  transition: 0.2s;
-  color: #383938;
-}
-
-p {
-  color: var(--text);
-  margin: 0;
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/*Navbar stuff*/
-.navbar-brand {
-  font-size: larger;
-  color: var(--text);
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
-.nav {
-  padding: 0px;
-  margin: 0px;
-}
-
-nav ul {
-  padding: 0px;
-  display: flex;
-  float: center;
-  justify-content: space-between;
-  list-style-type: none;
-  max-width: 100%;
-  align-items: center;
-}
-
-nav li a {
-  font-family: 'Raleway';
-  font-size: 20px;
-  padding: 20px;
-  color: rgba(255, 255, 255, 0) !important;
-  font-weight: bold;
-  display: inline;
-  max-width: 100%;
-}
-
-.navbar-custom {
-  background-color: var(--navbar);
-  height: 80px;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.navbar-custom li a:hover {
-  text-decoration: 4px underline;
-  text-decoration-color: var(--text);
-}
-
-.navbar-box {
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.logo {
-  box-sizing: border-box;
-  width: auto;
-  height: 50px;
-}
-
-.logo1 {
-  box-sizing: border-box;
-  width: auto;
-  height: 30px;
-}
-
 
 /*Error 404 redirect page*/
 .err404 {
@@ -145,7 +12,7 @@ nav li a {
   font-weight: bold;
   font-size: 20rem;
   vertical-align: center;
-  color: var(--text)
+  color: var(--text);
 }
 
 .err404 h2 {
@@ -154,15 +21,15 @@ nav li a {
   font-weight: normal;
   font-family: 'Raleway', serif;
   font-size: 2rem;
-  color: var(--text)
+  color: var(--text);
 }
 
 .err404 h3 {
-  margin-top: 5rem;
+  /* margin-top: 5rem; */
   font-size: 1rem;
-  color: var(--text)
+  color: var(--text);
 }
 
 .err404 h3 a {
-  color: #5fb7ff
+  color: var(--link);
 }
