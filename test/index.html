@@ -20,13 +20,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
 
   <script>
-    function submitLoginFunc() {
-
-      if (window.jQuery) {
+    function submitForm() {
+      console.log("test")
+      //if (window.jQuery) {
         /**
          * This runs when the user submits their login data, and submits their data to the backend, if the message says login was 
          * sucessful then we redirect them to login, otherwise we inform them that there is an error 
         */
+       /*
         $.post("https://peddiecs.peddie.org/nodejs/login", {
           email: $('#email').val(),
           password: $('#password').val()
@@ -42,13 +43,9 @@
           }
 
         });
-
-      }
+*/
+      //}
     }
-    // this is an old function, will delete later when we can test
-    $(document).ready(function () {
-      $('#test').removeClass('invisible').addClass('visible');
-    });
   </script>
 
   <link rel="stylesheet" href="style.css">
@@ -106,12 +103,12 @@
     </div>
   </nav>
   <header>
-    <form onsubmit="">
+    <form onsubmit="return false">
       <label for="fname">First name:</label><br>
       <input type="text" id="fname" name="fname" value=""><br>
       <label for="lname">Last name:</label><br>
       <input type="text" id="lname" name="lname" value=""><br><br>
-      <button class="submit">Submit</button>
+      <button class="submit" type="button" onclick="submitForm()">Submit</button>
     </form>
   </header>
 
