@@ -1,4 +1,6 @@
 var mysql = require('mysql');
+var express = require('express');
+var router = express.Router();
 
 var con = mysql.createConnection({
     host: "localhost",
@@ -25,3 +27,7 @@ function addMember(firstName, lastName, email) {
         });
     });
 }
+
+router.post('/login', function(req, res) {
+
+});
