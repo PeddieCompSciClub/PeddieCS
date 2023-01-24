@@ -19,32 +19,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
 
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script>
     function submitForm() {
       console.log("test")
-      //if (window.jQuery) {
+      if (window.jQuery) {
+        console.log("jQuery")
         /**
          * This runs when the user submits their login data, and submits their data to the backend, if the message says login was 
          * sucessful then we redirect them to login, otherwise we inform them that there is an error 
         */
-       /*
-        $.post("https://peddiecs.peddie.org/nodejs/login", {
-          email: $('#email').val(),
-          password: $('#password').val()
+        $.post("https://peddiecs.peddie.org/nodejs/test", {
         }, function (res) {
 
           if (res.message == "success") {
-            window.location.replace("https://exchange.peddie.org/index.html");
+            console.log("success")
           } else {
-            if (res.message) {
-              alert(res.message);
-            }
-            window.location.replace("https://exchange.peddie.org");
+            console.log(res.message)
           }
 
         });
-*/
-      //}
+      }
     }
   </script>
 
