@@ -19,6 +19,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
 
+  <script src="members.js"></script>
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="/main.css">
   <link rel="icon" href="/favicon.ico">
@@ -79,31 +81,31 @@
   <!-- Tabs for different grades -->
   <div class="tabcontainer">
     <div class="tab">
-      <button class="tablinks active" onclick="openTab(event, '2023')">2023</button>
-      <button class="tablinks" onclick="openTab(event, '2024')">2024</button>
-      <button class="tablinks" onclick="openTab(event, '2025')">2025</button>
-      <button class="tablinks" onclick="openTab(event, '2026')">2026</button>
+      <button class="tablinks active" onclick="openTab(event, 'Seniors')">Seniors</button>
+      <button class="tablinks" onclick="openTab(event, 'Juniors')">Juniors</button>
+      <button class="tablinks" onclick="openTab(event, 'Sophomores')">Sophomores</button>
+      <button class="tablinks" onclick="openTab(event, 'Freshmen')">Freshmen</button>
       <button class="tablinks" onclick="openTab(event, 'Faculty')">Faculty</button>
       <button class="tablinks" onclick="openTab(event, 'Alumni')">Alumni</button>
     </div>
 
     <!-- Tab content -->
-    <div id="2023" class="tabcontent" style="display:block">
+    <div id="Seniors" class="tabcontent" style="display:block">
       <h3>Class of 2023</h3>
       <p>Test2023</p>
     </div>
 
-    <div id="2024" class="tabcontent">
+    <div id="Juniors" class="tabcontent">
       <h3>Class of 2024</h3>
       <p>Test2024</p>
     </div>
 
-    <div id="2025" class="tabcontent">
+    <div id="Sophomores" class="tabcontent">
       <h3>Class of 2025</h3>
       <p>Test2025</p>
     </div>
 
-    <div id="2026" class="tabcontent">
+    <div id="Freshmen" class="tabcontent">
       <h3>Class of 2026</h3>
       <p>Test2026</p>
     </div>
@@ -119,6 +121,7 @@
     </div>
 
     <script>
+      //open the tab with the corresponding name
       function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
