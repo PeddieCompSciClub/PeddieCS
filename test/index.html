@@ -23,7 +23,7 @@
   <script>
     function submitForm() {
       console.log("test")
-      if (window.jQuery) {
+      if (window.jQuery && false) {
         console.log("jQuery")
         /**
          * This runs when the user submits their login data, and submits their data to the backend, if the message says login was 
@@ -40,8 +40,11 @@
 
         });
       }
+
+      test();
     }
   </script>
+  <script src="/nodejs/app.js"></script>
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="/main.css">
