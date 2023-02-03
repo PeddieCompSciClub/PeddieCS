@@ -6,62 +6,34 @@ var con = mysql.createConnection({
     host: "localhost",
     user: "admincs",
     password: "BeatBlair1864",
-    database: "pets",
+    database: "peddieCS",
     port: 3306
 });
 
 console.log("RUN")
 
-write();
+addMember();
 
 function read() {
     con.connect(function (err) {
         if (err) throw err;
         console.log("Connected!");
 
-        con.query("SELECT * FROM cats", function (err, result, fields) {
+        con.query("SELECT * FROM members", function (err, result, fields) {
             if (err) throw err;
             console.log(result);
         });
     });
 }
 
-function write() {
+function addMember() {
     con.connect(function (err) {
         if (err) throw err;
         console.log("Connected!");
-        var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
+        var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('Tomaz', 'Chevres', 'tchevres-24@peddie.org', 2024)";
         con.query(sql, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
         });
     });
 }
-
-// function test(){
-//     console.log("Tested");
-// }
-
-// function parseJSON(json) {
-//     return JSON.parse(json);
-// }
-
-// function addMember(firstName, lastName, email) {
-//     con.connect(function (err) {
-//         if (err) throw err;
-//         console.log("Connected!");
-//         var sql = "INSERT INTO `cats` (`id`, `name`, `owner`, `birth`) VALUES ";
-//         var str = sql + "(" + "\'" + firstName + "\', " + "\'" + lastName + "\', " + "\'" + email + "\'" + ");";
-//         console.log(str);
-//         con.query(str, function (err, result) {
-//             if (err) throw err;
-//             console.log("Number of records inserted: " + result.affectedRows);
-//         });
-//     });
-// }
-
-// router.post('/test', function(req, res) {
-//     console.log("reached test method")
-//     res.json({"message":"success"});
-//     res.end();
-// });
