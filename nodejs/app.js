@@ -12,12 +12,14 @@ var con = mysql.createConnection({
 
 console.log("RUN")
 
-// function connect() {
-//     con.connect(function (err) {
-//         if (err) throw err;
-//         console.log("Connected!");
-//     });
-// }
+connect();
+
+function connect() {
+    con.connect(function (err) {
+        if (err) throw err;
+        console.log("Connected!");
+    });
+}
 
 // function test(){
 //     console.log("Tested");
