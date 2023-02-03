@@ -12,9 +12,9 @@ var con = mysql.createConnection({
 
 console.log("RUN")
 
-connect();
+write();
 
-function connect() {
+function read() {
     con.connect(function (err) {
         if (err) throw err;
         console.log("Connected!");
@@ -22,6 +22,18 @@ function connect() {
         con.query("SELECT * FROM cats", function (err, result, fields) {
             if (err) throw err;
             console.log(result);
+        });
+    });
+}
+
+function write() {
+    con.connect(function (err) {
+        if (err) throw err;
+        console.log("Connected!");
+        var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
+        con.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log("1 record inserted");
         });
     });
 }
