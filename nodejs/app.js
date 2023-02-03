@@ -19,7 +19,7 @@ function connect() {
         if (err) throw err;
         console.log("Connected!");
 
-        con.query("SELECT * FROM customers", function (err, result, fields) {
+        con.query("SELECT * FROM cats", function (err, result, fields) {
             if (err) throw err;
             console.log(result);
         });
