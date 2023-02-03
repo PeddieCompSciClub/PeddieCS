@@ -1,14 +1,14 @@
-// var mysql = require('mysql');
-// var express = require('express');
-// var router = express.Router();
+var mysql = require('mysql');
+var express = require('express');
+var router = express.Router();
 
-// var con = mysql.createConnection({
-//     host: "localhost",
-//     user: "admincs",
-//     password: "BeatBlair1864",
-//     database: "pets",
-//     port: 3306
-// });
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "admincs",
+    password: "BeatBlair1864",
+    database: "pets",
+    port: 3306
+});
 
 console.log("RUN")
 
