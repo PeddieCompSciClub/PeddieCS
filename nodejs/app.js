@@ -12,7 +12,7 @@ var con = mysql.createConnection({
 
 console.log("RUN")
 
-addMember();
+addMember("Jack","Pometti","jpometti-23@peddie.org",2023);
 
 function read() {
     con.connect(function (err) {
@@ -26,11 +26,11 @@ function read() {
     });
 }
 
-function addMember() {
+function addMember(first_name, last_name, email, year) {
     con.connect(function (err) {
         if (err) throw err;
         console.log("Connected!");
-        var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('Tomaz', 'Chevres', 'tchevres-24@peddie.org', 2024)";
+        var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('"+first_name+"', '"+last_name+"', '"+last_name+"', "+email+")";
         con.query(sql, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
