@@ -1,25 +1,27 @@
-var mysql = require('mysql');
-var express = require('express');
-var router = express.Router();
+// var mysql = require('mysql');
+// var express = require('express');
+// var router = express.Router();
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "admincs",
-    password: "BeatBlair1864",
-    database: "pets",
-    port: 3306
-});
+// var con = mysql.createConnection({
+//     host: "localhost",
+//     user: "admincs",
+//     password: "BeatBlair1864",
+//     database: "pets",
+//     port: 3306
+// });
 
-function connect() {
-    con.connect(function (err) {
-        if (err) throw err;
-        console.log("Connected!");
-    });
-}
+console.log("RUN")
 
-function test(){
-    console.log("Tested");
-}
+// function connect() {
+//     con.connect(function (err) {
+//         if (err) throw err;
+//         console.log("Connected!");
+//     });
+// }
+
+// function test(){
+//     console.log("Tested");
+// }
 
 // function parseJSON(json) {
 //     return JSON.parse(json);
