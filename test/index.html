@@ -23,7 +23,7 @@
   <script>
     function submitForm() {
       console.log("test")
-      if (window.jQuery) {
+      if (window.jQuery && false) {
         console.log("jQuery")
 
         $.post("https://peddiecs.peddie.org/nodejs/test", {
@@ -37,8 +37,11 @@
 
         });
       }
+
+      test();
     }
   </script>
+  <script type="text/javascript" src="/nodejs/app.js"></script>
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="/main.css">
