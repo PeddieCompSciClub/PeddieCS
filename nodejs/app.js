@@ -33,7 +33,7 @@ function addMember(first_name, last_name, email, year) {
     con.connect(function (err) {
         if (err) throw err;
         console.log("Connected!");
-        var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('"+first_name+"', '"+last_name+"', '"+last_name+"', "+email+")";
+        var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('"+first_name+"', '"+last_name+"', '"+email+"', "+year+")";
         con.query(sql, function (err, result) {
             if (err) throw err;
             console.log("1 record inserted");
