@@ -12,7 +12,10 @@ var con = mysql.createConnection({
 
 console.log("RUN")
 
-addMember("Jack","Pometti","jpometti-23@peddie.org",2023);
+addMember("Aakarsh","Mamawala","amamawala-25@peddie.org",2025);
+addMember("Ananya", "Hari", "ahari-25@peddie.org", 2025);
+addMember("Sophia","Wu","swu-24@peddie.org",2024);
+addMember("Ryan","Rong","rrong-24@peddie.org",2024);
 
 function read() {
     con.connect(function (err) {
