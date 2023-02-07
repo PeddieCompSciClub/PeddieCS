@@ -12,10 +12,9 @@ var con = mysql.createConnection({
 
 console.log("RUN")
 
-addMember("Aakarsh","Mamawala","amamawala-25@peddie.org",2025);
-// addMember("Ananya", "Hari", "ahari-25@peddie.org", 2025);
-// addMember("Sophia","Wu","swu-24@peddie.org",2024);
-// addMember("Ryan","Rong","rrong-24@peddie.org",2024);
+addMember("Ananya", "Hari", "ahari-25@peddie.org", 2025);
+addMember("Sophia","Wu","swu-24@peddie.org",2024);
+addMember("Ryan","Rong","rrong-24@peddie.org",2024);
 
 function read() {
     con.connect(function (err) {
@@ -40,6 +39,6 @@ function addMember(first_name, last_name, email, year) {
             console.log("1 record inserted");
         });
         con.end();
+        console.log("Ended");
     });
-    console.log("Ended");
 }
