@@ -55,7 +55,7 @@ function addMember(first_name, last_name, email, year) {
         var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('" + first_name + "', '" + last_name + "', '" + email + "', " + year + ")";
         con.query(sql, function (err, result) {
             if (err) throw err;
-            console.log("1 record inserted");
+            console.log(first_name+" "+last_name+" added to members");
         });
         con.end();
         console.log("Ended");
