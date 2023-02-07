@@ -39,7 +39,7 @@ function addMember(first_name, last_name, email, year) {
             if (err) throw err;
             console.log("1 record inserted");
         });
+        con.end();
     });
-    con.end();
     console.log("Ended");
 }
