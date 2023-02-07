@@ -18,13 +18,27 @@ console.log("RUN")
 
 /*
     Allows user to pass arguments through command line
-    for example:
-    $ node app.js addMember Tomaz Chevres tchevres-24@peddie.org 2024
-    will have values of "addMember" "Tomaz" "Chevres" "tchevres-24@peddie.org" 2024
+    input:
+    $ node app.js debug Tomaz Chevres tchevres-24@peddie.org 2024
+    output:
+    0 '/usr/bin/node'
+    1 '/var/www/CSProjects/nodejs/app.js'
+    2 'debug'
+    3 'Tomaz'
+    4 'Chevres'
+    5 'tchevres-24@peddie.org'
+    6 '2024'
 */
-process.argv.forEach((value, index) => {
-    console.log(index, value);
-});
+switch (process.argv[2]){
+    case 'debug':
+        process.argv.forEach((value, index) => {
+            console.log(index, value);
+        });  
+        break;
+    case 'addMember':
+        addMember(process.argv[3],process.argv[4],process.argv[5],parseInt(process.argv[6]));
+        break;
+}
 
 function read() {
     con.connect(function (err) {
