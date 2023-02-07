@@ -10,11 +10,6 @@ var con = mysql.createConnection({
     port: 3306
 });
 
-console.log("RUN")
-
-// addMember("Ananya", "Hari", "ahari-25@peddie.org", 2025);
-// addMember("Sophia", "Wu", "swu-24@peddie.org", 2024);
-// addMember("Ryan", "Rong", "rrong-24@peddie.org", 2024);
 
 /*
     Allows user to pass arguments through command line
