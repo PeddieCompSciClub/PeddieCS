@@ -13,7 +13,9 @@ var con = mysql.createConnection({
 console.log("RUN")
 
 addMember("Ananya", "Hari", "ahari-25@peddie.org", 2025);
+await delay(1000);
 addMember("Sophia","Wu","swu-24@peddie.org",2024);
+await delay(1000);
 addMember("Ryan","Rong","rrong-24@peddie.org",2024);
 
 function read() {
