@@ -20,28 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-  <script>
-    function submitForm() {
-      console.log("test")
-      if (window.jQuery && false) {
-        console.log("jQuery")
-
-        $.post("https://peddiecs.peddie.org/nodejs/test", {
-        }, function (res) {
-
-          if (res.message == "success") {
-            console.log("success")
-          } else {
-            console.log(res.message)
-          }
-
-        });
-      }
-
-      test();
-    }
-  </script>
-  <script type="text/javascript" src="/nodejs/app.js"></script>
+  <script type="text/javascript" src="submit.js"></script>
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="/main.css">

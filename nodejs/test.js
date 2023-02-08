@@ -6,5 +6,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(5630, () => {
-  console.log('Example app listening on port 5630!');
+  console.log('Test app listening on port 5630!');
 });
