@@ -68,3 +68,8 @@ function addMember(first_name, last_name, email, year) {
         con.end();
     });
 }
+
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
