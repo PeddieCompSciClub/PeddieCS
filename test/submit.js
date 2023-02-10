@@ -1,15 +1,4 @@
-function submitForm() {
-    console.log("submitForm()");
-
-    $.ajax({
-        url: 'https://peddiecs.peddie.org/nod:5630',
-        success: function (data) {
-            console.log(data);
-        }
-    });
-}
-
-function submitLoginFunc(){
+function submitForm(){
             
     if(window.jQuery){
 
