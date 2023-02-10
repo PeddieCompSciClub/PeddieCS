@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
+const port = 5622;
 // var router = express.Router();
 
 var con = mysql.createConnection({
