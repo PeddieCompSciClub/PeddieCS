@@ -19,7 +19,7 @@ var con = mysql.createConnection({
  * (our proxy will route the requests to us, if you need a refresher on that just look through the docs)
  */
 app.listen(port, () => {
-    console.log(`Server running on port${port}`);
+    console.log(`Server running on port ${port}`);
 });
 
 /*
