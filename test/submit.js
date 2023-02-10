@@ -8,12 +8,12 @@ function submitForm(){
         },function(res){
             
             if(res.message=="success"){
-                window.location.replace("https://exchange.peddie.org/index.html");
+                console.log("success");
             }else{
                 if(res.message){
                     alert(res.message);
                 }
-                window.location.replace("https://exchange.peddie.org");
+                console.log('got the message');
             }
         
         });
