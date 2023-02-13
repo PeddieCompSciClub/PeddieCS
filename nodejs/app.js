@@ -70,6 +70,8 @@ function addMember(first_name, last_name, email, year) {
 }
 
 
+
+// test to make sure it is working
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
