@@ -39,7 +39,7 @@ function getMembers() {
                 console.log(res.message.length);
                 console.log(res.message[0]);
                 for(let i=0; i<res.message.length; i++){
-                    console.log(member[i]);
+                    console.log(message[i]);
                 }
             }
         });
