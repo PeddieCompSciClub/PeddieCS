@@ -61,7 +61,7 @@ function displayMember(json){
     let first_name = json.first_name;
     let last_name = json.last_name;
     let email = json.email;
-    let username = json.email.substring(0, str.indexOf("@"));
+    let username = email.substring(0, email.indexOf("@"));
     let year = json.year;
     console.log(first_name,last_name,email,username,year);
 }
