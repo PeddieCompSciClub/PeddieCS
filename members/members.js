@@ -38,8 +38,8 @@ function getMembers() {
                 console.log(res.message);
                 console.log(res.message.length);
                 console.log(res.message[0]);
-                for(var member in res.message){
-                    console.log(member);
+                for(let i=0; i<res.message.length; i++){
+                    console.log(member[i]);
                 }
             }
         });
