@@ -68,6 +68,16 @@ function addMember(first_name, last_name, email, year) {
         con.end();
     });
 }
+function getAllMembers() {
+    con.connect(function (err){
+        if (err) throw err;
+        con.query("SELECT * FROM members", function (err,result, fields) {
+            if(err) throw err;
+            console.log(result);
+            console.log(fields);
+        })
+    })
+}
 
 
 

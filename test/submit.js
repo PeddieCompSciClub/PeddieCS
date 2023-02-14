@@ -2,7 +2,7 @@ function submitForm(){
             
     if(window.jQuery){
 
-        $.get("https://peddiecs.peddie.org/nodejs/",{
+        $.get("https://peddiecs.peddie.org/nodejs/test",{
             email:$('#email').val(),
             password:$('#password').val()
         },function(res){

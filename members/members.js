@@ -1,5 +1,5 @@
 //get the current school year (the graduation class of the seniors)
-function getCurrentYear(){
+function getCurrentYear() {
     const d = new Date();
     let year = d.getFullYear() + (d.getMonth() > 6 ? 1 : 0);
     return year;
@@ -20,8 +20,25 @@ function getYear(year) {
     let gradYear = getCurrentYear();
     if (year < gradYear) return "Alumni";
     if (year == gradYear) return "Seniors";
-    if (year-1 == gradYear) return "Juniors";
-    if (year-2 == gradYear) return "Sophomores";
-    if (year-3 == gradYear) return "Freshmen";
+    if (year - 1 == gradYear) return "Juniors";
+    if (year - 2 == gradYear) return "Sophomores";
+    if (year - 3 == gradYear) return "Freshmen";
     return year;
+}
+
+
+//requests user data from the MySQL database
+function getMembers() {
+    $.get("https://peddiecs.peddie.org/nodejs/getAllMembers", {
+    }, function (res) {
+        if (res.message == "success") {
+            console.log("success");
+        } else {
+            if (res.message) {
+                alert(res.message);
+            }
+            console.log('got the message');
+        }
+    });
+
 }
