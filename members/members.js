@@ -62,9 +62,14 @@ function displayMember(json){
     let last_name = json.last_name;
     let email = json.email;
     let username = email.substring(0, email.indexOf("@"));
-    //let tab = getYear(json.year);
-    document.getElementById(getYear(json.year)).getElementsByClassName("memberTable")[0].innerHTML = "<div class='memberItem'></div>";
-    //console.log(first_name,last_name,email,username,year);
+    let yearElement = document.getElementById(getYear(json.year));
+    if (yearElement) {
+        let memberTableElement = yearElement.getElementsByClassName("memberTable")[0];
+        if (memberTableElement) {
+            memberTableElement.innerHTML = "<div class='memberItem'></div>";
+        }
+    }
 }
+
 
 getMembers();
