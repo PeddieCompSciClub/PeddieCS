@@ -1,4 +1,4 @@
-.calculator {
+.form-body {
     display: grid;
     width:fit-content;
     height:auto;
@@ -13,14 +13,14 @@
     grid-template-columns: auto;
 }
 
-.calculator .default{
+.form-body .default{
     grid-row:1;
     grid-column:1;
 
     width:300px;
 } 
 
-.calculator h2 {
+.form-body h2 {
     text-align: center;
     font-family: 'Raleway', serif;
     font-size: 24px;
@@ -29,7 +29,7 @@
     padding: 0px;
 }
 
-.calculator h3 {
+.form-body h3 {
     text-align: left;
     font-family: 'Raleway', serif;
     font-size: 18px;
@@ -39,7 +39,7 @@
     padding:0;
 }
 
-.calculator p{
+.form-body p{
     text-align: center;
     font-family: 'Raleway', serif;
     font-size: 18px;
@@ -49,30 +49,18 @@
     padding:0;
 }
 
-.time-in{
+.name{
     width:100%;
     display: grid;
-    grid-template-columns: 30% 5% 30% 5% 30%;
+    grid-template-columns: 48% 4% 48%;
     margin-bottom: 10px;
 }
-
-.time-in .speed{
-    grid-row:2;
-    grid-column: 1 / 4;
-    margin-top: 5px;
-}
-.time-in h3{
-    text-align:center;
-    align-self: end;
-    justify-self: left;
-    margin-bottom: 0.1rem;
-}
-
-.dist-in{
+.email{
     width:100%;
-    display: grid;
-    grid-template-columns: 60% 40%;
-    grid-gap:10px;
+    margin-bottom: 10px;
+}
+.image{
+    width:100%;
     margin-bottom: 10px;
 }
 
@@ -95,7 +83,8 @@
 
 input{
     width:100%;
-    text-align: right;
+    text-align: left;
+    /* border-radius: 0px; */
 }
 
 

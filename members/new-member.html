@@ -2,31 +2,32 @@
 <html lang="en">
 
 <head>
-  <title>Swim Pace Calculator</title>
-  <meta name="description" content="Tool to calculate swimming paces">
+    <title>Peddie Computer Science | Members</title>
+    <meta name="description" content="Tool to calculate swimming paces">
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <link
-    href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
-    href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 
-  <link rel="stylesheet" href="https://peddiecs.peddie.org/main.css">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="https://peddiecs.peddie.org/favicon.ico">
+    <link rel="stylesheet" href="https://peddiecs.peddie.org/main.css">
+    <link rel="stylesheet" href="new-member.css">
+    <link rel="icon" href="https://peddiecs.peddie.org/favicon.ico">
 </head>
 
 <body>
+    <!--  
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
 
     <div class="navbar-box" id="navbarText">
@@ -73,83 +74,32 @@
       </ul>
     </div>
   </nav>
-  <header>
-    <h1>Swim Pace Calculator</h1>
-  </header>
+-->
+    <header>
+        <h1></h1>
+    </header>
 
-  <div class="calculator">
-    <div class="default">
-      <h2>Calculate Pace</h2>
+    <div class="form-body">
+        <div class="default">
+            <h2>Add your information:</h2>
 
-      <!-- selection to calculate pace, time, or distance-->
-      <div class="select">
-        <!-- selection -->
-        <div class="tab">
-          <button class="tablinks active" onclick="openTab(event, 'pace')">Pace</button>
-          <button class="tablinks" onclick="openTab(event, 'time')">Time</button>
-          <button class="tablinks" onclick="openTab(event, 'dist')">Distance</button>
-        </div>
-
-        <!-- tab content -->
-        <div id="pace" class="tabcontent" style="display:block">
-          <h3>Time</h3>
-          <div class="time-in">
-            <input type="number" id="time-hr" onchange="setTime()" min=0 step="1" placeholder="hr">
-            <p>:</p>
-            <input type="number" id="time-min" onchange="setTime()" min=0 step="1" placeholder="min">
-            <p>:</p>
-            <input type="number" id="time-sec" onchange="setTime()" min=0 placeholder="sec">
-          </div>
-          <h3>Distance</h3>
-          <div class="dist-in">
-            <input type="number" id="pace-dist" onchange="setDist()" min=0 step="1">
-            <button class="unit-button" onclick="changeUnit(); calcPace()">Yards</button>
-          </div>
-          <div class="select">
-            <div class="tab">
-              <button class="split-button tablinks active" onclick="setSplit(event, 50)">50 Yards</button>
-              <button class="split-button tablinks" onclick="setSplit(event, 100)">100 Yards</button>
+            <h3>Name</h3>
+            <div class="name">
+                <input type="text" id="first-name" placeholder="First Name">
+                <p> </p>
+                <input type="text" id="last-name" placeholder="Last Name">
             </div>
-          </div>
-          <br>
-          <h3>Pace</h3>
-          <div class="time-in">
-            <input type="number" id="pace-min" placeholder="min" readonly>
-            <p>:</p>
-            <input type="number" id="pace-sec" placeholder="sec" readonly>
-            <p>.</p>
-            <input type="number" id="pace-ms" placeholder="ms" readonly>
-            <input type="number" class="speed" id="pace-speed" placeholder="speed" readonly>
-            <p></p>
-            <h3>m/s</h3>
-          </div>
+            <h3>Email</h3>
+            <div class="email">
+                <input type="text" id="email" placeholder="compsciclub@peddie.org">
+            </div>
+            <h3>Profile Image</h3>
+            <div class="image">
+                <input type="file" id="image" name="img" accept="image/*">
+            </div>
         </div>
-
-        <div id="time" class="tabcontent">
-          <h3>Time</h3>
-        </div>
-        <div id="dist" class="tabcontent">
-          <p>dist</p>
-        </div>
-
-        <script>
-          function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-              tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-              tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-          }
-        </script>
-      </div>
     </div>
-  </div>
+
 
 </body>
 
