@@ -11,7 +11,7 @@ function submitForm(){
                 console.log("success");
             }else{
                 if(res.message){
-                    alert(res.message);
+                    console.log(res.message);
                 }
                 console.log('got the message');
             }

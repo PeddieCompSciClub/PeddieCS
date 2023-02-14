@@ -76,7 +76,7 @@ app.get('/getAllMembers', (req, res) => {
         if (err) throw err;
         con.query("SELECT * FROM members", function (err,result, fields) {
             if(err) throw err;
-            res.json({"error" : false , "message" : "Got The Message!"});
+            res.json({"error" : false , "message" : result});
             return res.end();
         })
         con.end();
