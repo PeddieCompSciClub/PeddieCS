@@ -58,8 +58,12 @@ function getMembers() {
 # list items will eventually contain titles/projects
 */
 function displayMember(json){
-    console.log(json);
-    console.log(json.first_name);
+    let first_name = json.first_name;
+    let last_name = json.last_name;
+    let email = json.email;
+    let username = json.email.substring(0, str.indexOf("@"));
+    let year = json.year;
+    console.log(first_name,last_name,email,username,year);
 }
 
 getMembers();
