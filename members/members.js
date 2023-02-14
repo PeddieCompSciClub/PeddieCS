@@ -66,7 +66,7 @@ function displayMember(json){
     if (yearElement) {
         let memberTableElement = yearElement.getElementsByClassName("memberTable")[0];
         if (memberTableElement) {
-            memberTableElement.innerHTML = "<div class='memberItem'></div>";
+            memberTableElement.innerHTML += "<div class='memberItem'></div>";
         }
     }
 }
