@@ -63,13 +63,13 @@ function displayMember(json){
     let email = json.email;
     let username = email.substring(0, email.indexOf("@"));
 
-    let newDiv = '<div class="memberItem"><img src="user-images/${username}.jpg">'
+    let newDiv = '<div class="memberItem"><img src="user-images/${username}.jpg"></div>'
 
     let yearElement = document.getElementById(getYear(json.year));
     if (yearElement) {
         let memberTableElement = yearElement.getElementsByClassName("memberTable")[0];
         if (memberTableElement) {
-            memberTableElement.innerHTML += "<div class='memberItem'></div>";
+            memberTableElement.innerHTML += newDiv;
         }
     }
 }
