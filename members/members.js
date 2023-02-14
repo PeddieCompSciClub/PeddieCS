@@ -35,6 +35,7 @@ function getMembers() {
             if (res.message == "failed") {
                 console.log("Failed to get member data")
             } else {
+                console.log(res.message);
                 for(var member in res.message){
                     console.log(member);
                 }
