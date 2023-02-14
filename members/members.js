@@ -37,6 +37,7 @@ function getMembers() {
             } else {
                 for(let i=0; i<res.message.length; i++){
                     console.log(res.message[i]);
+                    displayMember(res.message[i]);
                 }
             }
         });
@@ -56,7 +57,7 @@ function getMembers() {
 </div>
 # list items will eventually contain titles/projects
 */
-function displayMembers(json){
+function displayMember(json){
     console.log(json);
     console.log(json.first_name);
 }
