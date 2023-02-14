@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <title>Peddie Computer Science</title>
-  <meta name="description" content="">
+  <title>Swim Pace Calculator</title>
+  <meta name="description" content="Tool to calculate swimming paces">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -19,17 +19,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="submit.js"></script>
+  <script src="script.js"></script>
 
+  <link rel="stylesheet" href="https://peddiecs.peddie.org/main.css">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="/main.css">
-  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="https://peddiecs.peddie.org/favicon.ico">
 </head>
 
 <body>
-
-
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
 
     <div class="navbar-box" id="navbarText">
@@ -77,14 +74,82 @@
     </div>
   </nav>
   <header>
-    <form onsubmit="return false">
-      <label for="fname">First name:</label><br>
-      <input type="text" id="fname" name="fname" value=""><br>
-      <label for="lname">Last name:</label><br>
-      <input type="text" id="lname" name="lname" value=""><br><br>
-      <button class="submit" type="button" onclick="submitForm()">Submit</button>
-    </form>
+    <h1>Swim Pace Calculator</h1>
   </header>
+
+  <div class="calculator">
+    <div class="default">
+      <h2>Calculate Pace</h2>
+
+      <!-- selection to calculate pace, time, or distance-->
+      <div class="select">
+        <!-- selection -->
+        <div class="tab">
+          <button class="tablinks active" onclick="openTab(event, 'pace')">Pace</button>
+          <button class="tablinks" onclick="openTab(event, 'time')">Time</button>
+          <button class="tablinks" onclick="openTab(event, 'dist')">Distance</button>
+        </div>
+
+        <!-- tab content -->
+        <div id="pace" class="tabcontent" style="display:block">
+          <h3>Time</h3>
+          <div class="time-in">
+            <input type="number" id="time-hr" onchange="setTime()" min=0 step="1" placeholder="hr">
+            <p>:</p>
+            <input type="number" id="time-min" onchange="setTime()" min=0 step="1" placeholder="min">
+            <p>:</p>
+            <input type="number" id="time-sec" onchange="setTime()" min=0 placeholder="sec">
+          </div>
+          <h3>Distance</h3>
+          <div class="dist-in">
+            <input type="number" id="pace-dist" onchange="setDist()" min=0 step="1">
+            <button class="unit-button" onclick="changeUnit(); calcPace()">Yards</button>
+          </div>
+          <div class="select">
+            <div class="tab">
+              <button class="split-button tablinks active" onclick="setSplit(event, 50)">50 Yards</button>
+              <button class="split-button tablinks" onclick="setSplit(event, 100)">100 Yards</button>
+            </div>
+          </div>
+          <br>
+          <h3>Pace</h3>
+          <div class="time-in">
+            <input type="number" id="pace-min" placeholder="min" readonly>
+            <p>:</p>
+            <input type="number" id="pace-sec" placeholder="sec" readonly>
+            <p>.</p>
+            <input type="number" id="pace-ms" placeholder="ms" readonly>
+            <input type="number" class="speed" id="pace-speed" placeholder="speed" readonly>
+            <p></p>
+            <h3>m/s</h3>
+          </div>
+        </div>
+
+        <div id="time" class="tabcontent">
+          <h3>Time</h3>
+        </div>
+        <div id="dist" class="tabcontent">
+          <p>dist</p>
+        </div>
+
+        <script>
+          function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+          }
+        </script>
+      </div>
+    </div>
+  </div>
 
 </body>
 
