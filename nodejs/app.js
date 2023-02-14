@@ -4,13 +4,6 @@ const app = express();
 const port = 5622;
 // var router = express.Router();
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "admincs",
-    password: "BeatBlair1864",
-    database: "peddieCS",
-    port: 3306
-});
 
 
 
@@ -72,6 +65,14 @@ function addMember(first_name, last_name, email, year) {
 
 
 app.get('/getAllMembers', (req, res) => {
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "admincs",
+        password: "BeatBlair1864",
+        database: "peddieCS",
+        port: 3306
+    });
+
     con.connect(function (err){
         if (err) throw err;
         con.query("SELECT * FROM members", function (err,result, fields) {
