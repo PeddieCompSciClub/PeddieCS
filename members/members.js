@@ -23,7 +23,7 @@ function getYear(year) {
     if (year - 1 == gradYear) return "Juniors";
     if (year - 2 == gradYear) return "Sophomores";
     if (year - 3 == gradYear) return "Freshmen";
-    return year;
+    return "Faculty";
 }
 
 
@@ -62,6 +62,9 @@ function displayMember(json){
     let last_name = json.last_name;
     let email = json.email;
     let username = email.substring(0, email.indexOf("@"));
+
+    let newDiv = '<div class="memberItem"><img src="user-images/${username}.jpg">'
+
     let yearElement = document.getElementById(getYear(json.year));
     if (yearElement) {
         let memberTableElement = yearElement.getElementsByClassName("memberTable")[0];
