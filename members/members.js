@@ -18,7 +18,7 @@ function getYear(grade) {
 function getYear(year) {
     const d = new Date();
     let gradYear = getCurrentYear();
-    if (year < gradYear) return "Alumni";
+    if (0 < year < gradYear) return "Alumni";
     if (year == gradYear) return "Seniors";
     if (year - 1 == gradYear) return "Juniors";
     if (year - 2 == gradYear) return "Sophomores";
