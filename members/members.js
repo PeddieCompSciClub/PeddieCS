@@ -29,16 +29,18 @@ function getYear(year) {
 
 //requests user data from the MySQL database
 function getMembers() {
-    $.get("https://peddiecs.peddie.org/nodejs/getAllMembers", {
-    }, function (res) {
-        if (res.message == "failed") {
-            console.log("Failed to get member data")
-        } else {
-            for(var member in res){
-                console.log(member);
+    if(window.jQuery){
+        $.get("https://peddiecs.peddie.org/nodejs/getAllMembers", {
+        }, function (res) {
+            if (res.message == "failed") {
+                console.log("Failed to get member data")
+            } else {
+                for(var member in res.message){
+                    console.log(member);
+                }
             }
-        }
-    });
+        });
+    }
 
 }
 getMembers();
