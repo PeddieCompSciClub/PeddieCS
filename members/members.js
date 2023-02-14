@@ -35,15 +35,30 @@ function getMembers() {
             if (res.message == "failed") {
                 console.log("Failed to get member data")
             } else {
-                console.log(res.message);
-                console.log(res.message.length);
-                console.log(res.message[0]);
                 for(let i=0; i<res.message.length; i++){
                     console.log(res.message[i]);
                 }
             }
         });
     }
-
 }
+
+//adds a member to the table displayed on the web page by inserting an html into the appropriate section
+/* Default html block:
+<div class="memberItem">
+    <img src="user-images/[USERNAME].jpg"  alt="Image not found" onError="this.onerror=null;this.src='user-images/missing.jpg';">
+    <a href="/members/member.html?[USERNAME]">[NAME]</a>
+    <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    </ul>
+</div>
+# list items will eventually contain titles/projects
+*/
+function displayMembers(json){
+    console.log(json);
+    console.log(json.first_name);
+}
+
 getMembers();
