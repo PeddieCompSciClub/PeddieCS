@@ -31,14 +31,14 @@ function getYear(year) {
 function getMembers() {
     $.get("https://peddiecs.peddie.org/nodejs/getAllMembers", {
     }, function (res) {
-        if (res.message == "success") {
-            console.log("success");
+        if (res.message == "failed") {
+            console.log("Failed to get member data")
         } else {
-            if (res.message) {
-                alert(res.message);
+            for(var member in res){
+                console.log(member);
             }
-            console.log('got the message');
         }
     });
 
 }
+getMembers();
