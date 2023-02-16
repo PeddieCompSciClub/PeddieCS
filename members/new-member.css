@@ -3,12 +3,13 @@ body {
     align-items: center;
     grid-template-rows: 100%;
     overflow-y: hidden;
+    overflow-x: hidden;
 }
 .form {
     /* display: grid; */
     width: 80vmin;
     height: auto;
-    max-height: 80vh;
+    max-height: 95vh;
     overflow-y: scroll;
 
     margin: auto;

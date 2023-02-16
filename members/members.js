@@ -45,6 +45,50 @@ function getMembers() {
     }
 }
 
+//requests user data from the MySQL database
+function submitMember() {
+    if(window.jQuery){
+        // Check if an image has been selected
+        var image = $('#profile-image')[0].files[0];
+        if (image) {
+            // Convert image to base64-encoded string
+            var reader = new FileReader();
+            reader.readAsDataURL(image);
+            reader.onload = function () {
+                var imageData = reader.result.split(',')[1];
+                // Send POST request with image data included as a parameter
+                $.post("https://peddiecs.peddie.org/nodejs/addMember", {
+                    first_name: $('#first-name').val(),
+                    last_name: $('#last-name').val(),
+                    email: $('#email').val(),
+                    image: imageData
+                }, function (res) {
+                    if (res.message == "failed") {
+                        console.log("Failed to add member data")
+                    } else {
+                        console.log(res.message);
+                    }
+                });
+            };
+        } else {
+            // Send POST request without image data
+            $.post("https://peddiecs.peddie.org/nodejs/addMember", {
+                first_name: $('#first-name').val(),
+                last_name: $('#last-name').val(),
+                email: $('#email').val()
+            }, function (res) {
+                if (res.message == "failed") {
+                    console.log("Failed to add member data")
+                } else {
+                    console.log(res.message);
+                }
+            });
+        }
+    }
+}
+
+
+
 //adds a member to the table displayed on the web page by inserting an html into the appropriate section
 /* Default html block:
 <div class="memberItem">

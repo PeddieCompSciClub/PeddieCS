@@ -31,7 +31,14 @@
       else if (re.test(email)) return 0;
       else return -1;
     }
+
+    function submit(){
+
+    }
+    
   </script>
+  <script src="members.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://peddiecs.peddie.org/main.css">
   <link rel="stylesheet" href="new-member.css">
@@ -130,7 +137,7 @@
           };
         </script>
       </div>
-      <button onclick="" id="form-button">Submit</button>
+      <button onclick="submitMember()" id="form-button">Submit</button>
       <script>
         function showButton() {
           if (document.getElementById("first-name").value.length > 0 && document.getElementById("last-name").value.length > 0 && validateEmail(document.getElementById("email").value) == 1) {

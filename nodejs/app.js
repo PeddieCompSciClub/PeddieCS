@@ -1,6 +1,11 @@
 const mysql = require('mysql');
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
+const fs = reqire('fs');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 const port = 5622;
 // var router = express.Router();
 
@@ -84,8 +89,32 @@ app.get('/getAllMembers', (req, res) => {
     })
 });
 
-app.post('/addNewMember', (req, res) => {
-    
+app.post('/addMember', function(req, res) {
+    // Get member data from POST request
+    const firstName = req.body.first_name;
+    const lastName = req.body.last_name;
+    const email = req.body.email;
+
+    // Save image file if it exists
+    if (req.body.image) {
+        const image = req.body.image;
+        // Create a buffer from the base64-encoded string
+        const buffer = Buffer.from(image, 'base64');
+        // Write the buffer to a file
+        fs.writeFile(`${firstName}_${lastName}.jpg`, buffer, function(err) {
+            if (err) {
+                console.log(err);
+                res.send({ message: 'failed' });
+            } else {
+                console.log(`Image saved as ${firstName}_${lastName}.jpg`);
+                res.send({ message: 'success' });
+            }
+        });
+    } else {
+        // If no image file was included in the request, just log the member data
+        var text = (`Received member data for ${firstName} ${lastName} (${email})`);
+        res.send({ message: 'success'+text });
+    }
 });
 
 
