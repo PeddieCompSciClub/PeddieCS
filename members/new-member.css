@@ -1,147 +1,146 @@
-.form-body {
-    display: grid;
-    width:fit-content;
-    height:auto;
-    margin:auto;
+body {
+    display:grid;
+    align-items: center;
+    grid-template-rows: 100%;
+    overflow-y: hidden;
+}
+.form {
+    /* display: grid; */
+    width: 80vmin;
+    height: auto;
+    max-height: 80vh;
+    overflow-y: scroll;
+
+    margin: auto;
     background-color: var(--navbar);
     border-radius: 15px;
     justify-content: center;
     justify-items: center;
+    font-size: 1vmin;
 
-    padding:10px;
-
-    grid-template-columns: auto;
+    padding: 1%;
+    margin-top: auto;
+    grid-row: 1; 
+    grid-column: 1;
 }
 
-.form-body .default{
-    grid-row:1;
-    grid-column:1;
+.form .form-body {
+    /* grid-row: 1; */
+    /* grid-column: 1; */
 
-    width:300px;
-} 
+    width: 100%;
+}
 
-.form-body h2 {
+.form h2 {
     text-align: center;
     font-family: 'Raleway', serif;
-    font-size: 24px;
+    font-size: 6.4em;
     color: var(--text);
     font-weight: bold;
     padding: 0px;
 }
 
-.form-body h3 {
+.form h3 {
     text-align: left;
     font-family: 'Raleway', serif;
-    font-size: 18px;
+    font-size: 5.5em;
     color: var(--text);
     font-weight: bold;
-    margin-bottom:0;
-    padding:0;
+    margin-bottom: 0;
+    padding: 0;
 }
 
-.form-body p{
-    text-align: center;
+.form p {
+    text-align: left;
     font-family: 'Raleway', serif;
-    font-size: 18px;
+    font-size: 3.2em;
     color: var(--text);
-    font-weight: bold;
-    margin-bottom:0;
-    padding:0;
+    font-weight: normal;
+    margin-bottom: 0;
+    padding: 0;
 }
 
-.name{
-    width:100%;
-    display: grid;
-    grid-template-columns: 48% 4% 48%;
-    margin-bottom: 10px;
-}
-.email{
-    width:100%;
-    margin-bottom: 10px;
-}
-.image{
-    width:100%;
-    margin-bottom: 10px;
-}
-
-.unit-button{
+.form button {
+    width: 80%;
+    /* height:1.8em; */
+    margin: auto;
+    display: block;
     background-color: var(--background);
     border: none;
     border-radius: 5px;
     outline: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
     font-family: 'Raleway', serif;
-    font-size: 16px;
+    font-size: 5em;
     color: var(--text);
 }
-
-.split-button {
-    width:50% !important;
+.form button:hover{
+    background-color: var(--hover);
+    color: var(--black);
+    /* font-weight: bold; */
 }
 
-input{
-    width:100%;
+#form-button {
+    /* height: 0; */
+    font-size: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.form input {
+    width: 100%;
+    padding-left: 2%;
     text-align: left;
-    /* border-radius: 0px; */
+    border-radius: 3px;
+    border: #00000000;
+    font-size: 4em;
+}
+.form input[type="file"]{
+    display: none;
+}
+
+.name {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 48% 4% 48%;
+    margin-bottom: 5%;
+}
+
+.email {
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.email p {
+    transition: opacity 0.1s ease-in-out;
+    opacity: 0;
+    font-size:3em;
+}
+
+.image {
+    width: 100%;
+    margin-bottom: 5%;
+}
+.image button{
+    margin-left:0;
+    padding:2% 2%;
+    width:100%;
+    font-size:4em;
+    /* height:1.5em; */
+}
+
+.image img {
+    width: 80%;
+    display: block;
+    border-radius:5px;
+    margin:auto;
 }
 
 
 /*all of the stuff for selection boxes, copied from members/style.css*/
 :root {
     /*Color variables*/
-    --tab-hover: #bbb;
-    --tab-select: #ddd;
-    --tab: #00000000;
-}
-
-.select {
-    width:80%;
-    margin:auto;
-}
-/* Style the tab */
-.tab {
-    overflow: hidden;
-    /* border: 1px solid var(--tab-select); */
-    background-color: var(--background);
-    display: flex;
-    justify-content: center;
-    margin:auto;
-    border-radius:5px;
-}
-
-/* Style the buttons that are used to open the tab content */
-.tab button {
-    background-color: inherit;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    transition: 0.3s;
-    width:33.3%;
-
-    font-family: 'Raleway', serif;
-    font-size: 16px;
-    color:var(--tab-select);
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: var(--tab-hover);
-    color: black;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-    background-color: var(--tab-select);
-    font-weight: bold;
-    color: black;
-}
-
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    /* border: 1px solid var(--tab-select); */
-    border-top: none;
+    --hover: #bbb;
+    --select: #ddd;
 }

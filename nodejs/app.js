@@ -84,6 +84,10 @@ app.get('/getAllMembers', (req, res) => {
     })
 });
 
+app.post('/addNewMember', (req, res) => {
+    
+});
+
 
 
 // test to make sure it is working
