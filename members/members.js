@@ -49,7 +49,7 @@ function getMembers() {
 function submitMember() {
     if(window.jQuery){
         // Check if an image has been selected
-        var image = $('#profile-image')[0].files[0];
+        var image = $('#image')[0].files[0];
         if (image) {
             // Convert image to base64-encoded string
             var reader = new FileReader();
