@@ -152,15 +152,15 @@ app.post('/confirmMember', function (req, res) {
         }
 
         //send verification email
-        var transporter = nodemailer.createTransport({
+        const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'compsciclub@peddie.org',
-                pass: '@peddie0225'
+              user: 'compsciclub@peddie.org',
+              pass: '@peddie0225'
             }
-        });
+          });
 
-        var mailOptions = {
+        const mailOptions = {
             from: 'compsciclub@peddie.org',
             to: email,
             subject: 'PeddieCS Verify',
