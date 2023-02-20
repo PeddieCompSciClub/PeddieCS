@@ -151,10 +151,8 @@ app.post('/confirmMember', function (req, res) {
             res.send({ error: 'false', message: text });
         }
 
-        console.log("Sending email");
-
         //send verification email
-        var transporter = nodemailer.createTranspot({
+        var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: 'compsciclub@peddie.org',
