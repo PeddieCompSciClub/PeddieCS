@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const validator = require("email-validator");
+const validator = require('email-validator');
 const nodemailer = require("nodemailer");
 
 //used to set port to listen on
@@ -150,6 +150,8 @@ app.post('/confirmMember', function (req, res) {
             var text = (`Received member data for ${firstName} ${lastName} (${email})`);
             res.send({ error: 'false', message: text });
         }
+
+        console.log("Sending email");
 
         //send verification email
         var transporter = nodemailer.createTranspot({
