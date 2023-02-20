@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const fs = reqire('fs');
+const fs = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
