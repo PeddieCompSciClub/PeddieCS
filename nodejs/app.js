@@ -152,29 +152,37 @@ app.post('/confirmMember', function (req, res) {
         }
 
         //send verification email
+        const output = `
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <h3>Reset password request</h3>
+        <p>Click <a href="https://exchange.peddie.org/changePassword.html?1234567890">here</a> to reset your password</p>
+        `;
+
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'compsciclub@peddie.org',
-              pass: '@peddie0225'
+                user: 'compsciclub@peddie.org',
+                pass: '@peddie0225'
             }
-          });
+        });
 
         const mailOptions = {
             from: 'compsciclub@peddie.org',
-            to: email,
-            subject: 'PeddieCS Verify',
-            text: 'test\n' + email
+            to: req.body.email,
+            subject: 'Reset password request',
+            html: output
         };
 
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-              res.send({error:'true', message:error});
+        transporter.sendMail(mailOptions, function (err, info) {
+            if (err) {
+                console.log("error");
+                console.log(err);
+                res.json({ "error": "true", "message": "error code #33, unabale to send email, if this error persists please report it to a member of our team!" });
+                return res.end();
             } else {
-              console.log('Email sent: ' + info.response);
+                console.log('Email Sent: ' + info.response);
             }
-          });
+        });
 
 
     } else {
