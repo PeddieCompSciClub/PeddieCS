@@ -105,12 +105,12 @@ app.post('/addMember', function(req, res) {
         // Create a buffer from the base64-encoded string
         const buffer = Buffer.from(image, 'base64');
         // Write the buffer to a file
-        fs.writeFile(`../members/user-images/${email.substring(0,email.lastIndexOf("@"))}.jpg`, buffer, function(err) {
+        fs.writeFile(`../members/user-images/${email.substring(0,email.lastIndexOf("@"))}`, buffer, function(err) {
             if (err) {
                 console.log(err);
                 res.send({ message: 'failed' });
             } else {
-                console.log(`Image saved as ${firstName}_${lastName}.jpg`);
+                console.log(`Image saved as ${email.substring(0,email.lastIndexOf("@"))}`);
                 res.send({ message: 'success' });
             }
         });
@@ -121,6 +121,33 @@ app.post('/addMember', function(req, res) {
     }
 });
 
+//send an email confirmation for updating user info (saves image)
+app.post('/confirmMember', function(req, res) {
+    const firstName = req.body.first_name;
+    const lastName = req.body.last_name;
+    const email = req.body.email;
+
+    // Save temp image file if it exists
+    if (req.body.image) {
+        const image = req.body.image;
+        // Create a buffer from the base64-encoded string
+        const buffer = Buffer.from(image, 'base64');
+        // Write the buffer to a file
+        fs.writeFile(`../members/user-images/_${email.substring(0,email.lastIndexOf("@"))}`, buffer, function(err) {
+            if (err) {
+                console.log(err);
+                res.send({ message: 'failed' });
+            } else {
+                console.log(`Image saved as ${email.substring(0,email.lastIndexOf("@"))}`);
+
+            }
+        });
+    } else {
+        // If no image file was included in the request, just log the member data
+        var text = (`Received member data for ${firstName} ${lastName} (${email})`);
+        res.send({ message: 'success'+text });
+    }
+});
 
 
 // test to make sure it is working
