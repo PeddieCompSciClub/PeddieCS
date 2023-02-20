@@ -1,17 +1,18 @@
 const mysql = require('mysql');
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
 const fs = require('fs');
+const validator = require("email-validator");
+const nodemailer = require("nodemailer");
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// Increase the maximum allowed payload size to 50MB
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-
+//used to set port to listen on
 const port = 5622;
-// var router = express.Router();
+
+const app = express();
+// Increase the maximum allowed payload size to 50MB
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 
 
 
@@ -82,18 +83,18 @@ app.get('/getAllMembers', (req, res) => {
         port: 3306
     });
 
-    con.connect(function (err){
+    con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM members", function (err,result, fields) {
-            if(err) throw err;
-            res.json({"error" : false , "message" : result});
+        con.query("SELECT * FROM members", function (err, result, fields) {
+            if (err) throw err;
+            res.json({ "error": false, "message": result });
             return res.end();
         })
         con.end();
     })
 });
 
-app.post('/addMember', function(req, res) {
+app.post('/addMember', function (req, res) {
     // Get member data from POST request
     const firstName = req.body.first_name;
     const lastName = req.body.last_name;
@@ -105,47 +106,79 @@ app.post('/addMember', function(req, res) {
         // Create a buffer from the base64-encoded string
         const buffer = Buffer.from(image, 'base64');
         // Write the buffer to a file
-        fs.writeFile(`../members/user-images/${email.substring(0,email.lastIndexOf("@"))}`, buffer, function(err) {
+        fs.writeFile(`../members/user-images/${email.substring(0, email.lastIndexOf("@"))}`, buffer, function (err) {
             if (err) {
                 console.log(err);
                 res.send({ message: 'failed' });
             } else {
-                console.log(`Image saved as ${email.substring(0,email.lastIndexOf("@"))}`);
+                console.log(`Image saved as ${email.substring(0, email.lastIndexOf("@"))}`);
                 res.send({ message: 'success' });
             }
         });
     } else {
         // If no image file was included in the request, just log the member data
         var text = (`Received member data for ${firstName} ${lastName} (${email})`);
-        res.send({ message: 'success'+text });
+        res.send({ message: 'success' + text });
     }
 });
 
+
 //send an email confirmation for updating user info (saves image)
-app.post('/confirmMember', function(req, res) {
+app.post('/confirmMember', function (req, res) {
     const firstName = req.body.first_name;
     const lastName = req.body.last_name;
     const email = req.body.email;
 
-    // Save temp image file if it exists
-    if (req.body.image) {
-        const image = req.body.image;
-        // Create a buffer from the base64-encoded string
-        const buffer = Buffer.from(image, 'base64');
-        // Write the buffer to a file
-        fs.writeFile(`../members/user-images/temp/${email.substring(0,email.lastIndexOf("@"))}`, buffer, function(err) {
-            if (err) {
-                console.log(err);
-                res.send({ message: 'failed' });
-            } else {
-                console.log(`Image saved as ${email.substring(0,email.lastIndexOf("@"))}`);
+    if (email.endsWith("@peddie.org") && validator.validate(email)) {
 
+        // Save temp image file if it exists
+        if (req.body.image) {
+            const image = req.body.image;
+            // Create a buffer from the base64-encoded string
+            const buffer = Buffer.from(image, 'base64');
+            // Write the buffer to a file
+            fs.writeFile(`../members/user-images/temp/${email.substring(0, email.lastIndexOf("@"))}`, buffer, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.send({ error: 'true', message: err });
+                } else {
+                    console.log(`Image saved as ${email.substring(0, email.lastIndexOf("@"))}`);
+                }
+            });
+        } else {
+            // If no image file was included in the request, just log the member data
+            var text = (`Received member data for ${firstName} ${lastName} (${email})`);
+            res.send({ error: 'false', message: text });
+        }
+
+        //send verification email
+        var transporter = nodemailer.createTranspot({
+            service: 'gmail',
+            auth: {
+                user: 'compsciclub@peddie.org',
+                pass: '@peddie0225'
             }
         });
+
+        var mailOptions = {
+            from: 'compsciclub@peddie.org',
+            to: email,
+            subject: 'PeddieCS Verify',
+            text: 'test\n' + email
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+              res.send({error:'true', message:error});
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+
+
     } else {
-        // If no image file was included in the request, just log the member data
-        var text = (`Received member data for ${firstName} ${lastName} (${email})`);
-        res.send({ message: 'success'+text });
+        res.send({ error: 'true', message: 'Email Invalid' })
     }
 });
 
