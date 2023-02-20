@@ -133,7 +133,7 @@ app.post('/confirmMember', function(req, res) {
         // Create a buffer from the base64-encoded string
         const buffer = Buffer.from(image, 'base64');
         // Write the buffer to a file
-        fs.writeFile(`../members/user-images/_${email.substring(0,email.lastIndexOf("@"))}`, buffer, function(err) {
+        fs.writeFile(`../members/user-images/temp/${email.substring(0,email.lastIndexOf("@"))}`, buffer, function(err) {
             if (err) {
                 console.log(err);
                 res.send({ message: 'failed' });

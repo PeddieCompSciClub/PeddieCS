@@ -45,7 +45,7 @@ function getMembers() {
     }
 }
 
-//requests user data from the MySQL database
+//submits new user data to mySQL database
 function submitMember() {
     if(window.jQuery){
         // Check if an image has been selected
@@ -57,7 +57,7 @@ function submitMember() {
             reader.onload = function () {
                 var imageData = reader.result.split(',')[1];
                 // Send POST request with image data included as a parameter
-                $.post("https://peddiecs.peddie.org/nodejs/addMember", {
+                $.post("https://peddiecs.peddie.org/nodejs/confirmMember", {
                     first_name: $('#first-name').val(),
                     last_name: $('#last-name').val(),
                     email: $('#email').val(),
@@ -72,7 +72,7 @@ function submitMember() {
             };
         } else {
             // Send POST request without image data
-            $.post("https://peddiecs.peddie.org/nodejs/addMember", {
+            $.post("https://peddiecs.peddie.org/nodejs/confirmMember", {
                 first_name: $('#first-name').val(),
                 last_name: $('#last-name').val(),
                 email: $('#email').val()
