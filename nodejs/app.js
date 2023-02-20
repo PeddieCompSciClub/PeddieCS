@@ -101,7 +101,7 @@ app.post('/addMember', function(req, res) {
         // Create a buffer from the base64-encoded string
         const buffer = Buffer.from(image, 'base64');
         // Write the buffer to a file
-        fs.writeFile(`../${firstName}_${lastName}.jpg`, buffer, function(err) {
+        fs.writeFile(`../members/user-images/${firstName}_${lastName}.jpg`, buffer, function(err) {
             if (err) {
                 console.log(err);
                 res.send({ message: 'failed' });
