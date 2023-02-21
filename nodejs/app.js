@@ -169,7 +169,7 @@ app.post('/confirmMember', function (req, res) {
 
         const mailOptions = {
             from: 'compsciclub@peddie.org',
-            to: 'tchevres-24@peddie.org',
+            to: email,
             subject: 'PeddieCS Verify Registration: ',
             attachments: [{
                 filename: username,
