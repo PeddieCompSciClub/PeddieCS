@@ -13,7 +13,18 @@ const app = express();
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
+// Read in the contents of the secure.json file
+const secureData = fs.readFileSync('secure.json');
+const secure = JSON.parse(secureData);
 
+//transporter to send emails with (for security reasons auth is held in a seperate json)
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: secure.email.user,
+        pass: secure.email.pass
+    }
+});
 
 
 
@@ -193,13 +204,7 @@ const output = `
             <p></p>
             `;
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'compsciclub@peddie.org',
-        pass: '@peddie0225'
-    }
-});
+
 
 const mailOptions = {
     from: 'compsciclub@peddie.org',
