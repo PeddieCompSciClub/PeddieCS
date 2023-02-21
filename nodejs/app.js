@@ -161,7 +161,6 @@ app.post('/confirmMember', function (req, res) {
 
         const body = `
             <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-            <style src="https://peddiecs.peddie.org/main.css">
             <h4>Verify Your Account:</h4>
             <p></p>
             `;
