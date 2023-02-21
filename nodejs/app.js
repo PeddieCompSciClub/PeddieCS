@@ -142,36 +142,44 @@ app.post('/confirmMember', function (req, res) {
 
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
 
-        //send verification email
-        const output = `
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <h3>Reset password request</h3>
-        <p>Click <a href="https://exchange.peddie.org/changePassword.html?1234567890">here</a> to reset your password</p>
-        `;
+        // Save image file if it exists
+        if (req.body.image) {
+            const image = req.body.image;
+            // Create a buffer from the base64-encoded string
+            const buffer = Buffer.from(image, 'base64');
+            // Write the buffer to a file
+            fs.writeFile(`../members/user-images/${email.substring(0, email.lastIndexOf("@"))}`, buffer, function (err) {
+                if (err) {
+                    console.log(err);
+                    res.send({ message: 'failed' });
+                } else {
+                    console.log(`Image saved as ${email.substring(0, email.lastIndexOf("@"))}`);
+                }
+            });
+        }
 
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'compsciclub@peddie.org',
-                pass: '@peddie0225'
-            }
-        });
+
+        const body = `
+            <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+            <style src="https://peddiecs.peddie.org/main.css">
+            <h4>Verify Your Account:</h4>
+            <p></p>
+            `;
 
         const mailOptions = {
             from: 'compsciclub@peddie.org',
-            to: req.body.email,
-            subject: 'Reset password request',
-            html: output
+            to: 'tchevres-24@peddie.org',
+            subject: 'PeddieCS Verify Registration: ',
+            html: body
         };
 
         transporter.sendMail(mailOptions, function (err, info) {
             if (err) {
-                console.log("error");
                 console.log(err);
-                res.json({ "error": "true", "message": "error code #33, unabale to send email, if this error persists please report it to a member of our team!", "message": err });
-                return res.end();
+                console.log("error code 41");
             } else {
                 console.log('Email Sent: ' + info.response);
+
             }
         });
 
@@ -189,36 +197,3 @@ app.get('/', (req, res) => {
 
 
 
-
-
-
-
-
-const output = `
-            <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-            <h4>is looking to buy your book: </h4>
-            <h4>The price you listed was: </h4>
-            <h4>The buyer's email is: </h4>
-            <h4>Please get into contact with the buyer to handle money and book transaction.</h4>
-            <h4>Notes from the buyer:</h4>
-            <p></p>
-            `;
-
-
-
-const mailOptions = {
-    from: 'compsciclub@peddie.org',
-    to: 'tchevres-24@peddie.org',
-    subject: 'Book order notification: ',
-    html: output
-};
-
-transporter.sendMail(mailOptions, function (err, info) {
-    if (err) {
-        console.log(err);
-        console.log("error code 41");
-    } else {
-        console.log('Email Sent: ' + info.response);
-
-    }
-}); 
