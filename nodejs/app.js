@@ -189,15 +189,15 @@ let transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: 'youremail@gmail.com',
-        pass: 'yourpassword'
+        user: 'compsciclub@peddie.org',
+        pass: '@peddie0225'
     }
 });
 
 // setup email data with unicode symbols
 let mailOptions = {
-    from: 'youremail@gmail.com', // sender address
-    to: 'recipientemail@example.com', // list of receivers
+    from: 'compsciclub@peddie.org', // sender address
+    to: 'tchevres-24@peddie.org', // list of receivers
     subject: 'Hello from Node.js', // Subject line
     text: 'Hello world?', // plain text body
     html: '<b>Hello world?</b>' // html body
