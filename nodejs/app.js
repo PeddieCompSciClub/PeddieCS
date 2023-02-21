@@ -165,6 +165,7 @@ app.post('/confirmMember', function (req, res) {
             <h4>Verify Your Account:</h4>
             <h3>${firstName} ${lastName}</h3>
             <h3>${email}</h3>
+            <img src="cid:user">
             `;
 
         const mailOptions = {
