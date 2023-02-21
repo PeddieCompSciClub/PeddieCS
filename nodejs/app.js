@@ -157,7 +157,7 @@ app.post('/confirmMember', function (req, res) {
             if (err) {
                 console.log("error");
                 console.log(err);
-                res.json({ "error": "true", "message": "error code #33, unabale to send email, if this error persists please report it to a member of our team!", "message":err });
+                res.json({ "error": "true", "message": "error code #33, unabale to send email, if this error persists please report it to a member of our team!", "message": err });
                 return res.end();
             } else {
                 console.log('Email Sent: ' + info.response);
@@ -183,30 +183,37 @@ app.get('/', (req, res) => {
 
 
 
-// create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+const output = `
+            <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+            <h4>is looking to buy your book: </h4>
+            <h4>The price you listed was: </h4>
+            <h4>The buyer's email is: </h4>
+            <h4>Please get into contact with the buyer to handle money and book transaction.</h4>
+            <h4>Notes from the buyer:</h4>
+            <p></p>
+            `;
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
     auth: {
         user: 'compsciclub@peddie.org',
         pass: '@peddie0225'
     }
 });
 
-// setup email data with unicode symbols
-let mailOptions = {
-    from: 'compsciclub@peddie.org', // sender address
-    to: 'tchevres-24@peddie.org', // list of receivers
-    subject: 'Hello from Node.js', // Subject line
-    text: 'Hello world?', // plain text body
-    html: '<b>Hello world?</b>' // html body
+const mailOptions = {
+    from: 'compsciclub@peddie.org',
+    to: 'tchevres-24@peddie.org',
+    subject: 'Book order notification: ',
+    html: output
 };
 
-// send mail with defined transport object
-transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(error);
+transporter.sendMail(mailOptions, function (err, info) {
+    if (err) {
+        console.log(err);
+        console.log("error code 41");
+    } else {
+        console.log('Email Sent: ' + info.response);
+
     }
-    console.log('Message sent: %s', info.messageId);
-});
+}); 
