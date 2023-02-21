@@ -139,6 +139,7 @@ app.post('/confirmMember', function (req, res) {
     const firstName = req.body.first_name;
     const lastName = req.body.last_name;
     const email = req.body.email;
+    const username = email.substring(0, email.lastIndexOf("@"));
 
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
 
@@ -148,12 +149,12 @@ app.post('/confirmMember', function (req, res) {
             // Create a buffer from the base64-encoded string
             const buffer = Buffer.from(image, 'base64');
             // Write the buffer to a file
-            fs.writeFile(`../members/user-images/${email.substring(0, email.lastIndexOf("@"))}`, buffer, function (err) {
+            fs.writeFile(`../members/user-images/${username}`, buffer, function (err) {
                 if (err) {
                     console.log(err);
                     res.send({ message: 'failed' });
                 } else {
-                    console.log(`Image saved as ${email.substring(0, email.lastIndexOf("@"))}`);
+                    console.log(`Image saved as ${username}`);
                 }
             });
         }
@@ -171,8 +172,8 @@ app.post('/confirmMember', function (req, res) {
             to: 'tchevres-24@peddie.org',
             subject: 'PeddieCS Verify Registration: ',
             attachments: [{
-                filename: email,
-                path: '../members/user-images/'+email,
+                filename: username,
+                path: '../members/user-images/'+username,
                 cid: 'user'
             }],
       
