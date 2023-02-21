@@ -167,13 +167,8 @@ app.post('/confirmMember', function (req, res) {
             <h3>${email}</h3>
             <img src="cid:user">
             <div class="memberItem">
-                <img src="user-images/[USERNAME].jpg"  alt="Image not found" onError="this.onerror=null;this.src='user-images/missing.jpg';">
-                <a href="/members/member.html?[USERNAME]">[NAME]</a>
-                <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                </ul>
+                <img src="cid:user"  alt="Image not found" onError="this.onerror=null;this.src='https://peddiecs.peddie.org/memebers/user-images/missing.jpg';">
+                <a>[NAME]</a>
             </div>
             `;
 
