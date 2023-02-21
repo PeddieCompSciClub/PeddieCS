@@ -177,7 +177,7 @@ app.post('/confirmMember', function (req, res) {
             if (err) {
                 console.log("error");
                 console.log(err);
-                res.json({ "error": "true", "message": "error code #33, unabale to send email, if this error persists please report it to a member of our team!" });
+                res.json({ "error": "true", "message": "error code #33, unabale to send email, if this error persists please report it to a member of our team!", "message":err });
                 return res.end();
             } else {
                 console.log('Email Sent: ' + info.response);
