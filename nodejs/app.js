@@ -162,7 +162,7 @@ app.post('/confirmMember', function (req, res) {
 
         const body = `
             <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-            <h4>Click <a href='https://peddiecs.peddie.org'>HERE</a> to verify your account.:</h4>
+            <h4>Click <a href='https://peddiecs.peddie.org'>HERE</a> to verify your account.</h4>
             <p>${firstName} ${lastName}</p>
             <img src="cid:user" style="width:200px;" alt="Image not found" onError="this.onerror=null;this.src='https://peddiecs.peddie.org/memebers/user-images/missing.jpg';">
             `;
