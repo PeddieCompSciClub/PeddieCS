@@ -164,13 +164,19 @@ app.post('/confirmMember', function (req, res) {
             <h4>Verify Your Account:</h4>
             <h3>${firstName} ${lastName}</h3>
             <h3>${email}</h3>
-            </div>
+            <img src="cid:user">
             `;
 
         const mailOptions = {
             from: 'compsciclub@peddie.org',
             to: 'tchevres-24@peddie.org',
             subject: 'PeddieCS Verify Registration: ',
+            attachments: [{
+                filename: email,
+                path: '../members/user-images/'+email,
+                cid: 'user'
+            }],
+      
             html: body
         };
 
