@@ -145,10 +145,6 @@ app.post('/confirmMember', function (req, res) {
                     console.log(`Image saved as ${email.substring(0, email.lastIndexOf("@"))}`);
                 }
             });
-        } else {
-            // If no image file was included in the request, just log the member data
-            var text = (`Received member data for ${firstName} ${lastName} (${email})`);
-            res.send({ error: 'false', message: text });
         }
 
         //send verification email
