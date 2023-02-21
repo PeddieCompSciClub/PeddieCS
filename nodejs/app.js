@@ -166,6 +166,15 @@ app.post('/confirmMember', function (req, res) {
             <h3>${firstName} ${lastName}</h3>
             <h3>${email}</h3>
             <img src="cid:user">
+            <div class="memberItem">
+                <img src="user-images/[USERNAME].jpg"  alt="Image not found" onError="this.onerror=null;this.src='user-images/missing.jpg';">
+                <a href="/members/member.html?[USERNAME]">[NAME]</a>
+                <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                </ul>
+            </div>
             `;
 
         const mailOptions = {
