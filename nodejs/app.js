@@ -162,6 +162,37 @@ app.post('/confirmMember', function (req, res) {
 
         const body = `
             <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+            <style>
+            .memberItem {
+                min-width: 200px;
+                max-width:400px;
+                width:18%;
+                height: auto;
+                border: 1px solid var(--select);
+                border-radius: 10px;
+                background-color: var(--table);
+                margin:auto;
+                margin-top: 10px;
+            }
+            .memberItem img {
+                margin:auto;
+                margin-top: 5%;
+                width: 90%;
+                object-fit: cover;
+                display:block;
+                border-radius: 5px;
+                border: 1px solid var(--select);
+            }
+            .memberItem a {
+                display:block;
+                margin:auto;
+                text-align: center;
+                font-family: 'Raleway', serif;
+                font-size: 24px;
+                color: var(--background) !important;
+                font-weight: bold;
+            }
+            </style>
             <h4>Verify Your Account:</h4>
             <div class="memberItem">
                 <img src="cid:user"  alt="Image not found" onError="this.onerror=null;this.src='https://peddiecs.peddie.org/memebers/user-images/missing.jpg';">
