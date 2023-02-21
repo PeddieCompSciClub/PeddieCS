@@ -131,22 +131,6 @@ app.post('/confirmMember', function (req, res) {
 
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
 
-        // Save temp image file if it exists
-        if (req.body.image) {
-            const image = req.body.image;
-            // Create a buffer from the base64-encoded string
-            const buffer = Buffer.from(image, 'base64');
-            // Write the buffer to a file
-            fs.writeFile(`../members/user-images/temp/${email.substring(0, email.lastIndexOf("@"))}`, buffer, function (err) {
-                if (err) {
-                    console.log(err);
-                    res.send({ error: 'true', message: err });
-                } else {
-                    console.log(`Image saved as ${email.substring(0, email.lastIndexOf("@"))}`);
-                }
-            });
-        }
-
         //send verification email
         const output = `
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -190,4 +174,39 @@ app.post('/confirmMember', function (req, res) {
 // test to make sure it is working
 app.get('/', (req, res) => {
     res.send('Hello World!');
+});
+
+
+
+
+
+
+
+
+// create reusable transporter object using the default SMTP transport
+let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: 'youremail@gmail.com',
+        pass: 'yourpassword'
+    }
+});
+
+// setup email data with unicode symbols
+let mailOptions = {
+    from: 'youremail@gmail.com', // sender address
+    to: 'recipientemail@example.com', // list of receivers
+    subject: 'Hello from Node.js', // Subject line
+    text: 'Hello world?', // plain text body
+    html: '<b>Hello world?</b>' // html body
+};
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        return console.log(error);
+    }
+    console.log('Message sent: %s', info.messageId);
 });
