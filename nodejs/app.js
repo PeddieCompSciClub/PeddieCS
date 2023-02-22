@@ -36,52 +36,13 @@ app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
-/*
- *  Allows user to pass arguments through command line (mainly for debugging)
- *  for example:
- *  $ node app.js addMember Tomaz Chevres tchevres-24@peddie.org 2024
- *  sets process.argv to ['user/bin/node','/var/www/CSProjects/nodejs/app.js','addMember','Tomaz','Chevres','tchevres-24@peddie.org','2024']
- *  and adds the member to the database
- */
-switch (process.argv[2]) {
-    case 'debug':
-        process.argv.forEach((value, index) => {
-            console.log(index, value);
-        });
-        break;
-    case 'addMember':
-        addMember(process.argv[3], process.argv[4], process.argv[5], parseInt(process.argv[6]));
-        break;
-}
 
+function randomString(length, chars) {
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+  }
 
-//Test
-// function read() {
-//     con.connect(function (err) {
-//         if (err) throw err;
-//         console.log("Connected!");
-
-//         con.query("SELECT * FROM members", function (err, result, fields) {
-//             if (err) throw err;
-//             console.log(result);
-//         });
-//     });
-//     con.end();
-// }
-
-
-//adds a member to database
-function addMember(first_name, last_name, email, year) {
-    con.connect(function (err) {
-        if (err) throw err;
-        var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('" + first_name + "', '" + last_name + "', '" + email + "', " + year + ")";
-        con.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log(first_name + " " + last_name + " added to members");
-        });
-        con.end();
-    });
-}
 
 
 
@@ -141,6 +102,7 @@ app.post('/confirmMember', function (req, res) {
     const email = req.body.email;
     const username = email.substring(0, email.lastIndexOf("@"));
 
+    //validate email before doing anything else
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
 
         // Save image file if it exists
@@ -152,38 +114,68 @@ app.post('/confirmMember', function (req, res) {
             fs.writeFile(`../members/user-images/${username}`, buffer, function (err) {
                 if (err) {
                     console.log(err);
-                    res.send({ message: 'failed' });
+                    res.send({ error:'true', message: 'Failed To Save Image' });
                 } else {
                     console.log(`Image saved as ${username}`);
                 }
             });
         }
 
+        //create confimation code and save it to MySQl
+        const code = randomString('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-');
+        res.send({message: 'code'});
+        var con = mysql.createConnection({
+            host: "localhost",
+            user: "admincs",
+            password: "BeatBlair1864",
+            database: "peddieCS",
+            port: 3306
+        });
+        con.connect(function (err) {
+            if (err) throw err;
+            // con.query("SELECT * FROM members", function (err, result, fields) {
+            //     if (err) throw err;
+            //     res.json({ "error": false, "message": result });
+            //     return res.end();
+            // })
+            con.end();
+        })
 
+
+
+        //send email to user
         const body = `
             <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
             <h4>Click <a href='https://peddiecs.peddie.org'>HERE</a> to verify your account.</h4>
             <p>${firstName} ${lastName}</p>
-            <img src="cid:user" style="width:200px;" alt="Image not found" onError="this.onerror=null;this.src='https://peddiecs.peddie.org/memebers/user-images/missing.jpg';">
+            ${(req.body.image ? '<img src="cid:user" style="width:200px;">':'')}
             `;
 
-        const mailOptions = {
+        var mailOptions = {
             from: 'compsciclub@peddie.org',
             to: email,
             subject: 'PeddieCS Verify Registration: ',
-            attachments: [{
-                filename: username,
-                path: '../members/user-images/'+username,
-                cid: 'user'
-            }],
-      
             html: body
         };
+    
+        if(req.body.image){
+            mailOptions = {
+                from: 'compsciclub@peddie.org',
+                to: email,
+                subject: 'PeddieCS Verify Registration: ',
+                attachments: [{
+                    filename: username,
+                    path: '../members/user-images/'+username,
+                    cid: 'user'
+                }],
+                html: body
+            };
+        }
 
         transporter.sendMail(mailOptions, function (err, info) {
             if (err) {
                 console.log(err);
-                console.log("error code 41");
+                res.send({error: 'true', message:'Failed to send Email'});
             } else {
                 console.log('Email Sent: ' + info.response);
 
@@ -192,8 +184,9 @@ app.post('/confirmMember', function (req, res) {
 
 
     } else {
-        res.send({ error: 'true', message: 'Email Invalid' })
+        res.send({ error: 'true', message: 'Email Invalid' });
     }
+    return res.end();
 });
 
 
