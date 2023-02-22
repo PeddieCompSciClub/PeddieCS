@@ -37,12 +37,28 @@ app.listen(port, () => {
 });
 
 
+//return a random string of a given length using the given character set
 function randomString(length, chars) {
     var result = '';
     for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
     return result;
 }
 
+//read an email at return the year
+function getEmailYear(email) {
+    const yearMatch = email.match(/\d{2}(?=@peddie\.org)/);
+    if (yearMatch) {
+        const year = parseInt(yearMatch[0]) + 2000;
+        return year;
+    } else {
+        return 0;
+    }
+}
+console.log(getEmailYear("tchevres-24@peddie.org"));
+console.log(getEmailYear("nchev-19@peddie.org"));
+console.log(getEmailYear("swu-23@peddie.org"));
+console.log(getEmailYear("jwolfe@peddie.org"));
+console.log(getEmailYear("compsciclub@peddie.org"));
 
 
 
@@ -100,6 +116,7 @@ app.post('/confirmMember', function (req, res) {
     const firstName = req.body.first_name;
     const lastName = req.body.last_name;
     const email = req.body.email;
+    const year = email.s
     const username = email.substring(0, email.lastIndexOf("@"));
 
     //validate email before doing anything else
@@ -133,7 +150,7 @@ app.post('/confirmMember', function (req, res) {
         });
         con.connect(function (err) {
             if (err) throw err;
-            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + first_name + "', '" + last_name + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
+            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastLame + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
             con.query(sql, function (err, result) {
                 if (err) throw err;
                 console.log(first_name + " " + last_name + " added to tempMembers");
