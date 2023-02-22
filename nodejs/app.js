@@ -41,7 +41,7 @@ function randomString(length, chars) {
     var result = '';
     for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
     return result;
-  }
+}
 
 
 
@@ -114,16 +114,16 @@ app.post('/confirmMember', function (req, res) {
             fs.writeFile(`../members/user-images/${username}`, buffer, function (err) {
                 if (err) {
                     console.log(err);
-                    res.send({ error:'true', message: 'Failed To Save Image' });
+                    res.send({ error: 'true', message: 'Failed To Save Image' });
                 } else {
                     console.log(`Image saved as ${username}`);
                 }
             });
         }
 
-        //create confimation code and save it to MySQl
-        const code = randomString(8,'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-');
-        res.send({'message': code});
+        //create confimation code and save it to MySQl (2^48 possible codes, so don't worry about repetition)
+        const verificationNumber = randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-');
+        res.send({ 'message': verificationNumber });
         var con = mysql.createConnection({
             host: "localhost",
             user: "admincs",
@@ -133,55 +133,57 @@ app.post('/confirmMember', function (req, res) {
         });
         con.connect(function (err) {
             if (err) throw err;
-            // con.query("SELECT * FROM members", function (err, result, fields) {
-            //     if (err) throw err;
-            //     res.json({ "error": false, "message": result });
-            //     return res.end();
-            // })
+            con.connect(function (err) {
+                if (err) throw err;
+                var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + first_name + "', '" + last_name + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
+                con.query(sql, function (err, result) {
+                    if (err) throw err;
+                    console.log(first_name + " " + last_name + " added to tempMembers");
+                });
+                con.end();
+            });
             con.end();
-        })
 
 
-
-        //send email to user
-        const body = `
+            //send email to user
+            const body = `
             <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-            <h4>Click <a href='https://peddiecs.peddie.org'>HERE</a> to verify your account.</h4>
+            <h4>Click <a href='https://peddiecs.peddie.org?"verificationNumber"=${verificationNumber}'>HERE</a> to verify your account.</h4>
             <p>${firstName} ${lastName}</p>
-            ${(req.body.image ? '<img src="cid:user" style="width:200px;">':'')}
+            ${(req.body.image ? '<img src="cid:user" style="width:200px;">' : '')}
             `;
 
-        var mailOptions = {
-            from: 'compsciclub@peddie.org',
-            to: email,
-            subject: 'PeddieCS Verify Registration: ',
-            html: body
-        };
-    
-        if(req.body.image){
-            mailOptions = {
+            var mailOptions = {
                 from: 'compsciclub@peddie.org',
                 to: email,
                 subject: 'PeddieCS Verify Registration: ',
-                attachments: [{
-                    filename: username,
-                    path: '../members/user-images/'+username,
-                    cid: 'user'
-                }],
                 html: body
             };
-        }
 
-        transporter.sendMail(mailOptions, function (err, info) {
-            if (err) {
-                console.log(err);
-                res.send({error: 'true', message:'Failed to send Email'});
-            } else {
-                console.log('Email Sent: ' + info.response);
-
+            if (req.body.image) {
+                mailOptions = {
+                    from: 'compsciclub@peddie.org',
+                    to: email,
+                    subject: 'PeddieCS Verify Registration: ',
+                    attachments: [{
+                        filename: username,
+                        path: '../members/user-images/' + username,
+                        cid: 'user'
+                    }],
+                    html: body
+                };
             }
-        });
 
+            transporter.sendMail(mailOptions, function (err, info) {
+                if (err) {
+                    console.log(err);
+                    res.send({ error: 'true', message: 'Failed to send Email' });
+                } else {
+                    console.log('Email Sent: ' + info.response);
+
+                }
+            });
+        });
 
     } else {
         res.send({ error: 'true', message: 'Email Invalid' });
