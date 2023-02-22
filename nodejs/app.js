@@ -54,12 +54,6 @@ function getEmailYear(email) {
         return 0;
     }
 }
-console.log(getEmailYear("tchevres-24@peddie.org"));
-console.log(getEmailYear("nchev-19@peddie.org"));
-console.log(getEmailYear("swu-23@peddie.org"));
-console.log(getEmailYear("jwolfe@peddie.org"));
-console.log(getEmailYear("compsciclub@peddie.org"));
-
 
 
 app.get('/getAllMembers', (req, res) => {
@@ -150,7 +144,7 @@ app.post('/confirmMember', function (req, res) {
         });
         con.connect(function (err) {
             if (err) throw err;
-            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastLame + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
+            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastLame + "', '" + email + "', " + getEmailYear(email) + ", '" + verificationNumber + "')";
             con.query(sql, function (err, result) {
                 if (err) throw err;
                 console.log(first_name + " " + last_name + " added to tempMembers");
