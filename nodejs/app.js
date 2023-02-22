@@ -133,14 +133,10 @@ app.post('/confirmMember', function (req, res) {
         });
         con.connect(function (err) {
             if (err) throw err;
-            con.connect(function (err) {
+            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + first_name + "', '" + last_name + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
+            con.query(sql, function (err, result) {
                 if (err) throw err;
-                var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + first_name + "', '" + last_name + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
-                con.query(sql, function (err, result) {
-                    if (err) throw err;
-                    console.log(first_name + " " + last_name + " added to tempMembers");
-                });
-                con.end();
+                console.log(first_name + " " + last_name + " added to tempMembers");
             });
             con.end();
 
@@ -184,6 +180,7 @@ app.post('/confirmMember', function (req, res) {
                 }
             });
         });
+        con.end();
 
     } else {
         res.send({ error: 'true', message: 'Email Invalid' });
