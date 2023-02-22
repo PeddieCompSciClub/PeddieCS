@@ -134,7 +134,6 @@ app.post('/confirmMember', function (req, res) {
 
         //create confimation code and save it to MySQl (2^48 possible codes, so don't worry about repetition)
         const verificationNumber = randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-');
-        res.send({ 'message': verificationNumber });
         var con = mysql.createConnection({
             host: "localhost",
             user: "admincs",
@@ -196,6 +195,7 @@ app.post('/confirmMember', function (req, res) {
     } else {
         res.send({ error: 'true', message: 'Email Invalid' });
     }
+    res.json({error:false, message:"Success"})
     return res.end();
 });
 
