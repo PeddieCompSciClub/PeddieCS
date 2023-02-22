@@ -123,7 +123,7 @@ app.post('/confirmMember', function (req, res) {
 
         //create confimation code and save it to MySQl
         const code = randomString('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-');
-        res.send({message: code});
+        res.send({'message': code});
         var con = mysql.createConnection({
             host: "localhost",
             user: "admincs",
