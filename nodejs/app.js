@@ -148,49 +148,49 @@ app.post('/confirmMember', function (req, res) {
                 if (err) throw err;
                 console.log(first_name + " " + last_name + " added to tempMembers");
                 con.end();
-            });
 
 
-            //send email to user
-            const body = `
-            <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-            <h4>Click <a href='https://peddiecs.peddie.org?"verificationNumber"=${verificationNumber}'>HERE</a> to verify your account.</h4>
-            <p>${firstName} ${lastName}</p>
-            ${(req.body.image ? '<img src="cid:user" style="width:200px;">' : '')}
-            `;
 
-            var mailOptions = {
-                from: 'compsciclub@peddie.org',
-                to: email,
-                subject: 'PeddieCS Verify Registration: ',
-                html: body
-            };
+                //send email to user
+                const body = `
+                    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+                    <h4>Click <a href='https://peddiecs.peddie.org?"verificationNumber"=${verificationNumber}'>HERE</a> to verify your account.</h4>
+                    <p>${firstName} ${lastName}</p>
+                    ${(req.body.image ? '<img src="cid:user" style="width:200px;">' : '')}
+                    `;
 
-            if (req.body.image) {
-                mailOptions = {
+                var mailOptions = {
                     from: 'compsciclub@peddie.org',
                     to: email,
                     subject: 'PeddieCS Verify Registration: ',
-                    attachments: [{
-                        filename: username,
-                        path: '../members/user-images/' + username,
-                        cid: 'user'
-                    }],
                     html: body
                 };
-            }
 
-            transporter.sendMail(mailOptions, function (err, info) {
-                if (err) {
-                    console.log(err);
-                    res.send({ error: 'true', message: 'Failed to send Email' });
-                } else {
-                    console.log('Email Sent: ' + info.response);
-                    res.send({error:'false', message: 'Success'})
+                if (req.body.image) {
+                    mailOptions = {
+                        from: 'compsciclub@peddie.org',
+                        to: email,
+                        subject: 'PeddieCS Verify Registration: ',
+                        attachments: [{
+                            filename: username,
+                            path: '../members/user-images/' + username,
+                            cid: 'user'
+                        }],
+                        html: body
+                    };
                 }
+
+                transporter.sendMail(mailOptions, function (err, info) {
+                    if (err) {
+                        console.log(err);
+                        res.send({ error: 'true', message: 'Failed to send Email' });
+                    } else {
+                        console.log('Email Sent: ' + info.response);
+                        res.send({ error: 'false', message: 'Success' })
+                    }
+                });
             });
         });
-        con.end();
 
     } else {
         res.send({ error: 'true', message: 'Email Invalid' });
