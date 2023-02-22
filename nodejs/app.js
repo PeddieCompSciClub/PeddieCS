@@ -143,7 +143,7 @@ app.post('/confirmMember', function (req, res) {
         });
         con.connect(function (err) {
             if (err) throw err;
-            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastLame + "', '" + email + "', " + getEmailYear(email) + ", '" + verificationNumber + "')";
+            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', " + getEmailYear(email) + ", '" + verificationNumber + "')";
             con.query(sql, function (err, result) {
                 if (err) throw err;
                 console.log(first_name + " " + last_name + " added to tempMembers");
@@ -186,7 +186,7 @@ app.post('/confirmMember', function (req, res) {
                     res.send({ error: 'true', message: 'Failed to send Email' });
                 } else {
                     console.log('Email Sent: ' + info.response);
-
+                    res.send({error:'false', message: 'Success'})
                 }
             });
         });
@@ -195,7 +195,6 @@ app.post('/confirmMember', function (req, res) {
     } else {
         res.send({ error: 'true', message: 'Email Invalid' });
     }
-    res.json({error:false, message:"Success"})
     return res.end();
 });
 
