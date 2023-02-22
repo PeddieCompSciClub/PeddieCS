@@ -143,7 +143,8 @@ app.post('/confirmMember', function (req, res) {
         });
         con.connect(function (err) {
             if (err) throw err;
-            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
+            //inserts user data into the table, overwritting it if there is already an entry with the same email
+            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', " + year + ", '" + verificationNumber + "') ON DUPLICATE KEY UPDATE first_name='" + firstName + "', last_name='" + lastName + "', year=" + year + ", verificationNumber='" + verificationNumber + "'";
             con.query(sql, function (err, result) {
                 if (err) throw err;
                 console.log(firstName + " " + lastName + " added to tempMembers");
