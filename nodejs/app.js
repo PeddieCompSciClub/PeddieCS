@@ -146,7 +146,7 @@ app.post('/confirmMember', function (req, res) {
             var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
             con.query(sql, function (err, result) {
                 if (err) throw err;
-                console.log(first_name + " " + last_name + " added to tempMembers");
+                console.log(firstName + " " + lastName + " added to tempMembers");
                 con.end();
 
 
