@@ -110,7 +110,7 @@ app.post('/confirmMember', function (req, res) {
     const firstName = req.body.first_name;
     const lastName = req.body.last_name;
     const email = req.body.email;
-    const year = email.s
+    const year = getEmailYear(email);
     const username = email.substring(0, email.lastIndexOf("@"));
 
     //validate email before doing anything else
@@ -143,12 +143,12 @@ app.post('/confirmMember', function (req, res) {
         });
         con.connect(function (err) {
             if (err) throw err;
-            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', " + getEmailYear(email) + ", '" + verificationNumber + "')";
+            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', " + year + ", '" + verificationNumber + "')";
             con.query(sql, function (err, result) {
                 if (err) throw err;
                 console.log(first_name + " " + last_name + " added to tempMembers");
+                con.end();
             });
-            con.end();
 
 
             //send email to user
