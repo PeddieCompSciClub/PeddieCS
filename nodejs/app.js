@@ -166,7 +166,7 @@ app.post('/confirmMember', function (req, res) {
         });
 
     } else {
-        res.send({ error: 'true', message: 'Email Invalid' });
+        res.send({ error: 'true', message: 'Invalid Email' });
     }
     return res.end();
 });
@@ -176,8 +176,6 @@ app.post('/addMember', function (req, res) {
     // Get member data from POST request
     const email = req.body.email;
     const verificationCode = req.body.verificationCode;
-
-    console.log(email +" "+ verificationCode);
 
     //validate email before doing anything else
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
@@ -201,10 +199,9 @@ app.post('/addMember', function (req, res) {
             })
             con.end();
         })
+    } else {
+        res.send({"error":true, "message":'Invalid Email'});
     }
-
-
-    res.send({});
 });
 
 
