@@ -146,7 +146,7 @@ app.post('/confirmMember', function (req, res) {
                         subject: 'PeddieCS Verify Registration: ',
                         attachments: [{
                             filename: username,
-                            path: '../members/user-images/' + username,
+                            path: '../members/user-images/temp/' + username,
                             cid: 'user'
                         }],
                         html: body
