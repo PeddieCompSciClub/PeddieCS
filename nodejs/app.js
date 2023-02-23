@@ -175,6 +175,7 @@ app.post('/confirmMember', function (req, res) {
 app.post('/addMember', function (req, res) {
     // Get member data from POST request
     const email = req.body.email;
+    const username = email.substring(0, email.lastIndexOf("@"));
     const verificationCode = req.body.verificationCode;
 
     //validate email before doing anything else
@@ -203,6 +204,7 @@ app.post('/addMember', function (req, res) {
                         //if everything is still going fine, delete the entry from tempMembers
                         con.query('DELETE FROM tempMembers WHERE verificationCode="' + String(verificationCode + '";'), function(err, result){
                             if(err) throw err;
+
                             res.send({"error":false,"message":"Successfully made "+ user.first_name +" a member."});
                             con.end();
                         });
@@ -210,6 +212,12 @@ app.post('/addMember', function (req, res) {
                 }
             })
         })
+
+        //move user image from temp to regular folder
+        fs.rename('..members/user-images/temp/'+username,'..members/user-images/'+username, (err) => {
+            if(err) console.log(err);
+        });
+
     } else {
         res.send({ "error": true, "message": 'Invalid Email' });
     }
