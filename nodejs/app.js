@@ -202,11 +202,10 @@ app.post('/addMember', function (req, res) {
                     var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('" + user.first_name + "', '" + user.last_name + "', '" + user.email + "', " + user.year + ") ON DUPLICATE KEY UPDATE first_name='" + user.first_name + "', last_name='" + user.last_name + "', year=" + user.year;
                     con.query(sql, function (err, result) {
                         if (err) throw err;
-                        console.log(firstName + " " + lastName + " added to tempMembers");
+                        con.end();
                     });
                 }
             })
-            con.end();
         })
     } else {
         res.send({ "error": true, "message": 'Invalid Email' });
