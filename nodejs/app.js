@@ -194,10 +194,10 @@ app.post('/addMember', function (req, res) {
                     res.json({"error":true, "message":err});
                     return res.end();
                 }
-                if(result.email == email){
+                if(result[0].email == email){
                     
                 }
-                console.log(result.email, email);
+                console.log(result[0].email, email);
                 res.send({"error":true, "message":result[0]});
             })
             con.end();
