@@ -186,23 +186,30 @@ app.post('/addMember', function (req, res) {
             database: "peddieCS",
             port: 3306
         });
-    
+
         con.connect(function (err) {
             if (err) throw err;
             con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {
-                if (err){
-                    res.json({"error":true, "message":err});
+                if (err) {
+                    res.json({ "error": true, "message": err });
                     return res.end();
                 }
-                if(result[0].email == email){
-                    con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {});
+                if (result[0].email != email) {
+                    res.send({ "error": true, "message": "Email and Verification Code do not match." });
+                } else {
+                    //on success, add data to members, and remove from tempMembers
+                    var user=result[0];
+                    var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('" + user.first_name + "', '" + user.last_name + "', '" + user.email + "', " + year + ") ON DUPLICATE KEY UPDATE first_name='" + firstName + "', last_name='" + lastName + "', year=" + year;
+                    con.query(sql, function (err, result) {
+                        if (err) throw err;
+                        console.log(firstName + " " + lastName + " added to tempMembers");
+                    });
                 }
-                res.send({"error":true, "message":"Email and Verification Code do not match."});
             })
             con.end();
         })
     } else {
-        res.send({"error":true, "message":'Invalid Email'});
+        res.send({ "error": true, "message": 'Invalid Email' });
     }
 });
 
