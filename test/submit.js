@@ -2,9 +2,9 @@ function submitForm(){
             
     if(window.jQuery){
 
-        $.get("https://peddiecs.peddie.org/nodejs/getAllMembers",{
+        $.get("https://peddiecs.peddie.org/nodejs/addMember",{
             email:$('#email').val(),
-            password:$('#password').val()
+            verificationCode:$('#code').val()
         },function(res){
             
             if(res.message=="success"){

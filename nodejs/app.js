@@ -76,34 +76,6 @@ app.get('/getAllMembers', (req, res) => {
     })
 });
 
-app.post('/addMember', function (req, res) {
-    // Get member data from POST request
-    const firstName = req.body.first_name;
-    const lastName = req.body.last_name;
-    const email = req.body.email;
-
-    // Save image file if it exists
-    if (req.body.image) {
-        const image = req.body.image;
-        // Create a buffer from the base64-encoded string
-        const buffer = Buffer.from(image, 'base64');
-        // Write the buffer to a file
-        fs.writeFile(`../members/user-images/${email.substring(0, email.lastIndexOf("@"))}`, buffer, function (err) {
-            if (err) {
-                console.log(err);
-                res.send({ message: 'failed' });
-            } else {
-                console.log(`Image saved as ${email.substring(0, email.lastIndexOf("@"))}`);
-                res.send({ message: 'success' });
-            }
-        });
-    } else {
-        // If no image file was included in the request, just log the member data
-        var text = (`Received member data for ${firstName} ${lastName} (${email})`);
-        res.send({ message: 'success' + text });
-    }
-});
-
 
 //send an email confirmation for updating user info (saves image)
 app.post('/confirmMember', function (req, res) {
@@ -122,7 +94,7 @@ app.post('/confirmMember', function (req, res) {
             // Create a buffer from the base64-encoded string
             const buffer = Buffer.from(image, 'base64');
             // Write the buffer to a file
-            fs.writeFile(`../members/user-images/${username}`, buffer, function (err) {
+            fs.writeFile(`../members/user-images/temp/${username}`, buffer, function (err) {
                 if (err) {
                     console.log(err);
                     res.send({ error: 'true', message: 'Failed To Save Image' });
@@ -155,7 +127,7 @@ app.post('/confirmMember', function (req, res) {
                 //send email to user
                 const body = `
                     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                    <h4>Click <a href='https://peddiecs.peddie.org/redirect.html?verificationCode=${verificationCode}'>HERE</a> to verify your account.</h4>
+                    <h4>Click <a href='https://peddiecs.peddie.org/redirect.html?request=addMember&email=${email}&verificationCode=${verificationCode}'>HERE</a> to verify your account.</h4>
                     <p>${firstName} ${lastName}</p>
                     ${(req.body.image ? '<img src="cid:user" style="width:200px;">' : '')}
                     `;
@@ -199,11 +171,43 @@ app.post('/confirmMember', function (req, res) {
     return res.end();
 });
 
+//adds a member form tempMembers to members (verification code is required)
+app.post('/addMember', function (req, res) {
+    // Get member data from POST request
+    const email = req.email;
+    const verificationCode = req.verificationCode;
+
+    //validate email before doing anything else
+    if (email.endsWith("@peddie.org") && validator.validate(email)) {
+        var con = mysql.createConnection({
+            host: "localhost",
+            user: "admincs",
+            password: "BeatBlair1864",
+            database: "peddieCS",
+            port: 3306
+        });
+    
+        con.connect(function (err) {
+            if (err) throw err;
+            con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {
+                if (err){
+                    res.json({"error":true, "message":err});
+                    return res.end();
+                }
+                res.json({ "error": false, "message": result });
+                return res.end();
+            })
+            con.end();
+        })
+    }
+
+
+    req.send({});
+});
+
 
 // test to make sure it is working
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-
-
 
