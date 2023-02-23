@@ -177,7 +177,7 @@ app.post('/addMember', function (req, res) {
     const email = req.body.email;
     const verificationCode = req.body.verificationCode;
 
-    console.log(eamil +" "+ verificationCode);
+    console.log(email +" "+ verificationCode);
 
     //validate email before doing anything else
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
