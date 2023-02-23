@@ -168,7 +168,6 @@ app.post('/confirmMember', function (req, res) {
     } else {
         res.send({ error: 'true', message: 'Invalid Email' });
     }
-    return res.end();
 });
 
 //adds a member form tempMembers to members (verification code is required)
