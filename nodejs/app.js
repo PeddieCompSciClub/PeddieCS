@@ -213,9 +213,9 @@ app.post('/addMember', function (req, res) {
         })
 
         //move user image from temp to regular folder
-        fs.rename('..members/user-images/temp/'+username,'..members/user-images/'+username, (err) => {
-            if(err) console.log(err);
-        });
+        // fs.rename('..members/user-images/temp/'+username,'..members/user-images/'+username, (err) => {
+        //     if(err) console.log(err);
+        // });
 
     } else {
         res.send({ "error": true, "message": 'Invalid Email' });
