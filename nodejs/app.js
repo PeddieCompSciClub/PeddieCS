@@ -202,7 +202,7 @@ app.post('/addMember', function (req, res) {
     }
 
 
-    req.send({});
+    res.send({});
 });
 
 
