@@ -133,7 +133,7 @@ app.post('/confirmMember', function (req, res) {
         }
 
         //create confimation code and save it to MySQl (2^48 possible codes, so don't worry about repetition)
-        const verificationNumber = randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-');
+        const verificationCode = randomString(8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-');
         var con = mysql.createConnection({
             host: "localhost",
             user: "admincs",
@@ -144,7 +144,7 @@ app.post('/confirmMember', function (req, res) {
         con.connect(function (err) {
             if (err) throw err;
             //inserts user data into the table, overwritting it if there is already an entry with the same email
-            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationNumber) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', " + year + ", '" + verificationNumber + "') ON DUPLICATE KEY UPDATE first_name='" + firstName + "', last_name='" + lastName + "', year=" + year + ", verificationNumber='" + verificationNumber + "'";
+            var sql = "INSERT INTO tempMembers (first_name, last_name, email, year, verificationCode) VALUES ('" + firstName + "', '" + lastName + "', '" + email + "', " + year + ", '" + verificationCode + "') ON DUPLICATE KEY UPDATE first_name='" + firstName + "', last_name='" + lastName + "', year=" + year + ", verificationCode='" + verificationCode + "'";
             con.query(sql, function (err, result) {
                 if (err) throw err;
                 console.log(firstName + " " + lastName + " added to tempMembers");
@@ -155,7 +155,7 @@ app.post('/confirmMember', function (req, res) {
                 //send email to user
                 const body = `
                     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                    <h4>Click <a href='https://peddiecs.peddie.org/redirect.html?verificationNumber=${verificationNumber}'>HERE</a> to verify your account.</h4>
+                    <h4>Click <a href='https://peddiecs.peddie.org/redirect.html?verificationCode=${verificationCode}'>HERE</a> to verify your account.</h4>
                     <p>${firstName} ${lastName}</p>
                     ${(req.body.image ? '<img src="cid:user" style="width:200px;">' : '')}
                     `;
@@ -163,7 +163,7 @@ app.post('/confirmMember', function (req, res) {
                 var mailOptions = {
                     from: 'compsciclub@peddie.org',
                     to: email,
-                    subject: 'PeddieCS Verify Registration: ',
+                    subject: 'PeddieCS Verify Registration',
                     html: body
                 };
 
