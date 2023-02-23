@@ -195,7 +195,7 @@ app.post('/addMember', function (req, res) {
                     return res.end();
                 }
                 if(result[0].email == email){
-                    
+                    con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {});
                 }
                 res.send({"error":true, "message":"Email and Verification Code do not match."});
             })
