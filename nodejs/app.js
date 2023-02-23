@@ -177,6 +177,8 @@ app.post('/addMember', function (req, res) {
     const email = req.body.email;
     const verificationCode = req.body.verificationCode;
 
+    console.log(eamil +" "+ verificationCode);
+
     //validate email before doing anything else
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
         var con = mysql.createConnection({
@@ -188,10 +190,7 @@ app.post('/addMember', function (req, res) {
         });
     
         con.connect(function (err) {
-            if (err){
-                console.log(err);
-                throw err;
-            }
+            if (err) throw err;
             con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {
                 if (err){
                     res.json({"error":true, "message":err});
