@@ -198,7 +198,7 @@ app.post('/addMember', function (req, res) {
                     
                 }
                 console.log(result.email, email);
-                res.send({"error":true, "message":result});
+                res.send({"error":true, "message":result[0]});
             })
             con.end();
         })
