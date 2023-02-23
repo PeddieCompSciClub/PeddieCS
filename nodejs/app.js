@@ -194,8 +194,10 @@ app.post('/addMember', function (req, res) {
                     res.json({"error":true, "message":err});
                     return res.end();
                 }
-                res.json({ "error": false, "message": result });
-                return res.end();
+                if(result.email == email){
+                    
+                }
+                else res.send({"error":true, "message":"Email does not match verification code."});
             })
             con.end();
         })
