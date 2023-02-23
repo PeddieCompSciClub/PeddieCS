@@ -189,8 +189,8 @@ app.post('/addMember', function (req, res) {
     
         con.connect(function (err) {
             if (err){
-                res.json({"error":true, "message":err});
-                return res.end();
+                console.log(err);
+                throw err;
             }
             con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {
                 if (err){
