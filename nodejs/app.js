@@ -199,7 +199,7 @@ app.post('/addMember', function (req, res) {
                 } else {
                     //on success, add data to members, and remove from tempMembers
                     var user=result[0];
-                    var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('" + user.first_name + "', '" + user.last_name + "', '" + user.email + "', " + year + ") ON DUPLICATE KEY UPDATE first_name='" + firstName + "', last_name='" + lastName + "', year=" + year;
+                    var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('" + user.first_name + "', '" + user.last_name + "', '" + user.email + "', " + user.year + ") ON DUPLICATE KEY UPDATE first_name='" + user.first_name + "', last_name='" + user.last_name + "', year=" + user.year;
                     con.query(sql, function (err, result) {
                         if (err) throw err;
                         console.log(firstName + " " + lastName + " added to tempMembers");
