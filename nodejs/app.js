@@ -78,7 +78,7 @@ app.get('/getAllMembers', (req, res) => {
 
 
 //send an email confirmation for updating user info (saves image)
-app.post('/confirmMember', function (req, res) {
+app.post('/submitMember', function (req, res) {
     const firstName = req.body.first_name;
     const lastName = req.body.last_name;
     const email = req.body.email;

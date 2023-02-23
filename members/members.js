@@ -57,13 +57,13 @@ function submitMember() {
             reader.onload = function () {
                 var imageData = reader.result.split(',')[1];
                 // Send POST request with image data included as a parameter
-                $.post("https://peddiecs.peddie.org/nodejs/confirmMember", {
+                $.post("https://peddiecs.peddie.org/nodejs/submitMember", {
                     first_name: $('#first-name').val(),
                     last_name: $('#last-name').val(),
                     email: $('#email').val(),
                     image: imageData
                 }, function (res) {
-                    if (res.message == "failed") {
+                    if (res.error == "false") {
                         console.log("Failed to add member data")
                     } else {
                         console.log(res.message);
@@ -72,12 +72,12 @@ function submitMember() {
             };
         } else {
             // Send POST request without image data
-            $.post("https://peddiecs.peddie.org/nodejs/confirmMember", {
+            $.post("https://peddiecs.peddie.org/nodejs/submitMember", {
                 first_name: $('#first-name').val(),
                 last_name: $('#last-name').val(),
                 email: $('#email').val()
             }, function (res) {
-                if (res.message == "failed") {
+                if (res.error == 'false') {
                     console.log("Failed to add member data")
                 } else {
                     console.log(res.message);
