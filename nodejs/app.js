@@ -197,7 +197,8 @@ app.post('/addMember', function (req, res) {
                 if(result.email == email){
                     
                 }
-                else res.send({"error":true, "message":"Email does not match verification code."});
+                console.log(result.email, email);
+                res.send({"error":true, "message":"Email does not match verification code."});
             })
             con.end();
         })
