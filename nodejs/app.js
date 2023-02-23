@@ -190,10 +190,7 @@ app.post('/addMember', function (req, res) {
         con.connect(function (err) {
             if (err) throw err;
             con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {
-                if (err) {
-                    res.json({ "error": true, "message": err });
-                    return res.end();
-                }
+                if(err) throw err;
                 if (result[0].email != email) {
                     res.send({ "error": true, "message": "Email and Verification Code do not match." });
                 } else {
@@ -202,7 +199,13 @@ app.post('/addMember', function (req, res) {
                     var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('" + user.first_name + "', '" + user.last_name + "', '" + user.email + "', " + user.year + ") ON DUPLICATE KEY UPDATE first_name='" + user.first_name + "', last_name='" + user.last_name + "', year=" + user.year;
                     con.query(sql, function (err, result) {
                         if (err) throw err;
-                        con.end();
+                        
+                        //if everything is still going fine, delete the entry from tempMembers
+                        con.query('DELETE FROM tempMembers WHERE verificationCode="' + String(verificationCode + '";'), function(err, result){
+                            if(err) throw err;
+                            res.send({"error":false,"message":"Successfully made "+ user.first_name +" a member."});
+                            con.end();
+                        });
                     });
                 }
             })
