@@ -47,6 +47,9 @@ function getMembers() {
 
 //submits new user data to mySQL database
 function submitMember() {
+    $('#body')[0].style.display="block";
+    $('#text')[0].style.display="block";
+
     if(window.jQuery){
         // Check if an image has been selected
         var image = $('#image')[0].files[0];
@@ -80,7 +83,7 @@ function submitMember() {
                 if (res.error == "true") {
                     console.log("Failed to add member data")
                 } else {
-                    $('#body')[0].style.display="none";
+                    $('#body')[0].style.display="block";
                 }
             });
         }
