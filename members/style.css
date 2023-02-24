@@ -57,7 +57,7 @@
     height: auto;
     border: 1px solid var(--select);
     border-radius: 10px;
-    background-color: var(--table);
+    background-color: var(--navbar);
     margin:auto;
     margin-top: 10px;
 }
@@ -76,7 +76,7 @@
     text-align: center;
     font-family: 'Raleway', serif;
     font-size: 24px;
-    color: var(--background) !important;
+    color: var(--text) !important;
     font-weight: bold;
 }
 .memberItem ul {
