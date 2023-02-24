@@ -177,7 +177,7 @@ app.post('/addMember', function (req, res) {
     const email = req.body.email;
     const verificationCode = req.body.verificationCode;
     console.log("Reunning /addMember "+email+" "+verificationCode);
-    
+
     //validate email before doing anything else
     if (email!=null && email.endsWith("@peddie.org") && validator.validate(email)) {
         const username = email.substring(0, email.lastIndexOf("@"));
@@ -222,7 +222,7 @@ app.post('/addMember', function (req, res) {
 
         fs.rename(sourcePath, destPath, (err) => {
             if (err) {
-                console.error(`Error moving file: ${err}`);
+                console.log(`Error moving file: ${err}`);
             } else {
                 console.log(`File moved successfully from ${sourcePath} to ${destPath}`);
             }
