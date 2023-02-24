@@ -3,8 +3,7 @@
 
 <head>
   <title>Peddie Computer Science</title>
-  <meta name="description"
-    content="">
+  <meta name="description" content="">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -22,7 +21,33 @@
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script>
-    
+    // Get the URL from the current page & search parameters
+    const url = new URL(window.location.href);
+    const searchParams = new URLSearchParams(url.search);
+
+    // Get the values of the "request", "email", and "verificationCode" parameters
+    const request = searchParams.get("request");
+    if (request == "addMember") {
+      const email = searchParams.get("email");
+      const verificationCode = searchParams.get("verificationCode");
+
+      $.post("https://peddiecs.peddie.org/nodejs/addMember", {
+        "email": email,
+        "verificationCode": verificationCode
+      }, function (res) {
+
+        if (res.message == "success") {
+          console.log("success");
+        } else {
+          if (res.message) {
+            console.log(res.message);
+          }
+        }
+
+      });
+
+    }
+
   </script>
 
   <link rel="stylesheet" href="style.css">
@@ -38,9 +63,10 @@
     <div class="navbar-box" id="navbarText">
       <ul class="navbar-nav mr-auto ">
         <li class="nav-item">
-          <a class="navbar-brand" href="/index.html"><img src="/WebsitePictures/logo.jpg" class="img-responsive logo"></a>
+          <a class="navbar-brand" href="/index.html"><img src="/WebsitePictures/logo.jpg"
+              class="img-responsive logo"></a>
         </li>
-        
+
         <li class="nav-item">
           <a class="navbar-brand" href="/index.html">
             <p>Home</p>
@@ -66,12 +92,13 @@
             <p>CS Fellows</p>
           </a>
         </li>
-        
+
         <li>
           <a href="mailto:compsciclub@peddie.org"><img src="/WebsitePictures/email.png" class="logo1" /></a>
         </li>
         <li>
-          <a href="https://peddiehacks.peddie.org"><img src="/WebsitePictures/peddiehacks.jpg" class="img-responsive logo"></a>
+          <a href="https://peddiehacks.peddie.org"><img src="/WebsitePictures/peddiehacks.jpg"
+              class="img-responsive logo"></a>
         </li>
 
       </ul>

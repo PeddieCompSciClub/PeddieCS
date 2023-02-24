@@ -13,7 +13,6 @@ function submitForm(){
                 if(res.message){
                     console.log(res.message);
                 }
-                console.log('got the message');
             }
         
         });
