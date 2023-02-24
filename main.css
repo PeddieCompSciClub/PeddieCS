@@ -203,3 +203,11 @@ nav li a {
     width: auto;
     height: 30px;
 }
+
+
+/* hides navbar when width<1000px */
+@media screen and (max-width: 1000px) {
+    .navbar {
+      display: none;
+    }
+  }
