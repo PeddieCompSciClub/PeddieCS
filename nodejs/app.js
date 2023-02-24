@@ -174,10 +174,8 @@ app.post('/submitMember', function (req, res) {
 //adds a member form tempMembers to members (verification code is required)
 app.post('/addMember', function (req, res) {
     // Get member data from POST request
-    console.log("test");
     const email = req.body.email;
     const verificationCode = req.body.verificationCode;
-    console.log("Rnunning /addMember " + email + " " + verificationCode);
 
     //validate email before doing anything else
     if (email != null && email.endsWith("@peddie.org") && validator.validate(email)) {
@@ -194,7 +192,7 @@ app.post('/addMember', function (req, res) {
             if (err) throw err;
             con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {
                 if (err) throw err;
-                if (result[0].email != email) {
+                if (result[0]==null || result[0].email != email) {
                     res.send({ "error": true, "message": "Email and Verification Code do not match." });
                 } else {
                     //on success, add data to members, and remove from tempMembers
