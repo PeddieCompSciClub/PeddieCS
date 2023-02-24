@@ -35,16 +35,7 @@
         "email": email,
         "verificationCode": verificationCode
       }, function (res) {
-
-        if (res.error == false) {
-          console.log("success");
-          window.location.replace("http://peddiecs.peddie.org/members");
-        } else {
-          if (res.message) {
-            console.log(res.message);
-          }
-        }
-
+        window.location.replace("http://peddiecs.peddie.org/members");
       });
 
     }
@@ -107,7 +98,7 @@
   </nav>
   <header>
   </header>
-  <h3 style="text-align: center;">Redirecting to peddiecs.peddie.org</h3>
+  <h3 style="text-align: center;" id="text">Redirecting to peddiecs.peddie.org</h3>
 
 </body>
 
