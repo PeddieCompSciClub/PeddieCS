@@ -175,11 +175,12 @@ app.post('/submitMember', function (req, res) {
 app.post('/addMember', function (req, res) {
     // Get member data from POST request
     const email = req.body.email;
-    const username = email.substring(0, email.lastIndexOf("@"));
     const verificationCode = req.body.verificationCode;
-
+    console.log("Reunning /addMember "+email+" "+verificationCode);
+    
     //validate email before doing anything else
-    if (email.endsWith("@peddie.org") && validator.validate(email)) {
+    if (email!=null && email.endsWith("@peddie.org") && validator.validate(email)) {
+        const username = email.substring(0, email.lastIndexOf("@"));
         var con = mysql.createConnection({
             host: "localhost",
             user: "admincs",
@@ -219,17 +220,13 @@ app.post('/addMember', function (req, res) {
         const sourcePath = path.join(__dirname, '..', 'members', 'user-images', 'temp', username);
         const destPath = path.join(__dirname, '..', 'members', 'user-images', username);
 
-        if (fs.existsSync(sourcePath)) {
-            fs.rename(sourcePath, destPath, (err) => {
-                if (err) {
-                    console.log(`Error moving file: ${err}`);
-                } else {
-                    console.log(`File moved successfully from ${sourcePath} to ${destPath}`);
-                }
-            });
-        } else {
-            console.log(`Error: Source file does not exist: ${sourcePath}`);
-        }
+        fs.rename(sourcePath, destPath, (err) => {
+            if (err) {
+                console.error(`Error moving file: ${err}`);
+            } else {
+                console.log(`File moved successfully from ${sourcePath} to ${destPath}`);
+            }
+        });
 
     } else {
         res.send({ "error": true, "message": 'Invalid Email' });
