@@ -137,7 +137,7 @@
           };
         </script>
       </div>
-      <button onclick="submitMember()" id="form-button">Submit</button>
+      <button onclick="submitMember()" ontouchstart="submitMember()" id="form-button">Submit</button>
       <script>
         function showButton() {
           if (document.getElementById("first-name").value.length > 0 && document.getElementById("last-name").value.length > 0 && validateEmail(document.getElementById("email").value) == 1) {
