@@ -63,10 +63,10 @@ function submitMember() {
                     email: $('#email').val(),
                     image: imageData
                 }, function (res) {
-                    if (res.error == "false") {
+                    if (res.error == "true") {
                         console.log("Failed to add member data")
                     } else {
-                        console.log(res.message);
+                        $('#body').style.display="none";
                     }
                 });
             };
@@ -77,10 +77,10 @@ function submitMember() {
                 last_name: $('#last-name').val(),
                 email: $('#email').val()
             }, function (res) {
-                if (res.error == 'false') {
+                if (res.error == "true") {
                     console.log("Failed to add member data")
                 } else {
-                    console.log(res.message);
+                    $('#body').style.display="none";
                 }
             });
         }
