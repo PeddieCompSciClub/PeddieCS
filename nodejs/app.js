@@ -223,9 +223,19 @@ app.post('/addMember', function (req, res) {
                 if (err) console.log(err);
             });
         } else {
-            console.log(username+' does not have a profile image.', sourcePath);
+            console.log(username + ' does not have a profile image.', sourcePath);
         }
 
+        const filename = '..members/user-images/temp/example.txt';
+        const content = 'This is some example content for the new file.';
+
+        fs.writeFile(filename, content, (err) => {
+            if (err) {
+                console.error(`Error creating file: ${err}`);
+            } else {
+                console.log(`File ${filename} created successfully.`);
+            }
+        });
 
     } else {
         res.send({ "error": true, "message": 'Invalid Email' });
