@@ -2,6 +2,7 @@ const mysql = require('mysql');
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const path = require('path');
 const validator = require('email-validator');
 const nodemailer = require("nodemailer");
 
@@ -215,25 +216,14 @@ app.post('/addMember', function (req, res) {
         console.log("Got this far " + username);
 
         //move user image from temp to regular folder
-        const sourcePath = '..members/user-images/temp/' + username;
-        const destPath = '..members/user-images/' + username;
+        const sourcePath = path.join(__dirname, '..', 'members', 'user-images', 'temp', username);
+        const destPath = path.join(__dirname, '..', 'members', 'user-images', username);
 
-        if (fs.existsSync(sourcePath)) {
-            fs.rename(sourcePath, destPath, (err) => {
-                if (err) console.log(err);
-            });
-        } else {
-            console.log(username + ' does not have a profile image.', sourcePath);
-        }
-
-        const filename = '..members/user-images/temp/example.txt';
-        const content = 'This is some example content for the new file.';
-
-        fs.writeFile(filename, content, (err) => {
+        fs.rename(sourcePath, destPath, (err) => {
             if (err) {
-                console.error(`Error creating file: ${err}`);
+                console.error(`Error moving file: ${err}`);
             } else {
-                console.log(`File ${filename} created successfully.`);
+                console.log(`File moved successfully from ${sourcePath} to ${destPath}`);
             }
         });
 
