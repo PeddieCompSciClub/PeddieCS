@@ -47,7 +47,7 @@ function getMembers() {
 
 //submits new user data to mySQL database
 function submitMember() {
-    $('#body')[0].style.display="block";
+    $('#body')[0].style.display="none";
     $('#text')[0].style.display="block";
 
     if(window.jQuery){
@@ -68,8 +68,6 @@ function submitMember() {
                 }, function (res) {
                     if (res.error == "true") {
                         console.log("Failed to add member data")
-                    } else {
-                        $('#body')[0].style.display="none";
                     }
                 });
             };
@@ -82,8 +80,6 @@ function submitMember() {
             }, function (res) {
                 if (res.error == "true") {
                     console.log("Failed to add member data")
-                } else {
-                    $('#body')[0].style.display="block";
                 }
             });
         }
