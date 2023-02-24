@@ -190,21 +190,21 @@ app.post('/addMember', function (req, res) {
         con.connect(function (err) {
             if (err) throw err;
             con.query("SELECT * FROM tempMembers WHERE verificationCode=" + "\"" + String(verificationCode) + "\";", function (err, result, fields) {
-                if(err) throw err;
+                if (err) throw err;
                 if (result[0].email != email) {
                     res.send({ "error": true, "message": "Email and Verification Code do not match." });
                 } else {
                     //on success, add data to members, and remove from tempMembers
-                    var user=result[0];
+                    var user = result[0];
                     var sql = "INSERT INTO members (first_name, last_name, email, year) VALUES ('" + user.first_name + "', '" + user.last_name + "', '" + user.email + "', " + user.year + ") ON DUPLICATE KEY UPDATE first_name='" + user.first_name + "', last_name='" + user.last_name + "', year=" + user.year;
                     con.query(sql, function (err, result) {
                         if (err) throw err;
-                        
-                        //if everything is still going fine, delete the entry from tempMembers
-                        con.query('DELETE FROM tempMembers WHERE verificationCode="' + String(verificationCode + '";'), function(err, result){
-                            if(err) throw err;
 
-                            res.send({"error":false,"message":"Successfully made "+ user.first_name +" a member."});
+                        //if everything is still going fine, delete the entry from tempMembers
+                        con.query('DELETE FROM tempMembers WHERE verificationCode="' + String(verificationCode + '";'), function (err, result) {
+                            if (err) throw err;
+
+                            res.send({ "error": false, "message": "Successfully made " + user.first_name + " a member." });
                             con.end();
                         });
                     });
@@ -212,12 +212,20 @@ app.post('/addMember', function (req, res) {
             })
         })
 
-        console.log("Got this far "+username);
+        console.log("Got this far " + username);
 
         //move user image from temp to regular folder
-        fs.rename('..members/user-images/temp/'+username,'..members/user-images/'+username, (err) => {
-            if(err) console.log(err);
-        });
+        const sourcePath = '..members/user-images/temp/' + username;
+        const destPath = '..members/user-images/' + username;
+
+        if (fs.existsSync(sourcePath)) {
+            fs.rename(sourcePath, destPath, (err) => {
+                if (err) console.log(err);
+            });
+        } else {
+            console.log(username+' does not have a profile image.', sourcePath);
+        }
+
 
     } else {
         res.send({ "error": true, "message": 'Invalid Email' });
