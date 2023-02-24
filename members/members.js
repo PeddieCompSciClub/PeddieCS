@@ -66,7 +66,7 @@ function submitMember() {
                     if (res.error == "true") {
                         console.log("Failed to add member data")
                     } else {
-                        $('#body').style.display="none";
+                        $('#body')[0].style.display="none";
                     }
                 });
             };
@@ -80,7 +80,7 @@ function submitMember() {
                 if (res.error == "true") {
                     console.log("Failed to add member data")
                 } else {
-                    $('#body').style.display="none";
+                    $('#body')[0].style.display="none";
                 }
             });
         }
