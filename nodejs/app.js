@@ -144,7 +144,7 @@ app.post('/submitMember', function (req, res) {
                     mailOptions = {
                         from: 'compsciclub@peddie.org',
                         to: email,
-                        subject: 'PeddieCS Verify Registration: ',
+                        subject: 'PeddieCS Verify Registration ',
                         attachments: [{
                             filename: username,
                             path: '../members/user-images/temp/' + username,
