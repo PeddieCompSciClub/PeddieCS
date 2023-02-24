@@ -213,8 +213,6 @@ app.post('/addMember', function (req, res) {
             })
         })
 
-        console.log("Got this far " + username);
-
         //move user image from temp to regular folder
         const sourcePath = path.join(__dirname, '..', 'members', 'user-images', 'temp', username);
         const destPath = path.join(__dirname, '..', 'members', 'user-images', username);
