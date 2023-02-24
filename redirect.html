@@ -36,7 +36,7 @@
         "verificationCode": verificationCode
       }, function (res) {
 
-        if (res.message == "success") {
+        if (res.error == false) {
           console.log("success");
           window.location.replace("http://peddiecs.peddie.org/members");
         } else {
