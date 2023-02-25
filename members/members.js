@@ -49,6 +49,8 @@ function getMembers() {
 function submitMember() {
     $('#body')[0].style.display="none";
     $('#text')[0].style.display="block";
+    
+    document.getElementById("text").innerHTML = "<h3 style='text-align:center;'>Check your email to verify your account:</h3><h4>"+$('#email').val()+"</h4>";
 
     if(window.jQuery){
         // Check if an image has been selected
