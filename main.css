@@ -111,7 +111,6 @@ nav li a {
 
 .navbar-custom {
     background-color: var(--navbar);
-    height: 80px;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -128,68 +127,17 @@ nav li a {
     margin-right: auto;
 }
 
-.logo {
-    box-sizing: border-box;
-    width: auto;
-    height: 50px;
+.navbar-full {
+    flex-direction: row;
+}
+.navbar-short{
+    flex-direction: row;
+    display: none;
 }
 
-.logo1 {
-    box-sizing: border-box;
-    width: auto;
-    height: 30px;
-}
-
-/*Navbar stuff*/
-.navbar-brand {
-    font-size: larger;
-    color: var(--text);
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-}
-
-.nav {
-    padding: 0px;
-    margin: 0px;
-}
-
-nav ul {
-    padding: 0px;
-    display: flex;
-    float: center;
-    justify-content: space-between;
-    list-style-type: none;
-    max-width: 100%;
-    align-items: center;
-}
-
-nav li a {
-    font-family: 'Raleway';
-    font-size: 20px;
-    padding: 20px;
-    color: rgba(255, 255, 255, 0) !important;
-    font-weight: bold;
-    display: inline;
-    max-width: 100%;
-}
-
-.navbar-custom {
-    background-color: var(--navbar);
-    height: 80px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.navbar-custom li a:hover {
-    text-decoration: 4px underline;
-    text-decoration-color: var(--text);
-}
-
-.navbar-box {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+.dropdown button {
+    background-color: #00000000;
+    border: #00000000;
 }
 
 .logo {
@@ -206,8 +154,11 @@ nav li a {
 
 
 /* hides navbar when width<1000px */
-@media screen and (max-width: 1000px) {
-    .navbar {
+@media screen and (max-width: 992px) {
+    .navbar-full {
       display: none;
+    }
+    .navbar-short {
+        display: flex;
     }
   }
