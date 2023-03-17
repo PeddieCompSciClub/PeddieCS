@@ -130,7 +130,8 @@ nav li a {
 .navbar-full {
     flex-direction: row;
 }
-.navbar-short{
+
+.navbar-short {
     flex-direction: row;
     display: none;
 }
@@ -138,6 +139,19 @@ nav li a {
 .dropdown button {
     background-color: #00000000;
     border: #00000000;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--navbar);
+    width:auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .logo {
@@ -156,9 +170,10 @@ nav li a {
 /* hides navbar when width<1000px */
 @media screen and (max-width: 992px) {
     .navbar-full {
-      display: none;
+        display: none;
     }
+
     .navbar-short {
         display: flex;
     }
-  }
+}
