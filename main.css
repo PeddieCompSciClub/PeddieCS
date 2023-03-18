@@ -77,36 +77,16 @@ p {
 }
 
 /*Navbar stuff*/
-.navbar-brand {
-    font-size: larger;
-    color: var(--text);
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-}
-
-.nav {
-    padding: 0px;
-    margin: 0px;
-}
-
-nav ul {
+nav div {
     padding: 0px;
     display: flex;
     float: center;
     justify-content: space-between;
     list-style-type: none;
     max-width: 100%;
+    height: 5vh;
     align-items: center;
-}
-
-nav li a {
-    font-family: 'Raleway';
-    font-size: 20px;
-    padding: 20px;
-    color: rgba(255, 255, 255, 0) !important;
-    font-weight: bold;
-    display: inline;
-    max-width: 100%;
+    margin:auto;
 }
 
 .navbar-custom {
@@ -116,24 +96,40 @@ nav li a {
     margin-right: auto;
 }
 
-.navbar-custom li a:hover {
+.navbar-custom a{
+    font-family: 'Raleway';
+    font-size: 120%;
+    padding: 0 20px;
+    color: rgba(255, 255, 255) !important;
+    text-decoration-color: #00000000;
+    font-weight: bold;
+    max-width: 100%;
+}
+
+.navbar-custom a:hover {
     text-decoration: 4px underline;
     text-decoration-color: var(--text);
 }
 
-.navbar-box {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+.navbar-custom img {
+    box-sizing: border-box;
+    width: auto;
+    height: 3vh;
+}
+
+.navbar-custom .logo {
+    height: 4vh;
 }
 
 .navbar-full {
     flex-direction: row;
+    display: flex;
 }
 
 .navbar-short {
     flex-direction: row;
     display: none;
+    height: 8vh;
 }
 
 .dropdown button {
@@ -146,24 +142,14 @@ nav li a {
     position: absolute;
     background-color: var(--navbar);
     width:auto;
+    height:fit-content;
+    top:4vh;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
-}
-
-.logo {
-    box-sizing: border-box;
-    width: auto;
-    height: 50px;
-}
-
-.logo1 {
-    box-sizing: border-box;
-    width: auto;
-    height: 30px;
 }
 
 
