@@ -68,7 +68,7 @@ app.get('/getAllMembers', (req, res) => {
 
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM members", function (err, result, fields) {
+        con.query("SELECT * FROM members WHERE status=1", function (err, result, fields) {
             if (err) throw err;
             res.json({ "error": false, "message": result });
             return res.end();
