@@ -190,10 +190,12 @@ app.post('/addMember', function (req, res) {
 
         con.connect(function (err) {
             if (err) throw err;
-            con.query(`UPDATE members SET status = 1, verificationCode = '00000000' WHERE verificationCode = "${verificationCode}" AND email="${email}"`, function (err, result, fields){
+            con.query(`UPDATE members SET status = 1, verificationCode = '00000000' WHERE verificationCode = "${verificationCode}" AND email = "${email}"`, function (err, result, fields){
                 if (err){
+                    console.log(err)
                     throw err;
                 }
+                console.log(result);
                 res.send({ "error": false, "message": "Successfully made " + email + " a member." });
                 con.end();
             });
