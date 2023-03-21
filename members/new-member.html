@@ -32,10 +32,10 @@
       else return -1;
     }
 
-    function submit(){
+    function submit() {
 
     }
-    
+
   </script>
   <script src="members.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
@@ -46,54 +46,7 @@
 </head>
 
 <body>
-  <!--  
-  <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
 
-    <div class="navbar-box" id="navbarText">
-      <ul class="navbar-nav mr-auto ">
-        <li class="nav-item">
-          <a class="navbar-brand" href="/index.html"><img src="/WebsitePictures/logo.jpg"
-              class="img-responsive logo"></a>
-        </li>
-
-        <li class="nav-item">
-          <a class="navbar-brand" href="/index.html">
-            <p>Home</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="navbar-brand" href="/projects/index.html">
-            <p>Projects</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="navbar-brand" href="/members/index.html">
-            <p>Members</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="navbar-brand" href="/clubs/index.html">
-            <p>Clubs</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="navbar-brand" href="/cs_fellows/index.html">
-            <p>CS Fellows</p>
-          </a>
-        </li>
-
-        <li>
-          <a href="mailto:compsciclub@peddie.org"><img src="/WebsitePictures/email.png" class="logo1" /></a>
-        </li>
-        <li>
-          <a href="https://peddiehacks.peddie.org"><img src="/WebsitePictures/peddiehacks.jpg"
-              class="img-responsive logo"></a>
-        </li>
-
-      </ul>
-    </div>
-  </nav>
--->
   <header>
     <h1></h1>
   </header>
@@ -125,15 +78,16 @@
       </div>
       <h3>Profile Image</h3>
       <div class="image">
-        <button id="image-button" onclick="document.getElementById('image').click()">Select Image<img id="displayImage"></button>
-      
+        <button id="image-button" onclick="document.getElementById('image').click()">Select Image<img
+            id="displayImage"></button>
+
         <input type="file" id="image" onchange="loadFile(event)" name="img" accept="image/*">
-        
+
         <script>
           var loadFile = function (event) {
             var image = document.getElementById('displayImage');
             image.src = URL.createObjectURL(event.target.files[0]);
-            document.getElementById('image-button').innerHTML=document.getElementById('image-button').innerHTML.replace("Select Image","");
+            document.getElementById('image-button').innerHTML = document.getElementById('image-button').innerHTML.replace("Select Image", "");
           };
         </script>
       </div>
