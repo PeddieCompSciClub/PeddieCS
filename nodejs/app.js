@@ -188,6 +188,7 @@ app.post('/addMember', function (req, res) {
             port: 3306
         });
 
+        con.log("adding-TEST");
         con.connect(function (err) {
             if (err) throw err;
             con.query(`UPDATE members SET status = 1, verificationCode = '00000000' WHERE verificationCode = "${verificationCode}" AND email = "${email}"`, function (err, result, fields){
