@@ -86,9 +86,10 @@ app.post('/submitMember', function (req, res) {
     const year = getEmailYear(email);
     const username = email.substring(0, email.lastIndexOf("@"));
 
+    console.log(email.endsWith("@peddie.org"), validator.validate(email));
+
     //validate email before doing anything else
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
-        console.log("valid email");
         // Save image file if it exists
         if (req.body.image) {
             const image = req.body.image;
