@@ -175,7 +175,7 @@ app.post('/addMember', function (req, res) {
     // Get member data from POST request
     const email = decodeURIComponent(req.body.email);
     const verificationCode = req.body.verificationCode;
-    console.log("adding-TEST "+email+" "+verificationCode);
+    console.log(email,decodeURIComponent(req.body.email));
 
     //validate email before doing anything else
     if (email != null && email.endsWith("@peddie.org") /*&& validator.validate(email)*/) {
