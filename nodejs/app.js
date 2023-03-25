@@ -86,8 +86,6 @@ app.post('/submitMember', function (req, res) {
     const year = getEmailYear(email);
     const username = email.substring(0, email.lastIndexOf("@"));
 
-    console.log(email.endsWith("@peddie.org"), validator.validate(email));
-
     //validate email before doing anything else
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
         // Save image file if it exists
@@ -178,6 +176,7 @@ app.post('/addMember', function (req, res) {
     const email = req.body.email;
     const verificationCode = req.body.verificationCode;
     console.log("adding-TEST "+email+" "+verificationCode);
+    console.log(email != null , email.endsWith("@peddie.org") , validator.validate(email));
 
     //validate email before doing anything else
     if (email != null && email.endsWith("@peddie.org") && validator.validate(email)) {
