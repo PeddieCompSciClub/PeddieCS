@@ -173,10 +173,9 @@ app.post('/submitMember', function (req, res) {
 //adds a member form tempMembers to members (verification code is required)
 app.post('/addMember', function (req, res) {
     // Get member data from POST request
-    const email = req.body.email;
+    const email = encodeURIComponent(req.body.email);
     const verificationCode = req.body.verificationCode;
     console.log("adding-TEST "+email+" "+verificationCode);
-    console.log(email != null , email.endsWith("@peddie.org") , validator.validate(email));
 
     //validate email before doing anything else
     if (email != null && email.endsWith("@peddie.org") && validator.validate(email)) {
