@@ -176,6 +176,7 @@ app.post('/addMember', function (req, res) {
     // Get member data from POST request
     const email = req.body.email;
     const verificationCode = req.body.verificationCode;
+    console.log("adding-TEST "+email+" "+verificationCode);
 
     //validate email before doing anything else
     if (email != null && email.endsWith("@peddie.org") && validator.validate(email)) {
@@ -188,7 +189,6 @@ app.post('/addMember', function (req, res) {
             port: 3306
         });
 
-        con.log("adding-TEST");
         con.connect(function (err) {
             if (err) throw err;
             con.query(`UPDATE members SET status = 1, verificationCode = '00000000' WHERE verificationCode = "${verificationCode}" AND email = "${email}"`, function (err, result, fields){
