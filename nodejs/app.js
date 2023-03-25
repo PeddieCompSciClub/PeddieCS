@@ -127,7 +127,7 @@ app.post('/submitMember', function (req, res) {
                 //send email to user
                 const body = `
                     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-                    <h4>Click <a href='https://peddiecs.peddie.org/redirect.html?request=addMember&email=${email}&verificationCode=${verificationCode}'>HERE</a> to verify your account.</h4>
+                    <h4>Click <a href='https://peddiecs.peddie.org/redirect.html?request=addMember&email=${encodeURIComponent(email)}&verificationCode=${verificationCode}'>HERE</a> to verify your account.</h4>
                     <p>${firstName} ${lastName}</p>
                     ${(req.body.image ? '<img src="cid:user" style="width:200px;">' : '')}
                     `;
