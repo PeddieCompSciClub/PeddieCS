@@ -173,7 +173,7 @@ app.post('/submitMember', function (req, res) {
 //adds a member form tempMembers to members (verification code is required)
 app.post('/addMember', function (req, res) {
     // Get member data from POST request
-    const email = encodeURIComponent(req.body.email);
+    const email = decodeURIComponent(req.body.email);
     const verificationCode = req.body.verificationCode;
     console.log("adding-TEST "+email+" "+verificationCode);
 

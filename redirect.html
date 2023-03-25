@@ -32,7 +32,7 @@
       const verificationCode = searchParams.get("verificationCode");
 
       $.post("https://peddiecs.peddie.org/nodejs/addMember", {
-        "email": email,
+        "email": encodeURIComponent(email),
         "verificationCode": verificationCode
       }, function (res) {
         window.location.replace("https://peddiecs.peddie.org/members");
