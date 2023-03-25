@@ -178,7 +178,7 @@ app.post('/addMember', function (req, res) {
     console.log("adding-TEST "+email+" "+verificationCode);
 
     //validate email before doing anything else
-    if (email != null && email.endsWith("@peddie.org") && validator.validate(email)) {
+    if (email != null && email.endsWith("@peddie.org") /*&& validator.validate(email)*/) {
         const username = email.substring(0, email.lastIndexOf("@"));
         var con = mysql.createConnection({
             host: "localhost",
