@@ -88,7 +88,7 @@ app.post('/submitMember', function (req, res) {
 
     //validate email before doing anything else
     if (email.endsWith("@peddie.org") && validator.validate(email)) {
-
+        console.log("valid email");
         // Save image file if it exists
         if (req.body.image) {
             const image = req.body.image;
