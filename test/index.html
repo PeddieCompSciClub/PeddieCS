@@ -37,9 +37,23 @@
     data-auto_prompt="false">
   </div>
 
-  <div class="g_id_signin" style="width:200px" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with"
-    data-size="large" data-logo_alignment="left">
+  <div class="g_id_signin" style="width:200px" data-type="standard" data-shape="rectangular" data-theme="outline"
+    data-text="signin_with" data-size="large" data-logo_alignment="left">
   </div>
+
+  <script>
+    function onSignIn(user) {
+      console.log(user.getBasicProfile().getEmail());
+    }
+
+    gapi.load('auth2', function () {
+      gapi.auth2.init({
+        client_id: '697373878303-v3m7kpalsr0a4a7sr4go96mic4101fd5.apps.googleusercontent.com'
+      }).then(function (authInstance) {
+        authInstance.isSignedIn.listen(onSignIn);
+      });
+    });
+  </script>
 
 </body>
 
