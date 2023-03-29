@@ -21,7 +21,6 @@
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="https://apis.google.com/js/api.js"></script>
   <script type="text/javascript" src="submit.js"></script>
 
   <link rel="stylesheet" href="style.css">
@@ -43,15 +42,15 @@
   </div>
 
   <script>
-    function onSignIn(user) {
-      console.log(user.getBasicProfile().getEmail());
-    }
-
     gapi.load('auth2', function () {
       gapi.auth2.init({
-        client_id: '697373878303-v3m7kpalsr0a4a7sr4go96mic4101fd5.apps.googleusercontent.com'
-      }).then(function (authInstance) {
-        authInstance.isSignedIn.listen(onSignIn);
+        client_id: '697373878303-v3m7kpalsr0a4a7sr4go96mic4101fd5.apps.googleusercontent.com',
+      });
+    });
+
+    $('.g_id_signin').click(function () {
+      gapi.auth2.getAuthInstance().signIn().then(function () {
+        console.log(gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail());
       });
     });
   </script>
