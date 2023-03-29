@@ -21,7 +21,6 @@
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script type="text/javascript" src="submit.js"></script>
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="/main.css">
@@ -43,6 +42,19 @@
   <script>
     function signInCallback(authResult) {
       console.log(authResult);
+      $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
+        token: authResult.credentials,
+      }, function (res) {
+
+        if (res.message == "success") {
+          console.log("success");
+        } else {
+          if (res.message) {
+            console.log(res.message);
+          }
+        }
+
+      });
     }
   </script>
 

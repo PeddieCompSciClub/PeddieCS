@@ -189,8 +189,8 @@ app.post('/addMember', function (req, res) {
 
         con.connect(function (err) {
             if (err) throw err;
-            con.query(`UPDATE members SET status = 1, verificationCode = '00000000' WHERE verificationCode = "${verificationCode}" AND email = "${email}"`, function (err, result, fields){
-                if (err){
+            con.query(`UPDATE members SET status = 1, verificationCode = '00000000' WHERE verificationCode = "${verificationCode}" AND email = "${email}"`, function (err, result, fields) {
+                if (err) {
                     console.log(err)
                     throw err;
                 }
@@ -227,3 +227,28 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+
+//login with google stuff
+app.post('/authenticateUser', (req, res) => {
+    const token = req.body.token;
+    const CLIENT_ID = secure.google.clientId;
+    const { OAuth2Client } = require('google-auth-library');
+    const client = new OAuth2Client(CLIENT_ID);
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: CLIENT_ID
+            // Specify the CLIENT_ID of the app that accesses the backend
+            // Or, if multiple clients access the backend:
+            //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+        });
+        const payload = ticket.getPayload();
+        const userid = payload['sub'];
+        res.send(payload);
+        console.log(payload);
+        console.log(userid);
+        // If request specified a G Suite domain:
+        // const domain = payload['hd'];
+    }
+    verify().catch(console.error);
+});
