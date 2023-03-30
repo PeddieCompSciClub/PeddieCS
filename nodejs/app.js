@@ -231,6 +231,8 @@ app.get('/', (req, res) => {
 //login with google stuff
 app.post('/authenticateUser', (req, res) => {
     const token = req.body.token;
+    console.log(req);
+    console.log(token);
     const CLIENT_ID = secure.google.clientId;
     const { OAuth2Client } = require('google-auth-library');
     const client = new OAuth2Client(CLIENT_ID);
