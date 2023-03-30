@@ -43,7 +43,7 @@
     function signInCallback(authResult) {
       console.log(authResult);
       $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
-        token: authResult.credentials,
+        token: authResult.credential,
       }, function (res) {
 
         if (res.message == "success") {
