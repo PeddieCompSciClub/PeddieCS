@@ -66,10 +66,53 @@
                     data-context="signin" data-ux_mode="popup" data-callback="signInCallback" data-auto_prompt="false">
                 </div>
 
-                <div style="width:200px; margin:auto; padding-top:8px;" class="g_id_signin" data-type="standard" data-shape="rectangular"
-                    data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left">
+                <div style="width:200px; margin:auto; padding-top:8px;" class="g_id_signin" data-type="standard"
+                    data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large"
+                    data-logo_alignment="left">
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function signInCallback(authResult) {
+            console.log(authResult);
+            $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
+                token: authResult.credential,
+            }, function (res) {
+
+                if (res.message == "success") {
+                    console.log("success");
+                } else {
+                    if (res.message) {
+                        console.log(res.message);
+                    }
+                }
+
+            });
+        }
+    </script>
+    <script>
+        // cookie scripts
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+    </script>
 </body>
