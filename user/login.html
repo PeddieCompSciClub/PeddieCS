@@ -83,7 +83,7 @@
                     setCookie("credential",authResult.credential,5);
                     console.log(getCookie("credential"));
                     const urlParams = new URLSearchParams(window.location.search);
-                    console.log(urlParams.redirect);
+                    console.log(urlParams.get('redirect'));
                 } else {
                     if (res.message) {
                         console.log(res.message);
