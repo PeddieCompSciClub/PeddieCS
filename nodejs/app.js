@@ -246,10 +246,8 @@ app.post('/authenticateUser', (req, res) => {
         });
         const payload = ticket.getPayload();
         const userid = payload['sub'];
-        res.message=""
-        res.send(payload);
-        console.log(payload);
-        console.log(userid);
+        res.json({"message":"success"});
+        res.end();
         // If request specified a G Suite domain:
         // const domain = payload['hd'];
     }
