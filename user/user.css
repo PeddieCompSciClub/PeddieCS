@@ -1,8 +1,9 @@
 :root {
     /*Color variables*/
-    --background: #004374;
-    --navbar: #005E9f;
-    --text: white;
+    --background: white;
+    --navbar: white;
+    --text: black;
+    --detail: #888;
     --link: #5fb7ff;
 }
 
@@ -30,52 +31,6 @@ html {
     overflow-x: hidden;
 }
 
-h1 {
-    text-align: center;
-    font-family: 'Raleway', serif;
-    font-size: 80px;
-    color: var(--text);
-    font-weight: bold;
-    padding: 15px;
-}
-
-h3 {
-    font-family: 'Raleway', serif;
-    font-size: 32px;
-    color: var(--text);
-    font-weight: bold;
-    padding: 8px;
-}
-
-a {
-    transition: 0.2s;
-    text-decoration: none;
-    color: var(--text);
-}
-
-a:hover {
-    transition: 0.2s;
-    color: #383938;
-}
-
-p {
-    color: var(--text);
-    margin: 0;
-}
-
-::-webkit-scrollbar {
-    width: 5px;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #888;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
 /*Navbar stuff*/
 nav div {
     padding: 0px;
@@ -96,6 +51,7 @@ nav div {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    border-bottom: solid var(--detail) 1px;
 }
 
 .navbar-custom a {
