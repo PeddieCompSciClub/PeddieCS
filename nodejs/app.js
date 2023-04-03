@@ -246,6 +246,7 @@ app.post('/authenticateUser', (req, res) => {
         });
         const payload = ticket.getPayload();
         const userid = payload['sub'];
+        res.message=""
         res.send(payload);
         console.log(payload);
         console.log(userid);
