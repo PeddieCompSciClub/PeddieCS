@@ -75,13 +75,14 @@
     </div>
     <script>
         function signInCallback(authResult) {
-            console.log(authResult);
+            console.log(getCookie("credential"));
             $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
                 token: authResult.credential,
             }, function (res) {
 
                 if (res.message == "success") {
                     console.log("success");
+                    setCookie("credential",authResult.credential,5);
                 } else {
                     if (res.message) {
                         console.log(res.message);
@@ -89,6 +90,7 @@
                 }
 
             });
+            console.log(getCookie("credential"));
         }
     </script>
     <script>
