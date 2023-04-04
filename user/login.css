@@ -46,3 +46,18 @@ p {
     opacity: 0;
     position:relative;
 }
+button {
+    border:solid 1px #dadce0;
+    background-color:#fff;
+    color:#3c4043;
+    height:40px;
+    padding: 0 12px;
+    border-radius: 4px;
+    font-size:14px;
+    margin:auto;
+    cursor:pointer;
+    transition:0.25s
+}
+button:hover {
+    background-color:hwb(220 90% 1%);
+}
