@@ -316,17 +316,18 @@ app.post('/addMember', function (req, res) {
                         if (err) throw err;
                         if (result.length > 0) {
                             //the member should not already be in the database
-                            res.json({ "message": "false"});
+                            res.json({ "message": "success"});
                             res.end();
                             con.end();
                         } else {
                             //add member
                             con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])})`, function (err,result,fields) {
-                                console.log(err);
-                                console.log(result);
-                                console.log(fields);
+                                if(err) throw err;
+
+                                res.json({"message":"success"});
+                                res.end();
+                                con.end();
                             });
-                            con.end();
                         }
                     })
                     
