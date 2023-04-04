@@ -49,9 +49,9 @@
         }
         function createUser() {
             $.post("https://peddiecs.peddie.org/nodejs/addMember", {
-
+                token:getCookie("credential")
             }, function (res) {
-
+                console.log(res);
             });
         }
     </script>
