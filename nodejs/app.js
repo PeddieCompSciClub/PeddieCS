@@ -266,7 +266,7 @@ app.post('/authenticateUser', (req, res) => {
                         res.json({"message":"success"});
                         res.end();
                     } else {
-                        res.json({"message":"new_user"});
+                        res.json({"message":"new-user"});
                         res.end();
                     }
                 })

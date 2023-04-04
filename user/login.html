@@ -43,13 +43,22 @@
                 token: authResult.credential,
             }).done(function (res) {
                 if (res.message == "success") {
+                    //save cookie and redirect to site
                     setCookie("credential", authResult.credential, 5);
-                    console.log(getCookie("credential"));
                     const urlParams = new URLSearchParams(window.location.search);
                     if(urlParams.get('redirect'))
                         window.location.href = urlParams.get('redirect');
                     else
                         window.location.href = 'index.html';
+
+                } else if(res.message == "new-user") {
+                    //save cookie and redirect to new-user.html
+                    setCookie("credential", authResult.credential, 5);
+                    const urlParams = new URLSearchParams(window.location.search);
+                    if(urlParams.get('redirect'))
+                        window.location.href = 'new-user.html?redirect='+encodeURIComponent(urlParams.get('redirect'));
+                    else
+                        window.location.href = 'new-user.html';
                 } else {
                     document.getElementById("err").style = "opacity:1";
                 }
