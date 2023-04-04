@@ -6,10 +6,11 @@ function verifyLogin() {
             token: getCookie('credential'),
         }, function (res) {
             if (res.message == "success") {
-                console.log(getCookie('credential'));
+                console.log("user validated");
             } else {
                 if (res.message) {
-                    console.log(res.message);
+                    console.log("failed to validate user");
+                    window.location.href=`login.html?redirect=${encodeURIComponent(window.location)}`
                 }
             }
 
