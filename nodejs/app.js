@@ -247,7 +247,11 @@ app.post('/authenticateUser', (req, res) => {
         var message="failed";
         console.log(payload);        
 
-        res.json({"message":"success"});
+        if(payload['hd']=='peddie.org'){
+            message="success";
+        }
+
+        res.json({"message":message});
         res.end();
         // If request specified a G Suite domain:
         // const domain = payload['hd'];
