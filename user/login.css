@@ -1,0 +1,48 @@
+* {
+    font-family: "Open Sans";
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.box {
+    width: 350px;
+    height: auto;
+    border: solid 1px rgb(218, 220, 224);
+    border-radius: 8px;
+    margin: auto;
+}
+
+.inner {
+    padding: 36px 40px 24px;
+}
+
+img {
+    display: block;
+    width: auto;
+    height: 32px;
+    margin: auto;
+}
+
+h3 {
+    text-align: center;
+    font-size: 24px;
+    padding-top: 16px;
+}
+
+h4 {
+    text-align: center;
+    font-size: 16px;
+    padding-top: 8px;
+}
+p {
+    font-size: 12px;
+    text-align: center;
+    color:#d93025;
+    margin-top: 2px;
+    opacity: 0;
+    position:relative;
+}
