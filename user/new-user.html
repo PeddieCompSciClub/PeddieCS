@@ -34,7 +34,6 @@
             $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
                 token:getCookie("credential")
             }, function (res) {
-                console.log(res);
                 if (res.message == "success") {
                     console.log("Preexisting user, redirecting to home");
                     const urlParams = new URLSearchParams(window.location.search);
@@ -43,7 +42,7 @@
                     else
                         window.location.href = 'index.html';
                 } else if (res.message == "new-user"){
-                    document.getElementById("name").innerText="test";
+                    document.getElementById("name").innerText=res.credential['name'];
                 } else {
                     window.location.href = 'login.html';
                 }
