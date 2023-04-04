@@ -259,7 +259,7 @@ app.post('/authenticateUser', (req, res) => {
             });
             con.connect(function (err) {
                 if (err) throw err;
-                con.query(`SELECT * FROM members WHERE email = '${payload['email']}a'`, function (err, result, fields) {
+                con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                     if (err) throw err;
                     if(result.length>0){
                         console.log("test");
