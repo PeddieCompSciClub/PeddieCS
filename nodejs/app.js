@@ -321,7 +321,7 @@ app.post('/addMember', function (req, res) {
                             con.end();
                         } else {
                             //add member
-                            con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given-name']}', '${"a"}', '${"a"}', ${"a"})`, function (err,result,fields) {
+                            con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])})`, function (err,result,fields) {
                                 console.log(err);
                                 console.log(result);
                                 console.log(fields);
