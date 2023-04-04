@@ -231,8 +231,7 @@ app.get('/', (req, res) => {
 //login with google stuff
 app.post('/authenticateUser', (req, res) => {
     const token = req.body.token;
-    console.log(req.body);
-    console.log(token);
+
     const CLIENT_ID = secure.google.clientId;
     const { OAuth2Client } = require('google-auth-library');
     const client = new OAuth2Client(CLIENT_ID);
@@ -245,7 +244,9 @@ app.post('/authenticateUser', (req, res) => {
             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
         });
         const payload = ticket.getPayload();
-        const userid = payload['sub'];
+        var message="failed";
+        console.log(payload);        
+
         res.json({"message":"success"});
         res.end();
         // If request specified a G Suite domain:
