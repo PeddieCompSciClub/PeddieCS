@@ -264,6 +264,9 @@ app.post('/authenticateUser', (req, res) => {
                     if (err) throw err;
                     console.log(result);
                     console.log(result.length);
+                    if(result){
+                        console.log("test");
+                    }
                 })
                 con.end();
             })
