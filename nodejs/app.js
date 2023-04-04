@@ -249,6 +249,26 @@ app.post('/authenticateUser', (req, res) => {
                 message = "success";
             }
 
+            //check if the user is already registered in the database
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+
+            con.connect(function (err) {
+                if (err) throw err;
+                con.query(`SELECT * FROM members WHERE email = ${payload['email']}`, function (err, result, fields) {
+                    if (err) throw err;
+                    console.log(result);
+                    console.log(result.length);
+                })
+                con.end();
+            })
+
+
             res.json({ "message": message });
             res.end();
         } catch (error) {
