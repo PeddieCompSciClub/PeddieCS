@@ -5,15 +5,15 @@ function verifyLogin() {
         $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
             token: getCookie('credential'),
         }, function (res) {
-            if (res.message == "success") {
-                console.log("user validated");
-            } else {
-                if (res.message) {
-                    console.log("failed to validate user");
-                    window.location.href=`login.html?redirect=${encodeURIComponent(window.location)}`
-                }
-            }
-
+            console.log(res);
+            // if (res.message == "success") {
+            //     console.log("user validated");
+            // } else {
+            //     if (res.message) {
+            //         console.log("failed to validate user");
+            //         window.location.href=`login.html?redirect=${encodeURIComponent(window.location)}`
+            //     }
+            // }
         });
     }
 }

@@ -242,11 +242,11 @@ app.post('/authenticateUser', (req, res) => {
                 audience: CLIENT_ID
             });
             const payload = ticket.getPayload();
-            var message = "failed";
             console.log(payload);
 
-            if (payload['hd'] == 'peddie.org') {
-                message = "success";
+            if (payload['hd'] != 'peddie.org') {
+                res.json({"message":"failed"});
+                res.end();
             }
 
             //check if the user is already registered in the database
@@ -257,23 +257,22 @@ app.post('/authenticateUser', (req, res) => {
                 database: "peddieCS",
                 port: 3306
             });
-
             con.connect(function (err) {
                 if (err) throw err;
                 con.query(`SELECT * FROM members WHERE email = '${payload['email']}a'`, function (err, result, fields) {
                     if (err) throw err;
-                    console.log(result);
-                    console.log(result.length);
-                    if(result){
+                    if(result.length>0){
                         console.log("test");
+                        res.json({"message":"success"});
+                        res.end();
+                    } else {
+                        res.json({"message":"new_user"});
+                        res.end();
                     }
                 })
                 con.end();
             })
 
-
-            res.json({ "message": message });
-            res.end();
         } catch (error) {
             console.error(error);
             res.json({"message":"failed"});
