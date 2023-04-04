@@ -54,7 +54,7 @@ button {
     padding: 0 12px;
     border-radius: 4px;
     font-size:14px;
-    margin:auto;
+    margin:12px auto;
     display: block;
     cursor:pointer;
     transition:0.25s

@@ -22,7 +22,7 @@
                 <img src="/WebsitePictures/peddie.webp">
                 <h3>Create a new account</h3>
                 <h4 id="name"></h4>
-                <button>Create Account</button>
+                <button onclick="createUser()">Create Account</button>
                 <p id="err">Something went wrong, try again</p>
             </div>
         </div>
@@ -45,6 +45,13 @@
                 } else {
                     window.location.href = 'login.html';
                 }
+            });
+        }
+        function createUser() {
+            $.post("https://peddiecs.peddie.org/addMember", {
+
+            }, function (res) {
+
             });
         }
     </script>

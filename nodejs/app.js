@@ -170,6 +170,7 @@ app.post('/submitMember', function (req, res) {
     }
 });
 
+/*
 //adds a member form tempMembers to members (verification code is required)
 app.post('/addMember', function (req, res) {
     // Get member data from POST request
@@ -220,7 +221,7 @@ app.post('/addMember', function (req, res) {
         res.send({ "error": true, "message": 'Invalid Email' });
     }
 });
-
+*/
 
 // test to make sure it is working
 app.get('/', (req, res) => {
@@ -245,33 +246,93 @@ app.post('/authenticateUser', (req, res) => {
             console.log(payload);
 
             if (payload['hd'] != 'peddie.org') {
-                res.json({"message":"failed","credential":payload});
+                res.json({ "message": "failed", "credential": payload });
                 res.end();
+            } else {
+
+                //check if the user is already registered in the database
+                var con = mysql.createConnection({
+                    host: "localhost",
+                    user: "admincs",
+                    password: "BeatBlair1864",
+                    database: "peddieCS",
+                    port: 3306
+                });
+                con.connect(function (err) {
+                    if (err) throw err;
+                    con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
+                        if (err) throw err;
+                        if (result.length > 0) {
+                            res.json({ "message": "success", "credential": payload });
+                            res.end();
+                        } else {
+                            res.json({ "message": "new-user", "credential": payload });
+                            res.end();
+                        }
+                    });
+                    con.end();
+                })
             }
 
-            //check if the user is already registered in the database
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
+        } catch (error) {
+            console.error(error);
+            res.json({ "message": "failed" });
+            res.end();
+        }
+    }
+    verify().catch(console.error);
+});
+
+//add member from google user credential
+app.post('/addMember', function (req, res) {
+    const token = req.body.token;
+
+    const CLIENT_ID = secure.google.clientId;
+    const { OAuth2Client } = require('google-auth-library');
+    const client = new OAuth2Client(CLIENT_ID);
+    async function verify() {
+        try {
+            const ticket = await client.verifyIdToken({
+                idToken: token,
+                audience: CLIENT_ID
             });
-            con.connect(function (err) {
-                if (err) throw err;
-                con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
+            const payload = ticket.getPayload();
+            //check that it is a peddie user
+            if (payload['hd'] != 'peddie.org') {
+                res.json({ "message": "failed"});
+                res.end();
+            } else {
+                //check if the user is already registered in the database
+                var con = mysql.createConnection({
+                    host: "localhost",
+                    user: "admincs",
+                    password: "BeatBlair1864",
+                    database: "peddieCS",
+                    port: 3306
+                });
+                con.connect(function (err) {
                     if (err) throw err;
-                    if (result.length > 0) {
-                        console.log("test");
-                        res.json({"message":"success","credential":payload});
-                        res.end();
-                    } else {
-                        res.json({"message":"new-user","credential":payload});
-                        res.end();
-                    }
+                    con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
+                        if (err) throw err;
+                        if (result.length > 0) {
+                            //the member should not already be in the database
+                            res.json({ "message": "false"});
+                            res.end();
+                            con.end();
+                        } else {
+                            //add member
+                            con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given-name']}', '${"a"}', '${"a"}', ${"a"})`, function (err,result,fields) {
+                                console.log(err);
+                                console.log(result);
+                                console.log(fields);
+                            });
+                            con.end();
+                        }
+                    })
+                    
                 })
-                con.end();
-            })
+            }
+
 
         } catch (error) {
             console.error(error);
