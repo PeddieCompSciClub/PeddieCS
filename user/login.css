@@ -55,9 +55,15 @@ button {
     border-radius: 4px;
     font-size:14px;
     margin:auto;
+    display: block;
     cursor:pointer;
     transition:0.25s
 }
 button:hover {
-    background-color:hwb(220 90% 1%);
+    background-color:#f8faff;
+    border-color: #d2e3fc;
+}
+button:active {
+    background-color: #ecf3fe;
+    border-color: #d2e3fc;
 }
