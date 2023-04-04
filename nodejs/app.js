@@ -245,7 +245,7 @@ app.post('/authenticateUser', (req, res) => {
             console.log(payload);
 
             if (payload['hd'] != 'peddie.org') {
-                res.json({"message":"failed"});
+                res.json({"message":"failed","credential":payload});
                 res.end();
             }
 
@@ -261,12 +261,12 @@ app.post('/authenticateUser', (req, res) => {
                 if (err) throw err;
                 con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                     if (err) throw err;
-                    if(result.length>0){
+                    if (result.length > 0) {
                         console.log("test");
-                        res.json({"message":"success"});
+                        res.json({"message":"success","credential":payload});
                         res.end();
                     } else {
-                        res.json({"message":"new-user"});
+                        res.json({"message":"new-user","credential":payload});
                         res.end();
                     }
                 })
@@ -275,7 +275,7 @@ app.post('/authenticateUser', (req, res) => {
 
         } catch (error) {
             console.error(error);
-            res.json({"message":"failed"});
+            res.json({ "message": "failed" });
             res.end();
         }
     }

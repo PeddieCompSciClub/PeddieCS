@@ -15,21 +15,39 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="onload();">
     <div class="container">
         <div class="box">
             <div class="inner">
                 <img src="/WebsitePictures/peddie.webp">
-                <h3>Sign in to continue</h3>
-                <h4>Use your Peddie account</h4>
+                <h3>Create a new account</h3>
+                <h4 id="name">Use your Peddie account</h4>
 
-                
+
                 <p id="err" style="display:block">Something went wrong, try again</p>
             </div>
         </div>
     </div>
     <script>
-        
+        function onload() {
+            //authenticate user
+            $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
+                token:getCookie("credential")
+            }, function (res) {
+                if (res.message == "success") {
+                    console.log("Preexisting user, redirecting to home");
+                    const urlParams = new URLSearchParams(window.location.search);
+                    if(urlParams.get('redirect'))
+                        window.location.href = urlParams.get('redirect');
+                    else
+                        window.location.href = 'index.html';
+                } else if (res.message == "new-user"){
+                    document.getElementById("name").innerText="test";
+                } else {
+                    window.location.href = 'login.html';
+                }
+            });
+        }
     </script>
     <script>
         // cookie scripts
