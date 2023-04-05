@@ -263,7 +263,7 @@ app.post('/authenticateUser', (req, res) => {
                     con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
-                            res.json({ "message": "success", "credential": payload, "user":result});
+                            res.json({ "message": "success", "credential": payload, "user":result[0]});
                             res.end();
                         } else {
                             res.json({ "message": "new-user", "credential": payload });
