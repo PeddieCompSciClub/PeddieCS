@@ -1,3 +1,5 @@
+var user;
+
 // redirects user to login if they have an invalid login
 function verifyLogin() {
     if (window.jQuery) {
@@ -9,7 +11,7 @@ function verifyLogin() {
             // console.log(res);
             if (res.message == "success") {
                 console.log("user validated");
-                console.log(res.user);
+                console.log(res.user());
             } else if (res.message=="new-user") {
                 console.log("new user");
                 window.location.href = `new-user.html?redirect=${encodeURIComponent(window.location)}`
