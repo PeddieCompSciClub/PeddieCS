@@ -26,18 +26,10 @@ function verifyLogin() {
 }
 
 function addSignoutButton(name) {
-    //add the sign out button
-    // Create new button element
-    const button = document.createElement("button");
-    button.classList.add("user", "sign-out");
-    button.textContent = name;
-    button.onclick = function () {
-        removeCookie("credential");
-        window.location.href = "/index.html";
-    };
-    // Append button to navbar
-    const navbar = document.querySelector(".navbar-full");
-    navbar.appendChild(button);
+    const signOutBtn = document.querySelector('.sign-out');
+  signOutBtn.textContent = name;
+  document.querySelector('.navbar .user::after').textContent = name;
+  document.querySelector('.navbar .user::before').textContent = 'Sign Out';
 }
 
 
