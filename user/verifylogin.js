@@ -26,7 +26,9 @@ function verifyLogin() {
 }
 
 function addSignoutButton(name) {
-    document.getElementById("navbar-main").appendChild(`<button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">${name}</button>`);
+    document.getElementById("navbar-main").appendChild(`<button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">${name}</button><style>.navbar-custom .user.sign-out::after,
+    .navbar-custom .user.sign-out::before {
+        content: "${name}";}</style>`);
 }
 
 
