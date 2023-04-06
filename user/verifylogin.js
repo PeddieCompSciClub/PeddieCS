@@ -12,18 +12,7 @@ function verifyLogin() {
             if (res.message == "success") {
                 console.log("user validated");
                 console.log(res.user);
-                //add the sign out button
-                // Create new button element
-                const button = document.createElement("button");
-                button.classList.add("user", "sign-out");
-                button.textContent = "TEST";
-                button.onclick = function () {
-                    removeCookie("credential");
-                    window.location.href = "/index.html";
-                };
-                // Append button to navbar
-                const navbar = document.querySelector(".navbar-full");
-                navbar.appendChild(button);
+                addSignoutButton("test");
 
             } else if (res.message == "new-user") {
                 console.log("new user");
@@ -34,6 +23,21 @@ function verifyLogin() {
             }
         });
     }
+}
+
+function addSignoutButton(name) {
+    //add the sign out button
+    // Create new button element
+    const button = document.createElement("button");
+    button.classList.add("user", "sign-out");
+    button.textContent = name;
+    button.onclick = function () {
+        removeCookie("credential");
+        window.location.href = "/index.html";
+    };
+    // Append button to navbar
+    const navbar = document.querySelector(".navbar-full");
+    navbar.appendChild(button);
 }
 
 
