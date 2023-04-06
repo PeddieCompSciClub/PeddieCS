@@ -27,9 +27,19 @@ function verifyLogin() {
 
 function addSignoutButton(name) {
     const nav = document.getElementById("navbar-main");
-    nav.appendChild(`<button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">${name}</button>`);
-    nav.appendChild(`<style>.navbar-custom .user.sign-out::after {content: "${name}";}</style>`)
+    const button = document.createElement("button");
+    button.classList.add("user", "sign-out");
+    button.textContent = name;
+    button.addEventListener("click", function () {
+        removeCookie("credential");
+        window.location.href = "/index.html";
+    });
+    nav.appendChild(button);
+    const style = document.createElement("style");
+    style.textContent = `.navbar-custom .user.sign-out::after {content: "${name}";}`;
+    nav.appendChild(style);
 }
+
 
 
 // cookie scripts
