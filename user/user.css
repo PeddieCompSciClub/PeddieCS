@@ -103,7 +103,7 @@ nav div {
 
 .navbar-custom .user.sign-out::after,
 .navbar-custom .user.sign-out::before {
-    content: "USERNAME";
+    content: "";
     color: var(--text);
     position: absolute;
     text-align: center;
