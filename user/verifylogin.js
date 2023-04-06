@@ -26,10 +26,7 @@ function verifyLogin() {
 }
 
 function addSignoutButton(name) {
-    const signOutBtn = document.querySelector('.sign-out');
-  signOutBtn.textContent = name;
-  document.querySelector('.navbar .user::after').textContent = name;
-  document.querySelector('.navbar .user::before').textContent = 'Sign Out';
+    document.getElementById("navbar-main").appendChild(`<button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">${name}</button>`);
 }
 
 
