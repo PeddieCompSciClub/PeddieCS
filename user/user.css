@@ -79,6 +79,17 @@ nav div {
     height: 3em;
 }
 
+.navbar-custom .user {
+    border:solid 1px var(--detail);
+    border-radius: 4px;
+    position: absolute;
+    right:1em;
+    height:auto;
+    text-align: center;
+    background-color: var(--background);
+    padding:0 0.5em;
+}
+
 .navbar-full {
     flex-direction: row;
     display: flex;
@@ -108,7 +119,7 @@ nav div {
     height:fit-content;
     width:fit-content;
     max-width: none;
-    top:1.8em;
+    top:2em;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     font-size:1em;
@@ -127,7 +138,6 @@ nav div {
 .dropdown:hover .dropdown-content {
     display: block;
 }
-
 
 /* hides navbar when width<1000px */
 @media screen and (max-width: 992px) {

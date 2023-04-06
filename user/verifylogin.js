@@ -12,7 +12,7 @@ function verifyLogin() {
             if (res.message == "success") {
                 console.log("user validated");
                 console.log(res.user());
-            } else if (res.message=="new-user") {
+            } else if (res.message == "new-user") {
                 console.log("new user");
                 window.location.href = `new-user.html?redirect=${encodeURIComponent(window.location)}`
             } else {
@@ -45,4 +45,8 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+function removeCookie(cname) {
+    document.cookie = cname + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    location.reload();
 }
