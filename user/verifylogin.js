@@ -11,7 +11,20 @@ function verifyLogin() {
             // console.log(res);
             if (res.message == "success") {
                 console.log("user validated");
-                console.log(res.user());
+                console.log(res.user);
+                //add the sign out button
+                // Create new button element
+                const button = document.createElement("button");
+                button.classList.add("user", "sign-out");
+                button.textContent = "TEST";
+                button.onclick = function () {
+                    removeCookie("credential");
+                    window.location.href = "/index.html";
+                };
+                // Append button to navbar
+                const navbar = document.querySelector(".navbar-full");
+                navbar.appendChild(button);
+
             } else if (res.message == "new-user") {
                 console.log("new user");
                 window.location.href = `new-user.html?redirect=${encodeURIComponent(window.location)}`
