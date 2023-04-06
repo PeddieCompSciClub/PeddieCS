@@ -12,7 +12,7 @@ function verifyLogin() {
             if (res.message == "success") {
                 console.log("user validated");
                 console.log(res.user);
-                addSignoutButton("test");
+                addSignoutButton(res.credential.name);
 
             } else if (res.message == "new-user") {
                 console.log("new user");
