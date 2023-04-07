@@ -90,3 +90,36 @@
 li:not(:last-child) {
     margin-bottom: 0.5rem;
 }
+
+
+/* Display Profile: */
+.profile{
+    display:grid;
+    margin:auto;
+    padding-top:5vh;
+    width:80vw;
+    height:20vh;
+    grid-template-columns: 40% auto;
+}
+
+.profile .image-block{
+    grid-row: 1;
+    grid-column: 1;
+    width:90%;
+    height:auto;
+    margin:auto;
+    background-color: #f0f;
+}
+
+.profile .memberItem{
+    width:80%;
+    margin-top:0;
+}
+.profile ul{
+  margin:auto;
+}
+.profile li{
+    text-align: center;
+    margin:auto;
+    line-height: 1.5em;
+}
