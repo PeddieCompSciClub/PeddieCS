@@ -45,49 +45,6 @@ function getMembers() {
     }
 }
 
-//submits new user data to mySQL database
-function submitMember() {
-    $('#body')[0].style.display="none";
-    $('#text')[0].style.display="block";
-    
-    document.getElementById("text").innerHTML = "<h3 style='text-align:center;'>Check your email to verify your account:</h3><h4>"+$('#email').val()+"</h4>";
-
-    if(window.jQuery){
-        // Check if an image has been selected
-        var image = $('#image')[0].files[0];
-        if (image) {
-            // Convert image to base64-encoded string
-            var reader = new FileReader();
-            reader.readAsDataURL(image);
-            reader.onload = function () {
-                var imageData = reader.result.split(',')[1];
-                // Send POST request with image data included as a parameter
-                $.post("https://peddiecs.peddie.org/nodejs/submitMember", {
-                    first_name: $('#first-name').val(),
-                    last_name: $('#last-name').val(),
-                    email: $('#email').val(),
-                    image: imageData
-                }, function (res) {
-                    if (res.error == "true") {
-                        console.log("Failed to add member data")
-                    }
-                });
-            };
-        } else {
-            // Send POST request without image data
-            $.post("https://peddiecs.peddie.org/nodejs/submitMember", {
-                first_name: $('#first-name').val(),
-                last_name: $('#last-name').val(),
-                email: $('#email').val()
-            }, function (res) {
-                if (res.error == "true") {
-                    console.log("Failed to add member data")
-                }
-            });
-        }
-    }
-}
-
 
 
 //adds a member to the table displayed on the web page by inserting an html into the appropriate section

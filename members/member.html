@@ -21,6 +21,7 @@
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 	<script src="members.js"></script>
+	<script src="loadprofile.js"></script>
 
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="/main.css">
@@ -62,14 +63,95 @@
 	</nav>
 
 	<div class="profile">
-		<div class="image-block">
+		<div class="image">
 			<div class="memberItem">
-				<img src="user-images/test.jpg"  alt="member image" onError="this.onerror=null;this.src='user-images/missing.jpg';">
-				<a>Test User</a>
+				<img id="image" src="user-images/test.jpg" alt="member image"
+					onError="this.onerror=null;this.src='user-images/missing.jpg';">
+				<a>Test User '24</a>
 				<ul>
 					<li>user-email@peddie.org</li>
 					<li>User University</li>
 				</ul>
+			</div>
+		</div>
+		<div class="bio">
+			<div>
+				<h3>Bio</h3>
+				<p id="bio">
+					[Name] is a [profession/occupation] based in [location]. With [number] years of experience in
+					[industry/field], they have a deep understanding of [relevant skills/knowledge]. [He/She/They] is
+					passionate about [interest/hobby], and enjoys spending [free time/hobbies]. In [his/her/their]
+					career, [name] has achieved numerous accomplishments such as [accomplishments/awards]. [He/She/They]
+					is dedicated to [cause/mission], and strives to make a positive impact in
+					[community/industry/world].
+				</p>
+			</div>
+			<div>
+				<h3>Club Groups</h3>
+				<ul id="groups">
+					<li>CS Fellows</li>
+					<li>Women in Tech — Club Leader</li>
+					<li>PeddieHacks — Logistics Lead</li>
+				</ul>
+			</div>
+		</div>
+		<div class="projects">
+			<h1>Projects</h1>
+			<div class="list">
+				<button class="item">
+					<h3>Project 1</h3>
+					<p>
+						This computer science project aims to explore innovative approaches to improve efficiency and performance
+						in a particular computing domain. Using advanced algorithms and techniques, the project will seek to
+						identify key areas of improvement and develop customized solutions to address these challenges. The ultimate
+						goal is to create a scalable and optimized system that can be easily adapted to meet the evolving needs of
+						modern computing environments. Stay tuned for more updates as the project progresses!
+					</p>
+				</button>
+				<button class="item">
+					<h3>Project 2</h3>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+						dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+						ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+						nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+						anim id est laborum.
+					</p>
+				</button>
+			</div>
+		</div>
+		<div class="articles">
+			<h1>Articles</h1>
+			<div class="list">
+				<button class="item">
+					<h3>Article 1</h3>
+					<p>
+						’Twas brillig, and the slithy toves
+						Did gyre and gimble in the wabe:
+						All mimsy were the borogoves,
+						And the mome raths outgrabe.
+
+						“Beware the Jabberwock, my son!
+						The jaws that bite, the claws that catch!
+						Beware the Jubjub bird, and shun
+						The frumious Bandersnatch!”
+
+						He took his vorpal sword in hand;
+						Long time the manxome foe he sought—
+						So rested he by the Tumtum tree
+						And stood awhile in thought.
+					</p>
+				</button>
+				<button class="item">
+					<h3>Article 2</h3>
+					<p>
+						According to all known laws of aviation, there is no way a bee should be able to fly.
+						Its wings are too small to get its fat little body off the ground.
+						The bee, of course, flies anyway because bees don't care what humans think is impossible.
+						Yellow, black. Yellow, black. Yellow, black. Yellow, black.
+						Ooh, black and yellow! Let's shake it up a little. Barry! Breakfast is ready! Coming!
+					</p>
+				</button>
 			</div>
 		</div>
 	</div>

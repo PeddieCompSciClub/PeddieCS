@@ -56,7 +56,7 @@ function getEmailYear(email) {
     }
 }
 
-
+//return the name, year, and email of all saved members
 app.get('/getAllMembers', (req, res) => {
     var con = mysql.createConnection({
         host: "localhost",
@@ -76,6 +76,28 @@ app.get('/getAllMembers', (req, res) => {
         con.end();
     })
 });
+
+//Returns all of a member's (public) data. (name, year, projects, articles, etc.)
+app.get('/getMemberData', (req, res) => {
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "admincs",
+        password: "BeatBlair1864",
+        database: "peddieCS",
+        port: 3306
+    });
+
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query("SELECT * FROM projects JSON_EXTRACT(contributors, '$.contributors[*].name') LIKE '%\"Alex\"%';", function (err, result, fields) {
+            if (err) throw err;
+            res.json(result);
+            return res.end();
+        })
+        con.end();
+    })
+});
+
 
 // test to make sure it is working
 app.get('/', (req, res) => {
