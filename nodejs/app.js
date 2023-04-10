@@ -89,7 +89,7 @@ app.get('/getMemberData', (req, res) => {
 
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT * FROM projects JSON_EXTRACT(contributors, '$.contributors[*].name') LIKE '%\"Alex\"%';", function (err, result, fields) {
+        con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%compsciclub@peddie.org%'`, function (err, result, fields) {
             if (err) throw err;
             res.json(result);
             return res.end();
