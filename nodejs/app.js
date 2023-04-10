@@ -92,7 +92,7 @@ app.get('/getMemberData', (req, res) => {
         con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%compsciclub@peddie.org%'`, function (err, result, fields) {
             if (err) throw err;
             for(var i=0; i<result.length; i++){
-                result[i].contributors = JSON.parse(result[i].contributors);
+                result[i].contributors = JSON.parse(result[i].contributors).contributors;
             }
             res.json(result);
             return res.end();
