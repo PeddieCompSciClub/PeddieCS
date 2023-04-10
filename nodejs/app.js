@@ -89,15 +89,7 @@ app.get('/getMemberData', (req, res) => {
 
     con.connect(function (err) {
         if (err) throw err;
-        con.query(`CREATE TABLE locations (
-            id INT NOT NULL AUTO_INCREMENT,
-            name VARCHAR(100) NOT NULL,  
-            type CHAR(1) NOT NULL,
-            latitude DECIMAL(9,6) NOT NULL,
-            longitude DECIMAL(9,6) NOT NULL,
-            attr JSON, 
-            PRIMARY KEY (id)
-        );`, function (err, result, fields) {
+        con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%compsciclub@peddie.org%'`, function (err, result, fields) {
             if (err) throw err;
             res.json(result);
             return res.end();
