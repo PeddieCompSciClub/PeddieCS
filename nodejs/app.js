@@ -94,7 +94,7 @@ app.get('/getMemberData', (req, res) => {
         con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%"email":${email}%'`, function (err, result, fields) {
             if (err) throw err;
             for(var i=0; i<result.length; i++){
-                //result[i].contributors is saved as a jsonArray, but needs to be parsed
+                //result[i].contributors is saved as a jsonArray, but needs to be parsed (also sorted)
                 //look into new versions for MariaDB to support acutal JSON datatypes?
                 result[i].contributors = JSON.parse(result[i].contributors).contributors;
             }
