@@ -1,5 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
-const email = urlParams.get('email')
+const username = urlParams.get('user');
+const email = username + '@peddie.org';
 
 getMember(email);
 
