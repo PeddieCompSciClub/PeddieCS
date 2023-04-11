@@ -115,9 +115,9 @@ app.get('/getMemberData', (req, res) => {
             result.sort(function (a, b) {
                 var dateA = new Date(a.publish_date);
                 var dateB = new Date(b.publish_date);
-                if (dateA < dateB) {
+                if (dateA > dateB) {
                     return -1;
-                } else if (dateA > dateB) {
+                } else if (dateA < dateB) {
                     return 1;
                 } else {
                     return 0;
