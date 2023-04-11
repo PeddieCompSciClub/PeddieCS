@@ -111,6 +111,7 @@ app.get('/getMemberData', (req, res) => {
                 });
                 result[i].contributors = json.contributors;
             }
+            console.log(result);
             res.json(result);
             return res.end();
         })
