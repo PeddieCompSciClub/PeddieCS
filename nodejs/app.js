@@ -133,6 +133,7 @@ app.get('/getMemberData', (req, res) => {
                         return 0;
                     }
                 });
+                member.projects = result;
                 res.json(member);
                 return res.end();
             });
