@@ -133,8 +133,7 @@ app.get('/getMemberData', (req, res) => {
                         return 0;
                     }
                 });
-                console.log(result);
-                res.json(result);
+                res.json(member);
                 return res.end();
             });
             con.end();
