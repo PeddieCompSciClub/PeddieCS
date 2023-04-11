@@ -32,14 +32,12 @@ function displayMemberProfile(json) {
     document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${json.university}</li>` : '');
 
     //center icon if no bio
-    if (!json.bio && !json.groups) {
-        document.getElementById('icon').style = "grid-column:1/-1";
-    } else {
+    if (json.bio || json.groups) {
+        document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
             document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${json.bio}</p>`
         }
-
         //add groups (not a thing yet)
         if (json.groups) {
             document.getElementById('groups').innerHTML = `<h3>Club Groups</h3><p>${json.groups}</p>`
