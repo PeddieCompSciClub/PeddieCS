@@ -170,9 +170,9 @@ app.get('/getMemberData', (req, res) => {
                     member.articles = result;
                     res.json(member);
                     return res.end();
+                    con.end();
                 });
             });
-            con.end();
         });
     });
 });
