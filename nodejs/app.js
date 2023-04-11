@@ -97,7 +97,7 @@ app.get('/getMemberData', (req, res) => {
 
             con.query(`SELECT * FROM members WHERE email = '${email}'`, function (err, result, fields) {
                 if (err) throw err;
-                member = result[0];
+                if(result) member = result[0];
 
 
                 //get user's project info
