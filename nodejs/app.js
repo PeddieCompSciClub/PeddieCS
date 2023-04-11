@@ -97,7 +97,7 @@ app.get('/getMemberData', (req, res) => {
 
             con.query(`SELECT * FROM members WHERE email = '${email}'`, function (err, result, fields) {
                 if (err) throw err;
-                if (result) {
+                if (result.length>0) {
                     member = result[0];
 
 
