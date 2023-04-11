@@ -134,8 +134,43 @@ app.get('/getMemberData', (req, res) => {
                     }
                 });
                 member.projects = result;
-                res.json(member);
-                return res.end();
+
+                //get user's article info
+                con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
+                    if (err) throw err;
+                    for (var i = 0; i < result.length; i++) {
+                        //result[i].contributors is saved as a jsonArray, but needs to be parsed (also sorted)
+                        //look into new versions for MariaDB to support acutal JSON datatypes?
+                        var json = JSON.parse(result[i].contributors);
+                        json.contributors.sort(function (a, b) {
+                            if (a.priority === undefined && b.priority === undefined) {
+                                return 0;
+                            } else if (a.priority === undefined) {
+                                return 1;
+                            } else if (b.priority === undefined) {
+                                return -1;
+                            } else {
+                                return a.priority - b.priority;
+                            }
+                        });
+                        result[i].contributors = json.contributors;
+                    }
+                    //sort projects in order of date
+                    result.sort(function (a, b) {
+                        var dateA = new Date(a.publish_date);
+                        var dateB = new Date(b.publish_date);
+                        if (dateA > dateB) {
+                            return -1;
+                        } else if (dateA < dateB) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    });
+                    member.articles = result;
+                    res.json(member);
+                    return res.end();
+                });
             });
             con.end();
         });
