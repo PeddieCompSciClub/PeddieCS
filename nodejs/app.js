@@ -81,6 +81,7 @@ app.get('/getAllMembers', (req, res) => {
 app.get('/getMemberData', (req, res) => {
     email = req.query.email;
     console.log(email);
+    var member;//json containing member's info
 
     var con = mysql.createConnection({
         host: "localhost",
@@ -90,53 +91,54 @@ app.get('/getMemberData', (req, res) => {
         port: 3306
     });
 
-   
+
     con.connect(function (err) {
         if (err) throw err;
 
-        con.query(`SELECT * FROM members WHERE email = '${email}'`, function(err, result, fields){
-            if(err) throw err;
-            console.log(result);
-        });
-
-        console.log("a");
-        //get user's project info
-        con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
+        con.query(`SELECT * FROM members WHERE email = '${email}'`, function (err, result, fields) {
             if (err) throw err;
-            for (var i = 0; i < result.length; i++) {
-                //result[i].contributors is saved as a jsonArray, but needs to be parsed (also sorted)
-                //look into new versions for MariaDB to support acutal JSON datatypes?
-                var json = JSON.parse(result[i].contributors);
-                json.contributors.sort(function (a, b) {
-                    if (a.priority === undefined && b.priority === undefined) {
-                        return 0;
-                    } else if (a.priority === undefined) {
-                        return 1;
-                    } else if (b.priority === undefined) {
+            console.log(result);
+            member = result[0];
+
+
+            //get user's project info
+            con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
+                if (err) throw err;
+                for (var i = 0; i < result.length; i++) {
+                    //result[i].contributors is saved as a jsonArray, but needs to be parsed (also sorted)
+                    //look into new versions for MariaDB to support acutal JSON datatypes?
+                    var json = JSON.parse(result[i].contributors);
+                    json.contributors.sort(function (a, b) {
+                        if (a.priority === undefined && b.priority === undefined) {
+                            return 0;
+                        } else if (a.priority === undefined) {
+                            return 1;
+                        } else if (b.priority === undefined) {
+                            return -1;
+                        } else {
+                            return a.priority - b.priority;
+                        }
+                    });
+                    result[i].contributors = json.contributors;
+                }
+                //sort projects in order of date
+                result.sort(function (a, b) {
+                    var dateA = new Date(a.publish_date);
+                    var dateB = new Date(b.publish_date);
+                    if (dateA > dateB) {
                         return -1;
+                    } else if (dateA < dateB) {
+                        return 1;
                     } else {
-                        return a.priority - b.priority;
+                        return 0;
                     }
                 });
-                result[i].contributors = json.contributors;
-            }
-            //sort projects in order of date
-            result.sort(function (a, b) {
-                var dateA = new Date(a.publish_date);
-                var dateB = new Date(b.publish_date);
-                if (dateA > dateB) {
-                    return -1;
-                } else if (dateA < dateB) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+                console.log(result);
+                res.json(result);
+                return res.end();
             });
-            console.log(result);
-            res.json(result);
-            return res.end();
+            con.end();
         });
-        con.end();
     });
 });
 
