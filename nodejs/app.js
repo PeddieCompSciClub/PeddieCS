@@ -136,7 +136,7 @@ app.get('/getMemberData', (req, res) => {
                 member.projects = result;
 
                 //get user's article info
-                con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
+                con.query(`SELECT * FROM articles WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
                     if (err) throw err;
                     for (var i = 0; i < result.length; i++) {
                         //result[i].contributors is saved as a jsonArray, but needs to be parsed (also sorted)
