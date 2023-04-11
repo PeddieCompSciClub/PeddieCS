@@ -25,22 +25,24 @@ function displayMemberProfile(json) {
     console.log("Loading data for " + name);
 
     //add user display-icon
-    document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
-    // document.getElementById('image').src = 'user-images/'+username;
     var img = document.getElementById('image');
     img.src = 'user-images/' + username;
-    img.addEventListener('error', function () {
-        img.src = 'user-images/missing.jpg';
-    });
+    img.addEventListener('error', function () {img.src = 'user-images/missing.jpg';});
+    document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
     document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${json.university}</li>` : '');
 
-    //center icon
+    //center icon if no bio
     if (!json.bio && !json.groups) {
         document.getElementById('icon').style = "grid-column:1/-1";
     } else {
+        //add bio
         if (json.bio) {
             document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${json.bio}</p>`
         }
 
+        //add groups (not a thing yet)
+        if (json.groups) {
+            document.getElementById('groups').innerHTML = `<h3>Club Groups</h3><p>${json.groups}</p>`
+        }
     }
 }
