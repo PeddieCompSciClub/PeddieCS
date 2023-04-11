@@ -132,7 +132,7 @@ app.get('/getMemberData', (req, res) => {
                             return 0;
                         }
                     });
-                    member.projects = result;
+                    if(result) member.projects = result;
 
                     //get user's article info
                     con.query(`SELECT * FROM articles WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
@@ -166,7 +166,7 @@ app.get('/getMemberData', (req, res) => {
                                 return 0;
                             }
                         });
-                        member.articles = result;
+                        if(result) member.articles = result;
                         res.json(member);
                         return res.end();
                         con.end();
