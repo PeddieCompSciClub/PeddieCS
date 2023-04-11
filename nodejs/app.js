@@ -79,6 +79,8 @@ app.get('/getAllMembers', (req, res) => {
 
 //Returns all of a member's (public) data. (name, year, projects, articles, etc.)
 app.get('/getMemberData', (req, res) => {
+    email = req.email;
+
     var con = mysql.createConnection({
         host: "localhost",
         user: "admincs",
@@ -89,9 +91,11 @@ app.get('/getMemberData', (req, res) => {
 
     con.connect(function (err) {
         if (err) throw err;
-        con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%compsciclub@peddie.org%'`, function (err, result, fields) {
+        con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%"name":${email}%'`, function (err, result, fields) {
             if (err) throw err;
             for(var i=0; i<result.length; i++){
+                //result[i].contributors is saved as a jsonArray, but needs to be parsed
+                //look into new versions for MariaDB to support acutal JSON datatypes?
                 result[i].contributors = JSON.parse(result[i].contributors).contributors;
             }
             res.json(result);
