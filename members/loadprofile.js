@@ -32,5 +32,10 @@ function displayMemberProfile(json){
     //center icon
     if(!json.bio && !json.groups){
         document.getElementById('icon').style = "grid-column:1/-1";
+    } else {
+        if(json.bio){
+            document.getElementById('bio').innerHTML=`<h3>Bio</h3><p>${json.bio}</p>`
+        }
+
     }
 }
