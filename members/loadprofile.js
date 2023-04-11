@@ -28,4 +28,9 @@ function displayMemberProfile(json){
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '"+json.year.toString().slice(-2)) : '');
     document.getElementById('image').src = 'user-images/'+username;
     document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university?`<li>${json.university}</li>`:'');
+
+    //center icon
+    if(!json.bio && !json.groups){
+        document.getElementById('icon').style = "grid-column:1/-1";
+    }
 }
