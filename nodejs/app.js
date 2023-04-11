@@ -113,8 +113,8 @@ app.get('/getMemberData', (req, res) => {
             }
             //sort projects in order of date
             result.sort(function (a, b) {
-                var dateA = new Date(a.date);
-                var dateB = new Date(b.date);
+                var dateA = new Date(a.publish_date);
+                var dateB = new Date(b.publish_date);
                 if (dateA < dateB) {
                     return -1;
                 } else if (dateA > dateB) {
