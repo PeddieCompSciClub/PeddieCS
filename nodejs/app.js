@@ -79,7 +79,7 @@ app.get('/getAllMembers', (req, res) => {
 
 //Returns all of a member's (public) data. (name, year, projects, articles, etc.)
 app.get('/getMemberData', (req, res) => {
-    email = req.email;
+    email = req.body.email;
 
     var con = mysql.createConnection({
         host: "localhost",
