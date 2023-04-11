@@ -68,7 +68,7 @@ function displayMember(json){
 
     console.log(first_name+" "+last_name+" "+email+" "+username+" "+getYear(json.year))
 
-    let newDiv = '<div class="memberItem"><img src="user-images/'+username+'" alt="Image not found" onError="this.onerror=null;this.src=\'user-images/missing.jpg\';"><a href="/members/member.html?'+username+'">'+first_name+' '+last_name+'</a><ul><li></li></ul></div>'
+    let newDiv = '<div class="memberItem"><img src="user-images/'+username+'" alt="Image not found" onError="this.onerror=null;this.src=\'user-images/missing.jpg\';"><a href="/members/member.html?email='+encodeURIComponent(email)+'">'+first_name+' '+last_name+'</a><ul><li></li></ul></div>'
 
     let yearElement = document.getElementById(getYear(json.year));
     if (yearElement) {
