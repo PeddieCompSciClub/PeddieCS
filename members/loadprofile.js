@@ -24,5 +24,5 @@ function displayMemberProfile(json){
     var name = json.first_name +" "+ json.last_name;
     console.log("Loading data for " + name);
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '"+json.year.toString().slice(-2)) : '');
-    document.getElementById('image').src = 'user-images/'+json.email;
+    document.getElementById('image').src = 'user-images/'+username;
 }
