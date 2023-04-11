@@ -20,6 +20,6 @@ function getMember(email) {
 }
 
 function displayMemberProfile(json){
-    console.log(json);
-    console.log(json.first_name);
+    var name = json.first_name +" "+ json.last_name;
+    console.log("Loading data for " + name);
 }
