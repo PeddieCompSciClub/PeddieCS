@@ -13,11 +13,13 @@ function getMember(email) {
                 console.log("Failed to get member data")
             } else {
                 console.log(res);
-                //load user data
-                
-
-
+                displayMemberProfile(res);
             }
         });
     }
+}
+
+function displayMemberProfile(json){
+    console.log(json);
+    console.log(json.first_name);
 }
