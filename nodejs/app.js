@@ -97,7 +97,12 @@ app.get('/getMemberData', (req, res) => {
 
             con.query(`SELECT * FROM members WHERE email = '${email}'`, function (err, result, fields) {
                 if (err) throw err;
-                if(result) member = result[0];
+                if (result) {
+                    member = result[0];
+                } else {
+                    res.json({ "message": "user not found" });
+                    return res.end();
+                }
 
 
                 //get user's project info
@@ -132,7 +137,7 @@ app.get('/getMemberData', (req, res) => {
                             return 0;
                         }
                     });
-                    if(result) member.projects = result;
+                    if (result) member.projects = result;
 
                     //get user's article info
                     con.query(`SELECT * FROM articles WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
@@ -166,7 +171,7 @@ app.get('/getMemberData', (req, res) => {
                                 return 0;
                             }
                         });
-                        if(result) member.articles = result;
+                        if (result) member.articles = result;
                         res.json(member);
                         return res.end();
                         con.end();
@@ -175,7 +180,7 @@ app.get('/getMemberData', (req, res) => {
             });
         });
     } else {
-        res.json({"message":"email invalid"});
+        res.json({ "message": "email invalid" });
         return res.end();
     }
 });
