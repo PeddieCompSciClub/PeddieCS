@@ -1,3 +1,7 @@
+const urlParams = new URLSearchParams(window.location.search);
+const email = urlParams.get('email')
+
+getMember(email);
 
 //requests user data from the MySQL database
 function getMember(email) {
@@ -9,6 +13,10 @@ function getMember(email) {
                 console.log("Failed to get member data")
             } else {
                 console.log(res);
+                //load user data
+                
+
+
             }
         });
     }
