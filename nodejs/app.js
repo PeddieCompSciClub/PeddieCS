@@ -93,10 +93,22 @@ app.get('/getMemberData', (req, res) => {
         if (err) throw err;
         con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%compsciclub@peddie.org%'`, function (err, result, fields) {
             if (err) throw err;
-            for(var i=0; i<result.length; i++){
+            for (var i = 0; i < result.length; i++) {
                 //result[i].contributors is saved as a jsonArray, but needs to be parsed (also sorted)
                 //look into new versions for MariaDB to support acutal JSON datatypes?
-                result[i].contributors = JSON.parse(result[i].contributors).contributors;
+                var json = JSON.parse(result[i].contributors);
+                json.contributors.sort(function (a, b) {
+                    if (a.priority === undefined && b.priority === undefined) {
+                        return 0;
+                    } else if (a.priority === undefined) {
+                        return 1;
+                    } else if (b.priority === undefined) {
+                        return -1;
+                    } else {
+                        return a.priority - b.priority;
+                    }
+                });
+                result[i].contributors = json.contributors;
             }
             res.json(result);
             return res.end();
@@ -146,7 +158,7 @@ app.post('/authenticateUser', (req, res) => {
                     con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
-                            res.json({ "message": "success", "credential": payload, "user":result[0]});
+                            res.json({ "message": "success", "credential": payload, "user": result[0] });
                             res.end();
                         } else {
                             res.json({ "message": "new-user", "credential": payload });
@@ -182,7 +194,7 @@ app.post('/addMember', function (req, res) {
             const payload = ticket.getPayload();
             //check that it is a peddie user
             if (payload['hd'] != 'peddie.org') {
-                res.json({ "message": "failed"});
+                res.json({ "message": "failed" });
                 res.end();
             } else {
                 //check if the user is already registered in the database
@@ -199,21 +211,21 @@ app.post('/addMember', function (req, res) {
                         if (err) throw err;
                         if (result.length > 0) {
                             //the member should not already be in the database
-                            res.json({ "message": "success"});
+                            res.json({ "message": "success" });
                             res.end();
                             con.end();
                         } else {
                             //add member
-                            con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])})`, function (err,result,fields) {
-                                if(err) throw err;
+                            con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])})`, function (err, result, fields) {
+                                if (err) throw err;
 
-                                res.json({"message":"success"});
+                                res.json({ "message": "success" });
                                 res.end();
                                 con.end();
                             });
                         }
                     })
-                    
+
                 })
             }
 
