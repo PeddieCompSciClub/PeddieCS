@@ -61,10 +61,10 @@ function displayMemberProfile(json) {
         var articles = document.getElementById('articles');
         if (json.projects.length == 0) { projects.style = "grid-column:1/-1"; }
 
-        projects.innerHTML = `<h1>Articles</h1><div class="list">`;
+        articles.innerHTML = `<h1>Articles</h1><div class="list">`;
         for (var i = 0; i < json.articles.length; i++) {
-            projects.innerHTML += `<button class="item"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
+            articles.innerHTML += `<button class="item"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
         }
-        projects.innerHTML += `</div>`;
+        articles.innerHTML += `</div>`;
     }
 }
