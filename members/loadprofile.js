@@ -52,7 +52,7 @@ function displayMemberProfile(json) {
         projects.innerHTML = `<h1>Projects</h1><div class="list"></div>`;
         var list = projects.getElementsByClassName("list")[0];
         for (var i = 0; i < json.projects.length; i++) {
-            list.innerHTML += `<button class="item"><h3>${json.projects[i].name}</h3><p>${json.projects[i].description}</p></button>`
+            list.innerHTML += `<button class="item" onclick="window.location.href='/projects/project.html?id=${json.projects[i].id}'"><h3>${json.projects[i].name}</h3><p>${json.projects[i].description}</p></button>`
         }
     }
 
