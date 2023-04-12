@@ -53,6 +53,6 @@ function displayMemberProfile(json) {
         for (var i = 0; i < json.projects.length; i++) {
             projects.innerHTML += `<button class="item"><h3>${json.projects[i].name}</h3><p>${json.projects[i].body}</p></button>`
         }
-        projects.innerHTML = `</div>`;
+        projects.innerHTML += `</div>`;
     }
 }
