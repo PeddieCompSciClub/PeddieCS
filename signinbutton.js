@@ -30,8 +30,7 @@ function addProfileButton(name) {
     button.classList.add("user");
     button.textContent = name;
     button.addEventListener("click", function () {
-        removeCookie("credential");
-        window.location.href = "/index.html";
+        window.location.href = "/user/";
     });
     nav.appendChild(button);
 }
