@@ -49,11 +49,11 @@ function displayMemberProfile(json) {
         var projects = document.getElementById('projects');
         if (json.articles.length == 0) { projects.style = "grid-column:1/-1"; }
 
-        projects.innerHTML = `<h1>Projects</h1><div class="list">`;
+        projects.innerHTML = `<h1>Projects</h1><div class="list"></div>`;
+        var list = projects.getElementsByClassName("list")[0];
         for (var i = 0; i < json.projects.length; i++) {
-            projects.innerHTML += `<button class="item"><h3>${json.projects[i].name}</h3><p>${json.projects[i].description}</p></button>`
+            list.innerHTML += `<button class="item"><h3>${json.projects[i].name}</h3><p>${json.projects[i].description}</p></button>`
         }
-        projects.innerHTML += `</div>`;
     }
 
     //load articles
