@@ -26,9 +26,12 @@
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="/main.css">
 	<link rel="icon" href="/favicon.ico">
+
+	<script src="/signinbutton.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="verifyLogin();">
 
 	<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
 		<!-- Main Navbar -->
@@ -65,7 +68,8 @@
 	<div class="profile">
 		<div class="icon" id="icon">
 			<div class="memberItem">
-				<img id="image" src="user-images/test.jpg" alt="member image" onError="this.onerror=null;this.src='user-images/missing.jpg';">
+				<img id="image" src="user-images/test.jpg" alt="member image"
+					onError="this.onerror=null;this.src='user-images/missing.jpg';">
 				<a id="name"></a>
 				<ul id="info">
 				</ul>
