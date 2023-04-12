@@ -1,28 +1,27 @@
-var user;
-
 // redirects user to login if they have an invalid login
 function verifyLogin() {
-    if (window.jQuery) {
-        // console.log(getCookie('credential'));
-        //checks that the user credential is valid, if not redirect to login.html
-        $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
-            token: getCookie('credential'),
-        }, function (res) {
-            // console.log(res);
-            if (res.message == "success") {
-                console.log("user validated");
-                console.log(res.user);
-                addSignoutButton(res.credential.name);
-
-            } else if (res.message == "new-user") {
-                console.log("new user");
-                window.location.href = `new-user.html?redirect=${encodeURIComponent(window.location)}`
-            } else {
-                console.log("failed to validate user");
-                window.location.href = `login.html?redirect=${encodeURIComponent(window.location)}`
-            }
-        });
-    }
+    return new Promise(function (resolve, reject) {
+        if (window.jQuery) {
+            $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
+                token: getCookie('credential'),
+            }, function (res) {
+                if (res.message == "success") {
+                    console.log("user validated");
+                    console.log(res.user);
+                    addSignoutButton(res.credential.name);
+                    resolve(res.user);
+                } else if (res.message == "new-user") {
+                    console.log("new user");
+                    window.location.href = `new-user.html?redirect=${encodeURIComponent(window.location)}`;
+                    reject(new Error('User is not authenticated.'));
+                } else {
+                    console.log("failed to validate user");
+                    window.location.href = `login.html?redirect=${encodeURIComponent(window.location)}`;
+                    reject(new Error('User is not authenticated.'));
+                }
+            });
+        }
+    });
 }
 
 function addSignoutButton(name) {
