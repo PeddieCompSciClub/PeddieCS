@@ -37,7 +37,7 @@ function getMembers() {
                 console.log("Failed to get member data")
             } else {
                 for(let i=0; i<res.message.length; i++){
-                    console.log(res.message[i]);
+                    // console.log(res.message[i]);
                     displayMember(res.message[i]);
                 }
             }
