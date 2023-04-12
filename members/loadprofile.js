@@ -45,7 +45,7 @@ function displayMemberProfile(json) {
     }
 
     //load projects
-    if (json.projects.length() > 0) {
+    if (json.projects.length > 0) {
         var projects = document.getElementById('projects');
         if (json.articles.length == 0) { projects.style = "grid-column:1/-1"; }
 
