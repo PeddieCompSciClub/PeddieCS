@@ -53,7 +53,7 @@ function displayMemberProfile(json) {
         for (var i = 0; i < json.projects.length; i++) {
             projects.innerHTML += `<button class="item"><h3>${json.projects[i].name}</h3><p>${json.projects[i].description}</p></button>`
         }
-        projects.innerHTML += `</div id="test">`;
+        projects.innerHTML += `</div>`;
     }
 
     //load articles
@@ -61,10 +61,10 @@ function displayMemberProfile(json) {
         var articles = document.getElementById('articles');
         if (json.projects.length == 0) { projects.style = "grid-column:1/-1"; }
 
-        articles.innerHTML = `<h1>Articles</h1><div class="list">`;
+        articles.innerHTML = `<h1>Articles</h1><div class="list"></div>`;
+        var list = articles.getElementsByClassName("list")[0];
         for (var i = 0; i < json.articles.length; i++) {
-            articles.innerHTML += `<button class="item"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
+            list.innerHTML += `<button class="item"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
         }
-        articles.innerHTML += `</div>`;
     }
 }
