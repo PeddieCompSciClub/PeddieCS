@@ -123,6 +123,31 @@ nav div {
     height: 3em;
 }
 
+.navbar-custom .user {
+    border: solid 1px #00000000;
+    border-radius: 8px;
+    position: absolute;
+    right: 1em;
+    height: 60%;
+    /* width:auto; */
+    text-align: center;
+    background-color: var(--background);
+    padding: 0 1.5em;
+    overflow: hidden;
+
+    display: inline-block;
+    text-decoration: none;
+    width: auto;
+    /* margin: 24px 0; */
+    overflow: hidden;
+    color:var(--text);
+    transition: border 0.2s;
+}
+
+.navbar-custom .user:hover {
+    border: 1px solid var(--text);
+}
+
 .navbar-full {
     flex-direction: row;
     display: flex;
