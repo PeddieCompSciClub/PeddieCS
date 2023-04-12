@@ -7,7 +7,6 @@ function verifyLogin() {
             }, function (res) {
                 if (res.message == "success") {
                     console.log("user validated");
-                    console.log(res.user);
                     addSignoutButton(res.credential.name);
                     resolve(res.user);
                 } else if (res.message == "new-user") {
