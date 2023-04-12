@@ -13,7 +13,7 @@ function getMember(email) {
             if (res.message == "failed") {
                 console.log("Failed to get member data")
             } else {
-                console.log(res);
+                // console.log(res);
                 displayMemberProfile(res);
             }
         });
