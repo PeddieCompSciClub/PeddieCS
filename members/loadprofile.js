@@ -27,7 +27,7 @@ function displayMemberProfile(json) {
     //add user display-icon
     var img = document.getElementById('image');
     img.src = 'user-images/' + username;
-    img.addEventListener('error', function () {img.src = 'user-images/missing.jpg';});
+    img.addEventListener('error', function () { img.src = 'user-images/missing.jpg'; });
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
     document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${json.university}</li>` : '');
 
@@ -42,5 +42,17 @@ function displayMemberProfile(json) {
         if (json.groups) {
             document.getElementById('groups').innerHTML = `<h3>Club Groups</h3><p>${json.groups}</p>`
         }
+    }
+
+    //load projects
+    if (json.projects.length() > 0) {
+        var projects = document.getElementById('projects');
+        if (json.articles.length == 0) { projects.style = "grid-column:1/-1"; }
+
+        projects.innerHTML += `<h1>Projects</h1><div class="list">`;
+        for (var i = 0; i < json.projects.length(); i++) {
+            projects.innerHTML += `<button class="item"><h3>${json.projects[i].name}</h3><p>${json.projects[i].body}</p></button>`
+        }
+        projects.innerHTML = `</div>`;
     }
 }
