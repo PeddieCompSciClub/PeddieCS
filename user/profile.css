@@ -1,114 +1,12 @@
-/* Display Profile (for home screen) */
-.profile {
-    display: grid;
-    margin: auto;
-    padding-top: 5vh;
-    width: 80vw;
-    height: 20vh;
-    grid-template-columns: 30% 20% auto;
-    row-gap: 5px;
+/* Display Profile (for home screen)
+ * mainly color changes, most stuff in /members/style.css
+ */
+.profile a{
+    color:var(--text) !important;
 }
-
-.profile h1 {
-    font-size: 3em;
-    padding-bottom: 0;
-    /* margin-bottom:0; */
+.profile .item{
+    border: 1px solid var(--detail);
 }
-
-.profile h3 {
-    padding: 0.5em 0.5em 0 0;
-    margin-bottom: 0;
-}
-
-.profile .icon {
-    grid-row: 1;
-    grid-column: 1/-1;
-    width: 90%;
-    height: auto;
-    margin: auto;
-}
-
-.profile .memberItem {
-    width: 80%;
-    margin-top: 0;
-}
-
-.profile .icon ul {
-    margin: auto;
-}
-
-.profile .icon li {
-    text-align: center;
-    margin: auto;
-    line-height: 1.5em;
-}
-
-.profile .bio {
-    grid-row: 1;
-    grid-column: 2/4;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.profile .bio ul {
-    color: var(--text)
-}
-
-.profile .bio li {
-    margin-bottom: 0;
-}
-
-.profile .projects {
-    grid-row: 2;
-    grid-column: 1/3;
-}
-
-.profile .articles {
-    grid-row: 2;
-    grid-column: 3/4;
-}
-
-.projects h3,
-.articles h3 {
-    padding: 1em 0 0 0;
-    text-align: center;
-}
-
-.profile .list {
-    flex-wrap: wrap;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-.profile .item {
-    width: 36vw;
-    max-width: 36em;
-    height: auto;
-    background-color: var(--navbar);
-    border-radius: 2vmin;
-    margin: 0 0 2%;
-    border: 2px solid var(--background);
-    transition: border 0.2s;
-}
-
-.profile .item:hover {
-    border: 2px solid var(--text);
-}
-
-.profile .item h3 {
-    padding-top: 0.2em;
-}
-
-.profile .item p {
-    display: -webkit-box;
-    -webkit-line-clamp: 6;/* Number of lines to show before truncating */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 5%;
-    margin-bottom: 0.5em;
-    text-align: justify;
+.profile .item:hover{
+    border: 1px solid var(--text);
 }
