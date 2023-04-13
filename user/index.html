@@ -28,7 +28,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="verifyLogin().then(function(user) {console.log(user);}).catch(function(error){console.error(error)});">
+<body onload="verifyLogin().then(console.log(user)).catch(function(error){console.error(error)});">
 
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <!-- Main Navbar -->
