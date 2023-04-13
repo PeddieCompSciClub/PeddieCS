@@ -1,6 +1,10 @@
+function displayProfile(user){
+    getProfile(user);
+}
+
 
 //requests user data from the MySQL database
-function getProfiler(user) {
+function getProfile(user) {
     if (window.jQuery) {
         $.get("https://peddiecs.peddie.org/nodejs/getMemberData", {
             "email": user.email
