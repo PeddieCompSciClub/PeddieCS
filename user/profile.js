@@ -21,6 +21,7 @@ function getProfile(user) {
 
 function displayMemberProfile(json) {
     var name = json.first_name + " " + json.last_name;
+    var username = email.substring(0, email.indexOf("@"));
     console.log("Loading data for " + name);
 
     //add user display-icon
