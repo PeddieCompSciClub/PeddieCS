@@ -7,6 +7,12 @@
 .profile .item{
     border: 1px solid var(--detail);
 }
+.profile .item button{
+    display:block;
+}
 .profile .item:hover{
     border: 1px solid var(--text);
+}
+.profile .item:hover button{
+    border-color:var(--text);
 }
