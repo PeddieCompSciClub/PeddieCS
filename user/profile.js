@@ -27,8 +27,8 @@ function displayMemberProfile(json) {
 
     //add user display-icon
     var img = document.getElementById('image');
-    img.src = 'user-images/' + username;
-    img.addEventListener('error', function () { img.src = 'user-images/missing.jpg'; });
+    img.src = '/members/user-images/' + username;
+    img.addEventListener('error', function () { img.src = '/members/user-images/missing.jpg'; });
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
     document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${json.university}</li>` : '');
 
