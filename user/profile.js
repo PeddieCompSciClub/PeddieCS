@@ -13,7 +13,7 @@ function getProfile(user) {
                 console.log("Failed to get member data")
             } else {
                 console.log(res);
-                // displayMemberProfile(res);
+                displayMemberProfile(res);
             }
         });
     }
