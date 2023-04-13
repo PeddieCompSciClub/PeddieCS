@@ -47,7 +47,7 @@ nav div {
 
 h1 {
     text-align: center;
-    font-family: 'Raleway', serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 80px;
     color: var(--text);
     font-weight: bold;
@@ -55,7 +55,7 @@ h1 {
 }
 
 h3 {
-    font-family: 'Raleway', serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 32px;
     color: var(--text);
     font-weight: bold;
