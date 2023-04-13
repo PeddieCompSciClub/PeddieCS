@@ -12,6 +12,7 @@
 }
 .profile .icon button{
     display:block;
+    transition:0.25s;
 }
 .profile .icon button:hover{
     border-color: var(--text);
