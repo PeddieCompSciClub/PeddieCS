@@ -21,11 +21,11 @@
 
   <link rel="stylesheet" href="user.css">
   <link rel="stylesheet" href="/members/style.css">
-  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="profile/profile.css">
   <link rel="icon" href="/favicon.ico">
 
   <script src="verifylogin.js"></script>
-  <script src="profile.js"></script>
+  <script src="profile/profile.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 </head>
 
@@ -36,11 +36,11 @@
     <div id="navbar-main" class="navbar-full navbar-nav mr-auto ">
       <a href="/"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
       <a href="/">Home</a>
-      <a href="">Profile</a>
-      <a href="">Projects</a>
-      <a href="">Club</a>
-      <a href="">Newsletters</a>
-      <a href="">CS Fellows</a>
+      <a href="/user/profile">Profile</a>
+      <a href="/user/projects">Projects</a>
+      <a href="/user/clubs">Club</a>
+      <a href="/user/articles">Articles</a>
+      <a href="/user/csfellows">CS Fellows</a>
       <!-- <button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">NAME</button> -->
     </div>
 
@@ -48,13 +48,13 @@
     <div class="navbar-short navbar-nav mr-auto">
       <a href="/"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
       <div class="dropdown">
-        <button><a>Home</a></button>
+        <button><a>Profile</a></button>
         <div class="dropdown-content">
-          <!-- <a href="/index.html">Home</a> -->
-          <a href="">Profile</a>
-          <a href="">Members</a>
-          <a href="">Clubs</a>
-          <a href="">CS Fellows</a>
+          <a href="/user/">Home</a>
+          <a href="/user/projects">Projects</a>
+          <a href="/user/clubs">Clubs</a>
+          <a href="/user/articles">Articles</a>
+          <a href="/user/csfellows">CS Fellows</a>
         </div>
       </div>
     </div>
