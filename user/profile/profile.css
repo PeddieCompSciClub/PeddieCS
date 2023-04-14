@@ -17,3 +17,6 @@
 .profile .icon button:hover{
     border-color: var(--text);
 }
+.editor .icon button:hover{
+    border-color: initial;
+}
