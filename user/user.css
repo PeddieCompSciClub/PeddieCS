@@ -64,7 +64,7 @@ h3 {
 }
 
 h4 {
-    font-family: 'Raleway', serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 24px;
     color: var(--text);
     font-weight: bold;
