@@ -17,13 +17,3 @@
 .profile .icon button:hover{
     border-color: var(--text);
 }
-
-/* Display Profile: */
-.editor {
-    display: grid;
-    margin: auto;
-    padding-top: 5vh;
-    width: 80vw;
-    height: 20vh;
-    grid-template-columns: 30% 20% auto;
-}
