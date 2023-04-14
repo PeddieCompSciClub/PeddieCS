@@ -2,7 +2,6 @@ function displayProfile(user){
     getProfile(user);
 }
 
-
 //requests user data from the MySQL database
 function getProfile(user) {
     if (window.jQuery) {
@@ -67,5 +66,33 @@ function displayMemberProfile(json) {
         for (var i = 0; i < json.articles.length; i++) {
             list.innerHTML += `<button class="item" onclick="window.location.href='/articles/article.html?id=${json.articles[i].id}'"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
         }
+    }
+}
+
+
+//loads profile/index.html to edit page
+function loadProfileEditor(){
+    if (window.jQuery) {
+        $.get("https://peddiecs.peddie.org/nodejs/getMemberData", {
+            "email": user.email
+        }, function (res) {
+            if (res.message == "failed") {
+                console.log("Failed to get member data")
+            } else {
+                console.log(res);
+                
+
+
+
+
+
+
+
+
+
+
+
+            }
+        });
     }
 }
