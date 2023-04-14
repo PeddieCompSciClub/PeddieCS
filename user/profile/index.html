@@ -29,7 +29,7 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="verifyLogin().then(function(user){displayProfile(user)}).catch(function(error){console.error(error)})">
+<body onload="verifyLogin().then(function(user){loadProfileEditor(user)}).catch(function(error){console.error(error)})">
 
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <!-- Main Navbar -->
@@ -59,20 +59,40 @@
     </div>
   </nav>
 
-  <div class="profile">
+  <div class="editor profile">
     <div class="icon" id="icon">
-      <button class="memberItem" onclick="window.location.href='profile.html'">
+      <div class="memberItem">
         <img id="image" src="/members/user-images/test.jpg" alt="member image"
           onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-        <a id="name"></a>
+        <a id="name">Test Name</a>
         <ul id="info">
+          <li>email@email.com</li>
         </ul>
-      </button>
-    </div>
-    <div class="bio">
-      <div id="bio">
       </div>
     </div>
+    <form id="form">
+      <label for="bio">
+        <h4>Bio</h4>
+      </label><br>
+      <textarea id="bio" name="bio" rows="8" maxlength="1000"></textarea>
+      <div id="counter">0/1000</div>
+      <script>
+        const messageEle = document.getElementById('bio');
+        const counterEle = document.getElementById('counter');
+
+        messageEle.addEventListener('input', function (e) {
+          const target = e.target;
+
+          // Get the `maxlength` attribute
+          const maxLength = target.getAttribute('maxlength');
+
+          // Count the current number of characters
+          const currentLength = target.value.length;
+
+          counterEle.innerHTML = `${currentLength}/${maxLength}`;
+        });
+        </script>
+    </form>
   </div>
 
 </body>
