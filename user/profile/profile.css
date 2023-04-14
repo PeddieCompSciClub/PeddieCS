@@ -20,3 +20,6 @@
 .editor .icon button:hover{
     border-color: initial;
 }
+.editor{
+    grid-template-columns: 40% auto;
+}
