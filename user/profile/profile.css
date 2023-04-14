@@ -23,3 +23,34 @@
 .editor{
     grid-template-columns: 40% auto;
 }
+.editor .icon{
+    grid-column:1;
+}
+.editor #form{
+    grid-column:2/-1;
+    /* background-color: #FF00FF; */
+    height: 200px;
+}
+.editor label{
+    margin:0;
+    padding:0;
+}
+.editor textarea{
+    width:100%;
+    border: 1px solid var(--detail);
+    border-radius:5px;
+    padding:0.25em;
+}
+.editor textarea:focus{
+    width:100%;
+    border-color:var(--text);
+    border-width: 1px;
+    border-radius:5px;
+}
+#counter{
+    margin:-0.5em 0;
+    width:auto;
+    display: flex;
+    justify-content: end;
+    right:0;
+}
