@@ -71,7 +71,7 @@ function displayMemberProfile(json) {
 
 
 //loads profile/index.html to edit page
-function loadProfileEditor(){
+function loadProfileEditor(user){
     if (window.jQuery) {
         $.get("https://peddiecs.peddie.org/nodejs/getMemberData", {
             "email": user.email
