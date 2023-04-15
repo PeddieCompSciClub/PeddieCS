@@ -10,6 +10,9 @@
 .profile .item:hover{
     border: 1px solid var(--text);
 }
+.profile .icon {
+    grid-column:1;
+}
 .profile .icon button{
     display:block;
     transition:0.25s;
@@ -17,31 +20,14 @@
 .profile .icon button:hover{
     border-color: var(--text);
 }
-.editor .icon button:hover{
-    border-color: initial;
-}
-.editor{
-    grid-template-columns: 40% auto;
-}
-.editor .icon{
-    grid-column:1;
-}
-.editor #form{
-    grid-column:2/-1;
-    /* background-color: #FF00FF; */
-    height: 200px;
-}
-.editor label{
-    margin:0;
-    padding:0;
-}
-.editor textarea{
+
+.profile textarea{
     width:100%;
     border: 1px solid var(--detail);
     border-radius:5px;
     padding:0.25em;
 }
-.editor textarea:focus{
+.profile textarea:focus{
     width:100%;
     border-color:var(--text);
     border-width: 1px;
