@@ -37,6 +37,7 @@ function displayMemberProfile(json) {
         //add bio
         if (json.bio) {
             document.getElementById('bio').innerText = json.bio;
+            document.getElementById('counter').innerText = `${json.bio.length}/1000`;
         }
         //add groups (not a thing yet)
         if (json.groups) {
