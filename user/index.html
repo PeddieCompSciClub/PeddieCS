@@ -75,6 +75,22 @@
         <h3>Bio</h3>
         <textarea id="bio" name="bio" rows="8" maxlength="1000"></textarea>
         <div id="counter">0/1000</div>
+        <script>
+          const messageEle = document.getElementById('bio');
+          const counterEle = document.getElementById('counter');
+
+          messageEle.addEventListener('input', function (e) {
+            const target = e.target;
+
+            // Get the `maxlength` attribute
+            const maxLength = target.getAttribute('maxlength');
+
+            // Count the current number of characters
+            const currentLength = target.value.length;
+
+            counterEle.innerHTML = `${currentLength}/${maxLength}`;
+          });
+        </script>
       </div>
       <div id="groups">
       </div>

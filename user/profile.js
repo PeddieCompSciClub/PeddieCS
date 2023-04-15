@@ -68,31 +68,3 @@ function displayMemberProfile(json) {
         }
     }
 }
-
-
-//loads profile/index.html to edit page
-function loadProfileEditor(user){
-    if (window.jQuery) {
-        $.get("https://peddiecs.peddie.org/nodejs/getMemberData", {
-            "email": user.email
-        }, function (res) {
-            if (res.message == "failed") {
-                console.log("Failed to get member data")
-            } else {
-                console.log(res);
-                
-
-
-
-
-
-
-
-
-
-
-
-            }
-        });
-    }
-}

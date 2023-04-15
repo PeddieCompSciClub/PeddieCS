@@ -1,6 +1,9 @@
 /* Display Profile (for home screen)
  * mainly color changes, most stuff in /members/style.css
  */
+.profile {
+    grid-template-columns: 40% 10% auto;
+}
 .profile a{
     color:var(--text) !important;
 }
