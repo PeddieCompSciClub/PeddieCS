@@ -1,3 +1,5 @@
+var originalBio;
+
 function displayProfile(user){
     getProfile(user);
 }
@@ -36,6 +38,7 @@ function displayMemberProfile(json) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
+            originalBio = json.bio;
             document.getElementById('bio').innerText = json.bio;
             document.getElementById('counter').innerText = `${json.bio.length}/1000`;
         }
