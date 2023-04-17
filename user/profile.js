@@ -84,7 +84,7 @@ function displayMemberProfile(json) {
         timerId = setTimeout(function () {
             // Run your function here
             console.log("Function executed after 5 seconds of inactivity");
-            document.getElementById("status").innerText = "saving…"
+            document.getElementById("status").innerText = "saving&#133;"
         }, delay);
     });
 }

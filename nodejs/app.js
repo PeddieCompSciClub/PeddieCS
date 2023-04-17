@@ -306,3 +306,25 @@ app.post('/addMember', function (req, res) {
     }
     verify().catch(console.error);
 });
+
+
+//return the name, year, and email of all saved members
+app.post('/updateBio', (req, res) => {
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "admincs",
+        password: "BeatBlair1864",
+        database: "peddieCS",
+        port: 3306
+    });
+
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query("SELECT first_name, last_name, email, year FROM members", function (err, result, fields) {
+            if (err) throw err;
+            res.json({ "error": false, "message": result });
+            return res.end();
+        })
+        con.end();
+    })
+});
