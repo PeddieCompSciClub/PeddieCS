@@ -36,7 +36,8 @@ function displayMemberProfile(json) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
-            document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${decodeURIComponent(json.bio).replace(/\n/g, `<br>`)}</p>`;
+            console.log(htmlEncode(decodeURIComponent(json.bio)));
+            document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${htmlEncode(decodeURIComponent(json.bio))}</p>`;
         }
         //add groups (not a thing yet)
         if (json.groups) {
@@ -69,6 +70,7 @@ function displayMemberProfile(json) {
     }
 }
 
+//encodes html special characters
 function htmlEncode(s)
 {
   var el = document.createElement("div");
