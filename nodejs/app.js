@@ -328,7 +328,7 @@ app.post('/updateBio', (req, res) => {
             });
             con.query(`UPDATE members SET bio="${bio}" WHERE email="${email}"`, function (err, result, fields) {
                 if(err) throw err;
-                console.log(err+'/n/n'+result+'/n/n'+fields);
+                console.log(bio);
                 res.json({'message':'success'});
             });
         }
