@@ -36,7 +36,7 @@ function displayMemberProfile(json) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
-            document.getElementById('bio').innerText = decodeURIComponent(json.bio).replace(/\n/g, '<br>');
+            document.getElementById('bio').innerHTML = decodeURIComponent(json.bio).replace(/\n/g, '<br>');
             document.getElementById('counter').innerText = `${json.bio.length}/1000`;
         }
         //add groups (not a thing yet)
