@@ -88,7 +88,7 @@ function displayMemberProfile(json) {
 
             $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
                 token: getCookie('credential'),
-                bio: document.getElementById('bio').value
+                bio: encodeURIComponent(document.getElementById('bio').value)
             }, function (res) {
                 if (res.message == "success") {
                     console.log("success");

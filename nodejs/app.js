@@ -326,7 +326,7 @@ app.post('/updateBio', (req, res) => {
                 database: "peddieCS",
                 port: 3306
             });
-            con.query(`UPDATE members SET bio='${bio}' WHERE email='${email}'`, function (err, result, fields) {
+            con.query(`UPDATE members SET bio="${bio}" WHERE email="${email}"`, function (err, result, fields) {
                 if(err) throw err;
                 console.log(err+'/n/n'+result+'/n/n'+fields);
                 res.json({'message':'success'});
