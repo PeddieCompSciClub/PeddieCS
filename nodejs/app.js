@@ -97,7 +97,7 @@ app.get('/getMemberData', (req, res) => {
 
             con.query(`SELECT * FROM members WHERE email = '${email}'`, function (err, result, fields) {
                 if (err) throw err;
-                if (result.length>0) {
+                if (result.length > 0) {
                     member = result[0];
 
 
@@ -308,23 +308,72 @@ app.post('/addMember', function (req, res) {
 });
 
 
-//return the name, year, and email of all saved members
+//updates the user's bio
 app.post('/updateBio', (req, res) => {
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "admincs",
-        password: "BeatBlair1864",
-        database: "peddieCS",
-        port: 3306
+    const token = req.body.token;
+    const bio = req.body.bio;
+    //verify credential
+    verifyCredential(credential, function (success,email) {
+        if(!success){
+            res.json({'message':'failed'});
+        }
+        else{
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+            con.query(`UPDATE members SET bio='${bio}' WHERE email='${email}'`, function (err, result, fields) {
+                if(err) console.error(err);
+                console.log(err+'/n/n'+result+'/n/n'+fields);
+            });
+        }
     });
-
-    con.connect(function (err) {
-        if (err) throw err;
-        con.query("SELECT first_name, last_name, email, year FROM members", function (err, result, fields) {
-            if (err) throw err;
-            res.json({ "error": false, "message": result });
-            return res.end();
-        })
-        con.end();
-    })
 });
+
+function verifyCredential(token, callback) {
+    const CLIENT_ID = secure.google.clientId;
+    const { OAuth2Client } = require('google-auth-library');
+    const client = new OAuth2Client(CLIENT_ID);
+    async function verify() {
+        try {
+            const ticket = await client.verifyIdToken({
+                idToken: token,
+                audience: CLIENT_ID
+            });
+            const payload = ticket.getPayload();
+
+            if (payload['hd'] != 'peddie.org') {
+                callback(false);
+            } else {
+                //check if the user is already registered in the database
+                var con = mysql.createConnection({
+                    host: "localhost",
+                    user: "admincs",
+                    password: "BeatBlair1864",
+                    database: "peddieCS",
+                    port: 3306
+                });
+                con.connect(function (err) {
+                    if (err) throw err;
+                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
+                        if (err) throw err;
+                        if (result.length > 0) {
+                            callback(true,payload['email']);
+                        } else {
+                            callback(false);
+                        }
+                    });
+                    con.end();
+                })
+            }
+
+        } catch (error) {
+            console.error(error);
+            callback(false);
+        }
+    }
+    verify().catch(console.error);
+}
