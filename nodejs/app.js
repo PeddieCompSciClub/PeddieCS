@@ -313,7 +313,7 @@ app.post('/updateBio', (req, res) => {
     const token = req.body.token;
     const bio = req.body.bio;
     //verify credential
-    verifyCredential(credential, function (success,email) {
+    verifyCredential(token, function (success,email) {
         if(!success){
             res.json({'message':'failed'});
         }
@@ -328,6 +328,7 @@ app.post('/updateBio', (req, res) => {
             con.query(`UPDATE members SET bio='${bio}' WHERE email='${email}'`, function (err, result, fields) {
                 if(err) console.error(err);
                 console.log(err+'/n/n'+result+'/n/n'+fields);
+                res.json({'message':'success'});
             });
         }
     });

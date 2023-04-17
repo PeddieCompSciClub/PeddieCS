@@ -85,6 +85,17 @@ function displayMemberProfile(json) {
             // Run your function here
             console.log("Function executed after 5 seconds of inactivity");
             document.getElementById("status").innerText = "saving&#133;"
+
+            $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
+                token: getCookie('credential'),
+                bio: document.getElementById('bio').value
+            }, function (res) {
+                if (res.message == "success") {
+                    console.log("success");
+                } else {
+                    console.log("failed")
+                }
+            });
         }, delay);
     });
 }
