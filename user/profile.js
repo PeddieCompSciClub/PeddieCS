@@ -76,12 +76,15 @@ function displayMemberProfile(json) {
     // Initialize the timer variable
     let timerId = null;
     document.getElementById("bio").addEventListener("input", function () {
+        //update status
+        document.getElementById("status").innerText = "Unsaved"
         // Clear the previous timer
         clearTimeout(timerId);
         // Start a new timer
         timerId = setTimeout(function () {
             // Run your function here
             console.log("Function executed after 5 seconds of inactivity");
+            document.getElementById("status").innerText = "Unsaved"
         }, delay);
     });
 }

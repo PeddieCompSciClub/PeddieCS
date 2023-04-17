@@ -36,10 +36,19 @@
     border-width: 1px;
     border-radius:5px;
 }
-#counter{
+.profile .bioStatus{
     margin:-0.5em 0;
     width:auto;
     display: flex;
     justify-content: end;
-    right:0;
 }
+
+#counter{
+  margin-left: 1em;
+  text-align: right;
+  width:8ch;
+}
+
+#status{
+    color:var(--detail);  
+  }
