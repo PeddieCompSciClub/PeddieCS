@@ -318,6 +318,7 @@ app.post('/updateBio', (req, res) => {
             res.json({'message':'failed'});
         }
         else{
+            console.log(email);
             var con = mysql.createConnection({
                 host: "localhost",
                 user: "admincs",
@@ -326,7 +327,7 @@ app.post('/updateBio', (req, res) => {
                 port: 3306
             });
             con.query(`UPDATE members SET bio='${bio}' WHERE email='${email}'`, function (err, result, fields) {
-                if(err) console.error(err);
+                if(err) throw err;
                 console.log(err+'/n/n'+result+'/n/n'+fields);
                 res.json({'message':'success'});
             });
