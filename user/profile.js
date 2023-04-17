@@ -1,6 +1,4 @@
-var originalBio;
-
-function displayProfile(user){
+function displayProfile(user) {
     getProfile(user);
 }
 
@@ -38,7 +36,6 @@ function displayMemberProfile(json) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
-            originalBio = json.bio;
             document.getElementById('bio').innerText = json.bio;
             document.getElementById('counter').innerText = `${json.bio.length}/1000`;
         }
@@ -71,4 +68,20 @@ function displayMemberProfile(json) {
             list.innerHTML += `<button class="item" onclick="window.location.href='/articles/article.html?id=${json.articles[i].id}'"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
         }
     }
+
+
+    //autosave Bio
+    // Set the delay time (in milliseconds)
+    const delay = 5000;
+    // Initialize the timer variable
+    let timerId = null;
+    document.getElementById("bio").addEventListener("input", function () {
+        // Clear the previous timer
+        clearTimeout(timerId);
+        // Start a new timer
+        timerId = setTimeout(function () {
+            // Run your function here
+            console.log("Function executed after 5 seconds of inactivity");
+        }, delay);
+    });
 }
