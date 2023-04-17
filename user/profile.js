@@ -77,7 +77,7 @@ function displayMemberProfile(json) {
     let timerId = null;
     document.getElementById("bio").addEventListener("input", function () {
         //update status
-        document.getElementById("status").innerText = "unsaved"
+        document.getElementById("status").innerText = "saving"
         // Clear the previous timer
         clearTimeout(timerId);
         // Start a new timer
