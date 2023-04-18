@@ -63,6 +63,7 @@
 
 .options {
     width:80%;
+    max-width: 400px;
     margin: 0.25em auto;
     display: grid;
     grid-template-columns: 50% 50%;
