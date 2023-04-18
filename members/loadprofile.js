@@ -48,7 +48,10 @@ function displayMemberProfile(json) {
     //load projects
     if (json.projects.length > 0) {
         var projects = document.getElementById('projects');
-        if (json.articles.length == 0) { projects.style = "grid-column:1/-1"; }
+        if (json.articles.length == 0) {
+            projects.style = "grid-column:1/-1";
+            document.getElementById('articles').style = "display:none";
+        }
 
         projects.innerHTML = `<h1>Projects</h1><div class="list"></div>`;
         var list = projects.getElementsByClassName("list")[0];
@@ -60,7 +63,10 @@ function displayMemberProfile(json) {
     //load articles
     if (json.articles.length > 0) {
         var articles = document.getElementById('articles');
-        if (json.projects.length == 0) { projects.style = "grid-column:1/-1"; }
+        if (json.projects.length == 0) {
+            projects.style = "grid-column:1/-1";
+            document.getElementById('projects').style = "display:none";
+        }
 
         articles.innerHTML = `<h1>Articles</h1><div class="list"></div>`;
         var list = articles.getElementsByClassName("list")[0];
