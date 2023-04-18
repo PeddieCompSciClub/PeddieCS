@@ -1,3 +1,5 @@
+var user;
+
 function displayProfile(user) {
     getProfile(user);
 }
@@ -19,6 +21,7 @@ function getProfile(user) {
 }
 
 function displayMemberProfile(json) {
+    user = json;
     var name = json.first_name + " " + json.last_name;
     var email = json.email;
     var username = email.substring(0, email.indexOf("@"));
@@ -109,4 +112,15 @@ function displayMemberProfile(json) {
             });
         }, delay);
     });
+}
+
+//changes a public/private profile
+function updateVisibility(){
+    $.post("https://peddiecs.peddie.org/nodejs/updateVisibility", {
+        token: getCookie('credential'),
+        oldVal:user.public
+    }, function(res) {
+        console.log(res);
+    });
+
 }

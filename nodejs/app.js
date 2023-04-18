@@ -308,16 +308,17 @@ app.post('/addMember', function (req, res) {
 });
 
 
+
 //updates the user's bio
 app.post('/updateBio', (req, res) => {
     const token = req.body.token;
     const bio = req.body.bio;
     //verify credential
-    verifyCredential(token, function (success,email) {
-        if(!success){
-            res.json({'message':'failed'});
+    verifyCredential(token, function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
         }
-        else{
+        else {
             console.log(email);
             var con = mysql.createConnection({
                 host: "localhost",
@@ -327,12 +328,46 @@ app.post('/updateBio', (req, res) => {
                 port: 3306
             });
             con.query(`UPDATE members SET bio="${bio}" WHERE email="${email}"`, function (err, result, fields) {
-                if(err) throw err;
+                if (err) throw err;
                 console.log(bio);
-                res.json({'message':'success'});
+                res.json({ 'message': 'success' });
             });
         }
     });
+});
+
+//updates the user's profile visibilty
+app.post('/updateVisibility', (req, res) => {
+    const token = req.body.token;
+    const oldVal = req.body.oldVal;
+    if (oldVal != null) {
+        var newVal = (oldVal <= 0 ? 1 : 0);
+        //verify credential
+        verifyCredential(token, function (success, email) {
+            if (!success) {
+                res.json({ 'message': 'failed' });
+                res.end();
+            }
+            else {
+                console.log(email);
+                var con = mysql.createConnection({
+                    host: "localhost",
+                    user: "admincs",
+                    password: "BeatBlair1864",
+                    database: "peddieCS",
+                    port: 3306
+                });
+                con.query(`UPDATE members SET public=${newVal} WHERE email="${email}"`, function (err, result, fields) {
+                    if (err) throw err;
+                    res.json({ 'message': 'success' });
+                    res.end();
+                });
+            }
+        });
+    } else {
+        res.json({ 'message': 'failed' });
+        res.end();
+    }
 });
 
 function verifyCredential(token, callback) {
@@ -363,7 +398,7 @@ function verifyCredential(token, callback) {
                     con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
-                            callback(true,payload['email']);
+                            callback(true, payload['email']);
                         } else {
                             callback(false);
                         }
