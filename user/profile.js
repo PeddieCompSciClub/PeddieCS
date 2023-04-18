@@ -36,7 +36,7 @@ function displayMemberProfile(json) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
-            document.getElementById('bio').innerHTML = decodeURIComponent(json.bio).replace(/\n/g, `\n`);
+            document.getElementById('bio').innerHTML = (json.bio).replace(/\n/g, `\n`);
             document.getElementById('counter').innerText = `${json.bio.length}/1000`;
         }
         //add groups (not a thing yet)
@@ -88,7 +88,7 @@ function displayMemberProfile(json) {
 
             $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
                 token: getCookie('credential'),
-                bio: encodeURIComponent(document.getElementById('bio').value)
+                bio: (document.getElementById('bio').value)
             }, function (res) {
                 if (res.message == "success") {
                     console.log("success");
