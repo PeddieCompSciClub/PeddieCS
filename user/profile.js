@@ -65,7 +65,7 @@ function displayMemberProfile(json) {
         articles.innerHTML = `<h1>Articles</h1><div class="list"></div>`;
         var list = articles.getElementsByClassName("list")[0];
         for (var i = 0; i < json.articles.length; i++) {
-            list.innerHTML += `<button class="item" onclick="window.location.href='/articles/article.html?id=${json.articles[i].id}'"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
+            list.innerHTML += `<div class="item" onclick="window.location.href='/articles/article.html?id=${json.articles[i].id}'"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></div>`
         }
     }
 
