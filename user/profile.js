@@ -85,6 +85,7 @@ function displayMemberProfile(json) {
             // Run your function here
             console.log("Function executed after 5 seconds of inactivity");
             document.getElementById("status").innerText = "saving"
+            console.log(htmlEncode(document.getElementById('bio').value));
 
             $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
                 token: getCookie('credential'),
