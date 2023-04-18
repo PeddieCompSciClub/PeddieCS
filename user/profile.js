@@ -120,7 +120,12 @@ function updateVisibility(){
         token: getCookie('credential'),
         oldVal:user.public
     }, function(res) {
-        console.log(res);
+        if(res.message == "success"){
+            document.getElementById("visibility").innerText = "Make Private";
+        }
+        else{
+            console.log("failed");
+        }
     });
 
 }
