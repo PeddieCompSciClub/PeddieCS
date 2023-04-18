@@ -30,6 +30,9 @@ function displayMemberProfile(json) {
     img.addEventListener('error', function () { img.src = '/members/user-images/missing.jpg'; });
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
     document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${json.university}</li>` : '');
+    if(user.public<=0){
+        document.getElementById('visibility').innerText = "Make Public"
+    }
 
     //center icon if no bio
     if (json.bio || json.groups) {
