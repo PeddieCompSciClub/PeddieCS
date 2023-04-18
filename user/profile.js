@@ -121,8 +121,8 @@ function updateVisibility(){
         oldVal:user.public
     }, function(res) {
         if(res.message == "success"){
-            user.public = (user.public <= 0 ? 1 : 0)
-            document.getElementById("visibility").innerText = (user.public >=0 ? "Make Private":"Make Public");
+            user.public = res.newVal;
+            document.getElementById("visibility").innerText = (res.newVal >=0 ? "Make Private":"Make Public");
         }
         else{
             console.log("failed");

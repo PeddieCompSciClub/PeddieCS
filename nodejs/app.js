@@ -359,7 +359,7 @@ app.post('/updateVisibility', (req, res) => {
                 });
                 con.query(`UPDATE members SET public=${newVal} WHERE email="${email}"`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({ 'message': 'success' });
+                    res.json({ 'message': 'success', 'newVal':newVal });
                     res.end();
                 });
             }
