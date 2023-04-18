@@ -123,7 +123,7 @@ function updateVisibility(){
         if(res.message == "success"){
             console.log("success "+ res.newVal);
             user.public = res.newVal;
-            document.getElementById("visibility").innerText = (res.newVal >=0 ? "Make Private":"Make Public");
+            document.getElementById("visibility").innerText = (res.newVal > 0 ? "Make Private":"Make Public");
         }
         else{
             console.log("failed");
