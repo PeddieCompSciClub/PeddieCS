@@ -37,7 +37,7 @@ function displayMemberProfile(json) {
         //add bio
         if (json.bio) {
             // console.log(htmlEncode(decodeURIComponent(json.bio)));
-            document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${htmlEncode((json.bio))}</p>`;
+            document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${htmlEncode(decodeURIComponent(json.bio))}</p>`;
         }
         //add groups (not a thing yet)
         if (json.groups) {

@@ -36,7 +36,7 @@ function displayMemberProfile(json) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
-            document.getElementById('bio').innerHTML = (json.bio).replace(/\n/g, `\n`);
+            document.getElementById('bio').innerHTML = decodeURIComponent(json.bio).replace(/\n/g, `\n`);
             document.getElementById('counter').innerText = `${json.bio.length}/1000`;
         }
         //add groups (not a thing yet)
@@ -85,11 +85,10 @@ function displayMemberProfile(json) {
             // Run your function here
             console.log("Function executed after 5 seconds of inactivity");
             document.getElementById("status").innerText = "saving"
-            console.log(htmlEncode(document.getElementById('bio').value));
 
             $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
                 token: getCookie('credential'),
-                bio: (htmlEncode(document.getElementById('bio').value))
+                bio: encodeURIComponent(document.getElementById('bio').value)
             }, function (res) {
                 if (res.message == "success") {
                     console.log("success");
@@ -101,14 +100,4 @@ function displayMemberProfile(json) {
             });
         }, delay);
     });
-}
-
-
-//encodes html special characters
-function htmlEncode(s)
-{
-  var el = document.createElement("div");
-  el.innerText = el.textContent = s;
-  s = el.innerHTML;
-  return s;
 }
