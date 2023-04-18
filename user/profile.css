@@ -4,51 +4,78 @@
 .profile {
     grid-template-columns: 40% 10% auto;
 }
-.profile a{
-    color:var(--text) !important;
+
+.profile a {
+    color: var(--text) !important;
 }
-.profile .item{
+
+.profile .item {
     border: 1px solid var(--detail);
 }
-.profile .item:hover{
+
+.profile .item:hover {
     border: 1px solid var(--text);
 }
+
 .profile .icon {
-    grid-column:1;
+    grid-column: 1;
 }
-.profile .icon button{
-    display:block;
-    transition:0.25s;
+
+.profile .icon button {
+    display: block;
+    transition: 0.25s;
 }
-.profile .icon button:hover{
+
+.profile .icon button:hover {
     border-color: var(--text);
 }
 
-.profile textarea{
-    width:100%;
+.profile textarea {
+    width: 100%;
     border: 1px solid var(--detail);
-    border-radius:5px;
-    padding:0.25em;
+    border-radius: 5px;
+    padding: 0.25em;
 }
-.profile textarea:focus{
-    width:100%;
-    border-color:var(--text);
+
+.profile textarea:focus {
+    width: 100%;
+    border-color: var(--text);
     border-width: 1px;
-    border-radius:5px;
+    border-radius: 5px;
 }
-.profile .bioStatus{
-    margin:-0.5em 0;
-    width:auto;
+
+.profile .bioStatus {
+    margin: -0.5em 0;
+    width: auto;
     display: flex;
     justify-content: end;
 }
 
-#counter{
-  margin-left: 1em;
-  text-align: right;
-  width:8ch;
+#counter {
+    margin-left: 1em;
+    text-align: right;
+    width: 8ch;
 }
 
-#status{
-    color:var(--detail);  
-  }
+#status {
+    color: var(--detail);
+}
+
+.options {
+    width:80%;
+    margin: 0.25em auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.option {
+    width:95% !important;
+    min-width: 0 !important;
+}
+#delete {
+    border-color:#e54b4b;
+    background-color:#ffbaba;
+}
+#delete:hover {
+    background-color:#EDA1A1;
+}

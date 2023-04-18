@@ -68,7 +68,7 @@ app.get('/getAllMembers', (req, res) => {
 
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT first_name, last_name, email, year FROM members", function (err, result, fields) {
+        con.query("SELECT first_name, last_name, email, year FROM members WHERE public=1", function (err, result, fields) {
             if (err) throw err;
             res.json({ "error": false, "message": result });
             return res.end();
