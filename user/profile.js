@@ -88,7 +88,7 @@ function displayMemberProfile(json) {
 
             $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
                 token: getCookie('credential'),
-                bio: (document.getElementById('bio').value)
+                bio: (htmlEncode(document.getElementById('bio').value))
             }, function (res) {
                 if (res.message == "success") {
                     console.log("success");
@@ -100,4 +100,14 @@ function displayMemberProfile(json) {
             });
         }, delay);
     });
+}
+
+
+//encodes html special characters
+function htmlEncode(s)
+{
+  var el = document.createElement("div");
+  el.innerText = el.textContent = s;
+  s = el.innerHTML;
+  return s;
 }
