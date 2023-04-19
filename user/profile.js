@@ -38,7 +38,7 @@ function displayMemberProfile(json) {
     }
     if(json.year==getCurrentYear()+1){
         document.getElementById('university').style = "display:block;";
-        document.getElementById('university').innerText = json.university;
+        document.getElementById('university').value = json.university;
     }
 
     //center icon if no bio
