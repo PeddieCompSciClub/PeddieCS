@@ -116,3 +116,42 @@
 .confirmDelete .options{
     width:90%;
 }
+
+.memberItem .container{
+    padding:0;
+    width:90%;
+    margin-top: 5%;
+    position: relative;
+}
+
+.memberItem img {
+    margin: auto;
+    margin-top: 0;
+    width: 100%;
+    object-fit:cover;
+    display: block;
+    border-radius: 5px;
+    border: 1px solid var(--select);
+}
+
+
+.memberItem .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 0px solid #00000000
+}
+
+.memberItem:hover .overlay {
+    opacity: 1;
+}
