@@ -361,7 +361,7 @@ app.post('/updateUniversity', (req, res) => {
                 database: "peddieCS",
                 port: 3306
             });
-            con.query(`UPDATE members SET university="${uni}" WHERE email="${email}" AND year = ${getCurrentYear()+1}`, function (err, result, fields) {
+            con.query(`UPDATE members SET university="${uni}" WHERE email="${email}" AND year = ${getCurrentYear()}`, function (err, result, fields) {
                 if (err) throw err;
                 // console.log(uni);
                 res.json({ 'message': 'success' });
