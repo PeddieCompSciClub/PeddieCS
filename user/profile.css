@@ -74,10 +74,37 @@
     width:95% !important;
     min-width: 0 !important;
 }
-#delete {
+.delete {
     border-color:#e54b4b;
     background-color:#ffbaba;
 }
-#delete:hover {
+.delete:hover {
     background-color:#EDA1A1;
+    border-color:#e54b4b !important;
+}
+.confirmDelete{
+    width:100vw;
+    height:100vh;
+    background-color: #88888888;
+    position: absolute;
+    top:0;
+    left:0;
+    display:none;
+}
+.confirmDelete .container{
+    margin-top: 25vh;
+    width:25vw;
+    min-width: 250px;
+    background-color: var(--btn);
+    border:1px solid var(--detail);
+    border-radius: 5px;
+    padding: 0.8em;
+}
+.confirmDelete h3{
+    padding:0;
+    margin: 0;
+    text-align: center;
+}
+.confirmDelete .options{
+    width:90%;
 }

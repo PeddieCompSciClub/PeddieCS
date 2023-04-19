@@ -62,16 +62,25 @@
 
   <div class="profile">
     <div class="icon" id="icon">
-      <button class="memberItem" onclick="window.location.href='/user/profile/'">
+      <div class="memberItem" onclick="window.location.href='/user/profile/'">
         <img id="image" src="/members/user-images/test.jpg" alt="member image"
           onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
         <a id="name"></a>
         <ul id="info">
         </ul>
-      </button>
+      </div>
       <div class="options">
         <button class="option memberItem" id="visibility" onclick="updateVisibility()">Make Private</button>
-        <button class="option memberItem" id="delete">Delete Account</button>
+        <button class="delete option memberItem" id="delete" onclick="document.getElementById('confirmDelete').style = 'display:block'">Delete Account</button>
+        <div class="confirmDelete" id="confirmDelete">
+          <div class="container">
+            <h3>Are you sure?</h3>
+            <div class="options">
+              <button class="option memberItem" onclick="document.getElementById('confirmDelete').style = 'display:none'">Keep Account</button>
+              <button class="delete option memberItem">Delete</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="bio">
