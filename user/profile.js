@@ -130,7 +130,7 @@ function displayMemberProfile(json) {
                     document.getElementById("status").innerText = "unsaved"
                 }
             });
-        }, delay);
+        }, delay/2);
     });
 }
 
