@@ -118,7 +118,7 @@ function displayMemberProfile(json) {
             document.getElementById("status").innerText = "saving"
             $.post("https://peddiecs.peddie.org/nodejs/updateUniversity", {
                 token: getCookie('credential'),
-                bio: encodeURIComponent(document.getElementById('university').value)
+                uni: encodeURIComponent(document.getElementById('university').value)
             }, function (res) {
                 if (res.message == "success") {
                     console.log("success");

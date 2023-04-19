@@ -346,7 +346,7 @@ app.post('/updateBio', (req, res) => {
 //updates the user's bio
 app.post('/updateUniversity', (req, res) => {
     const token = req.body.token;
-    const bio = req.body.bio;
+    const uni = req.body.uni;
     //verify credential
     verifyCredential(token, function (success, email) {
         if (!success) {
@@ -361,9 +361,9 @@ app.post('/updateUniversity', (req, res) => {
                 database: "peddieCS",
                 port: 3306
             });
-            con.query(`UPDATE members SET bio="${bio}" WHERE email="${email}"`, function (err, result, fields) {
+            con.query(`UPDATE members SET university="${uni}" WHERE email="${email}" AND year = ${getCurrentYear()+1}`, function (err, result, fields) {
                 if (err) throw err;
-                console.log(bio);
+                // console.log(uni);
                 res.json({ 'message': 'success' });
             });
         }
@@ -429,7 +429,7 @@ function verifyCredential(token, callback) {
                 });
                 con.connect(function (err) {
                     if (err) throw err;
-                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}' AND year = ${getCurrentYear()+1}`, function (err, result, fields) {
+                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
                             callback(true, payload['email']);
