@@ -37,8 +37,9 @@ function displayMemberProfile(json) {
         document.getElementById('visibility').innerText = "Make Public";
     }
     if(json.year==getCurrentYear()+1){
-        document.getElementById('university').style = "display:block;";
-        document.getElementById('university').value = json.university;
+        let uni = document.getElementById('university')
+        uni.style = "display:block;";
+        uni.value = json.university;
     }
 
     //center icon if no bio
