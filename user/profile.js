@@ -36,7 +36,7 @@ function displayMemberProfile(json) {
     if(json.public<=0){
         document.getElementById('visibility').innerText = "Make Public";
     }
-    if(json.year==getCurrentYear()+1){
+    if(json.year==getCurrentYear()){
         let uni = document.getElementById('university')
         uni.style = "display:block;";
         uni.value = decodeURIComponent(json.university);
