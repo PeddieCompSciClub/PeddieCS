@@ -29,7 +29,7 @@ function displayMemberProfile(json) {
     img.src = 'user-images/' + username;
     img.addEventListener('error', function () { img.src = 'user-images/missing.jpg'; });
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
-    document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${json.university}</li>` : '');
+    document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${decodeURIComponent(json.university)}</li>` : '');
 
     //center icon if no bio
     if (json.bio || json.groups) {
