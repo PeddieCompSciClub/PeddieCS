@@ -20,6 +20,7 @@ function getProfile(user) {
     }
 }
 
+//displays data from user json
 function displayMemberProfile(json) {
     user = json;
     var name = json.first_name + " " + json.last_name;
@@ -149,7 +150,23 @@ function updateVisibility(){
             console.log("failed");
         }
     });
+}
 
+//deletes user account
+function deleteUser(){
+    $.post("https://peddiecs.peddie.org/nodejs/deleteUser", {
+        token: getCookie('credential'),
+        oldVal:user.public
+    }, function(res) {
+        if(res.message == "success"){
+            console.log("deleted user"+ res.newVal);
+            removeCookie('credential');
+            window.location.href = '/'
+        }
+        else{
+            console.log("failed");
+        }
+    });
 }
 
 function getCurrentYear() {

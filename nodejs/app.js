@@ -383,7 +383,6 @@ app.post('/updateVisibility', (req, res) => {
                 res.end();
             }
             else {
-                console.log(email);
                 var con = mysql.createConnection({
                     host: "localhost",
                     user: "admincs",
@@ -404,6 +403,33 @@ app.post('/updateVisibility', (req, res) => {
     }
 });
 
+app.post('/deleteUser', (req, res) => {
+    const token = req.body.token;
+    verifyCredential(token, function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+            con.query(`DELETE FROM members WHERE email="${email}"`, function (err, result, fields) {
+                if (err) throw err;
+                console.log('Deleted user '+email);
+                res.json({ 'message': 'success'});
+                res.end();
+            });
+        }
+    });
+});
+
+
+//verify's user credential and callbacks with email
 function verifyCredential(token, callback) {
     const CLIENT_ID = secure.google.clientId;
     const { OAuth2Client } = require('google-auth-library');
