@@ -67,7 +67,7 @@
           <img id="image" src="/members/user-images/test.jpg" alt="member image"
             onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
           <button class="overlay" onclick="document.getElementById('image-file').click()">Change Profile Image</button>
-          <input type="file" onchange="loadFile(event)" name="img" accept="image/*">
+          <input type="file" id='image-file' style="display: none;" onchange="loadFile(event)" name="img" accept="image/*">
           <script>
             var loadFile = function (event) {
               var image = document.getElementById('image');
