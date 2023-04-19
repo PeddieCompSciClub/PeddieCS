@@ -39,7 +39,7 @@ function displayMemberProfile(json) {
     if(json.year==getCurrentYear()+1){
         let uni = document.getElementById('university')
         uni.style = "display:block;";
-        uni.value = json.university;
+        uni.value = decodeURIComponent(json.university);
     }
 
     //center icon if no bio
