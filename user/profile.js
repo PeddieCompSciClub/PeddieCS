@@ -32,12 +32,13 @@ function displayMemberProfile(json) {
     img.src = '/members/user-images/' + username;
     img.addEventListener('error', function () { img.src = '/members/user-images/missing.jpg'; });
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
-    document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university && json.university.length>0 ? `<li>${json.university}</li>` : '');
+    document.getElementById('info').innerHTML += `<li>${email}</li>`;
     if(json.public<=0){
         document.getElementById('visibility').innerText = "Make Public";
     }
     if(json.year==getCurrentYear()+1){
         document.getElementById('university').style = "display:block;";
+        document.getElementById('university').innerText = json.university;
     }
 
     //center icon if no bio
