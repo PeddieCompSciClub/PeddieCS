@@ -36,6 +36,9 @@ function displayMemberProfile(json) {
     if(json.public<=0){
         document.getElementById('visibility').innerText = "Make Public";
     }
+    if(json.year==getCurrentYear()+1){
+        document.getElementById('university').style = "display:block;";
+    }
 
     //center icon if no bio
     if (json.bio || json.groups) {
@@ -145,4 +148,10 @@ function updateVisibility(){
         }
     });
 
+}
+
+function getCurrentYear() {
+    const d = new Date();
+    let year = d.getFullYear() + (d.getMonth() > 6 ? 1 : 0);
+    return year;
 }
