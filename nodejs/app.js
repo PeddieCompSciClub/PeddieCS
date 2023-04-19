@@ -56,6 +56,13 @@ function getEmailYear(email) {
     }
 }
 
+//returns the current graduation year
+function getCurrentYear() {
+    const d = new Date();
+    let year = d.getFullYear() + (d.getMonth() > 6 ? 1 : 0);
+    return year;
+}
+
 //return the name, year, and email of all saved members
 app.get('/getAllMembers', (req, res) => {
     var con = mysql.createConnection({
@@ -336,6 +343,33 @@ app.post('/updateBio', (req, res) => {
     });
 });
 
+//updates the user's bio
+app.post('/updateUniversity', (req, res) => {
+    const token = req.body.token;
+    const bio = req.body.bio;
+    //verify credential
+    verifyCredential(token, function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+        }
+        else {
+
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+            con.query(`UPDATE members SET bio="${bio}" WHERE email="${email}"`, function (err, result, fields) {
+                if (err) throw err;
+                console.log(bio);
+                res.json({ 'message': 'success' });
+            });
+        }
+    });
+});
+
 //updates the user's profile visibilty
 app.post('/updateVisibility', (req, res) => {
     const token = req.body.token;
@@ -395,7 +429,7 @@ function verifyCredential(token, callback) {
                 });
                 con.connect(function (err) {
                     if (err) throw err;
-                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
+                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}' AND year = ${getCurrentYear()+1}`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
                             callback(true, payload['email']);

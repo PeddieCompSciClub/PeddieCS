@@ -84,23 +84,38 @@ function displayMemberProfile(json) {
 
     //autosave Bio
     // Set the delay time (in milliseconds)
-    const delay = 5000;
+    const delay = 3000;
     // Initialize the timer variable
-    let timerId = null;
+    let bioTimerId = null;
     document.getElementById("bio").addEventListener("input", function () {
-        //update status
         document.getElementById("status").innerText = "saving"
-        // Clear the previous timer
-        clearTimeout(timerId);
-        // Start a new timer
-        timerId = setTimeout(function () {
-            // Run your function here
-            console.log("Function executed after 5 seconds of inactivity");
+        clearTimeout(bioTimerId);
+        bioTimerId = setTimeout(function () {
             document.getElementById("status").innerText = "saving"
-
             $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
                 token: getCookie('credential'),
                 bio: encodeURIComponent(document.getElementById('bio').value)
+            }, function (res) {
+                if (res.message == "success") {
+                    console.log("success");
+                    document.getElementById("status").innerText = "saved"
+                } else {
+                    console.log("failed")
+                    document.getElementById("status").innerText = "unsaved"
+                }
+            });
+        }, delay);
+    });
+
+    let uniTimerId = null;
+    document.getElementById("university").addEventListener("input", function () {
+        document.getElementById("status").innerText = "saving"
+        clearTimeout(uniTimerId);
+        uniTimerId = setTimeout(function () {
+            document.getElementById("status").innerText = "saving"
+            $.post("https://peddiecs.peddie.org/nodejs/updateUniversity", {
+                token: getCookie('credential'),
+                bio: encodeURIComponent(document.getElementById('university').value)
             }, function (res) {
                 if (res.message == "success") {
                     console.log("success");

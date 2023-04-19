@@ -30,18 +30,26 @@
     border-color: var(--text);
 }
 
-.profile textarea {
+.profile .input {
     width: 100%;
     border: 1px solid var(--detail);
     border-radius: 5px;
     padding: 0.25em;
 }
 
-.profile textarea:focus {
-    width: 100%;
+.profile .input:focus {
     border-color: var(--text);
     border-width: 1px;
     border-radius: 5px;
+}
+
+.profile #university {
+    width: 60% !important;
+    border: 1px solid var(--detail);
+    border-radius: 5px;
+    padding: 0.25em;
+    margin-bottom: 0.25em;
+    display:none;
 }
 
 .profile .bioStatus {
