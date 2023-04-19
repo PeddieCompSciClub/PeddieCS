@@ -409,6 +409,7 @@ app.post('/updateUserProfile', (req, res) => {
     const token = req.body.token;
     const image = req.body.image;
     if (image) {
+
         verifyCredential(token, function (success, email) {
             if (!success) {
                 res.json({ 'message': 'failed' });
@@ -416,24 +417,43 @@ app.post('/updateUserProfile', (req, res) => {
             }
             else {
                 const buffer = Buffer.from(image, 'base64');
-                const imageMetadata = await sharp(buffer).metadata();
-
-                // Save full quality image
-                await sharp(buffer)
-                    .toFile(`../members/user-images/${username}`);
-
-                // Save resized images
+                const fileName = `${email}.jpg`;
+                const originalFilePath = `../members/user-images/${fileName}`;
                 const sizes = [720, 480, 360, 120];
-                for (const size of sizes) {
-                    await sharp(buffer)
-                        .resize(size, size)
-                        .toFile(`../members/user-images/${size}/${username}`);
-                }
+                const subDirs = sizes.map(size => `../members/user-images/${size}`);
+
+                // Write the original image to a file
+                fs.writeFile(originalFilePath, buffer, function (err) {
+                    if (err) {
+                        console.log(err);
+                        res.json({ message: 'failed' });
+                        res.end();
+                    } else {
+                        // Resize and save each smaller image
+                        for (let i = 0; i < sizes.length; i++) {
+                            const size = sizes[i];
+                            const subDir = subDirs[i];
+                            sharp(buffer)
+                                .resize(size)
+                                .toFile(`${subDir}/${fileName}`, function (err) {
+                                    if (err) {
+                                        console.log(err);
+                                        res.json({ message: 'failed' });
+                                        res.end();
+                                    } else {
+                                        if (i === sizes.length - 1) {
+                                            res.json({ success });
+                                            res.end();
+                                        }
+                                    }
+                                });
+                        }
+                    }
+                });
             }
         });
     }
 });
-
 app.post('/deleteUser', (req, res) => {
     const token = req.body.token;
     verifyCredential(token, function (success, email) {
