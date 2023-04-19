@@ -34,10 +34,10 @@ function displayMemberProfile(json) {
     img.addEventListener('error', function () { img.src = '/members/user-images/missing.jpg'; });
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
     document.getElementById('info').innerHTML += `<li>${email}</li>`;
-    if(json.public<=0){
+    if (json.public <= 0) {
         document.getElementById('visibility').innerText = "Make Public";
     }
-    if(json.year==getCurrentYear()){
+    if (json.year == getCurrentYear()) {
         let uni = document.getElementById('university')
         uni.style = "display:block;";
         uni.value = decodeURIComponent(json.university);
@@ -131,39 +131,62 @@ function displayMemberProfile(json) {
                     document.getElementById("status").innerText = "unsaved"
                 }
             });
-        }, delay/2);
+        }, delay / 2);
     });
 }
 
 //changes a public/private profile
-function updateVisibility(){
+function updateVisibility() {
     $.post("https://peddiecs.peddie.org/nodejs/updateVisibility", {
         token: getCookie('credential'),
-        oldVal:user.public
-    }, function(res) {
-        if(res.message == "success"){
+        oldVal: user.public
+    }, function (res) {
+        if (res.message == "success") {
             // console.log("success "+ res.newVal);
             user.public = res.newVal;
-            document.getElementById("visibility").innerText = (res.newVal > 0 ? "Make Private":"Make Public");
+            document.getElementById("visibility").innerText = (res.newVal > 0 ? "Make Private" : "Make Public");
         }
-        else{
+        else {
             console.log("failed");
         }
     });
 }
 
+//changes user profile image
+function updateImage() {
+    var image = $('#image-file')[0].files[0];
+    if (image) {
+        var reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = function () {
+            var imageData = reader.result.split(',')[1];
+            $.post("https://peddiecs.peddie.org/nodejs/updateUserImage", {
+                token: getCookie('credential'),
+                image: imageData
+            }, function (res) {
+                if (res.message == "success") {
+                    // console.log("success "+ res.newVal);
+                }
+                else {
+                    console.log("failed");
+                }
+            });
+        };
+    }
+}
+
 //deletes user account
-function deleteUser(){
+function deleteUser() {
     $.post("https://peddiecs.peddie.org/nodejs/deleteUser", {
         token: getCookie('credential'),
-        oldVal:user.public
-    }, function(res) {
-        if(res.message == "success"){
-            console.log("deleted user"+ res.newVal);
+        oldVal: user.public
+    }, function (res) {
+        if (res.message == "success") {
+            console.log("deleted user" + res.newVal);
             removeCookie('credential');
             window.location.href = '/'
         }
-        else{
+        else {
             console.log("failed");
         }
     });

@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const validator = require('email-validator');
 const nodemailer = require("nodemailer");
+const sharp = require('sharp');
 
 //used to set port to listen on
 const port = 5622;
@@ -392,7 +393,7 @@ app.post('/updateVisibility', (req, res) => {
                 });
                 con.query(`UPDATE members SET public=${newVal} WHERE email="${email}"`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({ 'message': 'success', 'newVal':newVal });
+                    res.json({ 'message': 'success', 'newVal': newVal });
                     res.end();
                 });
             }
@@ -400,6 +401,36 @@ app.post('/updateVisibility', (req, res) => {
     } else {
         res.json({ 'message': 'failed' });
         res.end();
+    }
+});
+
+//updates the user's profile image
+app.post('/updateUserProfile', (req, res) => {
+    const token = req.body.token;
+    const image = req.body.image;
+    if (image) {
+        verifyCredential(token, function (success, email) {
+            if (!success) {
+                res.json({ 'message': 'failed' });
+                res.end();
+            }
+            else {
+                const buffer = Buffer.from(image, 'base64');
+                const imageMetadata = await sharp(buffer).metadata();
+
+                // Save full quality image
+                await sharp(buffer)
+                    .toFile(`../members/user-images/${username}`);
+
+                // Save resized images
+                const sizes = [720, 480, 360, 120];
+                for (const size of sizes) {
+                    await sharp(buffer)
+                        .resize(size, size)
+                        .toFile(`../members/user-images/${size}/${username}`);
+                }
+            }
+        });
     }
 });
 
@@ -420,8 +451,8 @@ app.post('/deleteUser', (req, res) => {
             });
             con.query(`DELETE FROM members WHERE email="${email}"`, function (err, result, fields) {
                 if (err) throw err;
-                console.log('Deleted user '+email);
-                res.json({ 'message': 'success'});
+                console.log('Deleted user ' + email);
+                res.json({ 'message': 'success' });
                 res.end();
             });
         }
