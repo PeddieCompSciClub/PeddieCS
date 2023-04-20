@@ -57,6 +57,11 @@ function getEmailYear(email) {
     }
 }
 
+//returns the username from email
+function getUsername(email){
+    return email.substring(0, email.indexOf("@"));
+}
+
 //returns the current graduation year
 function getCurrentYear() {
     const d = new Date();
@@ -316,7 +321,6 @@ app.post('/addMember', function (req, res) {
 });
 
 
-
 //updates the user's bio
 app.post('/updateBio', (req, res) => {
     const token = req.body.token;
@@ -416,6 +420,7 @@ app.post('/updateUserImage', (req, res) => {
                 res.end();
             }
             else {
+                const username = getUsername(email);
                 const buffer = Buffer.from(image, 'base64');
                 // Write the buffer to a file
                 fs.writeFile(`../members/user-images/${username}`, buffer, function (err) {
@@ -430,6 +435,8 @@ app.post('/updateUserImage', (req, res) => {
         });
     }
 });
+
+//deletes a user's account
 app.post('/deleteUser', (req, res) => {
     const token = req.body.token;
     verifyCredential(token, function (success, email) {
