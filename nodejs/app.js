@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const validator = require('email-validator');
 const nodemailer = require("nodemailer");
-const sharp = require('sharp');
+// const sharp = require('sharp');
 
 //used to set port to listen on
 const port = 5622;
@@ -417,37 +417,13 @@ app.post('/updateUserProfile', (req, res) => {
             }
             else {
                 const buffer = Buffer.from(image, 'base64');
-                const fileName = `${email}.jpg`;
-                const originalFilePath = `../members/user-images/${fileName}`;
-                const sizes = [720, 480, 360, 120];
-                const subDirs = sizes.map(size => `../members/user-images/${size}`);
-
-                // Write the original image to a file
-                fs.writeFile(originalFilePath, buffer, function (err) {
+                // Write the buffer to a file
+                fs.writeFile(`../members/user-images/temp/${username}`, buffer, function (err) {
                     if (err) {
                         console.log(err);
-                        res.json({ message: 'failed' });
-                        res.end();
+                        res.send({ error: 'true', message: 'Failed To Save Image' });
                     } else {
-                        // Resize and save each smaller image
-                        for (let i = 0; i < sizes.length; i++) {
-                            const size = sizes[i];
-                            const subDir = subDirs[i];
-                            sharp(buffer)
-                                .resize(size)
-                                .toFile(`${subDir}/${fileName}`, function (err) {
-                                    if (err) {
-                                        console.log(err);
-                                        res.json({ message: 'failed' });
-                                        res.end();
-                                    } else {
-                                        if (i === sizes.length - 1) {
-                                            res.json({ success });
-                                            res.end();
-                                        }
-                                    }
-                                });
-                        }
+                        console.log(`Image saved as ${username}`);
                     }
                 });
             }
