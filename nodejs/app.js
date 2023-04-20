@@ -405,7 +405,7 @@ app.post('/updateVisibility', (req, res) => {
 });
 
 //updates the user's profile image
-app.post('/updateUserProfile', (req, res) => {
+app.post('/updateUserImage', (req, res) => {
     const token = req.body.token;
     const image = req.body.image;
     if (image) {
@@ -418,7 +418,7 @@ app.post('/updateUserProfile', (req, res) => {
             else {
                 const buffer = Buffer.from(image, 'base64');
                 // Write the buffer to a file
-                fs.writeFile(`../members/user-images/temp/${username}`, buffer, function (err) {
+                fs.writeFile(`../members/user-images/${username}`, buffer, function (err) {
                     if (err) {
                         console.log(err);
                         res.send({ error: 'true', message: 'Failed To Save Image' });
