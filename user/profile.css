@@ -152,6 +152,6 @@
     border: 0px solid #00000000
 }
 
-.memberItem:hover .overlay {
+.memberItem .container:hover .overlay {
     opacity: 1;
 }
