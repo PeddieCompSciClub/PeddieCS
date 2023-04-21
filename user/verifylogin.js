@@ -8,6 +8,7 @@ function verifyLogin() {
                 if (res.message == "success") {
                     console.log("user validated");
                     addSignoutButton(res.credential.name);
+                    appendNavbar(res.user.permissions);
                     resolve(res.user);
                 } else if (res.message == "new-user") {
                     console.log("new user");
@@ -36,6 +37,14 @@ function addSignoutButton(name) {
     const style = document.createElement("style");
     style.textContent = `.navbar-custom .user.sign-out::after {content: "${name}";}`;
     nav.appendChild(style);
+}
+
+function appendNavbar(permissions){
+    const nav = document.getElementById("navbar-main");
+    permissions = permissions.replace(' ','').split(',');
+    permissions.array.forEach(perm => {
+        console.log(perm);
+    });
 }
 
 

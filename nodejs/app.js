@@ -223,7 +223,7 @@ app.post('/authenticateUser', (req, res) => {
                 });
                 con.connect(function (err) {
                     if (err) throw err;
-                    con.query(`SELECT first_name, last_name, email, year FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
+                    con.query(`SELECT first_name, last_name, email, year, permissions FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
                             res.json({ "message": "success", "credential": payload, "user": result[0] });
