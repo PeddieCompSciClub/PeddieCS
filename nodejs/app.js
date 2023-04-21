@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const validator = require('email-validator');
 const nodemailer = require("nodemailer");
+// const sharp = require('sharp');
 
 //used to set port to listen on
 const port = 5622;
@@ -56,6 +57,18 @@ function getEmailYear(email) {
     }
 }
 
+//returns the username from email
+function getUsername(email){
+    return email.substring(0, email.indexOf("@"));
+}
+
+//returns the current graduation year
+function getCurrentYear() {
+    const d = new Date();
+    let year = d.getFullYear() + (d.getMonth() > 6 ? 1 : 0);
+    return year;
+}
+
 //return the name, year, and email of all saved members
 app.get('/getAllMembers', (req, res) => {
     var con = mysql.createConnection({
@@ -68,7 +81,7 @@ app.get('/getAllMembers', (req, res) => {
 
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT first_name, last_name, email, year FROM members", function (err, result, fields) {
+        con.query("SELECT first_name, last_name, email, year FROM members WHERE public>=1", function (err, result, fields) {
             if (err) throw err;
             res.json({ "error": false, "message": result });
             return res.end();
@@ -313,11 +326,11 @@ app.post('/updateBio', (req, res) => {
     const token = req.body.token;
     const bio = req.body.bio;
     //verify credential
-    verifyCredential(token, function (success,email) {
-        if(!success){
-            res.json({'message':'failed'});
+    verifyCredential(token, function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
         }
-        else{
+        else {
             console.log(email);
             var con = mysql.createConnection({
                 host: "localhost",
@@ -326,15 +339,131 @@ app.post('/updateBio', (req, res) => {
                 database: "peddieCS",
                 port: 3306
             });
-            con.query(`UPDATE members SET bio='${bio}' WHERE email='${email}'`, function (err, result, fields) {
-                if(err) throw err;
-                console.log(err+'/n/n'+result+'/n/n'+fields);
-                res.json({'message':'success'});
+            con.query(`UPDATE members SET bio="${bio}" WHERE email="${email}"`, function (err, result, fields) {
+                if (err) throw err;
+                console.log(bio);
+                res.json({ 'message': 'success' });
             });
         }
     });
 });
 
+//updates the user's bio
+app.post('/updateUniversity', (req, res) => {
+    const token = req.body.token;
+    const uni = req.body.uni;
+    //verify credential
+    verifyCredential(token, function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+        }
+        else {
+
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+            con.query(`UPDATE members SET university="${uni}" WHERE email="${email}" AND year = ${getCurrentYear()}`, function (err, result, fields) {
+                if (err) throw err;
+                // console.log(uni);
+                res.json({ 'message': 'success' });
+            });
+        }
+    });
+});
+
+//updates the user's profile visibilty
+app.post('/updateVisibility', (req, res) => {
+    const token = req.body.token;
+    const oldVal = req.body.oldVal;
+    if (oldVal != null) {
+        var newVal = (oldVal <= 0 ? 1 : 0);
+        //verify credential
+        verifyCredential(token, function (success, email) {
+            if (!success) {
+                res.json({ 'message': 'failed' });
+                res.end();
+            }
+            else {
+                var con = mysql.createConnection({
+                    host: "localhost",
+                    user: "admincs",
+                    password: "BeatBlair1864",
+                    database: "peddieCS",
+                    port: 3306
+                });
+                con.query(`UPDATE members SET public=${newVal} WHERE email="${email}"`, function (err, result, fields) {
+                    if (err) throw err;
+                    res.json({ 'message': 'success', 'newVal': newVal });
+                    res.end();
+                });
+            }
+        });
+    } else {
+        res.json({ 'message': 'failed' });
+        res.end();
+    }
+});
+
+//updates the user's profile image
+app.post('/updateUserImage', (req, res) => {
+    const token = req.body.token;
+    const image = req.body.image;
+    if (image) {
+
+        verifyCredential(token, function (success, email) {
+            if (!success) {
+                res.json({ 'message': 'failed' });
+                res.end();
+            }
+            else {
+                const username = getUsername(email);
+                const buffer = Buffer.from(image, 'base64');
+                // Write the buffer to a file
+                fs.writeFile(`../members/user-images/${username}`, buffer, function (err) {
+                    if (err) {
+                        console.log(err);
+                        res.send({ error: 'true', message: 'Failed To Save Image' });
+                    } else {
+                        console.log(`Image saved as ${username}`);
+                    }
+                });
+            }
+        });
+    }
+});
+
+//deletes a user's account
+app.post('/deleteUser', (req, res) => {
+    const token = req.body.token;
+    verifyCredential(token, function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+            con.query(`DELETE FROM members WHERE email="${email}"`, function (err, result, fields) {
+                if (err) throw err;
+                console.log('Deleted user ' + email);
+                res.json({ 'message': 'success' });
+                res.end();
+            });
+        }
+    });
+});
+
+
+//verify's user credential and callbacks with email
 function verifyCredential(token, callback) {
     const CLIENT_ID = secure.google.clientId;
     const { OAuth2Client } = require('google-auth-library');
@@ -363,7 +492,7 @@ function verifyCredential(token, callback) {
                     con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
-                            callback(true,payload['email']);
+                            callback(true, payload['email']);
                         } else {
                             callback(false);
                         }

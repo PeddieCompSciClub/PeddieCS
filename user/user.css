@@ -5,7 +5,11 @@
     --text: #212529;
     --detail: #888;
     --link: #5fb7ff;
+
+    --btn:#f1f1f1;
+    --btn-border: #ccc;
 }
+    
 
 * {
     margin: 0;

@@ -1,3 +1,5 @@
+var user;
+
 function displayProfile(user) {
     getProfile(user);
 }
@@ -18,7 +20,9 @@ function getProfile(user) {
     }
 }
 
+//displays data from user json
 function displayMemberProfile(json) {
+    user = json;
     var name = json.first_name + " " + json.last_name;
     var email = json.email;
     var username = email.substring(0, email.indexOf("@"));
@@ -29,15 +33,23 @@ function displayMemberProfile(json) {
     img.src = '/members/user-images/' + username;
     img.addEventListener('error', function () { img.src = '/members/user-images/missing.jpg'; });
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
-    document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${json.university}</li>` : '');
+    document.getElementById('info').innerHTML += `<li>${email}</li>`;
+    if (json.public <= 0) {
+        document.getElementById('visibility').innerText = "Make Public";
+    }
+    if (json.year == getCurrentYear()) {
+        let uni = document.getElementById('university')
+        uni.style = "display:block;";
+        uni.value = decodeURIComponent(json.university);
+    }
 
     //center icon if no bio
     if (json.bio || json.groups) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
-            document.getElementById('bio').innerText = json.bio;
-            document.getElementById('counter').innerText = `${json.bio.length}/1000`;
+            document.getElementById('bio').innerHTML = decodeURIComponent(json.bio).replace(/\n/g, `\n`);
+            document.getElementById('counter').innerText = `${ decodeURIComponent(json.bio).length}/1000`;
         }
         //add groups (not a thing yet)
         if (json.groups) {
@@ -48,7 +60,10 @@ function displayMemberProfile(json) {
     //load projects
     if (json.projects.length > 0) {
         var projects = document.getElementById('projects');
-        if (json.articles.length == 0) { projects.style = "grid-column:1/-1"; }
+        if (json.articles.length == 0) {
+            projects.style = "grid-column:1/-1";
+            document.getElementById('articles').style = "display:none";
+        }
 
         projects.innerHTML = `<h1>Projects</h1><div class="list"></div>`;
         var list = projects.getElementsByClassName("list")[0];
@@ -60,42 +75,125 @@ function displayMemberProfile(json) {
     //load articles
     if (json.articles.length > 0) {
         var articles = document.getElementById('articles');
-        if (json.projects.length == 0) { projects.style = "grid-column:1/-1"; }
+        if (json.projects.length == 0) {
+            projects.style = "grid-column:1/-1";
+            document.getElementById('projects').style = "display:none";
+        }
 
         articles.innerHTML = `<h1>Articles</h1><div class="list"></div>`;
         var list = articles.getElementsByClassName("list")[0];
         for (var i = 0; i < json.articles.length; i++) {
-            list.innerHTML += `<button class="item" onclick="window.location.href='/articles/article.html?id=${json.articles[i].id}'"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
+            list.innerHTML += `<div class="item" onclick="window.location.href='/articles/article.html?id=${json.articles[i].id}'"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></div>`
         }
     }
 
 
     //autosave Bio
     // Set the delay time (in milliseconds)
-    const delay = 5000;
+    const delay = 3000;
     // Initialize the timer variable
-    let timerId = null;
+    let bioTimerId = null;
     document.getElementById("bio").addEventListener("input", function () {
-        //update status
-        document.getElementById("status").innerText = "unsaved"
-        // Clear the previous timer
-        clearTimeout(timerId);
-        // Start a new timer
-        timerId = setTimeout(function () {
-            // Run your function here
-            console.log("Function executed after 5 seconds of inactivity");
-            document.getElementById("status").innerText = "saving&#133;"
-
+        document.getElementById("status").innerText = "saving"
+        clearTimeout(bioTimerId);
+        bioTimerId = setTimeout(function () {
+            document.getElementById("status").innerText = "saving"
             $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
                 token: getCookie('credential'),
-                bio: document.getElementById('bio').value
+                bio: encodeURIComponent(document.getElementById('bio').value)
             }, function (res) {
                 if (res.message == "success") {
                     console.log("success");
+                    document.getElementById("status").innerText = "saved"
                 } else {
                     console.log("failed")
+                    document.getElementById("status").innerText = "unsaved"
                 }
             });
         }, delay);
     });
+
+    let uniTimerId = null;
+    document.getElementById("university").addEventListener("input", function () {
+        document.getElementById("status").innerText = "saving"
+        clearTimeout(uniTimerId);
+        uniTimerId = setTimeout(function () {
+            document.getElementById("status").innerText = "saving"
+            $.post("https://peddiecs.peddie.org/nodejs/updateUniversity", {
+                token: getCookie('credential'),
+                uni: encodeURIComponent(document.getElementById('university').value)
+            }, function (res) {
+                if (res.message == "success") {
+                    console.log("success");
+                    document.getElementById("status").innerText = "saved"
+                } else {
+                    console.log("failed")
+                    document.getElementById("status").innerText = "unsaved"
+                }
+            });
+        }, delay / 2);
+    });
+}
+
+//changes a public/private profile
+function updateVisibility() {
+    $.post("https://peddiecs.peddie.org/nodejs/updateVisibility", {
+        token: getCookie('credential'),
+        oldVal: user.public
+    }, function (res) {
+        if (res.message == "success") {
+            // console.log("success "+ res.newVal);
+            user.public = res.newVal;
+            document.getElementById("visibility").innerText = (res.newVal > 0 ? "Make Private" : "Make Public");
+        }
+        else {
+            console.log("failed");
+        }
+    });
+}
+
+//changes user profile image
+function updateImage() {
+    var image = $('#image-file')[0].files[0];
+    if (image) {
+        var reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = function () {
+            var imageData = reader.result.split(',')[1];
+            $.post("https://peddiecs.peddie.org/nodejs/updateUserImage", {
+                token: getCookie('credential'),
+                image: imageData
+            }, function (res) {
+                if (res.message == "success") {
+                    // console.log("success "+ res.newVal);
+                }
+                else {
+                    console.log("failed");
+                }
+            });
+        };
+    }
+}
+
+//deletes user account
+function deleteUser() {
+    $.post("https://peddiecs.peddie.org/nodejs/deleteUser", {
+        token: getCookie('credential'),
+        oldVal: user.public
+    }, function (res) {
+        if (res.message == "success") {
+            console.log("deleted user" + res.newVal);
+            removeCookie('credential');
+            window.location.href = '/'
+        }
+        else {
+            console.log("failed");
+        }
+    });
+}
+
+function getCurrentYear() {
+    const d = new Date();
+    let year = d.getFullYear() + (d.getMonth() > 6 ? 1 : 0);
+    return year;
 }

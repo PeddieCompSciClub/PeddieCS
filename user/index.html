@@ -37,10 +37,11 @@
       <a href="/"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
       <a href="/">Home</a>
       <a href="/user">Profile</a>
+      <a href="/user/class">Class</a>
+      <a href="/user/clubs">Clubs</a>
       <a href="/user/projects">Projects</a>
-      <a href="/user/clubs">Club</a>
       <a href="/user/articles">Articles</a>
-      <a href="/user/csfellows">CS Fellows</a>
+      <!-- <a href="/user/csfellows">CS Fellows</a> -->
       <!-- <button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">NAME</button> -->
     </div>
 
@@ -51,10 +52,11 @@
         <button><a>Profile</a></button>
         <div class="dropdown-content">
           <a href="/">Home</a>
-          <a href="/user/projects">Projects</a>
+          <a href="/user/class">Class</a>
           <a href="/user/clubs">Clubs</a>
+          <a href="/user/projects">Projects</a>
           <a href="/user/articles">Articles</a>
-          <a href="/user/csfellows">CS Fellows</a>
+          <!-- <a href="/user/csfellows">CS Fellows</a> -->
         </div>
       </div>
     </div>
@@ -62,19 +64,49 @@
 
   <div class="profile">
     <div class="icon" id="icon">
-      <button class="memberItem" onclick="window.location.href='/user/profile/'">
-        <img id="image" src="/members/user-images/test.jpg" alt="member image"
-          onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+      <div class="memberItem">
+        <div class="container">
+          <img id="image" src="/members/user-images/test.jpg" alt="member image"
+            onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+          <button class="overlay" onclick="document.getElementById('image-file').click()">Change Profile Image</button>
+          <input type="file" id='image-file' style="display: none;" onchange="loadFile(event)" name="img" accept="image/*">
+          <script>
+            var loadFile = function (event) {
+              var image = document.getElementById('image');
+              image.src = URL.createObjectURL(event.target.files[0]);
+              updateImage();
+            };
+          </script>
+        </div>
         <a id="name"></a>
         <ul id="info">
         </ul>
-      </button>
+      </div>
+      <div class="options">
+        <button class="option memberItem" id="visibility" onclick="updateVisibility()">Make Private</button>
+        <button class="delete option memberItem" id="delete"
+          onclick="document.getElementById('confirmDelete').style = 'display:block'">Delete Account</button>
+        <div class="confirmDelete" id="confirmDelete">
+          <div class="container">
+            <h3>Are you sure?</h3>
+            <div class="options">
+              <button class="option memberItem"
+                onclick="document.getElementById('confirmDelete').style = 'display:none'">Keep Account</button>
+              <button class="delete option memberItem" onclick="deleteUser()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="bio">
       <div>
         <h3>Bio</h3>
-        <textarea id="bio" name="bio" rows="8" maxlength="1000"></textarea>
-        <div class="bioStatus"><div id="status">saved</div><div id="counter">0/1000</div></div>
+        <input type="text" class="input" id="university" maxlength="60" placeholder="University">
+        <textarea id="bio" class="input" name="bio" rows="8" maxlength="1000" placeholder="Bio"></textarea>
+        <div class="bioStatus">
+          <div id="status">saved</div>
+          <div id="counter">0/1000</div>
+        </div>
         <script>
           const messageEle = document.getElementById('bio');
           const counterEle = document.getElementById('counter');

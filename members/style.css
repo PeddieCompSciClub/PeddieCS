@@ -125,7 +125,7 @@ li:not(:last-child) {
     grid-column: 1/-1;
     width: 90%;
     height: auto;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .profile .memberItem {

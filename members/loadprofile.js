@@ -29,14 +29,15 @@ function displayMemberProfile(json) {
     img.src = 'user-images/' + username;
     img.addEventListener('error', function () { img.src = 'user-images/missing.jpg'; });
     document.getElementById('name').innerText = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
-    document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${json.university}</li>` : '');
+    document.getElementById('info').innerHTML += `<li>${email}</li>` + (json.university ? `<li>${decodeURIComponent(json.university)}</li>` : '');
 
     //center icon if no bio
     if (json.bio || json.groups) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
-            document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${json.bio}</p>`
+            // console.log(htmlEncode(decodeURIComponent(json.bio)));
+            document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${htmlEncode(decodeURIComponent(json.bio))}</p>`;
         }
         //add groups (not a thing yet)
         if (json.groups) {
@@ -47,7 +48,10 @@ function displayMemberProfile(json) {
     //load projects
     if (json.projects.length > 0) {
         var projects = document.getElementById('projects');
-        if (json.articles.length == 0) { projects.style = "grid-column:1/-1"; }
+        if (json.articles.length == 0) {
+            projects.style = "grid-column:1/-1";
+            document.getElementById('articles').style = "display:none";
+        }
 
         projects.innerHTML = `<h1>Projects</h1><div class="list"></div>`;
         var list = projects.getElementsByClassName("list")[0];
@@ -59,7 +63,10 @@ function displayMemberProfile(json) {
     //load articles
     if (json.articles.length > 0) {
         var articles = document.getElementById('articles');
-        if (json.projects.length == 0) { projects.style = "grid-column:1/-1"; }
+        if (json.projects.length == 0) {
+            projects.style = "grid-column:1/-1";
+            document.getElementById('projects').style = "display:none";
+        }
 
         articles.innerHTML = `<h1>Articles</h1><div class="list"></div>`;
         var list = articles.getElementsByClassName("list")[0];
@@ -67,4 +74,13 @@ function displayMemberProfile(json) {
             list.innerHTML += `<button class="item" onclick="window.location.href='/articles/article.html?id=${json.articles[i].id}'"><h3>${json.articles[i].name}</h3><p>${json.articles[i].body}</p></button>`
         }
     }
+}
+
+//encodes html special characters
+function htmlEncode(s)
+{
+  var el = document.createElement("div");
+  el.innerText = el.textContent = s;
+  s = el.innerHTML;
+  return s;
 }
