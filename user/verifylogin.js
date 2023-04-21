@@ -43,8 +43,8 @@ function appendNavbar(permissions){
     const nav = document.getElementById("navbar-main");
     permissions = permissions.replace(' ','').split(',');
     permissions.forEach(perm => {
-        console.log(perm);
         if(perm == 'csfellows'){
+            console.log(perm);
             nav.innerHTML+='<a href="/user/csfellows">CS Fellows</a>';
         }
         if(perm == 'admin'){
