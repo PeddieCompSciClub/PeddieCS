@@ -42,7 +42,7 @@ function addSignoutButton(name) {
 function appendNavbar(permissions){
     const nav = document.getElementById("navbar-main");
     permissions = permissions.replace(' ','').split(',');
-    permissions.array.forEach(perm => {
+    permissions.forEach(perm => {
         console.log(perm);
     });
 }
