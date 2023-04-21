@@ -44,10 +44,10 @@ function appendNavbar(permissions){
     permissions = permissions.replace(' ','').split(',');
     permissions.forEach(perm => {
         console.log(perm);
-        if(permission == 'csfellows'){
+        if(perm == 'csfellows'){
             nav.innerHTML+='<a href="/user/csfellows">CS Fellows</a>';
         }
-        if(permission == 'admin'){
+        if(perm == 'admin'){
             nav.innerHTML+='<a href="/user/admin">Admin Tools</a>';
         }
     });
