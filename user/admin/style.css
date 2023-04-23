@@ -5,6 +5,10 @@
     margin: 0 auto;
 }
 
+.tab{
+    border: 0 solid var(--table);
+}
+
 .tab button:hover {
     background-color: var(--table);
 }
@@ -12,4 +16,8 @@
 /* Create an active/current tablink class */
 .tab button.active {
     background-color: var(--select);
+}
+
+.tabcontainer #members{
+    padding:0;
 }

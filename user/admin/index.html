@@ -63,71 +63,72 @@
 
 	<div class="tabcontainer" id="maintabs">
 		<div class="tab">
-			<button class="tablinks active" onclick="openMainTab(event, 'members')">Members</button>
-			<button class="tablinks" onclick="openMainTab(event, 'permissions')">Permissions</button>
+			<button class="tablinks maintablinks active" onclick="openMainTab(event, 'members')">Members</button>
+			<button class="tablinks maintablinks" onclick="openMainTab(event, 'permissions')">Permissions</button>
 		</div>
 
 		<!-- Tab content -->
-		<div id="members" class="tabcontent" style="display:block">
+		<div id="members" class="tabcontent maintabcontent" style="display:block">
 			<div class="tabcontainer">
 				<div class="tab">
-					<button class="tablinks active" onclick="openMemberTab(event, 'Seniors')">Seniors</button>
-					<button class="tablinks" onclick="openMemberTab(event, 'Juniors')">Juniors</button>
-					<button class="tablinks" onclick="openMemeberTab(event, 'Sophomores')">Sophomores</button>
-					<button class="tablinks" onclick="openMemeberTab(event, 'Freshmen')">Freshmen</button>
-					<button class="tablinks" onclick="openMemeberTab(event, 'Faculty')">Faculty</button>
-					<button class="tablinks" onclick="openMemeberTab(event, 'Alumni')">Alumni</button>
+					<button class="tablinks membertablinks active" onclick="openMemberTab(event, 'Seniors')">Seniors</button>
+					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Juniors')">Juniors</button>
+					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Sophomores')">Sophomores</button>
+					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Freshmen')">Freshmen</button>
+					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Alumni')">Alumni</button>
+					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Faculty')">Faculty</button>
 				</div>
 
 				<!-- Tab content -->
-				<div id="Seniors" class="tabcontent">
+				<div id="Seniors" class="tabcontent membertabcontent" style="display:block">
 					<h3>Class of 2023</h3>
 					<div class="memberTable"></div>
 				</div>
 
-				<div id="Juniors" class="tabcontent">
+				<div id="Juniors" class="tabcontent membertabcontent">
 					<h3>Class of 2024</h3>
 					<div class="memberTable"></div>
 				</div>
 
-				<div id="Sophomores" class="tabcontent">
+				<div id="Sophomores" class="tabcontent membertabcontent">
 					<h3>Class of 2025</h3>
 					<div class="memberTable"></div>
 				</div>
 
-				<div id="Freshmen" class="tabcontent">
+				<div id="Freshmen" class="tabcontent membertabcontent">
 					<h3>Class of 2026</h3>
 					<div class="memberTable"></div>
 				</div>
 
-				<div id="Faculty" class="tabcontent">
+				<div id="Faculty" class="tabcontent membertabcontent">
 					<h3>Peddie Computer Science Faculty</h3>
 					<div class="memberTable"></div>
 				</div>
 
-				<div id="Alumni" class="tabcontent">
+				<div id="Alumni" class="tabcontent membertabcontent">
 					<h3>Peddie Computer Science Alumni</h3>
 					<div class="memberTable"></div>
 				</div>
-			</div>
-			<script>
-				function openMemeberTab(evt, tabName) {
-					var i, tabcontent, tablinks;
-					tabcontent = document.getElementById("members");
-					for (i = 0; i < tabcontent.length; i++) {
-						tabcontent[i].style.display = "none";
+				<script>
+					//open the tab with the corresponding name
+					function openMemberTab(evt, tabName) {
+						var i, tabcontent, tablinks;
+						tabcontent = document.getElementsByClassName("membertabcontent");
+						for (i = 0; i < tabcontent.length; i++) {
+							tabcontent[i].style.display = "none";
+						}
+						tablinks = document.getElementsByClassName("membertablinks");
+						for (i = 0; i < tablinks.length; i++) {
+							tablinks[i].className = tablinks[i].className.replace(" active", "");
+						}
+						document.getElementById(tabName).style.display = "block";
+						evt.currentTarget.className += " active";
 					}
-					tablinks = document.getElementsByClassName("tablinks");
-					for (i = 0; i < tablinks.length; i++) {
-						tablinks[i].className = tablinks[i].className.replace(" active", "");
-					}
-					document.getElementById(tabName).style.display = "block";
-					evt.currentTarget.className += " active";
-				}
 				</script>
+			</div>
 		</div>
 
-		<div id="permissions">
+		<div id="permissions" class="tabcontent maintabcontent">
 		</div>
 
 
@@ -135,11 +136,11 @@
 			//open the tab with the corresponding name
 			function openMainTab(evt, tabName) {
 				var i, tabcontent, tablinks;
-				tabcontent = document.getElementById("maintabs");
+				tabcontent = document.getElementsByClassName("maintabcontent");
 				for (i = 0; i < tabcontent.length; i++) {
 					tabcontent[i].style.display = "none";
 				}
-				tablinks = document.getElementsByClassName("tablinks");
+				tablinks = document.getElementsByClassName("maintablinks");
 				for (i = 0; i < tablinks.length; i++) {
 					tablinks[i].className = tablinks[i].className.replace(" active", "");
 				}
