@@ -61,54 +61,81 @@
 		</div>
 	</nav>
 
-
-	<div class="tabcontainer">
+	<div class="tabcontainer" id="maintabs">
 		<div class="tab">
-			<button class="tablinks active" onclick="openTab(event, 'Seniors')">Seniors</button>
-			<button class="tablinks" onclick="openTab(event, 'Juniors')">Juniors</button>
-			<button class="tablinks" onclick="openTab(event, 'Sophomores')">Sophomores</button>
-			<button class="tablinks" onclick="openTab(event, 'Freshmen')">Freshmen</button>
-			<button class="tablinks" onclick="openTab(event, 'Faculty')">Faculty</button>
-			<button class="tablinks" onclick="openTab(event, 'Alumni')">Alumni</button>
+			<button class="tablinks active" onclick="openMainTab(event, 'members')">Members</button>
+			<button class="tablinks" onclick="openMainTab(event, 'permissions')">Permissions</button>
 		</div>
 
 		<!-- Tab content -->
-		<div id="Seniors" class="tabcontent" style="display:block">
-			<h3>Class of 2023</h3>
-			<div class="memberTable">
+		<div id="members" class="tabcontent" style="display:block">
+			<div class="tabcontainer">
+				<div class="tab">
+					<button class="tablinks active" onclick="openMemberTab(event, 'Seniors')">Seniors</button>
+					<button class="tablinks" onclick="openMemberTab(event, 'Juniors')">Juniors</button>
+					<button class="tablinks" onclick="openMemeberTab(event, 'Sophomores')">Sophomores</button>
+					<button class="tablinks" onclick="openMemeberTab(event, 'Freshmen')">Freshmen</button>
+					<button class="tablinks" onclick="openMemeberTab(event, 'Faculty')">Faculty</button>
+					<button class="tablinks" onclick="openMemeberTab(event, 'Alumni')">Alumni</button>
+				</div>
+
+				<!-- Tab content -->
+				<div id="Seniors" class="tabcontent">
+					<h3>Class of 2023</h3>
+					<div class="memberTable"></div>
+				</div>
+
+				<div id="Juniors" class="tabcontent">
+					<h3>Class of 2024</h3>
+					<div class="memberTable"></div>
+				</div>
+
+				<div id="Sophomores" class="tabcontent">
+					<h3>Class of 2025</h3>
+					<div class="memberTable"></div>
+				</div>
+
+				<div id="Freshmen" class="tabcontent">
+					<h3>Class of 2026</h3>
+					<div class="memberTable"></div>
+				</div>
+
+				<div id="Faculty" class="tabcontent">
+					<h3>Peddie Computer Science Faculty</h3>
+					<div class="memberTable"></div>
+				</div>
+
+				<div id="Alumni" class="tabcontent">
+					<h3>Peddie Computer Science Alumni</h3>
+					<div class="memberTable"></div>
+				</div>
 			</div>
+			<script>
+				function openMemeberTab(evt, tabName) {
+					var i, tabcontent, tablinks;
+					tabcontent = document.getElementById("members");
+					for (i = 0; i < tabcontent.length; i++) {
+						tabcontent[i].style.display = "none";
+					}
+					tablinks = document.getElementsByClassName("tablinks");
+					for (i = 0; i < tablinks.length; i++) {
+						tablinks[i].className = tablinks[i].className.replace(" active", "");
+					}
+					document.getElementById(tabName).style.display = "block";
+					evt.currentTarget.className += " active";
+				}
+				</script>
 		</div>
 
-		<div id="Juniors" class="tabcontent">
-			<h3>Class of 2024</h3>
-			<div class="memberTable"></div>
+		<div id="permissions">
 		</div>
 
-		<div id="Sophomores" class="tabcontent">
-			<h3>Class of 2025</h3>
-			<div class="memberTable"></div>
-		</div>
-
-		<div id="Freshmen" class="tabcontent">
-			<h3>Class of 2026</h3>
-			<div class="memberTable"></div>
-		</div>
-
-		<div id="Faculty" class="tabcontent">
-			<h3>Peddie Computer Science Faculty</h3>
-			<div class="memberTable"></div>
-		</div>
-
-		<div id="Alumni" class="tabcontent">
-			<h3>Peddie Computer Science Alumni</h3>
-			<div class="memberTable"></div>
-		</div>
 
 		<script>
 			//open the tab with the corresponding name
-			function openTab(evt, tabName) {
+			function openMainTab(evt, tabName) {
 				var i, tabcontent, tablinks;
-				tabcontent = document.getElementsByClassName("tabcontent");
+				tabcontent = document.getElementById("maintabs");
 				for (i = 0; i < tabcontent.length; i++) {
 					tabcontent[i].style.display = "none";
 				}
