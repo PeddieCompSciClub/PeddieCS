@@ -12,11 +12,11 @@ function verifyLogin() {
                     resolve(res.user);
                 } else if (res.message == "new-user") {
                     console.log("new user");
-                    window.location.href = `new-user.html?redirect=${encodeURIComponent(window.location)}`;
+                    window.location.href = `/user/new-user.html?redirect=${encodeURIComponent(window.location)}`;
                     reject(new Error('User is not authenticated.'));
                 } else {
                     console.log("failed to validate user");
-                    window.location.href = `login.html?redirect=${encodeURIComponent(window.location)}`;
+                    window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
                     reject(new Error('User is not authenticated.'));
                 }
             });
