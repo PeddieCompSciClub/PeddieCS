@@ -36,19 +36,24 @@
     grid-template-columns: 20% auto;
     grid-template-rows: 1.5em auto;
     font-size: 20px;
+    height: calc(100vh - 169px); /* adjust as needed based on your navbar height */
 }
 
 #members .search{
-    padding-left: 0.5em;
+    padding: 0 0.5em;
     border-radius: 0;
-    border: 0;
     cursor: text !important;
     background-color: var(--table) !important;
+    border-top: 1px solid var(--hover) !important;
+    border-bottom: 1px solid var(--hover) !important;
+    text-align: right;
 }
 
 #members .memberlist{
     display:flex;
     flex-direction: column;
+    height:100%;
+    background-color: var(--table);
 }
 
 #members .memberbtn{
@@ -67,15 +72,13 @@
 }
 
 #members .profile{
+    padding-top: 1em;
     grid-column: 2;
-    grid-row:1/3;
+    grid-row:1;
     background-color: #ff00ff44;
-}
-/* 
-#members .profile .icon{
-    grid-column: 1/3;
+    font-size: 0.8em;
 }
 
-#members .memberItem .container{
-    margin:auto;
-} */
+#members #university{
+    display: block;
+}
