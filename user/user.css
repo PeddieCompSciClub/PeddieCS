@@ -8,6 +8,14 @@
 
     --btn:#f1f1f1;
     --btn-border: #ccc;
+
+    --btn-red:#ffbaba;
+    --btn-red-border:#e54b4b;
+    --btn-red-hover:#eda1a1;
+
+    --btn-green:#b8ffb8;
+    --btn-green-border:#4ce64c;
+    --btn-green-hover:#a1eda1;
 }
     
 

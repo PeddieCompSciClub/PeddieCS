@@ -83,12 +83,12 @@
     min-width: 0 !important;
 }
 .delete {
-    border-color:#e54b4b;
-    background-color:#ffbaba;
+    border-color:var(--btn-red-border);
+    background-color:var(--btn-red);
 }
 .delete:hover {
-    background-color:#EDA1A1;
-    border-color:#e54b4b !important;
+    background-color:var(--btn-red-hover);
+    border-color:var(--btn-red-border) !important;
 }
 .confirmDelete{
     width:100vw;

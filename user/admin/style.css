@@ -72,13 +72,27 @@
 }
 
 #members .profile{
-    padding-top: 1em;
+    padding: 1em;
     grid-column: 2;
     grid-row:1;
-    background-color: #ff00ff44;
     font-size: 0.8em;
+    /* grid-template-columns: auto 0 auto; */
 }
 
 #members #university{
     display: block;
+}
+
+#members .options{
+    row-gap:0.2em;
+}
+#members .update{
+    grid-column:1/-1;
+    width:97.5% !important;
+    font-size: 1em;
+    background-color: var(--btn-green);
+    border-color: var(--btn-green-border);
+}
+#members .update:hover{
+    background-color: var(--btn-green-hover);
 }

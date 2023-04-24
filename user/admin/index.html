@@ -26,10 +26,11 @@
 	<link rel="icon" href="/favicon.ico">
 
 	<script src="/user/verifylogin.js"></script>
+	<script src="admin.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="verifyLogin().then(function(user){}).catch(function(error){console.error(error)})">
+<body onload="verifyLogin().then(function(user){load(user)}).catch(function(error){console.error(error)})">
 
 	<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
 		<!-- Main Navbar -->
@@ -86,26 +87,26 @@
 					<!-- Tab content -->
 					<div id="Seniors" class="tabcontent membertabcontent" style="display:block">
 						<div class="memberlist">
-							<button class="memberbtn">Test1</button>
+							<!-- <button class="memberbtn">Test1</button>
 							<button class="memberbtn">Test2</button>
 							<button class="memberbtn">Test3</button>
-							<button class="memberbtn">Test4</button>
+							<button class="memberbtn">Test4</button> -->
 						</div>
 					</div>
 					<div id="Juniors" class="tabcontent membertabcontent">
-
+						<div class="memberlist"></div>
 					</div>
 					<div id="Sophomores" class="tabcontent membertabcontent">
-
+						<div class="memberlist"></div>
 					</div>
 					<div id="Freshmen" class="tabcontent membertabcontent">
-
+						<div class="memberlist"></div>
 					</div>
 					<div id="Alumni" class="tabcontent membertabcontent">
-
+						<div class="memberlist"></div>
 					</div>
 					<div id="Faculty" class="tabcontent membertabcontent">
-
+						<div class="memberlist"></div>
 					</div>
 
 					<div class="profile">
@@ -114,8 +115,7 @@
 								<div class="container">
 									<img id="image" src="/members/user-images/test.jpg" alt="member image"
 										onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-									<button class="overlay" onclick="document.getElementById('image-file').click()">Change Profile
-										Image</button>
+									<button class="overlay" onclick="document.getElementById('image-file').click()">Change Profile Image</button>
 									<input type="file" id='image-file' style="display: none;" onchange="loadFile(event)" name="img"
 										accept="image/*">
 									<script>
@@ -132,27 +132,25 @@
 								</ul>
 							</div>
 							<div class="options">
-								<button class="option memberItem" id="visibility" onclick="updateVisibility()">Make
-									Private</button>
+								<button class="option memberItem" id="visibility" onclick="updateVisibility()">Make Private</button>
 								<button class="delete option memberItem" id="delete"
-									onclick="document.getElementById('confirmDelete').style = 'display:block'">Delete
-									Account</button>
+									onclick="document.getElementById('confirmDelete').style = 'display:block'">Delete Account</button>
 								<div class="confirmDelete" id="confirmDelete">
 									<div class="container">
 										<h3>Are you sure?</h3>
 										<div class="options">
 											<button class="option memberItem"
-												onclick="document.getElementById('confirmDelete').style = 'display:none'">Keep
-												Account</button>
+												onclick="document.getElementById('confirmDelete').style = 'display:none'">Keep Account</button>
 											<button class="delete option memberItem" onclick="deleteUser()">Delete</button>
 										</div>
 									</div>
 								</div>
+								<button class="update option memberItem">Apply Changes</button>
 							</div>
 						</div>
 						<div class="bio">
 							<div>
-								<h3>Bio</h3>
+								<h3></h3>
 								<input type="text" class="input" id="university" maxlength="60" placeholder="University">
 								<textarea id="bio" class="input" name="bio" rows="8" maxlength="1000" placeholder="Bio"></textarea>
 								<div class="bioStatus">
