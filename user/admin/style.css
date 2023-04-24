@@ -10,7 +10,7 @@
 }
 
 .tab button:hover {
-    background-color: var(--table);
+    background-color: var(--hover);
 }
 
 /* Create an active/current tablink class */
@@ -21,3 +21,61 @@
 .tabcontainer #members{
     padding:0;
 }
+.tabcontent{
+    border: 0 solid var(--table);
+}
+
+#members .tabcontent{
+    padding:0;
+    grid-column: 1;
+}
+
+#members .memberdisplay{
+    padding:0;
+    display: grid;
+    grid-template-columns: 20% auto;
+    grid-template-rows: 1.5em auto;
+    font-size: 20px;
+}
+
+#members .search{
+    padding-left: 0.5em;
+    border-radius: 0;
+    border: 0;
+    cursor: text !important;
+    background-color: var(--table) !important;
+}
+
+#members .memberlist{
+    display:flex;
+    flex-direction: column;
+}
+
+#members .memberbtn{
+    border:0;
+    width:100%;
+    height: 1.5em;
+    background-color: var(--table);
+    cursor: pointer;
+    transition: 0.3s;
+}
+#members .memberbtn:hover{
+    background-color: var(--hover);
+}
+#members .memberbtn.active{
+    background-color: var(--select);
+}
+
+#members .profile{
+    grid-column: 2;
+    grid-row:1/3;
+    background-color: #ff00ff44;
+}
+/* 
+#members .profile .icon{
+    grid-column: 1/3;
+}
+
+#members .memberItem .container{
+    margin:auto;
+} */

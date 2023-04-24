@@ -21,6 +21,7 @@
 
 	<link rel="stylesheet" href="/user/user.css">
 	<link rel="stylesheet" href="/members/style.css">
+	<link rel="stylesheet" href="/user/profile.css">
 	<link rel="stylesheet" href="style.css">
 	<link rel="icon" href="/favicon.ico">
 
@@ -71,43 +72,88 @@
 		<div id="members" class="tabcontent maintabcontent" style="display:block">
 			<div class="tabcontainer">
 				<div class="tab">
-					<button class="tablinks membertablinks active" onclick="openMemberTab(event, 'Seniors')">Seniors</button>
+					<button class="tablinks membertablinks active"
+						onclick="openMemberTab(event, 'Seniors')">Seniors</button>
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Juniors')">Juniors</button>
-					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Sophomores')">Sophomores</button>
+					<button class="tablinks membertablinks"
+						onclick="openMemberTab(event, 'Sophomores')">Sophomores</button>
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Freshmen')">Freshmen</button>
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Alumni')">Alumni</button>
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Faculty')">Faculty</button>
 				</div>
 
-				<!-- Tab content -->
-				<div id="Seniors" class="tabcontent membertabcontent" style="display:block">
-					<h3>Class of 2023</h3>
-					<div class="memberTable"></div>
-				</div>
+				<div class="memberdisplay">
+					<input class="search memberbtn">
 
-				<div id="Juniors" class="tabcontent membertabcontent">
-					<h3>Class of 2024</h3>
-					<div class="memberTable"></div>
-				</div>
+					<!-- Tab content -->
+					<div id="Seniors" class="tabcontent membertabcontent" style="display:block">
+						<div class="memberlist">
+							<button class="memberbtn">Test1</button>
+							<button class="memberbtn">Test2</button>
+							<button class="memberbtn">Test3</button>
+							<button class="memberbtn">Test4</button>
+						</div>
+					</div>
+					<div id="Juniors" class="tabcontent membertabcontent">
 
-				<div id="Sophomores" class="tabcontent membertabcontent">
-					<h3>Class of 2025</h3>
-					<div class="memberTable"></div>
-				</div>
+					</div>
+					<div id="Sophomores" class="tabcontent membertabcontent">
 
-				<div id="Freshmen" class="tabcontent membertabcontent">
-					<h3>Class of 2026</h3>
-					<div class="memberTable"></div>
-				</div>
+					</div>
+					<div id="Freshmen" class="tabcontent membertabcontent">
 
-				<div id="Faculty" class="tabcontent membertabcontent">
-					<h3>Peddie Computer Science Faculty</h3>
-					<div class="memberTable"></div>
-				</div>
+					</div>
+					<div id="Alumni" class="tabcontent membertabcontent">
 
-				<div id="Alumni" class="tabcontent membertabcontent">
-					<h3>Peddie Computer Science Alumni</h3>
-					<div class="memberTable"></div>
+					</div>
+					<div id="Faculty" class="tabcontent membertabcontent">
+
+					</div>
+
+					<div class="profile">
+						<div class="icon" id="icon">
+							<div class="memberItem">
+								<div class="container">
+									<img id="image" src="/members/user-images/test.jpg" alt="member image"
+										onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+									<button class="overlay"
+										onclick="document.getElementById('image-file').click()">Change Profile
+										Image</button>
+									<input type="file" id='image-file' style="display: none;" onchange="loadFile(event)"
+										name="img" accept="image/*">
+									<script>
+										var loadFile = function (event) {
+											var image = document.getElementById('image');
+											image.src = URL.createObjectURL(event.target.files[0]);
+											updateImage();
+										};
+									</script>
+								</div>
+								<a id="name"></a>
+								<ul id="info">
+								</ul>
+							</div>
+							<div class="options">
+								<button class="option memberItem" id="visibility" onclick="updateVisibility()">Make
+									Private</button>
+								<button class="delete option memberItem" id="delete"
+									onclick="document.getElementById('confirmDelete').style = 'display:block'">Delete
+									Account</button>
+								<div class="confirmDelete" id="confirmDelete">
+									<div class="container">
+										<h3>Are you sure?</h3>
+										<div class="options">
+											<button class="option memberItem"
+												onclick="document.getElementById('confirmDelete').style = 'display:none'">Keep
+												Account</button>
+											<button class="delete option memberItem"
+												onclick="deleteUser()">Delete</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<script>
 					//open the tab with the corresponding name
