@@ -233,7 +233,7 @@ p {
 }
 
 /* hides navbar when width<1000px */
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
     nav div {
         font-size: 32px;
     }
@@ -245,4 +245,4 @@ p {
     .navbar-short {
         display: flex;
     }
-}
+} */
