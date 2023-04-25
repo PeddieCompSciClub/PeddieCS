@@ -44,6 +44,6 @@ function getGrade(year) {
 //get the current school year (the graduation class of the seniors)
 function getCurrentYear() {
     const d = new Date();
-    let year = d.getFullYear() + (d.getMonth() > 6 ? 1 : 0);
+    let year = d.getFullYear() + (d.getMonth() > 2 ? 1 : 0);
     return year;
 }
