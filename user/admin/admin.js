@@ -31,7 +31,7 @@ function loadmembers() {
                 var members = document.getElementsByClassName("memberbtn");
                 var search = document.getElementById("membersearch").value;
                 for (var i = 0; i < members.length; i++) {
-                    if (members[i].innerText.includes(search) || members[i].id.includes(search)) {
+                    if (members[i].innerText.includes(search) || members[i].id.substring(8).includes(search)) {
                         console.log(members[i]);
                     }
                 }
