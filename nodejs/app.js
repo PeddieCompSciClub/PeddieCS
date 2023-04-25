@@ -81,7 +81,7 @@ app.get('/getAllMembers', (req, res) => {
 
     con.connect(function (err) {
         if (err) throw err;
-        con.query("SELECT first_name, last_name, email, year FROM members WHERE public>=1", function (err, result, fields) {
+        con.query("SELECT first_name, last_name, email, year FROM members WHERE public>=1  AND FIND_IN_SET('admin', permissions) > 0", function (err, result, fields) {
             if (err) throw err;
             res.json({ "error": false, "message": result });
             return res.end();
@@ -521,7 +521,7 @@ function verifyCredential(token, callback) {
                 });
                 con.connect(function (err) {
                     if (err) throw err;
-                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}' AND FIND_IN_SET('admin', permissions) > 0`, function (err, result, fields) {
+                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
                             callback(true, payload['email']);
