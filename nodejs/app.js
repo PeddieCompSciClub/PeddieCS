@@ -58,7 +58,7 @@ function getEmailYear(email) {
 }
 
 //returns the username from email
-function getUsername(email){
+function getUsername(email) {
     return email.substring(0, email.indexOf("@"));
 }
 
@@ -320,7 +320,6 @@ app.post('/addMember', function (req, res) {
     verify().catch(console.error);
 });
 
-
 //updates the user's bio
 app.post('/updateBio', (req, res) => {
     const token = req.body.token;
@@ -463,7 +462,40 @@ app.post('/deleteUser', (req, res) => {
 });
 
 
-//verify's user credential and callbacks with email
+//admin tools
+//return all member data
+app.get('/admin/getAllMembers', (req, res) => {
+    const token = req.body.token;
+    verifyCredential(token, function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+
+            con.connect(function (err) {
+                if (err) throw err;
+                con.query("SELECT * FROM members", function (err, result, fields) {
+                    if (err) throw err;
+                    res.json({ "error": false, "message": result });
+                    return res.end();
+                })
+                con.end();
+            })
+        }
+    });
+});
+
+
+
+//verify user credential and callbacks with email
 function verifyCredential(token, callback) {
     const CLIENT_ID = secure.google.clientId;
     const { OAuth2Client } = require('google-auth-library');
@@ -489,7 +521,53 @@ function verifyCredential(token, callback) {
                 });
                 con.connect(function (err) {
                     if (err) throw err;
-                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
+                    con.query(`SELECT email FROM members WHERE email = '${payload['email']}' AND FIND_IN_SET('admin', permissions) > 0`, function (err, result, fields) {
+                        if (err) throw err;
+                        if (result.length > 0) {
+                            callback(true, payload['email']);
+                        } else {
+                            callback(false);
+                        }
+                    });
+                    con.end();
+                })
+            }
+
+        } catch (error) {
+            console.error(error);
+            callback(false);
+        }
+    }
+    verify().catch(console.error);
+}
+
+//verifys admin credential
+function verifyAdminCredential(token, callback) {
+    const CLIENT_ID = secure.google.clientId;
+    const { OAuth2Client } = require('google-auth-library');
+    const client = new OAuth2Client(CLIENT_ID);
+    async function verify() {
+        try {
+            const ticket = await client.verifyIdToken({
+                idToken: token,
+                audience: CLIENT_ID
+            });
+            const payload = ticket.getPayload();
+
+            if (payload['hd'] != 'peddie.org') {
+                callback(false);
+            } else {
+                //check if the user is already registered in the database
+                var con = mysql.createConnection({
+                    host: "localhost",
+                    user: "admincs",
+                    password: "BeatBlair1864",
+                    database: "peddieCS",
+                    port: 3306
+                });
+                con.connect(function (err) {
+                    if (err) throw err;
+                    con.query(`SELECT email FROM members WHERE email = '${payload['email']} AND FIND_IN_SET('admin', permissions) > 0'`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
                             callback(true, payload['email']);

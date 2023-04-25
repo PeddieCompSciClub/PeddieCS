@@ -10,7 +10,7 @@ function load(user){
 }
 
 function loadmembers(){
-    $.get("https://peddiecs.peddie.org/nodejs/getAllMembers", {
+    $.get("https://peddiecs.peddie.org/nodejs/admin/getAllMembers", {
         }, function (res) {
             if (res.message == "failed") {
                 console.log("Failed to get member data")
