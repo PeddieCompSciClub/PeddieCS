@@ -9,6 +9,7 @@ function load(user){
     }
 }
 
+var memberSaved = true;
 function loadmembers(){
     console.log(getCookie('credential'));
     $.get("https://peddiecs.peddie.org/nodejs/admin/getAllMembers", {
@@ -26,7 +27,13 @@ function loadmembers(){
                     document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += button;
                 }
 
+                //set active view active
                 document.getElementById('members_compsciclub@peddie.org').classList.add('active');
+                document.getElementById("membersearch").addEventListener("input", function () {
+                    var members = document.getElementsByClassName("memberbtn");
+                    var search = document.getElementById("membersearch").value;
+                    console.log(value);
+                });
             }
         });
 }
