@@ -30,9 +30,9 @@ function loadmembers(){
                 document.getElementById("membersearch").addEventListener("input", function () {
                     var members = document.getElementsByClassName("memberbtn");
                     var search = document.getElementById("membersearch").value;
-                    members.forEach(member => {
-                        console.log(member);
-                    });
+                    for(var i=0; i<members.length; i++){
+                        console.log(members[i]);
+                    }
                 });
             }
         });
