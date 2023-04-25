@@ -33,6 +33,10 @@ function loadmembers() {
                 for (var i = 0; i < members.length; i++) {
                     if (members[i].innerText.includes(search) || members[i].id.substring(8).includes(search)) {
                         console.log(members[i]);
+                        members[i].style.display='block';
+                    }
+                    else{
+                        members[i].style.display='none';
                     }
                 }
             });
