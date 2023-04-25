@@ -10,6 +10,7 @@ function load(user){
 }
 
 function loadmembers(){
+    console.log(getCookie('credential'));
     $.get("https://peddiecs.peddie.org/nodejs/admin/getAllMembers", {
             token: getCookie('credential')
         }, function (res) {
