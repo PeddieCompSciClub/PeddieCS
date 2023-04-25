@@ -46,6 +46,7 @@
     background-color: var(--table) !important;
     border-top: 1px solid var(--hover) !important;
     border-bottom: 1px solid var(--hover) !important;
+    display:block !important;
     text-align: right;
 }
 
