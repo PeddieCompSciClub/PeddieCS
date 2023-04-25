@@ -1,5 +1,4 @@
 function load(user){
-    console.log(user);
     const permissions = user.permissions.replace(' ','').split(',');
     if(permissions.includes('admin')){
         loadmembers(user);
@@ -11,14 +10,13 @@ function load(user){
 
 var memberSaved = true;
 function loadmembers(){
-    console.log(getCookie('credential'));
     $.get("https://peddiecs.peddie.org/nodejs/admin/getAllMembers", {
             token: getCookie('credential')
         }, function (res) {
             if (res.message == "failed") {
                 console.log("Failed to get member data")
             } else {
-                console.log(res);
+                // console.log(res);
 
                 //add members to button list
                 for(let i=0; i<res.message.length; i++){
@@ -32,7 +30,9 @@ function loadmembers(){
                 document.getElementById("membersearch").addEventListener("input", function () {
                     var members = document.getElementsByClassName("memberbtn");
                     var search = document.getElementById("membersearch").value;
-                    console.log(search);
+                    members.forEach(member => {
+                        console.log(member);
+                    });
                 });
             }
         });
