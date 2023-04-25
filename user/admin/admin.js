@@ -22,11 +22,11 @@ function loadmembers(){
                 //add members to button list
                 for(let i=0; i<res.message.length; i++){
                     var user = res.message[i];
-                    var button = `<button class="memberbtn" id="${user.email}">${user.first_name+' '+user.last_name}</button>`;
+                    var button = `<button class="memberbtn" id="members_${user.email}">${user.first_name+' '+user.last_name}</button>`;
                     document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += button;
                 }
 
-                document.getElementById('compsciclub@peddie.org').classList.add('active');
+                document.getElementById('members_compsciclub@peddie.org').classList.add('active');
             }
         });
 }
