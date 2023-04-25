@@ -23,8 +23,20 @@ function loadmembers(){
                 for(let i=0; i<res.message.length; i++){
                     var user = res.message[i];
                     var button = `<button class="memberbtn">${user.first_name+' '+user.last_name}</button>`;
-                    document.getElementById("Seniors").getElementsByClassName("memberlist")[0].innerHTML += button;
+                    document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += button;
                 }
             }
         });
+}
+
+function getGrade(year) {
+    const d = new Date();
+    let gradYear = getCurrentYear();
+    if (year == 0) return "Faculty";
+    if (year < gradYear) return "Alumni";
+    if (year == gradYear) return "Seniors";
+    if (year - 1 == gradYear) return "Juniors";
+    if (year - 2 == gradYear) return "Sophomores";
+    if (year - 3 == gradYear) return "Freshmen";
+    return year;
 }
