@@ -29,9 +29,9 @@ function loadmembers() {
             document.getElementById('members_compsciclub@peddie.org').classList.add('active');
             document.getElementById("membersearch").addEventListener("input", function () {
                 var members = document.getElementsByClassName("memberbtn");
-                var search = document.getElementById("membersearch").value;
+                var search = document.getElementById("membersearch").value.toLowerCase();
                 for (var i = 0; i < members.length; i++) {
-                    if (members[i].innerText.includes(search) || members[i].id.substring(8).includes(search)) {
+                    if (members[i].innerText.toLowerCase().includes(search) || members[i].id.substring(8).includes(search)) {
                         console.log(members[i]);
                         members[i].style.display='block';
                     }
