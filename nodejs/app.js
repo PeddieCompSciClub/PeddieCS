@@ -466,6 +466,7 @@ app.post('/deleteUser', (req, res) => {
 //return all member data
 app.get('/admin/getAllMembers', (req, res) => {
     const token = req.query.token;
+    console.log(token);
     verifyCredential(token,'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
