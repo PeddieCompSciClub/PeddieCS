@@ -50,6 +50,7 @@ function loadmembers() {
 function loadmember(email){
     console.log(memberData);
     const user = memberData.filter(function(item){return item.email == email;})[0];
+    memberProfile.getElementById("name") = user.first_name + ' ' + user.last_name;
 }
 
 function getGrade(year) {
