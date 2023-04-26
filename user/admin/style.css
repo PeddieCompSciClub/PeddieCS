@@ -97,5 +97,5 @@
     border-color: var(--btn-green-border) !important;
 }
 #members .updatevalid:hover{
-    background-color: var(--btn-green-hover);
+    background-color: var(--btn-green-hover)!important;
 }
