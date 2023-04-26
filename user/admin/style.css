@@ -96,6 +96,6 @@
     background-color: var(--btn-green) !important;
     border-color: var(--btn-green-border) !important;
 }
-#members .update:hover{
+#members .updatevalid:hover{
     background-color: var(--btn-green-hover);
 }
