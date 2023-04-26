@@ -42,12 +42,12 @@ function loadmembers() {
             });
 
             document.getElementById('members_compsciclub').classList.add('active');
-            loadMember('compsciclub@peddie.org');
+            loadMember();
         }
     });
 }
 
-function loadmember(email){
+function loadmember(){
     console.log(memberData);
 }
 
