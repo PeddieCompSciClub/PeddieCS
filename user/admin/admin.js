@@ -9,6 +9,7 @@ function load(user) {
 }
 
 var memberSaved = true;
+var memberData;
 function loadmembers() {
     $.get("https://peddiecs.peddie.org/nodejs/admin/getAllMembers", {
         token: getCookie('credential')
@@ -16,7 +17,7 @@ function loadmembers() {
         if (res.message == "failed") {
             console.log("Failed to get member data")
         } else {
-            // console.log(res);
+            oldMemberData = res.message;
 
             //add members to button list
             for (let i = 0; i < res.message.length; i++) {
@@ -42,6 +43,10 @@ function loadmembers() {
             });
         }
     });
+}
+
+function loadmember(email){
+    console.log(memberData);
 }
 
 function getGrade(year) {
