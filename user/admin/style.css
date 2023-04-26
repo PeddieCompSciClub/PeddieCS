@@ -63,7 +63,7 @@
     height: 1.5em;
     background-color: var(--table);
     cursor: pointer;
-    transition: 0.3s;
+    /* transition: 0.3s; */
 }
 #members .memberbtn:hover{
     background-color: var(--hover);
