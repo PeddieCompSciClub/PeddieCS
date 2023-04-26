@@ -53,7 +53,7 @@ function loadmember(email){
     memberProfile.querySelector('#email').innerText = user.email;
     memberProfile.querySelector('#image').src = `/members/user-images/${email.substring(0,user.email.indexOf("@peddie.org"))}`
     memberProfile.querySelector('#university').value = decodeURIComponent(user.university);
-    memberProfile.querySelector('#bio').innerHTML = decodeURIComponent(json.bio).replace(/\n/g, `\n`);
+    memberProfile.querySelector('#bio').innerHTML = decodeURIComponent(user.bio).replace(/\n/g, `\n`);
 }
 
 function getGrade(year) {
