@@ -48,7 +48,7 @@ function loadmembers() {
 
 function loadmember(email){
     console.log(memberData);
-    const user = arr.filter(function(item){
+    const user = memberData.filter(function(item){
         return item.email == email;         
     });
     console.log(user);
