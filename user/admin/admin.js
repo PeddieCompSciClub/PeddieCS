@@ -42,7 +42,7 @@ function loadmembers() {
             });
 
             document.getElementById('members_compsciclub').classList.add('active');
-            loadMember();
+            loadmember();
         }
     });
 }
