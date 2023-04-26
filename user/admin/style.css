@@ -92,9 +92,9 @@
     width:97.5% !important;
     font-size: 1em;
 }
-#members .update .updatevalid{
-    background-color: var(--btn-green);
-    border-color: var(--btn-green-border);
+#members .updatevalid{
+    background-color: var(--btn-green) !important;
+    border-color: var(--btn-green-border) !important;
 }
 #members .update:hover{
     background-color: var(--btn-green-hover);
