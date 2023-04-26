@@ -40,6 +40,14 @@ function loadmembers() {
                 }
             });
 
+            //set listeners for profile
+            const memberProfile = document.getElementById('memberprofile');
+            memberProfile.querySelector('#name').addEventListener('input', function(){
+                document.getElementById('membersearch').classList.add('updatevalid');
+            })
+
+
+            //default compsciclub@peddie.org
             document.getElementById('members_compsciclub').classList.add('active');
             loadmember('compsciclub@peddie.org');
         }
