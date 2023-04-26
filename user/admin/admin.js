@@ -50,7 +50,7 @@ function loadmember(email){
     console.log(memberData);
     const user = memberData.filter(function(item){return item.email == email;})[0];
     const memberProfile = document.getElementById("memberprofile");
-    memberProfile.getElementById("name") = user.first_name + ' ' + user.last_name;
+    console.log(memberProfile.querySelector("#name"));
 }
 
 function getGrade(year) {
