@@ -49,8 +49,10 @@ function loadmembers() {
 function loadmember(email){
     console.log(memberData);
     const user = memberData.filter(function(item){return item.email == email;})[0];
-    const memberProfile = document.getElementById("memberprofile");
-    console.log(memberProfile.querySelector("#name"));
+    const memberProfile = document.getElementById('memberprofile');
+    memberProfile.querySelector('#name').innerText = user.first_name + ' ' + user.last_name;
+    memberProfile.querySelector('#email').innerText = user.email;
+    memberProfile.querySelector('#image').src = `/members/user-images/${email.substring(0,user.email.indexOf("@peddie.org"))}`
 }
 
 function getGrade(year) {

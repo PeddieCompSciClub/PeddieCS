@@ -117,7 +117,7 @@
 							<div class="memberItem">
 								<div class="container">
 									<img id="image" src="/members/user-images/test.jpg" alt="member image"
-										onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+										onError="this.src='/members/user-images/missing.jpg';">
 									<button class="overlay" onclick="document.getElementById('image-file').click()">Change Profile Image</button>
 									<input type="file" id='image-file' style="display: none;" onchange="loadFile(event)" name="img"
 										accept="image/*">
@@ -131,7 +131,7 @@
 								</div>
 								<a id="name">CompSci Club</a>
 								<ul id="info">
-									<li>compsciclub@peddie.org</li>
+									<li id="email">compsciclub@peddie.org</li>
 								</ul>
 							</div>
 							<div class="options">
