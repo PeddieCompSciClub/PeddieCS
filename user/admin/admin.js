@@ -10,6 +10,7 @@ function load(user) {
 
 var memberSaved = true;
 var memberData;
+const memberProfile = document.getElementById("memberprofile");
 function loadmembers() {
     $.get("https://peddiecs.peddie.org/nodejs/admin/getAllMembers", {
         token: getCookie('credential')
@@ -48,10 +49,7 @@ function loadmembers() {
 
 function loadmember(email){
     console.log(memberData);
-    const user = memberData.filter(function(item){
-        return item.email == email;         
-    });
-    console.log(user);
+    const user = memberData.filter(function(item){return item.email == email;})[0];
 }
 
 function getGrade(year) {
