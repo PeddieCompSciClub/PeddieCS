@@ -43,7 +43,7 @@ function loadmembers() {
             //set listeners for profile
             const memberProfile = document.getElementById('memberprofile');
             memberProfile.querySelector('#university').addEventListener('input', function(){
-                document.getElementById('membersearch').classList.add('updatevalid');
+                document.getElementById('updatememberprofile').classList.add('updatevalid');
             })
 
 
