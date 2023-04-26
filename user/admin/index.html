@@ -79,6 +79,7 @@
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Seniors')">Seniors</button>
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Alumni')">Alumni</button>
 					<button class="tablinks membertablinks active" onclick="openMemberTab(event, 'Faculty')">Faculty</button>
+					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'all')">All</button>
 				</div>
 
 				<div class="memberdisplay">
@@ -188,7 +189,8 @@
 						var i, tabcontent, tablinks;
 						tabcontent = document.getElementsByClassName("membertabcontent");
 						for (i = 0; i < tabcontent.length; i++) {
-							tabcontent[i].style.display = "none";
+							if(tabName!='all')tabcontent[i].style.display = "none";
+							else tabcontent[i].style.display = "block";
 						}
 						tablinks = document.getElementsByClassName("membertablinks");
 						for (i = 0; i < tablinks.length; i++) {
