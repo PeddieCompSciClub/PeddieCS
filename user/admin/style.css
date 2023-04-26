@@ -34,7 +34,7 @@
     padding:0;
     display: grid;
     grid-template-columns: 20% auto;
-    grid-template-rows: 1.5em repeat(4,min-content) max-content;
+    grid-template-rows: 1.5em repeat(6,min-content);
     font-size: 20px;
     height: calc(100vh - 169px); /* adjust as needed based on your navbar height */
 }
