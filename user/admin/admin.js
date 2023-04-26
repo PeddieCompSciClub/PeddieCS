@@ -32,7 +32,6 @@ function loadmembers() {
                 var search = document.getElementById("membersearch").value.toLowerCase();
                 for (var i = 0; i < members.length; i++) {
                     if (members[i].innerText.toLowerCase().includes(search) || members[i].id.substring(8).includes(search)) {
-                        console.log(members[i]);
                         members[i].style.display='block';
                     }
                     else{
@@ -42,13 +41,17 @@ function loadmembers() {
             });
 
             document.getElementById('members_compsciclub').classList.add('active');
-            loadmember();
+            loadmember('compsciclub@peddie.org');
         }
     });
 }
 
-function loadmember(){
+function loadmember(email){
     console.log(memberData);
+    const user = arr.filter(function(item){
+        return item.email == email;         
+    });
+    console.log(user);
 }
 
 function getGrade(year) {
