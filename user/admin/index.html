@@ -179,7 +179,7 @@
 								<p>Your changes will not be saved</p>
 								<div class="options">
 									<button class="updatevalid option memberItem" onclick="document.getElementById('confirmExit').style='display:none'">Apply Changes</button>
-									<button class="delete option memberItem" onclick="document.getElementById('confirmExit').style = 'display:none'; requireMemberSave(false); ">Exit</button>
+									<button class="delete option memberItem" onclick="var popup = document.getElementById('confirmExit'); popup.style='display:none'; requireMemberSave(false); changeMember(popup.email); popup.email=null;">Exit</button>
 								</div>
 							</div>
 						</div>
