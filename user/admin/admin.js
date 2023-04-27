@@ -82,6 +82,7 @@ function changeMember(email){
         loadMember(email);
     }
     else{
+        document.getElementById('confirmExit').email = email;
         document.getElementById('confirmExit').style = 'display:block';
     }
 }
