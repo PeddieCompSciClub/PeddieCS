@@ -87,6 +87,11 @@ function changeMember(email){
     }
 }
 
+function applyMemberChanges(){
+    console.log("saving member data");
+    await $.get("https://peddiecs.peddie.org/nodejs/",{},function(res){console.log(res)});
+}
+
 function getGrade(year) {
     const d = new Date();
     let gradYear = getCurrentYear();
