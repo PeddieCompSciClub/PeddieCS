@@ -42,8 +42,8 @@ function loadmembers() {
 
             //set listeners for profile
             const memberProfile = document.getElementById('memberprofile');
-            memberProfile.querySelector('#university').addEventListener('input', function(){requireMemberSave();})
-            memberProfile.querySelector('#bio').addEventListener('input', function(){requireMemberSave();})
+            memberProfile.querySelector('#university').addEventListener('input', function(){requireMemberSave(true);})
+            memberProfile.querySelector('#bio').addEventListener('input', function(){requireMemberSave(true);})
 
             //default compsciclub@peddie.org
             document.getElementById('members_compsciclub').classList.add('active');
@@ -51,9 +51,14 @@ function loadmembers() {
         }
     });
 }
-function requireMemberSave(){
-    memberSaved=false;
-    document.getElementById('updatememberprofile').classList.add('updatevalid');
+function requireMemberSave(require){
+    if(require){
+        memberSaved=false;
+        document.getElementById('updatememberprofile').classList.add('updatevalid');
+    } else {
+        memberSaved=true;
+        document.getElementById('updatememberprofile').classList.remove('updatevalid');
+    }
 }
 
 function loadMember(email){

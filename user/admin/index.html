@@ -137,7 +137,7 @@
 								<button class="option memberItem" id="visibility" onclick="updateVisibility()">Make Private</button>
 								<button class="delete option memberItem" id="delete"
 									onclick="document.getElementById('confirmDelete').style = 'display:block'">Delete Account</button>
-								<div class="confirmDelete" id="confirmDelete">
+								<div class="confirmPopup" id="confirmDelete">
 									<div class="container">
 										<h3>Are you sure?</h3>
 										<div class="options">
@@ -178,9 +178,16 @@
 							<div id="groups">
 							</div>
 						</div>
-						<div class="projects" id="projects">
-						</div>
-						<div class="articles" id="articles">
+						<div class="confirmPopup" id="confirmExit">
+							<div class="container">
+								<h3>Are you sure?</h3>
+								<p>Your changes will not be saved</p>
+								<div class="options">
+									<button class="updatevalid option memberItem"
+										onclick="document.getElementById('confirmDelete').style = 'display:none'">Apply Changes</button>
+									<button class="delete option memberItem">Exit</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

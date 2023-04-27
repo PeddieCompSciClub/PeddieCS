@@ -90,7 +90,7 @@
     background-color:var(--btn-red-hover);
     border-color:var(--btn-red-border) !important;
 }
-.confirmDelete{
+.confirmPopup{
     width:100vw;
     height:100vh;
     background-color: #88888888;
@@ -98,22 +98,23 @@
     top:0;
     left:0;
     display:none;
+    text-align: center;
 }
-.confirmDelete .container{
+.confirmPopup .container{
     margin-top: 25vh;
-    width:25vw;
+    width:32ch;
     min-width: 250px;
     background-color: var(--btn);
     border:1px solid var(--detail);
     border-radius: 5px;
     padding: 0.8em;
 }
-.confirmDelete h3{
+.confirmPopup h3{
     padding:0;
     margin: 0;
     text-align: center;
 }
-.confirmDelete .options{
+.confirmPopup .options{
     width:90%;
 }
 
