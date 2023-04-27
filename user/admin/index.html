@@ -78,8 +78,8 @@
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Juniors')">Juniors</button>
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Seniors')">Seniors</button>
 					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Alumni')">Alumni</button>
-					<button class="tablinks membertablinks active" onclick="openMemberTab(event, 'Faculty')">Faculty</button>
-					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'all')">All</button>
+					<button class="tablinks membertablinks" onclick="openMemberTab(event, 'Faculty')">Faculty</button>
+					<button class="tablinks membertablinks active" onclick="openMemberTab(event, 'all')">All</button>
 				</div>
 
 				<div class="memberdisplay">
@@ -88,24 +88,19 @@
 					<input class="search memberbtn" id="membersearch" placeholder="Search &#128269;" onclick="this.select()">
 
 					<!-- Tab content -->
-					<div id="Seniors" class="tabcontent membertabcontent">
-						<div class="memberlist">
-							<!-- <button class="memberbtn">Test1</button>
-							<button class="memberbtn">Test2</button>
-							<button class="memberbtn">Test3</button>
-							<button class="memberbtn">Test4</button> -->
-						</div>
-					</div>
-					<div id="Juniors" class="tabcontent membertabcontent">
+					<div id="Freshmen" class="tabcontent membertabcontent" style="display:block">
 						<div class="memberlist"></div>
 					</div>
-					<div id="Sophomores" class="tabcontent membertabcontent">
+					<div id="Sophomores" class="tabcontent membertabcontent" style="display:block">
 						<div class="memberlist"></div>
 					</div>
-					<div id="Freshmen" class="tabcontent membertabcontent">
+					<div id="Juniors" class="tabcontent membertabcontent" style="display:block">
 						<div class="memberlist"></div>
 					</div>
-					<div id="Alumni" class="tabcontent membertabcontent">
+					<div id="Seniors" class="tabcontent membertabcontent" style="display:block">
+						<div class="memberlist"></div>
+					</div>
+					<div id="Alumni" class="tabcontent membertabcontent" style="display:block">
 						<div class="memberlist"></div>
 					</div>
 					<div id="Faculty" class="tabcontent membertabcontent" style="display:block">
