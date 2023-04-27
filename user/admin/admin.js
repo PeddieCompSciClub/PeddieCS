@@ -62,6 +62,7 @@ function requireMemberSave(require){
 }
 
 function loadMember(email){
+    requireMemberSave(false);
     const user = memberData.filter(function(item){return item.email == email;})[0];
     const memberProfile = document.getElementById('memberprofile');
     memberProfile.querySelector('#name').innerText = user.first_name + ' ' + user.last_name;
