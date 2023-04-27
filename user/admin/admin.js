@@ -82,7 +82,7 @@ function changeMember(email){
         loadMember(email);
     }
     else{
-        console.log(email + " failed to load");
+        document.getElementById('confirmDelete').style = 'display:block';
     }
 }
 
