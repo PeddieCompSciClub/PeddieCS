@@ -22,7 +22,7 @@ function loadmembers() {
             //add members to button list
             for (let i = 0; i < res.message.length; i++) {
                 var user = res.message[i];
-                var button = `<button class="memberbtn" id="members_${user.email.substring(0,user.email.indexOf("@peddie.org"))}">${user.first_name + ' ' + user.last_name}</button>`;
+                var button = `<button class="memberbtn" id="members_${user.email.substring(0,user.email.indexOf("@peddie.org"))}" onclick="changeMember(${user.email});">${user.first_name + ' ' + user.last_name}</button>`;
                 document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += button;
             }
 
@@ -62,7 +62,6 @@ function requireMemberSave(require){
 }
 
 function loadMember(email){
-    requireMemberSave(false);
     const user = memberData.filter(function(item){return item.email == email;})[0];
     const memberProfile = document.getElementById('memberprofile');
     memberProfile.querySelector('#name').innerText = user.first_name + ' ' + user.last_name;
@@ -70,6 +69,15 @@ function loadMember(email){
     memberProfile.querySelector('#image').src = `/members/user-images/${email.substring(0,user.email.indexOf("@peddie.org"))}`
     memberProfile.querySelector('#university').value = decodeURIComponent(user.university);
     memberProfile.querySelector('#bio').innerHTML = decodeURIComponent(user.bio).replace(/\n/g, `\n`);
+    requireMemberSave(false);
+}
+function changeMember(email){
+    if(memberSaved){
+        loadMember(email);
+    }
+    else{
+        console.log(email + " failed to load");
+    }
 }
 
 function getGrade(year) {
