@@ -70,7 +70,13 @@ function loadMember(email){
     memberProfile.querySelector('#university').value = decodeURIComponent(user.university);
     memberProfile.querySelector('#bio').innerHTML = decodeURIComponent(user.bio).replace(/\n/g, `\n`);
     requireMemberSave(false);
+    const members = document.getElementsByClassName('memberbtn');
+    for(var i=0; i<members.length; i++){
+        members[i].classList.remove('active')
+    }
+    document.getElementById('members_'+email.substring(0,user.email.indexOf("@peddie.org"))).classList.add('active');
 }
+
 function changeMember(email){
     if(memberSaved){
         loadMember(email);
