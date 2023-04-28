@@ -517,9 +517,9 @@ app.post('/admin/updateUserProfile', (req,res) => {
 
             con.connect(function (err) {
                 if (err) throw err;
-                con.query(`UPDATE members SET bio="${bio}", university="${university}", public=${public} WHERE email="${userEmail}"`, function (err, result, fields) {
+                con.query(`UPDATE members SET public=${public} WHERE email="${userEmail}"`, function (err, result, fields) {
                     if (err) throw err;
-                    console.log(`UPDATE members SET bio="${bio}", university="${university}", public=${public} WHERE email="${userEmail}"`);
+                    // console.log(`UPDATE members SET bio="${bio}", university="${university}", public=${public} WHERE email="${userEmail}"`);
                     res.json({"message":"success"});
                     return res.end();
                 });
