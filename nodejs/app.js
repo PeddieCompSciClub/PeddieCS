@@ -468,7 +468,7 @@ app.post('/deleteUser', (req, res) => {
 app.get('/admin/getAllMembers', (req, res) => {
     const token = req.query.token;
     console.log(token);
-    verifyCredential(token,'admin', function (success, email) {
+    verifyCredentialPermission(token,'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
             res.end();
@@ -547,7 +547,7 @@ function verifyCredential(token, callback) {
 }
 
 //verifys admin credential & if a user has a specific permission
-function verifyCredential(token, permission, callback) {
+function verifyCredentialPermission(token, permission, callback) {
     const CLIENT_ID = secure.google.clientId;
     const { OAuth2Client } = require('google-auth-library');
     const client = new OAuth2Client(CLIENT_ID);
@@ -572,7 +572,6 @@ function verifyCredential(token, permission, callback) {
                 });
                 con.connect(function (err) {
                     if (err) throw err;
-                    console.log(`SELECT email FROM members WHERE email = '${payload['email']}' AND FIND_IN_SET('${permission}', permissions) > 0`);
                     con.query(`SELECT email FROM members WHERE email = '${payload['email']}' AND FIND_IN_SET('${permission}', permissions) > 0`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
