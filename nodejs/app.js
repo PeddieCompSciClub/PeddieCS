@@ -466,7 +466,6 @@ app.post('/deleteUser', (req, res) => {
 //return all member data
 app.get('/admin/getAllMembers', (req, res) => {
     const token = req.query.token;
-    console.log(token);
     verifyCredentialPermission(token,'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
@@ -495,7 +494,39 @@ app.get('/admin/getAllMembers', (req, res) => {
 });
 
 //updates a users profile info
-// app.post
+app.post('admin/updateMemberProfile', (req,res) => {
+    const token = req.body.token;
+    const userEmail = req.body.email;
+    const bio = req.body.bio;
+    const university = req.body.university;
+    const public = req.body.public;
+
+    verifyCredentialPermission(token,'admin', function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+
+            con.connect(function (err) {
+                if (err) throw err;
+                con.query(`UPDATE members SET bio="${bio}", university="${university}", public=${public} WHERE email="${userEmail}"`, function (err, result, fields) {
+                    if (err) throw err;
+                    res.json({"message":"success"});
+                    return res.end();
+                });
+                con.end();
+            })
+        }
+    });
+});
 
 
 
