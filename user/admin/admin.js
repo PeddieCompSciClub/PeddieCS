@@ -88,7 +88,12 @@ function changeMember(email){
 }
 
 function applyMemberChanges(){
+    const profile = document.getElementById('memberprofile');
+    const email = profile.querySelector('#email').innerText();
+    const university = encodeURIComponent(profile.querySelector('#university').value);
+    const bio = encodeURIComponent(profile.querySelector('#bio').value);
     console.log("saving member data");
+    console.log(email+'\n'+university+'\n'+bio)
 }
 
 function getGrade(year) {

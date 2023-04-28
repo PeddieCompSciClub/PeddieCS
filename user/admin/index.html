@@ -142,7 +142,7 @@
 										</div>
 									</div>
 								</div>
-								<button class="update option memberItem" id="updatememberprofile">Apply Changes</button>
+								<button class="update option memberItem" id="updatememberprofile" onclick="applyChanges()">Apply Changes</button>
 							</div>
 						</div>
 						<div class="bio">
@@ -178,7 +178,7 @@
 								<h3>Are you sure?</h3>
 								<p>Your changes will not be saved</p>
 								<div class="options">
-									<button class="updatevalid option memberItem" onclick="document.getElementById('confirmExit').style='display:none'">Apply Changes</button>
+									<button class="updatevalid option memberItem" onclick="document.getElementById('confirmExit').style='display:none'; applyChanges();">Apply Changes</button>
 									<button class="delete option memberItem" onclick="var popup = document.getElementById('confirmExit'); popup.style='display:none'; requireMemberSave(false); changeMember(popup.email); popup.email=null;">Exit</button>
 								</div>
 							</div>
