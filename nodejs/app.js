@@ -519,6 +519,7 @@ app.post('/admin/updateUserProfile', (req,res) => {
                 if (err) throw err;
                 con.query(`UPDATE members SET bio="${bio}", university="${university}", public=${public} WHERE email="${userEmail}"`, function (err, result, fields) {
                     if (err) throw err;
+                    console.log(res);
                     res.json({"message":"success"});
                     return res.end();
                 });
