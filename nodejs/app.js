@@ -572,6 +572,7 @@ function verifyCredential(token, permission, callback) {
                 });
                 con.connect(function (err) {
                     if (err) throw err;
+                    console.log(`SELECT email FROM members WHERE email = '${payload['email']}' AND FIND_IN_SET('${permission}', permissions) > 0`);
                     con.query(`SELECT email FROM members WHERE email = '${payload['email']}' AND FIND_IN_SET('${permission}', permissions) > 0`, function (err, result, fields) {
                         if (err) throw err;
                         if (result.length > 0) {
