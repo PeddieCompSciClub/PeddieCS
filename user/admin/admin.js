@@ -108,6 +108,7 @@ function applyMemberChanges(){
 
         $.post("https://peddiecs.peddie.org/nodejs/admin/updateUserProfile", {
             token: getCookie('credential'),
+            email: email,
             bio: userBio,
             university: userUniversity,
             public: 0
