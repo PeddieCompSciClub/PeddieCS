@@ -88,6 +88,14 @@ function changeMember(email){
     }
 }
 
+function updateVisibility(){
+    let email = document.getElementById('memberprofile').querySelector('#email').innerText;
+    let user = memberData.filter(function(item){return item.email == email;})[0];
+    user.public = (user.public>=1?0:1);
+    memberProfile.querySelector('#visibility').innerText = (user.public>=1?'Make Private':'Make Public');
+    requireMemberSave(true);
+}
+
 function applyMemberChanges(){
     if(!memberSaved){
         const profile = document.getElementById('memberprofile');
