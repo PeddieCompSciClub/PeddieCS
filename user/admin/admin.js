@@ -91,10 +91,17 @@ function applyMemberChanges(){
     if(!memberSaved){
         const profile = document.getElementById('memberprofile');
         const email = profile.querySelector('#email').innerText;
-        const university = encodeURIComponent(profile.querySelector('#university').value);
-        const bio = encodeURIComponent(profile.querySelector('#bio').value);
+        const userUniversity = encodeURIComponent(profile.querySelector('#university').value);
+        const userBio = encodeURIComponent(profile.querySelector('#bio').value);
         console.log("saving member data");
         console.log(email+'\n'+university+'\n'+bio)
+
+        $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
+            token: getCookie('credential'),
+            bio: userBio,
+            university: userUniversity,
+            public: 0
+        }, function (res) {});
     }
 }
 
