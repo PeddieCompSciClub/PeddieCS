@@ -95,7 +95,7 @@ function applyMemberChanges(){
         const userBio = encodeURIComponent(profile.querySelector('#bio').value);
         const userPublic = memberData.filter(function(item){return item.email == email;})[0].public;
         console.log("saving member data");
-        console.log(email+'\n'+university+'\n'+bio+'\n'+public)
+        console.log(email+'\n'+userUniversity+'\n'+userBio+'\n'+userPublic)
 
         // $.post("https://peddiecs.peddie.org/nodejs/admin/updateProfile", {
         //     token: getCookie('credential'),
