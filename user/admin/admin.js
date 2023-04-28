@@ -93,15 +93,16 @@ function applyMemberChanges(){
         const email = profile.querySelector('#email').innerText;
         const userUniversity = encodeURIComponent(profile.querySelector('#university').value);
         const userBio = encodeURIComponent(profile.querySelector('#bio').value);
+        const userPublic = memberData.filter(function(item){return item.email == email;})[0].public;
         console.log("saving member data");
-        console.log(email+'\n'+university+'\n'+bio)
+        console.log(email+'\n'+university+'\n'+bio+'\n'+public)
 
-        $.post("https://peddiecs.peddie.org/nodejs/updateBio", {
-            token: getCookie('credential'),
-            bio: userBio,
-            university: userUniversity,
-            public: 0
-        }, function (res) {});
+        // $.post("https://peddiecs.peddie.org/nodejs/admin/updateProfile", {
+        //     token: getCookie('credential'),
+        //     bio: userBio,
+        //     university: userUniversity,
+        //     public: 0
+        // }, function (res) {});
     }
 }
 

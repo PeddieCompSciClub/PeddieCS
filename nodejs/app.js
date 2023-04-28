@@ -494,6 +494,9 @@ app.get('/admin/getAllMembers', (req, res) => {
     });
 });
 
+//updates a users profile info
+// app.post
+
 
 
 //verify user credential and callbacks with email
