@@ -106,7 +106,7 @@ function applyMemberChanges(){
         console.log("saving member data");
         console.log(email+'\n'+userUniversity+'\n'+userBio+'\n'+userPublic)
 
-        $.post("https://peddiecs.peddie.org/nodejs/admin/updateProfile", {
+        $.post("https://peddiecs.peddie.org/nodejs/admin/updateUserProfile", {
             token: getCookie('credential'),
             bio: userBio,
             university: userUniversity,

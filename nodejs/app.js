@@ -494,7 +494,7 @@ app.get('/admin/getAllMembers', (req, res) => {
 });
 
 //updates a users profile info
-app.post('admin/updateMemberProfile', (req,res) => {
+app.post('admin/updateUserProfile', (req,res) => {
     const token = req.body.token;
     const userEmail = req.body.email;
     const bio = req.body.bio;
