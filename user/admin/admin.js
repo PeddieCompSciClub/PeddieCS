@@ -106,12 +106,12 @@ function applyMemberChanges(){
         console.log("saving member data");
         console.log(email+'\n'+userUniversity+'\n'+userBio+'\n'+userPublic)
 
-        // $.post("https://peddiecs.peddie.org/nodejs/admin/updateProfile", {
-        //     token: getCookie('credential'),
-        //     bio: userBio,
-        //     university: userUniversity,
-        //     public: 0
-        // }, function (res) {});
+        $.post("https://peddiecs.peddie.org/nodejs/admin/updateProfile", {
+            token: getCookie('credential'),
+            bio: userBio,
+            university: userUniversity,
+            public: 0
+        }, function (res) {console.log(res)});
     }
 }
 
