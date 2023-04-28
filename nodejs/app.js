@@ -517,7 +517,7 @@ app.post('/admin/updateUserProfile', (req,res) => {
 
             con.connect(function (err) {
                 if (err) throw err;
-                con.query(`UPDATE members SET public=${1} WHERE email="${userEmail}"`, function (err, result, fields) {
+                con.query(`UPDATE members SET public=${public} WHERE email="${userEmail}"`, function (err, result, fields) {
                     if (err) throw err;
                     console.log(`UPDATE members SET public=${public} WHERE email="${userEmail}"`);
                     res.json({"message":"success"});
