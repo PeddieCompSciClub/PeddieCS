@@ -394,6 +394,7 @@ app.post('/updateVisibility', (req, res) => {
                     database: "peddieCS",
                     port: 3306
                 });
+                console.log(`UPDATE members SET public=${newVal} WHERE email="${email}"`);
                 con.query(`UPDATE members SET public=${newVal} WHERE email="${email}"`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ 'message': 'success', 'newVal': newVal });
