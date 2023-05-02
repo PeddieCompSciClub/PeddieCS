@@ -111,7 +111,7 @@ function applyMemberChanges(){
             email: email,
             bio: userBio,
             university: userUniversity,
-            public: 0
+            public: userPublic
         }, function (res) {console.log(res)});
     }
 }
