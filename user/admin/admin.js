@@ -134,6 +134,7 @@ function applyMemberChanges() {
                 var imageData = reader.result.split(',')[1];
                 $.post("https://peddiecs.peddie.org/nodejs/admin/updateUserImage", {
                     token: getCookie('credential'),
+                    email: email,
                     image: imageData
                 }, function (res) {
                     if (res.message == "success") {
