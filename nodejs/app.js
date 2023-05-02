@@ -530,6 +530,35 @@ app.post('/admin/updateUserProfile', (req,res) => {
     });
 });
 
+//updates the user's profile image
+app.post('/admin/updateUserImage', (req, res) => {
+    const token = req.body.token;
+    const userEmail = req.body.email;
+    const image = req.body.image;
+    if (image) {
+
+        verifyCredentialPermission(token, "admin", function (success, email) {
+            if (!success) {
+                res.json({ 'message': 'failed' });
+                res.end();
+            }
+            else {
+                const username = getUsername(userEmail);
+                const buffer = Buffer.from(image, 'base64');
+                // Write the buffer to a file
+                fs.writeFile(`../members/user-images/${username}`, buffer, function (err) {
+                    if (err) {
+                        console.log(err);
+                        res.send({ error: 'true', message: 'Failed To Save Image' });
+                    } else {
+                        console.log(`Image saved as ${username}`);
+                    }
+                });
+            }
+        });
+    }
+});
+
 
 
 //verify user credential and callbacks with email
