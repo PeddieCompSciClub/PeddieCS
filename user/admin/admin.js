@@ -112,7 +112,11 @@ function applyMemberChanges(){
             bio: userBio,
             university: userUniversity,
             public: userPublic
-        }, function (res) {console.log(res)});
+        }, function (res) {
+            if(res.message = "success"){
+                requireMemberSave(false);
+            }
+        });
     }
 }
 
