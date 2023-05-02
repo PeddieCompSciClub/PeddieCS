@@ -501,6 +501,8 @@ app.post('/admin/updateUserProfile', (req,res) => {
     const university = req.body.university;
     const public = req.body.public;
 
+    console.log(public);
+
     verifyCredentialPermission(token,'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
