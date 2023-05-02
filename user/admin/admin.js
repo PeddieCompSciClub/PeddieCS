@@ -69,6 +69,7 @@ function loadMember(email){
     memberProfile.querySelector('#image').src = `/members/user-images/${email.substring(0,user.email.indexOf("@peddie.org"))}`
     memberProfile.querySelector('#university').value = decodeURIComponent(user.university);
     memberProfile.querySelector('#bio').value = decodeURIComponent(user.bio).replace(/\n/g, `\n`);
+    document.getElementById('counter').innerHTML = `${decodeURIComponent(user.bio).replace(/\n/g, `\n`).length}/${1000}`;
     memberProfile.querySelector('#visibility').innerText = (user.public>=1?'Make Private':'Make Public');
     requireMemberSave(false);
     const members = document.getElementsByClassName('memberbtn');
