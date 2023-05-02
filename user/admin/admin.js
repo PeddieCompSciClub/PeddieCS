@@ -68,7 +68,7 @@ function loadMember(email){
     memberProfile.querySelector('#email').innerText = user.email;
     memberProfile.querySelector('#image').src = `/members/user-images/${email.substring(0,user.email.indexOf("@peddie.org"))}`
     memberProfile.querySelector('#university').value = decodeURIComponent(user.university);
-    memberProfile.querySelector('#bio').innerHTML = decodeURIComponent(user.bio).replace(/\n/g, `\n`);
+    memberProfile.querySelector('#bio').value = decodeURIComponent(user.bio).replace(/\n/g, `\n`);
     memberProfile.querySelector('#visibility').innerText = (user.public>=1?'Make Private':'Make Public');
     requireMemberSave(false);
     const members = document.getElementsByClassName('memberbtn');
