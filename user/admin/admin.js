@@ -103,6 +103,11 @@ function applyMemberChanges(){
         const userUniversity = encodeURIComponent(profile.querySelector('#university').value);
         const userBio = encodeURIComponent(profile.querySelector('#bio').value);
         const userPublic = memberData.filter(function(item){return item.email == email;})[0].public;
+
+        member = memberData.filter(function(item){return item.email == email;})[0];
+        member.university = userUniversity;
+        member.bio = userBio;
+
         console.log("saving member data");
         console.log(email+'\n'+userUniversity+'\n'+userBio+'\n'+userPublic)
 
