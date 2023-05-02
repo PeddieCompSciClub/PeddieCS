@@ -9,6 +9,7 @@ function load(user) {
 }
 
 var memberSaved = true;
+var newImage = false;
 var memberData;
 function loadmembers() {
     $.get("https://peddiecs.peddie.org/nodejs/admin/getAllMembers", {
@@ -67,6 +68,7 @@ function loadMember(email){
     memberProfile.querySelector('#name').innerText = user.first_name + ' ' + user.last_name;
     memberProfile.querySelector('#email').innerText = user.email;
     memberProfile.querySelector('#image').src = `/members/user-images/${email.substring(0,user.email.indexOf("@peddie.org"))}`
+    newImage=false;
     memberProfile.querySelector('#university').value = decodeURIComponent(user.university);
     memberProfile.querySelector('#bio').value = decodeURIComponent(user.bio).replace(/\n/g, `\n`);
     document.getElementById('counter').innerHTML = `${decodeURIComponent(user.bio).replace(/\n/g, `\n`).length}/${1000}`;
