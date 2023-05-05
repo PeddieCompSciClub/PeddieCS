@@ -501,8 +501,6 @@ app.post('/admin/updateUserProfile', (req,res) => {
     const university = req.body.university;
     const public = req.body.public;
 
-    console.log(public);
-
     verifyCredentialPermission(token,'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
@@ -557,6 +555,39 @@ app.post('/admin/updateUserImage', (req, res) => {
             }
         });
     }
+});
+
+
+//cs fellows
+//schedules a cs fellow for a specific time slot
+app.post('/csfellows/schedule', (req, res) => {
+    const token = req.body.token;
+
+    verifyCredentialPermission(token,'csfellow', function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+
+            con.connect(function (err) {
+                if (err) throw err;
+                con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', ${email}, '0000-00-00 00:00:00');`, function (err, result, fields) {
+                    if (err) throw err;
+                    res.json({"message":"success"});
+                    return res.end();
+                });
+                con.end();
+            })
+        }
+    });
 });
 
 
