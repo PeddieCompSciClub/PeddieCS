@@ -63,7 +63,7 @@
   </nav>
 
   <div class="main">
-    <div class="calendar">
+    <div class="calendar" id="calendar">
       <div class="calendar-body">
         <div class="month"></div>
         <div class="weekday">Monday</div>
@@ -74,6 +74,17 @@
         <div class="weekday">Saturday</div>
         <div class="weekday">Sunday</div>
       </div>
+      <script>
+        const d = new Date;
+        loadCalendarDates(d.getDay(),d.getMonth(),d.getFullYear());
+
+        function loadCalendarDates(day,month,year){
+          console.log(day,month,year);
+          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          const calendar=document.getElementById("calendar");
+          calendar.getElementsByClassName("month")[0].innerHTML = `<h1>${monthNames[month]}</h1><h2>${year}</h2>`;
+        }
+      </script>
     </div>
   </div>
 

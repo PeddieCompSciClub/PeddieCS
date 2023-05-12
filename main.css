@@ -4,6 +4,10 @@
     --navbar: #005E9f;
     --text: white;
     --link: #5fb7ff;
+
+    --light: #f1f1f1;
+    --hover: #ddd;
+    --select: #ccc;
 }
 
 * {
