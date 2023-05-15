@@ -91,6 +91,10 @@
             days.push(monthDays[(d.getMonth()-1)%12] - i + 1)
           }
           console.log(days);
+          days.forEach(day => {
+            console.log(day);
+            calendar.getElementsByClassName('calendar-body').innerHTML += `<div class="day">${day}</div>`;
+          });
         }
       </script>
     </div>
