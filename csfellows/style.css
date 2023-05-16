@@ -17,7 +17,7 @@
 .calendar-body{
     display:grid;
     grid-template-columns: repeat(7,calc(100%/7));
-    grid-template-rows:repeat(4,5%) repeat(5,auto);
+    grid-template-rows:repeat(4,5%) repeat(6,auto);
     height:100%;
     /* border: solid 1px var(--navbar); */
 }
@@ -56,4 +56,25 @@
     height: 100%;
     text-align: center;
     background-color: var(--hover);
+}
+
+.calendar .day{
+    background-color: var(--light);
+    padding: 0 0.2em;
+    border:solid 1px var(--hover);
+}
+
+.calendar .change-month{
+    grid-row:2;
+    padding:0 0.25em;
+    width:max-content;
+}
+.calendar .previous{
+    grid-column:1;
+    text-align:left;
+}
+.calendar .next{
+    grid-column:7;
+    text-align:right;
+    justify-self: right;
 }

@@ -64,8 +64,10 @@
 
   <div class="main">
     <div class="calendar" id="calendar">
-      <div class="calendar-body">
+      <div class="calendar-body" id="calendar-body">
         <div class="month"></div>
+        <button class="change-month next" id="next-month"></button>
+        <button class="change-month previous" id="prev-month"></button>
         <div class="weekday">Sunday</div>
         <div class="weekday">Monday</div>
         <div class="weekday">Tuesday</div>
@@ -80,21 +82,28 @@
 
         function loadCalendarDates(date){
           console.log(date);
+          //load month
           const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
           const monthDays = [31,28,31,30,31,30,31,31,30,31,30,31];
           const calendar=document.getElementById("calendar");
           calendar.getElementsByClassName("month")[0].innerHTML = `<h1>${monthNames[date.getMonth()]}</h1><h2>${date.getFullYear()}</h2>`;
+          //load days
           var d = new Date(date.getTime());
           var days = [];
           d.setDate(1);
           for(var i=d.getDay(); i>0; i--){
             days.push(monthDays[(d.getMonth()-1)%12] - i + 1)
           }
-          console.log(days);
+          for(var i=0; days.length<42; i++){
+            days.push(i%monthDays[d.getMonth()]+1)
+          }
           days.forEach(day => {
             console.log(day);
-            calendar.getElementsByClassName('calendar-body').innerHTML += `<div class="day">${day}</div>`;
+            document.getElementById('calendar-body').innerHTML += `<div class="day">${day}</div>`;
           });
+          //load next month
+          document.getElementById("prev-month").innerText = '◀ '+monthNames[(d.getMonth()-1)%12];
+          document.getElementById("next-month").innerText = monthNames[(d.getMonth()-1)%12] + ' ▶';
         }
       </script>
     </div>
