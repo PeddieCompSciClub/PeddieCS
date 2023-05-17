@@ -108,7 +108,7 @@
           document.getElementById("next-month").innerText = monthNames[(d.getMonth() + 1) % 12] + ' \u25b6';
           document.getElementById("next-month").onclick = function onclick() { saveDate.setMonth(saveDate.getMonth() + 1); loadCalendarDates(saveDate); };
           //load fellows
-          $.get('https://peddiecs.peddie.org/csfellows/schedule',{
+          $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule',{
             date:date
           }, function(res){
             console.log(res);
