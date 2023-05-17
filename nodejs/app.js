@@ -593,6 +593,8 @@ app.post('/csfellows/schedule', (req, res) => {
 //gets the cs fellow for a specific month
 app.get('/csfellows/schedule', (req,res) => {
     const date = req.query.date;
+    res.json({"message":"success","date":date});
+    return res.end();
 });
 
 //verify user credential and callbacks with email
