@@ -579,7 +579,7 @@ app.post('/csfellows/schedule', (req, res) => {
 
             con.connect(function (err) {
                 if (err) throw err;
-                con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '1000-00-00 00:00:00');`, function (err, result, fields) {
+                con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({"message":"success"});
                     return res.end();
