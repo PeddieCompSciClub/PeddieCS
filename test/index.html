@@ -31,21 +31,14 @@
   <header>
   </header>
 
-  <div id="g_id_onload" data-client_id="697373878303-v3m7kpalsr0a4a7sr4go96mic4101fd5.apps.googleusercontent.com"
-    data-context="signin" data-ux_mode="popup" data-callback="signInCallback" data-auto_prompt="false">
-  </div>
-
-  <div style="width:200px" class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
-    data-text="signin_with" data-size="large" data-logo_alignment="left">
-  </div>
+  <button onclick="test()">Test</button>
 
   <script>
-    function signInCallback(authResult) {
-      console.log(authResult);
-      $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
-        token: authResult.credential,
+    function test() {
+      $.post("https://peddiecs.peddie.org/nodejs/csfellows/schedule", {
+        token: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjgyMjgzOGMxYzhiZjllZGNmMWY1MDUwNjYyZTU0YmNiMWFkYjViNWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODQzMzY3MjIsImF1ZCI6IjY5NzM3Mzg3ODMwMy12M203a3BhbHNyMGE0YTdzcjRnbzk2bWljNDEwMWZkNS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwMDM5MzQyNjQ2MDM4Mzc2MDkyMSIsImhkIjoicGVkZGllLm9yZyIsImVtYWlsIjoidGNoZXZyZXMtMjRAcGVkZGllLm9yZyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiI2OTczNzM4NzgzMDMtdjNtN2twYWxzcjBhNGE3c3I0Z285Nm1pYzQxMDFmZDUuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJuYW1lIjoiVG9tYXogQ2hldnJlcyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BR05teXhiQ0d3X2xPR1AzWmUtSFRHWUlyYkM2dDBRbkN2NFlkTGhSazlROHJ3PXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IlRvbWF6IiwiZmFtaWx5X25hbWUiOiJDaGV2cmVzIiwiaWF0IjoxNjg0MzM3MDIyLCJleHAiOjE2ODQzNDA2MjIsImp0aSI6IjM5ODgwYzQ0MzJiODZlYmQ1M2U3ZGJjYjZiNTk0MmI2YjcxYTg4MzUifQ.jtWGBQtac5Rv1xU4hZaI5OnHTcMaB5zOPWsbHpBUFY_UngdxrjbJ54XU-qdVYjj2Ie7mOl80l9KK1MiQzqEI9cgHpl-XmS0dvySQOnA47iTc3GJMqG26F3-qufBUpXZ2nyrNOnkQVywjOZtVbRyBrv8na6cAicpK4yJkf8AW_MbA0AJh-uYLjMG0glKdxyQ7NhZnVNEUGl_ovMtqmKXDc4nhaSa8EqVjZe7NZdK-e76mL_63j0LsVTObmmYByQ0gU1l7g5Coav6jNW21E-_Dk_IrX-tn_KbyVPEOwA3XP2honfVkx_GarfTWQbJTpZi0j6udTHG2lXlVASw0pimKqg',
       }, function (res) {
-
+        console.log(res);
         if (res.message == "success") {
           console.log("success");
         } else {
