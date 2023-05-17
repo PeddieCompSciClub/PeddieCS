@@ -592,7 +592,7 @@ app.post('/csfellows/schedule', (req, res) => {
 
 //gets the cs fellow for a specific month
 app.get('/csfellows/schedule', (req,res) => {
-    const date = req.query.date;
+    const date = new Date(req.query.date);
     date.setMonth(1);
     res.json({"message":"success","date":date});
     return res.end();
