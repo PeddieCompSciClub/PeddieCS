@@ -97,3 +97,15 @@
     padding: 0 0.5em;
     font-weight:bold;
 }
+
+/* hides navbar when width<1000px */
+@media screen and (max-width: 992px) {
+    .calendar{
+        grid-column: 1/-1;
+        margin:auto;
+    }
+
+    .calendar button{
+        font-size: 2em;
+    }
+}
