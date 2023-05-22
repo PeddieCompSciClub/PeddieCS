@@ -1,7 +1,20 @@
 .main{
     display: grid;
     grid-template-columns: auto min-content;
+    grid-template-rows: 120px min-content;
     height: 200px;
+}
+
+.title{
+    grid-column: 1;
+    grid-row:1;
+
+}
+
+.title h1{
+    padding: 0.5em 0;;
+    margin:0;
+    white-space: nowrap;
 }
 
 .calendar{
@@ -99,10 +112,24 @@
     font-weight:bold;
 }
 
+.info{
+    grid-column: 1;
+    grid-row: 2;
+    background-color: #ff00ffdd;
+}
+
 /* hides navbar when width<1000px */
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1250px) {
+    .title{
+        grid-column: 1/-1;
+        grid-row: 1;
+        margin:auto;
+        padding-bottom: 0;
+    }
+    
     .calendar{
         grid-column: 1/-1;
+        grid-row: 2;
         margin:auto;
     }
 
