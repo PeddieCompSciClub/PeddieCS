@@ -64,10 +64,16 @@
     padding: 0 0.2em;
     border:solid 1px var(--hover);
 }
+.calendar .off{
+    background-color: var(--select) !important;
+}
+.calendar .today{
+    background-color: var(--hover) !important;
+}
 
 .calendar .change-month{
     grid-row:2;
-    padding:0 0.25em;
+    /* padding:0 0.25em; */
     width:max-content;
 }
 .calendar .previous{
@@ -78,4 +84,29 @@
     grid-column:7;
     text-align:right;
     justify-self: right;
+}
+
+.calendar button{
+    border:none;
+    background: none;
+    color:var(--text);
+    padding:0 1em;
+    transition: all 0.25s ease-in-out;
+}
+
+.calendar button:hover{
+    padding: 0 0.5em;
+    font-weight:bold;
+}
+
+/* hides navbar when width<1000px */
+@media screen and (max-width: 992px) {
+    .calendar{
+        grid-column: 1/-1;
+        margin:auto;
+    }
+
+    .calendar button{
+        font-size: 2em;
+    }
 }

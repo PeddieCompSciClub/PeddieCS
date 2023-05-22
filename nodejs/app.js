@@ -579,7 +579,7 @@ app.post('/csfellows/schedule', (req, res) => {
 
             con.connect(function (err) {
                 if (err) throw err;
-                con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', ${email}, '0000-00-00 00:00:00');`, function (err, result, fields) {
+                con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({"message":"success"});
                     return res.end();
@@ -590,7 +590,13 @@ app.post('/csfellows/schedule', (req, res) => {
     });
 });
 
-
+//gets the cs fellow for a specific month
+app.get('/csfellows/schedule', (req,res) => {
+    const date = new Date(req.query.date);
+    const mysqlDate = date.getFullYear()+'-'+date.getMonth()+'-'+(date.getDate()+1)+' '+date.getHours()+':00:00';
+    res.json({"message":"success","date":mysqlDate});
+    return res.end();
+});
 
 //verify user credential and callbacks with email
 function verifyCredential(token, callback) {
