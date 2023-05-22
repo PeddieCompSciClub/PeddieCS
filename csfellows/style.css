@@ -115,7 +115,6 @@
 .info{
     grid-column: 1;
     grid-row: 2;
-    background-color: #ff00ffdd;
 }
 
 /* hides navbar when width<1000px */
