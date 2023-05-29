@@ -1,20 +1,26 @@
 .main{
     display: grid;
     grid-template-columns: auto min-content;
-    grid-template-rows: 120px min-content;
-    height: 200px;
+    grid-template-rows: 12em min-content;
 }
 
 .title{
     grid-column: 1;
     grid-row:1;
-
+    padding-left:4vmin;
 }
 
 .title h1{
-    padding: 0.5em 0;;
+    padding: 0.5em 0 0 0;
     margin:0;
     white-space: nowrap;
+}
+
+.title p{
+    width:80ch;
+    max-width: 90vw;
+    margin:auto;
+    text-align: center;
 }
 
 .calendar{
@@ -115,15 +121,58 @@
 .info{
     grid-column: 1;
     grid-row: 2;
+    padding-left: 4vmin;
+
+    /* display:grid; */
+}
+
+.info h3{
+    text-align: center;
+    margin: 0.5em 0 0 0;
+}
+
+.fellows{
+    display:flex;
+    justify-content: center;
+}
+
+.join-zoom {
+    border: none;
+    border-radius: 8px;
+    right: 1em;
+    text-align: center;
+    background-color: var(--light);
+    padding: 0 1em;
+    margin:auto;
+    display:block;
+
+    color:var(--background);
+    transition: 0.25s;
+}
+.join-zoom h3{
+    color: var(--background);
+    margin:0;
+}
+
+.join-zoom:hover {
+    background-color: var(--hover);
+}
+.join-zoom:active{
+    background-color: var(--select);
 }
 
 /* hides navbar when width<1000px */
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1600px) {
+    .main{
+        grid-template-rows: auto min-content;
+    }
+
     .title{
         grid-column: 1/-1;
         grid-row: 1;
         margin:auto;
         padding-bottom: 0;
+        padding-left:0;
     }
     
     .calendar{
@@ -135,4 +184,11 @@
     .calendar button{
         font-size: 2em;
     }
+
+    .info{
+        grid-column: 1/-1;
+        grid-row: 3;
+        padding-left: 4vmin;
+    }
+
 }

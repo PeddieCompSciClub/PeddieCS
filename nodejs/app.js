@@ -598,6 +598,20 @@ app.get('/csfellows/schedule', (req,res) => {
     return res.end();
 });
 
+//get zoom link
+app.get('/csfellows/getZoomLink', (req,res)=>{
+    const token = req.query.token;
+    verifyCredentialPermission(token,'csfellow', function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            res.json({'message':'success','zoom':secure.zoom.link})
+        }
+    });
+});
+
 //verify user credential and callbacks with email
 function verifyCredential(token, callback) {
     const CLIENT_ID = secure.google.clientId;
