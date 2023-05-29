@@ -45,6 +45,7 @@ function addProfileButton(name) {
         if (res.message == "failed") {
             console.log("Failed to get zoom link")
         } else {
+            console.log(res);
             document.getElementById('join-zoom').addEventListener("click", function () {
                 window.location.href = res.link;
             });     
