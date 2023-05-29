@@ -143,7 +143,7 @@
     text-align: center;
     background-color: var(--light);
     padding: 0 1em;
-    margin:auto;
+    margin: 0 auto 1em;
     display:block;
 
     color:var(--background);
@@ -189,10 +189,6 @@
         grid-column: 1/-1;
         grid-row: 3;
         padding-left: 4vmin;
-    }
-
-    .join-zoom{
-        margin-bottom: 14em;
     }
 
 }
