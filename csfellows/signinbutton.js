@@ -47,7 +47,7 @@ function addProfileButton(name) {
         } else {
             document.getElementById('join-zoom').addEventListener("click", function () {
                 removeCookie("credential");
-                window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
+                window.location.href = res.link;
             });     
         }
     });
