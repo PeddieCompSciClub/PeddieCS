@@ -46,7 +46,6 @@ function addProfileButton(name) {
             console.log("Failed to get zoom link")
         } else {
             document.getElementById('join-zoom').addEventListener("click", function () {
-                removeCookie("credential");
                 window.location.href = res.link;
             });     
         }
