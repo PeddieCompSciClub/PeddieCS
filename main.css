@@ -45,7 +45,7 @@ h1 {
 
 h3 {
     font-family: 'Raleway', serif;
-    font-size: 32px;
+    font-size: 2em;
     color: var(--text);
     font-weight: bold;
     padding: 8px;
