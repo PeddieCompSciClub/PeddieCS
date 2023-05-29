@@ -607,7 +607,7 @@ app.get('/csfellows/getZoomLink', (req,res)=>{
             res.end();
         }
         else {
-            res.json({'message':'success','zoom':secure.zoom.link});
+            res.json({'message':'success','link':secure.zoom.link});
             res.end();
         }
     });
