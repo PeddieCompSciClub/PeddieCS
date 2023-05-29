@@ -37,11 +37,19 @@ function addProfileButton(name) {
     nav.appendChild(button);
 
     //add zoom link (sign in button)
-    document.getElementById('info').innerHTML+=`<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Join</h3></button>`
-    
-    document.getElementById('join-zoom').addEventListener("click", function(){
-        removeCookie("credential");
-        window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
+    document.getElementById('info').innerHTML += `<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Join</h3></button>`
+
+    $.get("https://peddiecs.peddie.org/nodejs/csfellows/getZoomLink", {
+        token: getCookie('credential')
+    }, function (res) {
+        if (res.message == "failed") {
+            console.log("Failed to get zoom link")
+        } else {
+            document.getElementById('join-zoom').addEventListener("click", function () {
+                removeCookie("credential");
+                window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
+            });     
+        }
     });
 }
 
@@ -54,12 +62,12 @@ function addSigninButton() {
         removeCookie("credential");
         window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
     });
-    button.textContent= "Sign In";
+    button.textContent = "Sign In";
     nav.appendChild(button);
 
     //add zoom link (sign in button)
-    document.getElementById('info').innerHTML+=`<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Sign In</h3></button>`
-    document.getElementById('join-zoom').addEventListener("click", function(){
+    document.getElementById('info').innerHTML += `<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Sign In</h3></button>`
+    document.getElementById('join-zoom').addEventListener("click", function () {
         removeCookie("credential");
         window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
     });
