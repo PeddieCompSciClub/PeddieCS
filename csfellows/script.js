@@ -1,5 +1,6 @@
 //load calendar
 const currentDate = new Date;
+const saveDate = new Date;
 function loadCalendarDates(date) {
     console.log(date);
     //load month
