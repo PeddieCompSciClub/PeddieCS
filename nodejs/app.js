@@ -594,6 +594,25 @@ app.post('/csfellows/schedule', (req, res) => {
 app.get('/csfellows/schedule', (req,res) => {
     const date = new Date(req.query.date);
     const mysqlDate = date.getFullYear()+'-'+date.getMonth()+'-'+(date.getDate()+1)+' '+date.getHours()+':00:00';
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "admincs",
+        password: "BeatBlair1864",
+        database: "peddieCS",
+        port: 3306
+    });
+    con.connect(function (err) {
+        if (err) throw err;
+        con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');`, function (err, result, fields) {
+            if (err) throw err;
+            res.json({"message":"success"});
+            return res.end();
+        });
+        con.end();
+    });
+
+
     res.json({"message":"success","date":mysqlDate});
     return res.end();
 });
