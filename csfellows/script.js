@@ -37,16 +37,17 @@ const loadedMonths = new Map();
 function loadMonth(date) {
     console.log([date.getMonth(), date.getFullYear()].toString());
     if (loadedMonths.has([date.getFullYear(), date.getMonth()].toString())) {
-
+        addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
     } else {
         $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
             date: date
         }, function (res) {
-            console.log(res);
+            loadedMonths.set([date.getFullYear(), date.getMonth()].toString(),res)
+            addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
         });
     }
 }
 
-function addCalendarEvent(date, user) {
-
+function addCalendarEvents(year, month, data) {
+    console.log({year:year,month:month,data:data});
 }
