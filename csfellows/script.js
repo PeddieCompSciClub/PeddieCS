@@ -40,6 +40,7 @@ function loadMonth(date) {
     if (loadedMonths.has([date.getFullYear(), date.getMonth()].toString())) {
         addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
     } else {
+        console.log('loading data');
         $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
             date: date
         }, function (res) {
