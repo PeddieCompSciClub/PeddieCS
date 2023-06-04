@@ -44,7 +44,7 @@ function loadMonth(date) {
         $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
             date: date
         }, function (res) {
-            loadedMonths.set([date.getFullYear(), date.getMonth()].toString(),res)
+            loadedMonths.set([date.getFullYear(), date.getMonth()].toString(),res.schedule)
             addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
         });
     }
@@ -52,4 +52,7 @@ function loadMonth(date) {
 
 function addCalendarEvents(year, month, data) {
     console.log({year:year,month:month,data:data});
+    if(month == currentDate.getMonth()){
+        document.getElementById('day-'+data)
+    }
 }

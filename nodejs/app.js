@@ -604,16 +604,16 @@ app.get('/csfellows/schedule', (req,res) => {
     });
     con.connect(function (err) {
         if (err) throw err;
-        con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');`, function (err, result, fields) {
+        con.query(`SELECT name, email, date FROM csfellows`, function (err, result, fields) {
             if (err) throw err;
-            res.json({"message":"success"});
+            res.json({"message":"success","schedule":result});
             return res.end();
         });
         con.end();
     });
 
 
-    res.json({"message":"success","date":mysqlDate});
+    res.json({"message":"success","schedule":''});
     return res.end();
 });
 
