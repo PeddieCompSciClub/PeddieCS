@@ -120,15 +120,16 @@
 }
 
 .calendar .event{
-    background-color: lightcoral;
     border-radius: 0.2em;
+    border: solid 1px;
     font-weight: 600;
     font-size: 0.8em;
     margin-bottom: 1px;
     line-height: 1.2em;
-    border: solid 1px;
+    white-space:nowrap;
+    text-overflow: ellipsis;
     cursor: pointer;
-    transition: 0.25s all
+    transition: 0.25s all;
 }
 
 .calendar .event:hover{
