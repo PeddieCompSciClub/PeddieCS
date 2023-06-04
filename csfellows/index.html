@@ -67,22 +67,24 @@
   <div class="main">
     <div class="title">
       <h1>CS Fellows</h1>
-      <p>The Computer Science Fellows can help you with any programming questions you may have. If your code isn't working or if you just want to discuss your logic for a program, feel free to join us via zoom.</p>
+      <p>The Computer Science Fellows can help you with any programming questions you may have. If your code isn't
+        working or if you just want to discuss your logic for a program, feel free to join us via zoom.</p>
     </div>
     <div class="calendar" id="calendar">
-      <div class="calendar-popup"></div>
+      <div class="calendar-popup">
+        <div class="icon">
+          <div class="memberItem">
+            <img src="/members/user-images/test.jpg" alt="member image"
+              onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+            <a>Test</a>
+            <ul>
+              <li>Test 1</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="calendar-body" id="calendar-body">
         <div class="month">
-          <div class="icon">
-            <div class="memberItem">
-              <img src="/members/user-images/test.jpg" alt="member image"
-                onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-              <a>Test</a>
-              <ul>
-                <li>Test 1</li>
-              </ul>
-            </div>
-          </div>
         </div>
         <button class="change-month next" id="next-month"></button>
         <button class="change-month previous" id="prev-month"></button>
