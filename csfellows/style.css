@@ -137,6 +137,10 @@
     border-color:#000 !important
 }
 
+.calendar-popup{
+    
+}
+
 .info{
     grid-column: 1;
     grid-row: 2;
