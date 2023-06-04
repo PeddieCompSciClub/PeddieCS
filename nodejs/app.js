@@ -611,10 +611,6 @@ app.get('/csfellows/schedule', (req,res) => {
         });
         con.end();
     });
-
-
-    res.json({"message":"success","schedule":''});
-    return res.end();
 });
 
 //get zoom link
