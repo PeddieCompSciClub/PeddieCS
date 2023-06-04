@@ -127,6 +127,7 @@
     margin-bottom: 1px;
     line-height: 1.2em;
     white-space:nowrap;
+    overflow-x: clip;
     text-overflow: ellipsis;
     cursor: pointer;
     transition: 0.25s all;
