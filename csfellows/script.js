@@ -53,7 +53,7 @@ function loadMonth(date) {
 function addCalendarEvents(year, month, data) {
     console.log({year:year,month:month,data:data});
     for(var event in data){
-        console.log(event);
+        console.log(event.name);
     }
         // document.getElementById('day-'+data.getDay()).innerHTML = `<div class="event">Test</div>`;
 }
