@@ -124,6 +124,13 @@
     font-weight: 600;
     font-size: 0.8em;
     margin-bottom: 1px;
+    line-height: 1.2em;
+    border: solid 1px;
+    transition: 0.25s all
+}
+
+.calendar .event:hover{
+    border-color:#00000000
 }
 
 .info{
