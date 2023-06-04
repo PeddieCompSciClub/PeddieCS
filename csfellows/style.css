@@ -37,7 +37,7 @@
 .calendar-body{
     display:grid;
     grid-template-columns: repeat(7,calc(100%/7));
-    grid-template-rows:repeat(4,5%) repeat(6,auto);
+    grid-template-rows:repeat(4,5%) repeat(6,13.333%);
     height:100%;
     /* border: solid 1px var(--navbar); */
 }
@@ -119,7 +119,11 @@
 }
 
 .calendar .event{
-    
+    background-color: lightcoral;
+    border-radius: 0.2em;
+    font-weight: 600;
+    font-size: 0.8em;
+    margin-bottom: 1px;
 }
 
 .info{
