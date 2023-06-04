@@ -56,6 +56,6 @@ function addCalendarEvents(year, month, data) {
         var event = data[i]
         var eventDate = new Date(event.date);
         console.log('day-'+eventDate.getDay());
-        document.getElementById('day-'+eventDate.getDay()).innerHTML += `<div class="event">Test</div>`;
+        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event">Test</div>`;
     }
 }
