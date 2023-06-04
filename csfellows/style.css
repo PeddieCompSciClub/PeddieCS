@@ -32,6 +32,7 @@
     padding:5%;
     background-color: #00000000;
     font-size: 1.5vmin;
+    user-select: none; /*disables highlighting text*/
 }
 
 .calendar-body{
@@ -126,6 +127,7 @@
     margin-bottom: 1px;
     line-height: 1.2em;
     border: solid 1px;
+    cursor: pointer;
     transition: 0.25s all
 }
 
