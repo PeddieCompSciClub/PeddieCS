@@ -60,12 +60,23 @@ function addCalendarEvents(year, month, data) {
     }
 }
 
-function hashColor(text){
-    var hash = (text).hashCode();
+function hashToColor(text){
+    var hash = stringToHash(text);
     let r = (hash & 0xFF0000) >> 16;
     let g = (hash & 0x00FF00) >> 8;
     let b = (hash & 0x0000FF);
     
     //println(hash,r,g,b);
     return `rgb(${r},${g},${b})`;
-  }
+}
+
+function stringToHash(string) {  
+    var hash = 0;
+    if (string.length == 0) return hash;
+    for (i = 0; i < string.length; i++) {
+        char = string.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return hash;
+}
