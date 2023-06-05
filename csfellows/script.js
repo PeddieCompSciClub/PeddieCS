@@ -56,6 +56,16 @@ function addCalendarEvents(year, month, data) {
         var event = data[i]
         var eventDate = new Date(event.date);
         console.log('day-'+eventDate.getDay());
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:lightcoral; border-color:lightcoral">${event.name}</div>`;
+        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${hashColor('test')}; border-color:#00000000">${event.name}</div>`;
     }
 }
+
+function hashColor(text){
+    var hash = (text).hashCode();
+    let r = (hash & 0xFF0000) >> 16;
+    let g = (hash & 0x00FF00) >> 8;
+    let b = (hash & 0x0000FF);
+    
+    //println(hash,r,g,b);
+    return `rgb(${r},${g},${b})`;
+  }
