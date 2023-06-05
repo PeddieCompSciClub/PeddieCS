@@ -62,9 +62,9 @@ function addCalendarEvents(year, month, data) {
 
 function stringToColor(text){
     var hash = stringToHash(text);
-    let r = (hash & 0xFF0000) >> 16;
-    let g = (hash & 0x00FF00) >> 8;
-    let b = (hash & 0x0000FF);
+    let r = 128+((hash & 0xFF0000) >> 16)/2;
+    let g = 128+((hash & 0x00FF00) >> 8)/2;
+    let b = 128+((hash & 0x0000FF))/2;
     
     //println(hash,r,g,b);
     return `rgb(${r},${g},${b})`;
