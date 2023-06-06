@@ -55,8 +55,8 @@ function addCalendarEvents(year, month, data) {
     for(var i=0; i<data.length; i++){
         var event = data[i]
         var eventDate = new Date(event.date);
-        console.log(eventDate.getHour());
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHour()}','${eventDate.getMinutes()}')">${event.name}</div>`;
+        console.log(eventDate.getHours());
+        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
     }
 }
 
