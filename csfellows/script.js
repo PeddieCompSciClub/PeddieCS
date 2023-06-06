@@ -64,7 +64,7 @@ function loadPopup(email){
     console.log(email);
     const popup = document.getElementById("calendar-popup");
 
-    popup.querySelector('#popup-image').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
+    popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
 
     popup.style="display:block";
 }
