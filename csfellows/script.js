@@ -56,15 +56,16 @@ function addCalendarEvents(year, month, data) {
         var event = data[i]
         var eventDate = new Date(event.date);
         console.log('day-'+eventDate.getDay());
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}')">${event.name}</div>`;
+        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getTime()}')">${event.name}</div>`;
     }
 }
 
-function loadPopup(email, name){
+function loadPopup(email, name, time){
     const popup = document.getElementById("calendar-popup");
 
     popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
     popup.querySelector('#popup-name').innerText=name;
+    popup.querySelector('#popup-time').innerText=time;
 
     popup.style="display:block";
 }

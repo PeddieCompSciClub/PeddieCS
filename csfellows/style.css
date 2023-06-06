@@ -147,8 +147,15 @@
     grid-row:1;
     z-index: 1;
     padding-top:25%;
-    display:none;
+    display:block;
     background: #00000088;
+}
+
+.calendar-popup p{
+    text-align: center;
+    margin-top: -0.6em;
+    font-weight: 600;
+    color:black;
 }
 
 .info{
