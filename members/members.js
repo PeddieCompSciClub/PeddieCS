@@ -1,7 +1,7 @@
 //get the current school year (the graduation class of the seniors)
 function getCurrentYear() {
     const d = new Date();
-    let year = d.getFullYear() + (d.getMonth() > 6 ? 1 : 0);
+    let year = d.getFullYear() + (d.getMonth() >= 5 ? 1 : 0);
     return year;
 }
 
@@ -30,6 +30,7 @@ function getYear(year) {
 
 //requests user data from the MySQL database
 function getMembers() {
+    setTitles();
     if(window.jQuery){
         $.get("https://peddiecs.peddie.org/nodejs/getAllMembers", {
         }, function (res) {
@@ -80,4 +81,10 @@ function displayMember(json){
 }
 
 
-// getMembers();
+//Set tab titles
+function setTitles(){
+    document.getElementById("seniors-title").innerText = 'Class of '+getCurrentYear();
+    document.getElementById("juniors-title").innerText = 'Class of '+(getCurrentYear()+1);
+    document.getElementById("sophomores-title").innerText = 'Class of '+(getCurrentYear()+2);
+    document.getElementById("freshmen-title").innerText = 'Class of '+(getCurrentYear()+3);
+}
