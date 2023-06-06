@@ -56,12 +56,14 @@ function addCalendarEvents(year, month, data) {
         var event = data[i]
         var eventDate = new Date(event.date);
         console.log('day-'+eventDate.getDay());
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}:${eventDate.getMinutes()}')">${event.name}</div>`;
+        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
     }
 }
 
-function loadPopup(email, name, time){
+function loadPopup(email, name, hour, minute){
     const popup = document.getElementById("calendar-popup");
+
+    const time = (hour%12)+':'+(minute<10?'0':'') + minute + '-' + ((hour+1)%12)+':'+(minute<10?'0':'') + minute
 
     popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
     popup.querySelector('#popup-name').innerText=name;
