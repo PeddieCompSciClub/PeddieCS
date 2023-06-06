@@ -71,11 +71,11 @@
         working or if you just want to discuss your logic for a program, feel free to join us via zoom.</p>
     </div>
     <div class="calendar" id="calendar">
-      <div class="calendar-popup" id="calendar-popup" onclick="console.log(this.style = 'display:none;')">
+      <div class="calendar-popup" id="calendar-popup" onclick="this.style = 'display:none;'">
         <div class="icon">
           <div class="memberItem">
             <img id="popup-img" src="/members/user-images/test.jpg" alt="member image" onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-            <script>document.getElementById('popup-image').addEventListener('error', function () {document.getElementById('popup-img').src = '/members/user-images/missing.jpg';});</script>
+            <script>document.getElementById('popup-image').addEventListener('error', function () {console.log("error img"); document.getElementById('popup-img').src = '/members/user-images/missing.jpg';});</script>
             <a id="popup-name">Test</a>
             <ul id="popup-list">
               <li>Test 1</li>
