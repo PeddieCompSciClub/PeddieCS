@@ -68,6 +68,12 @@ function loadPopup(email){
 
     popup.style="display:block";
 }
+//Listener for default image if error
+// document.getElementById('popup-image').addEventListener('error', function () {
+//     console.log("image error");
+//     document.getElementById('popup-img').src = '/members/user-images/missing.jpg';
+// });
+
 
 
 function stringToColor(text){
