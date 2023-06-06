@@ -56,24 +56,18 @@ function addCalendarEvents(year, month, data) {
         var event = data[i]
         var eventDate = new Date(event.date);
         console.log('day-'+eventDate.getDay());
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}')">${event.name}</div>`;
+        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email+','+event.name}')">${event.name}</div>`;
     }
 }
 
-function loadPopup(email){
-    console.log(email);
+function loadPopup(email, name){
     const popup = document.getElementById("calendar-popup");
 
     popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
+    popup.querySelector('#popup-name').innerText=name;
 
     popup.style="display:block";
 }
-//Listener for default image if error
-// document.getElementById('popup-image').addEventListener('error', function () {
-//     console.log("image error");
-//     document.getElementById('popup-img').src = '/members/user-images/missing.jpg';
-// });
-
 
 
 function stringToColor(text){
