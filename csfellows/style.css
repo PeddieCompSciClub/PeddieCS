@@ -33,6 +33,8 @@
     background-color: #00000000;
     font-size: 1.5vmin;
     user-select: none; /*disables highlighting text*/
+
+    display:grid;
 }
 
 .calendar-body{
@@ -40,6 +42,9 @@
     grid-template-columns: repeat(7,calc(100%/7));
     grid-template-rows:repeat(4,5%) repeat(6,13.333%);
     height:100%;
+
+    grid-column:1;
+    grid-row:1;
     /* border: solid 1px var(--navbar); */
 }
 
@@ -138,7 +143,11 @@
 }
 
 .calendar-popup{
-    position:absolute;
+    grid-column:1;
+    grid-row:1;
+    z-index: 1;
+    padding-top:25%;
+    display:block;
     background: #00000088;
 }
 
