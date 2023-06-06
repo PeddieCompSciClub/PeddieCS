@@ -62,8 +62,10 @@ function addCalendarEvents(year, month, data) {
 
 function loadPopup(email, name, hour, minute){
     const popup = document.getElementById("calendar-popup");
-    console.log(''+hour, ''+(((hour+11)%12)+1))
-    const time = (hour%12)+':'+(minute<10?'0':'') + minute + '-' + ((hour+1)%12)+':'+(minute<10?'0':'') + minute
+
+    hour = hour%12;
+
+    const time = (hour)+':'+(minute<10?'0':'') + minute + '-' + (hour+1)+':'+(minute<10?'0':'') + minute
 
     popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
     popup.querySelector('#popup-name').innerText=name;
