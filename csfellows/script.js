@@ -55,14 +55,14 @@ function addCalendarEvents(year, month, data) {
     for(var i=0; i<data.length; i++){
         var event = data[i]
         var eventDate = new Date(event.date.substring(0,event.date.length-1));
-        console.log(event.name,eventDate);
+        
         document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
     }
 }
 
 function loadPopup(email, name, hour, minute){
     const popup = document.getElementById("calendar-popup");
-
+    console.log(''+hour, ''+((hour+11)%12)+1)
     const time = (hour%12)+':'+(minute<10?'0':'') + minute + '-' + ((hour+1)%12)+':'+(minute<10?'0':'') + minute
 
     popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
