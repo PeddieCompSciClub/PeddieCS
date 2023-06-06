@@ -74,10 +74,10 @@
       <div class="calendar-popup" id="calendar-popup" onclick="console.log(this.style = 'display:none;')">
         <div class="icon">
           <div class="memberItem">
-            <img src="/members/user-images/test.jpg" alt="member image"
-              onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-            <a>Test</a>
-            <ul>
+            <img id="popup-img" src="/members/user-images/test.jpg" alt="member image" onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+            <script>document.getElementById('popup-image').addEventListener('error', function () {document.getElementById('popup-image').src = '/members/user-images/missing.jpg';});</script>
+            <a id="popup-name">Test</a>
+            <ul id="popup-list">
               <li>Test 1</li>
             </ul>
           </div>

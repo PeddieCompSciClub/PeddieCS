@@ -62,7 +62,11 @@ function addCalendarEvents(year, month, data) {
 
 function loadPopup(email){
     console.log(email);
-    document.getElementById("calendar-popup").style="display:block";
+    const popup = document.getElementById("calendar-popup");
+
+    popup.getElementById('popup-image').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
+
+    popup.style="display:block";
 }
 
 
