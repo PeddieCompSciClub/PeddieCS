@@ -64,7 +64,7 @@ function loadPopup(email, name, hour, minute){
     const popup = document.getElementById("calendar-popup");
 
     let hour2 = (hour%12)+1;
-    hour = ((hour+11)%12)+1;
+    hour = ((int(hour)+11)%12)+1;
     
 
     const time = (hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute
