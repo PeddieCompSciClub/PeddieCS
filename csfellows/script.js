@@ -95,7 +95,7 @@ function loadPreview(email,name,hour,minute){
             </div>
         </div>`;
     
-    console.log(email,name,hour,minute);
+    displayTodaysFellows();
 }
 
 function displayTodaysFellows(){
