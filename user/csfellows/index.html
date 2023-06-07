@@ -20,16 +20,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="/user/user.css">
   <link rel="stylesheet" href="/members/style.css">
   <link rel="icon" href="/favicon.ico">
 
-  <script src="/csfellows/script.js"></script>
-  <script src="/csfellows/signinbutton.js"></script>
+  <script src="/user/csfellows/script.js"></script>
+  <script src="/user/verifylogin.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="verifyLogin();">
+<body onload="verifyLogin().then(function(user){load(user)}).catch(function(error){console.error(error)})">
 
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <!-- Main Navbar -->

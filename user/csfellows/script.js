@@ -1,3 +1,15 @@
+//runs once user is validated
+function load(){
+    const permissions = user.permissions.replace(' ', '').split(',');
+    if (permissions.includes('admin')) {
+        loadMonth(new Date());
+    }
+    else {
+        window.location.href = '/user/'
+    }
+}
+
+
 //load calendar
 const currentDate = new Date;
 const saveDate = new Date;
@@ -31,8 +43,6 @@ function loadCalendarDates(date) {
     document.getElementById("prev-month").onclick = function onclick() { saveDate.setMonth(saveDate.getMonth() - 1); loadCalendarDates(saveDate); };
     document.getElementById("next-month").innerText = monthNames[(d.getMonth() + 1) % 12] + ' \u25b6';
     document.getElementById("next-month").onclick = function onclick() { saveDate.setMonth(saveDate.getMonth() + 1); loadCalendarDates(saveDate); };
-    //load fellows
-    loadMonth(date);
 }
 
 const loadedMonths = new Map();
