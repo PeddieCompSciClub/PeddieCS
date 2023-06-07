@@ -1,5 +1,5 @@
 //runs once user is validated
-function load(){
+function load(user){
     const permissions = user.permissions.replace(' ', '').split(',');
     if (permissions.includes('admin')) {
         loadMonth(new Date());
