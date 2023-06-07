@@ -1,8 +1,9 @@
 //runs once user is validated
 function load(user){
     const permissions = user.permissions.replace(' ', '').split(',');
-    if (permissions.includes('admin')) {
+    if (permissions.includes('csfellow')) {
         loadMonth(new Date());
+        loadZoomLink();
     }
     else {
         window.location.href = '/user/'
@@ -134,4 +135,21 @@ function stringToHash(string) {
         hash = hash & hash;
     }
     return hash;
+}
+
+function loadZoomLink(){
+    //add zoom link (sign in button)
+    document.getElementById('info').innerHTML += `<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Join</h3></button>`
+
+    $.get("https://peddiecs.peddie.org/nodejs/csfellows/getZoomLink", {
+        token: getCookie('credential')
+    }, function (res) {
+        if (res.message == "failed") {
+            console.log("Failed to get zoom link")
+        } else {
+            document.getElementById('join-zoom').addEventListener("click", function () {
+                window.location.href = res.link;
+            });     
+        }
+    });
 }
