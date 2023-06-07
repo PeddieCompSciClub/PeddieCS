@@ -1,6 +1,8 @@
 //load calendar
 const currentDate = new Date;
 const saveDate = new Date;
+var displayTodaysFellows = false;
+
 function loadCalendarDates(date) {
     console.log(date);
     //load month
@@ -57,6 +59,10 @@ function addCalendarEvents(year, month, data) {
         var eventDate = new Date(event.date.substring(0,event.date.length-1));
         
         document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
+
+        if(eventDate.toDateString() == currentDate.toDateString()){
+            loadFellowIcon(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
+        };
     }
 }
 
@@ -66,7 +72,6 @@ function loadPopup(email, name, hour, minute){
     let hour2 = (hour%12)+1;
     hour = ((parseInt(hour)+11)%12)+1;
     
-
     const time = (hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute
 
     popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
@@ -76,6 +81,26 @@ function loadPopup(email, name, hour, minute){
     popup.style="display:block";
 }
 
+function loadFellowIcon(email,name,hour,minute){
+    let hour2 = (hour%12)+1;
+    hour = ((parseInt(hour)+11)%12)+1;
+
+    document.getElementById('fellows-preview').innerHTML =
+        `<div class="icon">
+            <div class="memberItem">
+                <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+                <a>${name}</a>
+                <p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute}</p>
+            </div>
+        </div>`
+}
+
+function displayTodaysFellows(){
+    if(!displayTodaysFellows){
+        displayTodaysFellows = true;
+        document.getElementById('info-fellows').style = 'display:block;'
+    }
+}
 
 function stringToColor(text){
     var hash = stringToHash(text);

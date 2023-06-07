@@ -74,8 +74,9 @@
       <div class="calendar-popup" id="calendar-popup" onclick="this.style = 'display:none;'">
         <div class="icon">
           <div class="memberItem">
-            <img id="popup-img" src="/members/user-images/test.jpg" alt="member image" onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-            <script>document.getElementById('popup-img').addEventListener('error', function () {console.log("error img"); document.getElementById('popup-img').src = '/members/user-images/missing.jpg';});</script>
+            <img id="popup-img" src="/members/user-images/test.jpg" alt="member image"
+              onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+            <script>document.getElementById('popup-img').addEventListener('error', function () { console.log("error img"); document.getElementById('popup-img').src = '/members/user-images/missing.jpg'; });</script>
             <a id="popup-name">Test</a>
             <p id="popup-time">8:00-9:00</p>
             <ul id="popup-list">
@@ -102,47 +103,9 @@
       </script>
     </div>
     <div class="info" id="info">
-      <h3>Today's Fellows</h3>
-      <div class="fellows">
-        <div class="icon">
-          <div class="memberItem">
-            <img src="/members/user-images/test.jpg" alt="member image"
-              onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-            <a>Test</a>
-            <ul>
-              <li>Test 1</li>
-            </ul>
-          </div>
-        </div>
-        <div class="icon">
-          <div class="memberItem">
-            <img src="/members/user-images/test.jpg" alt="member image"
-              onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-            <a>Test</a>
-            <ul>
-              <li>Test 1</li>
-            </ul>
-          </div>
-        </div>
-        <div class="icon">
-          <div class="memberItem">
-            <img src="/members/user-images/test.jpg" alt="member image"
-              onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-            <a>Test</a>
-            <ul>
-              <li>Test 1</li>
-            </ul>
-          </div>
-        </div>
-        <div class="icon">
-          <div class="memberItem">
-            <img src="/members/user-images/test.jpg" alt="member image"
-              onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
-            <a>Test</a>
-            <ul>
-              <li>Test 1</li>
-            </ul>
-          </div>
+      <div id="info-fellows">
+        <h3>Today's Fellows</h3>
+        <div class="fellows" id="fellows-preview">
         </div>
       </div>
     </div>

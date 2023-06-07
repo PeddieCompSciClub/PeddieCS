@@ -151,7 +151,7 @@
     background: #00000088;
 }
 
-.calendar-popup p{
+.icon p{
     text-align: center;
     margin-top: -0.6em;
     font-weight: 600;
@@ -163,7 +163,11 @@
     grid-row: 2;
     padding-left: 4vmin;
 
-    /* display:grid; */
+    /* display:none; */
+}
+
+.info #info-fellows{
+    display:none;
 }
 
 .info h3{
