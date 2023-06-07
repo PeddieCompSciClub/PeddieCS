@@ -93,7 +93,9 @@ function loadPreview(email,name,hour,minute){
                 <a>${name}</a>
                 <p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute}</p>
             </div>
-        </div>`
+        </div>`;
+    
+    console.log(email,name,hour,minute);
 }
 
 function displayTodaysFellows(){
