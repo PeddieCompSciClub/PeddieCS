@@ -95,10 +95,10 @@ function loadPreview(email,name,hour,minute){
             </div>
         </div>`;
     
-    displayTodaysFellows();
+    displayPreview();
 }
 
-function displayTodaysFellows(){
+function displayPreview(){
     if(!displayTodaysFellows){
         displayTodaysFellows = true;
         document.getElementById('info-fellows').style = 'display:block;'
