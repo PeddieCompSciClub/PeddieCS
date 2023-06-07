@@ -86,7 +86,7 @@ function loadPreview(email,name,hour,minute){
     let hour2 = (hour%12)+1;
     hour = ((parseInt(hour)+11)%12)+1;
 
-    document.getElementById('fellows-preview').innerHTML =
+    document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon">
             <div class="memberItem">
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
