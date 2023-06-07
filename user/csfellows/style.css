@@ -160,6 +160,10 @@
     color:black;
 }
 
+.icon a{
+    color: var(--text) !important;
+}
+
 .info{
     grid-column: 1;
     grid-row: 2;
