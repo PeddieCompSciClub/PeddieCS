@@ -61,7 +61,8 @@ function addCalendarEvents(year, month, data) {
         document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
 
         if(eventDate.toDateString() == currentDate.toDateString()){
-            loadFellowIcon(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
+            console.log("Today's Fellow: "+event.name);
+            loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
         };
     }
 }
@@ -81,7 +82,7 @@ function loadPopup(email, name, hour, minute){
     popup.style="display:block";
 }
 
-function loadFellowIcon(email,name,hour,minute){
+function loadPreview(email,name,hour,minute){
     let hour2 = (hour%12)+1;
     hour = ((parseInt(hour)+11)%12)+1;
 
