@@ -32,37 +32,35 @@
 <body onload="verifyLogin().then(function(user){load(user)}).catch(function(error){console.error(error)})">
 
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-    <!-- Main Navbar -->
-    <div id="navbar-main" class="navbar-full navbar-nav mr-auto">
-      <a href="/"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
-      <a href="/">Home</a>
-      <a href="/projects/">Projects</a>
-      <a href="/members/">Members</a>
-      <a href="/clubs/">Clubs</a>
-      <a href="/csfellows/">CS Fellows</a>
-      <a href="mailto:compsciclub@peddie.org"><img src="/WebsitePictures/email.png"></a>
-      <a href="https://peddiehacks.peddie.org"><img src="/WebsitePictures/peddiehacks.jpg"></a>
-      <!-- <button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">NAME</button> -->
-    </div>
+		<!-- Main Navbar -->
+		<div id="navbar-main" class="navbar-full navbar-nav mr-auto ">
+			<a href="/"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
+			<a href="/">Home</a>
+			<a href="/user">Profile</a>
+			<a href="/user/class">Class</a>
+			<a href="/user/clubs">Clubs</a>
+			<a href="/user/projects">Projects</a>
+			<a href="/user/articles">Articles</a>
+			<!-- <a href="/user/csfellows">CS Fellows</a> -->
+			<!-- <button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">NAME</button> -->
+		</div>
 
-    <!-- Mobile Navbar -->
-    <div class="navbar-short navbar-nav mr-auto">
-      <a href="/index.html"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
-      <div class="dropdown">
-        <button><a>Home</a></button>
-        <div class="dropdown-content">
-          <!-- <a href="/index.html">Home</a> -->
-          <a href="/projects/index.html">Projects</a>
-          <a href="/members/index.html">Members</a>
-          <a href="/clubs/index.html">Clubs</a>
-          <a href="/csfellows/index.html">CS Fellows</a>
-        </div>
-      </div>
-      <a href="mailto:compsciclub@peddie.org"><img src="/WebsitePictures/email.png"></a>
-      <a href="https://peddiehacks.peddie.org"><img src="/WebsitePictures/peddiehacks.jpg"></a>
-      </li>
-    </div>
-  </nav>
+		<!-- Mobile Navbar -->
+		<div class="navbar-short navbar-nav mr-auto">
+			<a href="/"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
+			<div class="dropdown">
+				<button><a>CS Fellows</a></button>
+				<div class="dropdown-content">
+					<a href="/">Home</a>
+					<a href="/user/class">Class</a>
+					<a href="/user/clubs">Clubs</a>
+					<a href="/user/projects">Projects</a>
+					<a href="/user/articles">Articles</a>
+					<!-- <a href="/user/csfellows">CS Fellows</a> -->
+				</div>
+			</div>
+		</div>
+	</nav>
 
   <div class="main">
     <div class="title">
