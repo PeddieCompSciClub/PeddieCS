@@ -170,7 +170,7 @@ function selectCalendarDate(element, date){
     document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] +' '+ monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
     
     document.getElementById('fellows-preview').innerHTML = "";
-    console.log(loadedMonths);
-    console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
-    console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).filter(function(i){return new Date(i.date.substring(0,i.date.length-1)).getDate == date.getDate();}));
+    // console.log(loadedMonths);
+    // console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
+    [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()),function(entry){console.log(entry)})
 }
