@@ -164,7 +164,9 @@ function selectCalendarDate(element, date){
     [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active');}); element.classList.add('active');
 
     date = new Date(date);
-    
-    const months = 
     document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] +' '+ monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
+    
+    document.getElementById('fellows-preview').innerHTML = "";
+    console.log(loadedMonths);
+
 }
