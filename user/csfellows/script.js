@@ -3,6 +3,7 @@ function load(user){
     const permissions = user.permissions.replace(' ', '').split(',');
     if (permissions.includes('csfellow')) {
         loadMonth(new Date());
+        selectCalendarDate(null, new Date())
         loadZoomLink();
     }
     else {
@@ -76,9 +77,9 @@ function addCalendarEvents(year, month, data) {
         document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
 
         
-        if(eventDate.toDateString() == currentDate.toDateString()){
-            loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
-        };
+        // if(eventDate.toDateString() == currentDate.toDateString()){
+        //     loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
+        // };
     }
 }
 
@@ -161,7 +162,7 @@ function loadZoomLink(){
 
 //called when user clicks on the calendar to select a date
 function selectCalendarDate(element, date){
-    [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active');}); element.classList.add('active');
+    if(element) [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active');}); element.classList.add('active');
 
     date = new Date(date);
     document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] +' '+ monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
