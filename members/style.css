@@ -135,6 +135,10 @@ li:not(:last-child) {
     margin-top: 0;
 }
 
+.profile img{
+    height: auto;
+}
+
 .profile .icon ul {
     margin: auto;
 }
