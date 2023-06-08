@@ -55,7 +55,7 @@
     min-width: 200px;
     max-width: 400px;
     width: 18%;
-    height: auto;
+    height: 20em;
     border: 1px solid var(--select);
     border-radius: 10px;
     background-color: var(--table);
@@ -67,6 +67,7 @@
     margin: auto;
     margin-top: 5%;
     width: 90%;
+    height: 85%;
     object-fit: cover;
     display: block;
     border-radius: 5px;
