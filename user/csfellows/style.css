@@ -148,7 +148,7 @@
     white-space:nowrap;
     overflow-x: clip;
     text-overflow: ellipsis;
-    cursor: pointer;
+    /* cursor: pointer; */
     transition: 0.25s all;
 }
 
