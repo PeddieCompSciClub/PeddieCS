@@ -152,9 +152,9 @@
     transition: 0.25s all;
 }
 
-.calendar .event:hover{
+/* .calendar .event:hover{
     border-color:#000 !important
-}
+} */
 
 .calendar-popup{
     grid-column:1;

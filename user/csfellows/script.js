@@ -73,8 +73,8 @@ function addCalendarEvents(year, month, data,firstLoad) {
         var event = data[i]
         var eventDate = new Date(event.date.substring(0,event.date.length-1));
         
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
-
+        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000"</div>`;
+        //removed onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name} from above string
         
         if(eventDate.toDateString() == currentDate.toDateString() && firstLoad){
             loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
