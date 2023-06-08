@@ -162,7 +162,7 @@ function loadZoomLink(){
 
 //called when user clicks on the calendar to select a date
 function selectCalendarDate(element, date){
-    if(element) [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active');}); element.classList.add('active');
+    if(element!=null) [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active');}); element.classList.add('active');
 
     date = new Date(date);
     document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] +' '+ monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
