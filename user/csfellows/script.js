@@ -2,8 +2,7 @@
 function load(user){
     const permissions = user.permissions.replace(' ', '').split(',');
     if (permissions.includes('csfellow')) {
-        loadMonth(new Date());
-        selectCalendarDate(null, new Date())
+        loadMonth(new Date(),true);
         loadZoomLink();
     }
     else {
@@ -53,7 +52,7 @@ function loadCalendarDates(date) {
 
 const loadedMonths = new Map();
 //add events to calendar
-function loadMonth(date) {
+function loadMonth(date,firstLoad) {
     console.log([date.getMonth(), date.getFullYear()].toString());
     if (loadedMonths.has([date.getFullYear(), date.getMonth()].toString())) {
         addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
@@ -63,12 +62,12 @@ function loadMonth(date) {
             date: date
         }, function (res) {
             loadedMonths.set([date.getFullYear(), date.getMonth()].toString(),res.schedule)
-            addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
+            addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()),firstLoad);
         });
     }
 }
 
-function addCalendarEvents(year, month, data) {
+function addCalendarEvents(year, month, data,firstLoad) {
     console.log({year:year,month:month,data:data});
     for(var i=0; i<data.length; i++){
         var event = data[i]
@@ -77,9 +76,9 @@ function addCalendarEvents(year, month, data) {
         document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
 
         
-        // if(eventDate.toDateString() == currentDate.toDateString()){
-        //     loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
-        // };
+        if(eventDate.toDateString() == currentDate.toDateString() && firstLoad){
+            loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
+        };
     }
 }
 
