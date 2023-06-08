@@ -54,8 +54,8 @@
 .memberItem {
     min-width: 200px;
     max-width: 400px;
-    width: 18%;
-    height: 20em;
+    width: 16em;
+    height: 21.5em;
     border: 1px solid var(--select);
     border-radius: 10px;
     background-color: var(--table);
