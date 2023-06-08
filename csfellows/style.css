@@ -177,7 +177,7 @@
 
 .fellows{
     display:flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .join-zoom {
