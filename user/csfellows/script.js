@@ -16,11 +16,13 @@ const currentDate = new Date;
 const saveDate = new Date;
 var displayTodaysFellows = false;
 
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
 function loadCalendarDates(date) {
     console.log(date);
     //load month
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const calendar = document.getElementById("calendar");
     calendar.getElementsByClassName("month")[0].innerHTML = `<h1>${monthNames[date.getMonth()]}</h1><h2>${date.getFullYear()}</h2>`;
     [].forEach.call(document.querySelectorAll('.day'), function (day) { day.parentNode.removeChild(day); });
@@ -37,7 +39,9 @@ function loadCalendarDates(date) {
         days.push(i % (monthDays[d.getMonth()] + ((d.getMonth() == 1 && d.getFullYear() % 4 == 0) ? 1 : 0)) + 1)
     }
     for (var i = 0; i < days.length; i++) {
-        document.getElementById('calendar-body').innerHTML += `<div class="day${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? ' off' : ''}${currentDate.getDate() == i - d.getDay() + 1 && currentDate.toDateString() == date.toDateString() ? ' today' : ''}"${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'id="day-' + days[i] + '"'}>${days[i]}</div>`;
+        //behold; the single worst line of code I have ever written:
+        document.getElementById('calendar-body').innerHTML += `<div class="day${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? ' off' : ''}${currentDate.getDate() == i - d.getDay() + 1 && currentDate.toDateString() == date.toDateString() ? ' today' : ''}"${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'id="day-' + days[i] + '"'}${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14) || (currentDate > saveDate) || (currentDate.toDateString() == saveDate.toDateString() && currentDate.getDate() > days[i])) ? '' : 'onclick="selectCalendarDate(this,\''+date.getFullYear()+','+(date.getMonth()+1)+','+days[i]+'\')"'}>${days[i]}</div>`;
+        
     }
     //load next month
     document.getElementById("prev-month").innerText = '\u25c0 ' + monthNames[((d.getMonth() - 1) % 12 + 12) % 12];//weird stuff to deal with negatives
@@ -71,8 +75,8 @@ function addCalendarEvents(year, month, data) {
         
         document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
 
+        
         if(eventDate.toDateString() == currentDate.toDateString()){
-            console.log("Today's Fellow: "+event.name);
             loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
         };
     }
@@ -109,6 +113,8 @@ function loadPreview(email,name,hour,minute){
     displayPreview();
 }
 
+
+//not needed
 function displayPreview(){
     if(!displayTodaysFellows){
         displayTodaysFellows = true;
@@ -152,4 +158,14 @@ function loadZoomLink(){
             });     
         }
     });
+}
+
+//called when user clicks on the calendar to select a date
+function selectCalendarDate(element, date){
+    [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active');}); element.classList.add('active');
+
+    date = new Date(date);
+    
+    const months = 
+    document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] +' '+ monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
 }

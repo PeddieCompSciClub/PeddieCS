@@ -90,12 +90,24 @@
     background-color: var(--light);
     padding: 0 0.2em;
     border:solid 1px var(--hover);
+    transition: 0s;
 }
+
+.calendar .day:hover{
+    background-color: var(--hover);
+}
+
 .calendar .off{
     background-color: var(--select) !important;
+    border:solid 1px var(--hover) !important;
 }
 .calendar .today{
     background-color: var(--hover) !important;
+}
+
+.calendar .active{
+    /* border:solid 1px var(--text); */
+    background-color: var(--select) !important;
 }
 
 .calendar .change-month{
@@ -174,6 +186,10 @@
 
 .info #info-fellows{
     display:none;
+}
+
+.info #info-signup p{
+    text-align: center;
 }
 
 .info h3{
