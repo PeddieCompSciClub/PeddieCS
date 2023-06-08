@@ -80,7 +80,7 @@
     margin: auto;
     text-align: center;
     font-family: 'Raleway', serif;
-    font-size: 24px;
+    font-size: 1.5em;
     color: var(--background) !important;
     font-weight: bold;
 }
@@ -92,7 +92,7 @@
 }
 
 .memberItem li {
-    line-height: 1rem;
+    line-height: 1em;
 }
 
 li:not(:last-child) {
