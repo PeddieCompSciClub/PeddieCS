@@ -168,5 +168,5 @@ function selectCalendarDate(element, date){
     
     document.getElementById('fellows-preview').innerHTML = "";
     console.log(loadedMonths);
-
+    console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
 }
