@@ -110,7 +110,6 @@ function loadPreview(email,name,hour,minute){
             </div>
         </div>`;
     
-    displayPreview();
 }
 
 
