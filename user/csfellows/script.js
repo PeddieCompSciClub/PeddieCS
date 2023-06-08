@@ -171,5 +171,9 @@ function selectCalendarDate(element, date){
     document.getElementById('fellows-preview').innerHTML = "";
     // console.log(loadedMonths);
     // console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
-    [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()),function(entry){console.log(entry)})
+    [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()),function(entry){
+        if(new Date(entry.date.substring(0,entry.date.length-1)).getDate()==date.getDate()){
+            console.log(entry);
+        }
+    });
 }
