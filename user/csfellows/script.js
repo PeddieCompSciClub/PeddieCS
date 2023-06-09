@@ -40,7 +40,7 @@ function loadCalendarDates(date) {
     }
     for (var i = 0; i < days.length; i++) {
         //behold; the single worst line of code I have ever written:
-        document.getElementById('calendar-body').innerHTML += `<div class="day${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? ' off' : ''}${currentDate.getDate() == i - d.getDay() + 1 && currentDate.toDateString() == date.toDateString() ? ' today' : ''}"${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'id="day-' + days[i] + '"'}${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14) || (currentDate > saveDate) || (currentDate.toDateString() == saveDate.toDateString() && currentDate.getDate() > days[i])) ? '' : 'onclick="selectCalendarDate(this,\''+date.getFullYear()+','+(date.getMonth()+1)+','+days[i]+'\')"'}>${days[i]}</div>`;
+        document.getElementById('calendar-body').innerHTML += `<div class="day${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? ' off' : ''}${currentDate.getDate() == i - d.getDay() + 1 && currentDate.toDateString() == date.toDateString() ? ' today' : ''}"${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'id="day-' + days[i] + '"'}${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'onclick="selectCalendarDate(this,\''+date.getFullYear()+','+(date.getMonth()+1)+','+days[i]+'\')"'}>${days[i]}</div>`;
         
     }
     //load next month
