@@ -52,20 +52,22 @@ function loadMonth(date) {
     }
 }
 
+var loadIcons=true;
 function addCalendarEvents(year, month, data) {
     console.log({year:year,month:month,data:data});
-    document.getElementById('fellows-preview').innerHTML = '';
     for(var i=0; i<data.length; i++){
         var event = data[i]
         var eventDate = new Date(event.date.substring(0,event.date.length-1));
         
         document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
 
-        if(eventDate.toDateString() == currentDate.toDateString()){
+        if(eventDate.toDateString() == currentDate.toDateString() && loadIcons){
+            tempLoadIcons = 
             console.log("Today's Fellow: "+event.name);
             loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
         };
     }
+    loadIcons = false;
 }
 
 function loadPopup(email, name, hour, minute){
