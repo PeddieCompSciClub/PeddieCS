@@ -1,6 +1,8 @@
 //runs once user is validated
+var userData;
 function load(user) {
     const permissions = user.permissions.replace(' ', '').split(',');
+    userData = user;
     if (permissions.includes('csfellow')) {
         loadMonth(new Date(), true);
         loadZoomLink();
@@ -169,17 +171,28 @@ function selectCalendarDate(element, date) {
     document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] + ' ' + monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
 
     document.getElementById('fellows-preview').innerHTML = "";
-    // console.log(loadedMonths);
-    // console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
-    if (loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).length>0){
-        [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
-            eventDate = new Date(event.date.substring(0, event.date.length - 1));
-            if (eventDate.getDate() == date.getDate()) {
-                console.log(event);
-                loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes());
-            }
-        });
-    } else {
-        document.getElementById('fellows-preview').innerHTML = "<p>(no fellows scheduled)</p>";
+
+
+    var fellowsCount = 0;//number of fellows on a given day
+    var time8=0, time9=0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
+    var userScheduled = false;
+    [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
+        eventDate = new Date(event.date.substring(0, event.date.length - 1));
+        if (eventDate.getDate() == date.getDate()) {
+            console.log(event);
+            loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes());
+            fellowsCount++;
+            if(eventDate.getHours()==20) time8++;
+            if(eventDate.getHours()==21) time9++;
+            if(event.email == userData.email) userScheduled = true;
+        }
+    });
+    if(userScheduled){
+        
+    }
+    if(fellowsCount<4){
+        if(fellowsCount==0){
+            document.getElementById('fellows-preview').innerHTML = "(no fellows scheduled)";
+        }
     }
 }
