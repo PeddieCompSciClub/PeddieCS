@@ -619,7 +619,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     const token = req.body.token;
     const datetime = new Date(req.body.datetime);
     console.log(datetime);
-    console.log(date.getFullYear())
+    console.log(datetime.getFullYear())
 
     verifyCredentialPermission(token,'csfellow', function (success, email) {
         if (!success) {
