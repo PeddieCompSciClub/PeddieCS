@@ -171,7 +171,7 @@ function selectCalendarDate(element, date) {
     document.getElementById('fellows-preview').innerHTML = "";
     // console.log(loadedMonths);
     // console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
-    console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()),loadedMonths.get([date.getFullYear(), date.getMonth()].toString().length));
+    console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).length);
     if (1>0){
         [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
             eventDate = new Date(event.date.substring(0, event.date.length - 1));
