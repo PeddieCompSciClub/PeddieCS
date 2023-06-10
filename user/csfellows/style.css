@@ -201,6 +201,17 @@
     display: block;
 }
 
+.delete {
+    border-color:var(--btn-red-border);
+    background-color:var(--btn-red);
+    width:auto;
+    transition: 0.25s;
+}
+.delete:hover {
+    background-color:var(--btn-red-hover);
+    border-color:var(--btn-red-border) !important;
+}
+
 .fellows{
     display:flex;
     justify-content: space-evenly;
