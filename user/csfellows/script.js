@@ -162,13 +162,14 @@ function loadZoomLink() {
 }
 
 //called when user clicks on the calendar to select a date
+var selectedDate;
 function selectCalendarDate(element, date) {
     if (element != null) {
         [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active'); }); element.classList.add('active');
     }
 
-    date = new Date(date);
-    document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] + ' ' + monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+    selectedDate = new Date(date);
+    document.getElementById('signup-instruction').innerText = dayNames[selectedDate.getDay()] + ' ' + monthNames[selectedDate.getMonth()] + ' ' + selectedDate.getDate() + ', ' + selectedDate.getFullYear();
 
     document.getElementById('fellows-preview').innerHTML = "";
     document.getElementById('fellows-remove').style = "display:none";
@@ -176,9 +177,9 @@ function selectCalendarDate(element, date) {
     var fellowsCount = 0;//number of fellows on a given day
     var time8=0, time9=0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
     var userScheduled = false;
-    [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
+    [].forEach.call(loadedMonths.get([selectedDate.getFullYear(), selectedDate.getMonth()].toString()), function (event) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
-        if (eventDate.getDate() == date.getDate()) {
+        if (eventDate.getDate() == selectedDate.getDate()) {
             console.log(event);
             loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes());
             fellowsCount++;
@@ -195,4 +196,14 @@ function selectCalendarDate(element, date) {
             document.getElementById('fellows-preview').innerHTML = "(no fellows scheduled)";
         }
     }
+}
+
+
+function cancelEvent(){
+    $.get("https://peddiecs.peddie.org/nodejs/csfellows/schedule/cancel", {
+        token: getCookie('credential'),
+        datetime: selectedDate
+    }, function (res) {
+        console.log(res);
+    });
 }
