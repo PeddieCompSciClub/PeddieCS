@@ -1,8 +1,8 @@
 //runs once user is validated
-function load(user){
+function load(user) {
     const permissions = user.permissions.replace(' ', '').split(',');
     if (permissions.includes('csfellow')) {
-        loadMonth(new Date(),true);
+        loadMonth(new Date(), true);
         loadZoomLink();
     }
     else {
@@ -18,7 +18,7 @@ var displayTodaysFellows = false;
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function loadCalendarDates(date) {
     console.log(date);
@@ -40,98 +40,98 @@ function loadCalendarDates(date) {
     }
     for (var i = 0; i < days.length; i++) {
         //behold; the single worst line of code I have ever written:
-        document.getElementById('calendar-body').innerHTML += `<div class="day${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? ' off' : ''}${currentDate.getDate() == i - d.getDay() + 1 && currentDate.toDateString() == date.toDateString() ? ' today' : ''}"${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'id="day-' + days[i] + '"'}${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'onclick="selectCalendarDate(this,\''+date.getFullYear()+','+(date.getMonth()+1)+','+days[i]+'\')"'}>${days[i]}</div>`;
-        
+        document.getElementById('calendar-body').innerHTML += `<div class="day${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? ' off' : ''}${currentDate.getDate() == i - d.getDay() + 1 && currentDate.toDateString() == date.toDateString() ? ' today' : ''}"${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'id="day-' + days[i] + '"'}${((i < 7 && days[i] > 14) || (i > 21 && days[i] < 14)) ? '' : 'onclick="selectCalendarDate(this,\'' + date.getFullYear() + ',' + (date.getMonth() + 1) + ',' + days[i] + '\')"'}>${days[i]}</div>`;
+
     }
     //load next month
     document.getElementById("prev-month").innerText = '\u25c0 ' + monthNames[((d.getMonth() - 1) % 12 + 12) % 12];//weird stuff to deal with negatives
-    document.getElementById("prev-month").onclick = function onclick() { saveDate.setMonth(saveDate.getMonth() - 1); loadCalendarDates(saveDate); loadMonth(saveDate);};
+    document.getElementById("prev-month").onclick = function onclick() { saveDate.setMonth(saveDate.getMonth() - 1); loadCalendarDates(saveDate); loadMonth(saveDate); };
     document.getElementById("next-month").innerText = monthNames[(d.getMonth() + 1) % 12] + ' \u25b6';
-    document.getElementById("next-month").onclick = function onclick() { saveDate.setMonth(saveDate.getMonth() + 1); loadCalendarDates(saveDate); loadMonth(saveDate);};
+    document.getElementById("next-month").onclick = function onclick() { saveDate.setMonth(saveDate.getMonth() + 1); loadCalendarDates(saveDate); loadMonth(saveDate); };
 }
 
 const loadedMonths = new Map();
 //add events to calendar
-function loadMonth(date,firstLoad) {
+function loadMonth(date, firstLoad) {
     console.log([date.getMonth(), date.getFullYear()].toString());
     if (loadedMonths.has([date.getFullYear(), date.getMonth()].toString())) {
-        addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
+        addCalendarEvents(date.getYear(), date.getMonth(), loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
     } else {
         console.log('loading data');
         $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
             date: date
         }, function (res) {
-            loadedMonths.set([date.getFullYear(), date.getMonth()].toString(),res.schedule)
-            addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()),firstLoad);
+            loadedMonths.set([date.getFullYear(), date.getMonth()].toString(), res.schedule)
+            addCalendarEvents(date.getYear(), date.getMonth(), loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), firstLoad);
         });
     }
 }
 
-function addCalendarEvents(year, month, data,firstLoad) {
-    console.log({year:year,month:month,data:data});
-    for(var i=0; i<data.length; i++){
+function addCalendarEvents(year, month, data, firstLoad) {
+    console.log({ year: year, month: month, data: data });
+    for (var i = 0; i < data.length; i++) {
         var event = data[i]
-        var eventDate = new Date(event.date.substring(0,event.date.length-1));
-        
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" >${event.name}</div>`;
+        var eventDate = new Date(event.date.substring(0, event.date.length - 1));
+
+        document.getElementById('day-' + eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" >${event.name}</div>`;
         //removed onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')" from above
-        
-        if(eventDate.toDateString() == currentDate.toDateString() && firstLoad){
-            loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
+
+        if (eventDate.toDateString() == currentDate.toDateString() && firstLoad) {
+            loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes());
         };
     }
 }
 
-function loadPopup(email, name, hour, minute){
+function loadPopup(email, name, hour, minute) {
     const popup = document.getElementById("calendar-popup");
 
-    let hour2 = (hour%12)+1;
-    hour = ((parseInt(hour)+11)%12)+1;
-    
-    const time = (hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute
+    let hour2 = (hour % 12) + 1;
+    hour = ((parseInt(hour) + 11) % 12) + 1;
 
-    popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
-    popup.querySelector('#popup-name').innerText=name;
-    popup.querySelector('#popup-time').innerText=time;
+    const time = (hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute < 10 ? '0' : '') + minute
 
-    popup.style="display:block";
+    popup.querySelector('#popup-img').src = '/members/user-images/' + email.substring(0, email.indexOf("@"));
+    popup.querySelector('#popup-name').innerText = name;
+    popup.querySelector('#popup-time').innerText = time;
+
+    popup.style = "display:block";
 }
 
-function loadPreview(email,name,hour,minute){
-    let hour2 = (hour%12)+1;
-    hour = ((parseInt(hour)+11)%12)+1;
+function loadPreview(email, name, hour, minute) {
+    let hour2 = (hour % 12) + 1;
+    hour = ((parseInt(hour) + 11) % 12) + 1;
 
     document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon">
             <div class="memberItem">
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
-                <p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute}</p>
+                <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute < 10 ? '0' : '') + minute}</p>
             </div>
         </div>`;
-    
+
 }
 
 
 //not needed
-function displayPreview(){
-    if(!displayTodaysFellows){
+function displayPreview() {
+    if (!displayTodaysFellows) {
         displayTodaysFellows = true;
         document.getElementById('info-fellows').style = 'display:block;'
     }
 }
 
-function stringToColor(text){
+function stringToColor(text) {
     var hash = stringToHash(text);
-    let r = 127+((hash & 0xFF0000) >> 16)/2;
-    let g = 127+((hash & 0x00FF00) >> 8)/2;
-    let b = 127+((hash & 0x0000FF))/2;
-    
+    let r = 127 + ((hash & 0xFF0000) >> 16) / 2;
+    let g = 127 + ((hash & 0x00FF00) >> 8) / 2;
+    let b = 127 + ((hash & 0x0000FF)) / 2;
+
     //println(hash,r,g,b);
     return `rgb(${r},${g},${b})`;
 }
 
-function stringToHash(string) {  
+function stringToHash(string) {
     var hash = 0;
     if (string.length == 0) return hash;
     for (i = 0; i < string.length; i++) {
@@ -142,7 +142,7 @@ function stringToHash(string) {
     return hash;
 }
 
-function loadZoomLink(){
+function loadZoomLink() {
     //add zoom link (sign in button)
     document.getElementById('info').innerHTML += `<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Join</h3></button>`
 
@@ -154,28 +154,32 @@ function loadZoomLink(){
         } else {
             document.getElementById('join-zoom').addEventListener("click", function () {
                 window.location.href = res.link;
-            });     
+            });
         }
     });
 }
 
 //called when user clicks on the calendar to select a date
-function selectCalendarDate(element, date){
-    if(element!=null){
-        [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active');}); element.classList.add('active');
+function selectCalendarDate(element, date) {
+    if (element != null) {
+        [].forEach.call(document.querySelectorAll('.active'), function (day) { day.classList.remove('active'); }); element.classList.add('active');
     }
 
     date = new Date(date);
-    document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] +' '+ monthNames[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear();
-    
+    document.getElementById('signup-instruction').innerText = dayNames[date.getDay()] + ' ' + monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+
     document.getElementById('fellows-preview').innerHTML = "";
     // console.log(loadedMonths);
     // console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
-    [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()),function(event){
-        eventDate = new Date(event.date.substring(0,event.date.length-1));
-        if(eventDate.getDate()==date.getDate()){
-            console.log(event);
-            loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
-        }
-    });
+    if (loadedMonths.get([date.getFullYear(), date.getMonth()].toString().length > 0)){
+        [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
+            eventDate = new Date(event.date.substring(0, event.date.length - 1));
+            if (eventDate.getDate() == date.getDate()) {
+                console.log(event);
+                loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes());
+            }
+        });
+    } else {
+        document.getElementById('fellows-preview').innerHTML = "<p>(no fellows scheduled</p>";
+    }
 }
