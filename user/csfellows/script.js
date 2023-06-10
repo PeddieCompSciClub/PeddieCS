@@ -180,6 +180,6 @@ function selectCalendarDate(element, date) {
             }
         });
     } else {
-        document.getElementById('fellows-preview').innerHTML = "<p>(no fellows scheduled</p>";
+        document.getElementById('fellows-preview').innerHTML = "<p>(no fellows scheduled)</p>";
     }
 }
