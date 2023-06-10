@@ -198,7 +198,7 @@
 }
 
 .info #fellows-remove{
-    display: block;
+    display: none;
 }
 
 .delete {
