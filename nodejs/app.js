@@ -617,7 +617,7 @@ app.get('/csfellows/schedule', (req,res) => {
 //removes an event from the calendar
 app.post('/csfellows/schedule/cancel', (req, res) => {
     const token = req.body.token;
-    const datetime = req.body.datetime
+    const datetime = new Date(req.body.datetime);
     console.log(datetime);
     console.log(date.getFullYear())
 
