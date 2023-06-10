@@ -200,7 +200,7 @@ function selectCalendarDate(element, date) {
 
 
 function cancelEvent(){
-    $.get("https://peddiecs.peddie.org/nodejs/csfellows/schedule/cancel", {
+    $.post("https://peddiecs.peddie.org/nodejs/csfellows/schedule/cancel", {
         token: getCookie('credential'),
         datetime: selectedDate
     }, function (res) {
