@@ -210,6 +210,8 @@ function cancelEvent(id){
             if(document.getElementById('fellows-preview').childElementCount==0){
                 document.getElementById('fellows-preview').innerText = "(no fellows scheduled)"
             }
+            var events = loadedMonths.get([saveDate.getFullYear(), saveDate.getMonth()].toString()).data.filter(function(item){return item.id == id});
+            console.log(events);
         }
     });
 }
