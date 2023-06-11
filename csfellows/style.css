@@ -29,7 +29,6 @@
     width:80vmin;
     max-width:80vw;
     height:80vmin;
-    padding:5%;
     background-color: #00000000;
     font-size: 1.5vmin;
     user-select: none; /*disables highlighting text*/
@@ -42,6 +41,7 @@
     grid-template-columns: repeat(7,calc(100%/7));
     grid-template-rows:repeat(4,5%) repeat(6,13.333%);
     height:100%;
+    padding:5%;
 
     grid-column:1;
     grid-row:1;
@@ -147,6 +147,7 @@
     grid-row:1;
     z-index: 1;
     padding-top:25%;
+    margin:5%;
     display:none;
     background: #00000088;
 }
