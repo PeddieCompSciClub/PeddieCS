@@ -708,7 +708,7 @@ function recursiveAdd(con, schedule, i, j) {
             
             j = (j+1)%schedule[i].length;
             if(j==0) i++;
-            if(i < schedule.length) recursiveAdd(con, schedule, i, j);
+            // if(i < schedule.length) recursiveAdd(con, schedule, i, j);
             else con.end();
         });
     });
