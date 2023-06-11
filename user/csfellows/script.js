@@ -255,12 +255,12 @@ function DEBUGfillCalendar(year, month){
 
             console.log(newSchedule);
 
-            // $.post('https://peddiecs.peddie.org/nodejs/csfellows/adminSchedule',{
-            //     token: getCookie('credential'),
-            //     schedule: newSchedule
-            // },function (res) {
-            //     console.log(res);
-            // });
+            $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule/month',{
+                token: getCookie('credential'),
+                schedule: newSchedule
+            },function (res) {
+                console.log(res);
+            });
         });
 
 

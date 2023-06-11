@@ -466,7 +466,7 @@ app.post('/deleteUser', (req, res) => {
 //return all member data
 app.get('/admin/getAllMembers', (req, res) => {
     const token = req.query.token;
-    verifyCredentialPermission(token,'admin', function (success, email) {
+    verifyCredentialPermission(token, 'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
             res.end();
@@ -494,14 +494,14 @@ app.get('/admin/getAllMembers', (req, res) => {
 });
 
 //updates a users profile info
-app.post('/admin/updateUserProfile', (req,res) => {
+app.post('/admin/updateUserProfile', (req, res) => {
     const token = req.body.token;
     const userEmail = req.body.email;
     const bio = req.body.bio;
     const university = req.body.university;
     const public = req.body.public;
 
-    verifyCredentialPermission(token,'admin', function (success, email) {
+    verifyCredentialPermission(token, 'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
             res.end();
@@ -519,7 +519,7 @@ app.post('/admin/updateUserProfile', (req,res) => {
                 if (err) throw err;
                 con.query(`UPDATE members SET public=${public}, bio="${bio}", university="${university}" WHERE email="${userEmail}"`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({"message":"success"});
+                    res.json({ "message": "success" });
                     return res.end();
                 });
                 con.end();
@@ -563,7 +563,7 @@ app.post('/admin/updateUserImage', (req, res) => {
 app.post('/csfellows/schedule', (req, res) => {
     const token = req.body.token;
 
-    verifyCredentialPermission(token,'csfellow', function (success, email) {
+    verifyCredentialPermission(token, 'csfellow', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
             res.end();
@@ -581,7 +581,7 @@ app.post('/csfellows/schedule', (req, res) => {
                 if (err) throw err;
                 con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({"message":"success"});
+                    res.json({ "message": "success" });
                     return res.end();
                 });
                 con.end();
@@ -591,9 +591,9 @@ app.post('/csfellows/schedule', (req, res) => {
 });
 
 //gets the cs fellow for a specific month
-app.get('/csfellows/schedule', (req,res) => {
+app.get('/csfellows/schedule', (req, res) => {
     const date = new Date(req.query.date);
-    const mysqlDate = date.getFullYear()+'-'+date.getMonth()+'-'+(date.getDate()+1)+' '+date.getHours()+':00:00';
+    const mysqlDate = date.getFullYear() + '-' + date.getMonth() + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
 
     var con = mysql.createConnection({
         host: "localhost",
@@ -604,10 +604,10 @@ app.get('/csfellows/schedule', (req,res) => {
     });
     con.connect(function (err) {
         if (err) throw err;
-        console.log(`SELECT name, email, date, id FROM csfellows WHERE MONTH(date)=${date.getMonth()+1}`);
-        con.query(`SELECT name, email, date, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth()+1}`, function (err, result, fields) {
+        console.log(`SELECT name, email, date, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
+        con.query(`SELECT name, email, date, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
             if (err) throw err;
-            res.json({"message":"success","schedule":result});
+            res.json({ "message": "success", "schedule": result });
             return res.end();
         });
         con.end();
@@ -619,7 +619,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     const token = req.body.token;
     const id = req.body.id;
 
-    verifyCredentialPermission(token,'csfellow', function (success, email) {
+    verifyCredentialPermission(token, 'csfellow', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
             res.end();
@@ -640,7 +640,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
                 console.log(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`)
                 con.query(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({"message":"success"});
+                    res.json({ "message": "success" });
                     return res.end();
                 });
                 con.end();
@@ -649,16 +649,57 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
-//get zoom link
-app.get('/csfellows/getZoomLink', (req,res)=>{
-    const token = req.query.token;
-    verifyCredentialPermission(token,'csfellow', function (success, email) {
+//removes an event from the calendar
+app.post('/csfellows/schedule/month', (req, res) => {
+    const token = req.body.token;
+    const schedule = req.body.schedule;
+
+    verifyCredentialPermission(token, 'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
             res.end();
         }
         else {
-            res.json({'message':'success','link':secure.zoom.link});
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+
+            for (let i = 0; i < schedule.length; i++) {
+                for (let j = 0; j < schedule[i].lenght; j++) {
+                    var event = schedule[i][j];
+                    console.log(event);
+                    //var dateString = 
+                    // con.connect(function (err) {
+                    //     if (err) throw err;
+                    //     con.query(``, function (err, result, fields) {
+                    //         if (err) throw err;
+                    //         res.json({ "message": "success" });
+                    //         return res.end();
+                    //     });
+                    // });
+                }
+            }
+
+            con.end();
+        }
+    });
+});
+
+
+//get zoom link
+app.get('/csfellows/getZoomLink', (req, res) => {
+    const token = req.query.token;
+    verifyCredentialPermission(token, 'csfellow', function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            res.json({ 'message': 'success', 'link': secure.zoom.link });
             res.end();
         }
     });
