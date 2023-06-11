@@ -177,7 +177,7 @@ function selectCalendarDate(element, date) {
     var time8=0, time9=0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
     var userScheduled = false;
     var pastEvent = false;
-    if(new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()+1) < currentDate && date.toDateString() != currentDate.toDateString()) pastEvent = true;
+    if(new Date(date.toDateString()) < new Date(currentDate.toDateString)) pastEvent = true;
 
     [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
