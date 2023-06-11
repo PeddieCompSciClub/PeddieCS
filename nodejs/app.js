@@ -669,30 +669,32 @@ app.post('/csfellows/schedule/month', (req, res) => {
                 port: 3306
             });
 
-            for (let i = 0; i < schedule.length; i++) {
-                for (let j = 0; j < schedule[i].length; j++) {
+            recursiveAdd(con, schedule, 0, 0);
+
+            // for (let i = 0; i < schedule.length; i++) {
+            //     for (let j = 0; j < schedule[i].length; j++) {
 
 
 
-                    var event = schedule[i][j];
+            //         var event = schedule[i][j];
 
-                    const date = new Date(event.date);
-                    const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + date.getHours() + ':00:00';
-                    con.connect(function (err) {
-                        if (err) throw err;
-                        con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
-                            if (err) throw err;
-                            console.log(i, j, schedule[i][j]);
-                            con.end();
-                        });
-                    });
-                }
-            }
+            //         const date = new Date(event.date);
+            //         const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + date.getHours() + ':00:00';
+            //         con.connect(function (err) {
+            //             if (err) throw err;
+            //             con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
+            //                 if (err) throw err;
+            //                 console.log(i, j, schedule[i][j]);
+            //                 con.end();
+            //             });
+            //         });
+            //     }
+            // }
         }
     });
 });
 
-function recursiveAdd(schedule, i, j) {
+function recursiveAdd(con, schedule, i, j) {
     console.log(i,j)
     var event = schedule[i][j];
     const date = new Date(event.date);
@@ -706,7 +708,7 @@ function recursiveAdd(schedule, i, j) {
             
             j = (j+1)%schedule[i].length;
             if(j==0) i++;
-            if(i < schedule.length) recursiveAdd(schedule, i, j);
+            if(i < schedule.length) recursiveAdd(con, schedule, i, j);
             else con.end();
         });
     });
