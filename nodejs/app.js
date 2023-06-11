@@ -661,14 +661,6 @@ app.post('/csfellows/schedule/month', (req, res) => {
         }
         else {
 
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
-
             recursiveAdd(con, schedule, 0, 0);
 
             // for (let i = 0; i < schedule.length; i++) {
@@ -694,8 +686,17 @@ app.post('/csfellows/schedule/month', (req, res) => {
     });
 });
 
-function recursiveAdd(con, schedule, i, j) {
+function recursiveAdd(schedule, i, j) {
     console.log(i,j)
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "admincs",
+        password: "BeatBlair1864",
+        database: "peddieCS",
+        port: 3306
+    });
+
     var event = schedule[i][j];
     const date = new Date(event.date);
     const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + date.getHours() + ':00:00';
@@ -708,7 +709,7 @@ function recursiveAdd(con, schedule, i, j) {
             
             j = (j+1)%schedule[i].length;
             if(j==0) i++;
-            if(i < schedule.length) setTimeout(() => { recursiveAdd(con, schedule, i, j);}, 5000);
+            if(i < schedule.length) setTimeout(() => { con.end(); recursiveAdd(schedule, i, j);}, 5000);
             else con.end();
         });
     });
