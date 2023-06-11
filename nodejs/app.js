@@ -660,17 +660,18 @@ app.post('/csfellows/schedule/month', (req, res) => {
             res.end();
         }
         else {
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
-
-            var done = false;
+            
             for (let i = 0; i < schedule.length; i++) {
                 for (let j = 0; j < schedule[i].length; j++) {
+
+                    var con = mysql.createConnection({
+                        host: "localhost",
+                        user: "admincs",
+                        password: "BeatBlair1864",
+                        database: "peddieCS",
+                        port: 3306
+                    });
+
                     var event = schedule[i][j];
                     console.log(schedule[i][j]);
 
@@ -680,12 +681,10 @@ app.post('/csfellows/schedule/month', (req, res) => {
                         if (err) throw err;
                         con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
                             if (err) throw err;
-
-                            if(i==schedule.length-1 && j==schedule[i].length-1){
-                                con.end();
-                            }
                         });
                     });
+
+                    con.end();
                 }
             }
         }
