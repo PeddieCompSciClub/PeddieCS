@@ -109,6 +109,7 @@ function loadPreview(email, name, hour, minute) {
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
                 <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute < 10 ? '0' : '') + minute}</p>
+                ${email == userData.email ?'<button id="fellows-remove" class="delete memberItem" onclick="cancelEvent('+selectedDate.getDay()+','+hour+','+minute+');">Cancel Sign Up</button>':''}
             </div>
         </div>`;
 
@@ -189,7 +190,7 @@ function selectCalendarDate(element, date) {
         }
     });
     if(userScheduled){
-        document.getElementById('fellows-remove').style = "display:block";
+        
     }
     if(fellowsCount<4){
         if(fellowsCount==0){

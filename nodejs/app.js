@@ -626,7 +626,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
             res.json({ 'message': 'failed' });
             res.end();
         }
-        else {/*
+        else {
             var con = mysql.createConnection({
                 host: "localhost",
                 user: "admincs",
@@ -635,16 +635,17 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
                 port: 3306
             });
 
+            //var dateString = 
             con.connect(function (err) {
                 if (err) throw err;
                 //INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');
-                con.query(``, function (err, result, fields) {
+                con.query(`DELETE FROM csfellows WHERE email='${email}' AND datetime=''`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({"message":"success"});
                     return res.end();
                 });
                 con.end();
-            })*/
+            })
         }
     });
 });
