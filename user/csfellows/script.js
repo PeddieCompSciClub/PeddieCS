@@ -240,9 +240,18 @@ function DEBUGfillCalendar(year, month){
             var schedule = res.schedule;
             var month = [];
             for(let i=0; i<monthDays[date.getMonth()]; i++) month[i] = 0;
-            console.log(month);
             for(let i=0; i<schedule.length; i++) month[new Date(schedule[i].date.substring(0,schedule[i].date.length-1)).getDate()-1]++;
-            console.log(month);
+
+            console.log(members);
+
+            var newSchedule = [];
+            for(let i=0; i<month.length; i++){
+                newSchedule[i] = [];
+                for(let j=0; j<4-month[i]; j++){
+                    Math.floor(Math.random()*members.length)
+                    // newSchedule[i][j] = {name: }
+                }
+            }
         });
 
 
