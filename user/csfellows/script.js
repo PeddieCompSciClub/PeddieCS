@@ -214,7 +214,7 @@ function cancelEvent(id){
             console.log(events);
             for(let i=events.length-1; i>=0; i--){
                 if(events[i].id == id){
-                    events.remove(i);
+                    events.splice(id,1);
                 }
             }
             console.log(events);
