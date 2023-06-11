@@ -681,10 +681,9 @@ app.post('/csfellows/schedule/month', (req, res) => {
                         con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
                             if (err) throw err;
                             console.log(i,j,schedule[i][j]);
+                            con.end();
                         });
                     });
-
-                    con.end();
                 }
             }
         }
