@@ -241,7 +241,7 @@ function DEBUGfillCalendar(year, month){
             var month = [];
             for(let i=0; i<monthDays[date.getMonth()]; i++) month[i] = 0;
             console.log(month);
-            for(let i=0; i<schedule.length; i++) month[new Date(schedule[i].date.substring(0,schedule[i].date.length-1)).getDate()]++;
+            for(let i=0; i<schedule.length; i++) month[new Date(schedule[i].date.substring(0,schedule[i].date.length-1)).getDate()-1]++;
             console.log(month);
         });
 
