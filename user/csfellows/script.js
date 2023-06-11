@@ -204,5 +204,9 @@ function cancelEvent(id){
         id: id
     }, function (res) {
         console.log(res);
+        if(res.message == "success"){
+            document.getElementById('event-'+id).remove();
+            document.getElementById('fellow-'+id).remove();
+        }
     });
 }
