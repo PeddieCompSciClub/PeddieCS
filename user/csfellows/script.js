@@ -173,7 +173,6 @@ function selectCalendarDate(element, date) {
     document.getElementById('signup-instruction').innerText = dayNames[selectedDate.getDay()] + ' ' + monthNames[selectedDate.getMonth()] + ' ' + selectedDate.getDate() + ', ' + selectedDate.getFullYear();
 
     document.getElementById('fellows-preview').innerHTML = "";
-    document.getElementById('fellows-remove').style = "display:none";
 
     var fellowsCount = 0;//number of fellows on a given day
     var time8=0, time9=0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
