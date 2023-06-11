@@ -207,6 +207,9 @@ function cancelEvent(id){
         if(res.message == "success"){
             document.getElementById('event-'+id).remove();
             document.getElementById('fellow-'+id).remove();
+            if(document.getElementById('fellows-preview').childElementCount==0){
+                document.getElementById('fellows-preview').innerText = "(no fellows scheduled)"
+            }
         }
     });
 }
