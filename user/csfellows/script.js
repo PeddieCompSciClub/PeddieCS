@@ -228,7 +228,7 @@ function DEBUGfillCalendar(year, month){
     console.log(date);
 
     //get all members
-    $.get("/admin/getAllMembers", {
+    $.get("/nodejs/admin/getAllMembers", {
         token: getCookie('credential')
     }, function(res){
         console.log(res);
