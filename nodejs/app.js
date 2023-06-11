@@ -653,6 +653,8 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
 app.post('/csfellows/schedule/month', (req, res) => {
     const token = req.body.token;
     const schedule = req.body.schedule;
+    console.log("test");
+    console.log(schedule);
 
     verifyCredentialPermission(token, 'admin', function (success, email) {
         if (!success) {
