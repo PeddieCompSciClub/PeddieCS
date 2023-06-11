@@ -248,10 +248,19 @@ function DEBUGfillCalendar(year, month){
             for(let i=0; i<month.length; i++){
                 newSchedule[i] = [];
                 for(let j=0; j<4-month[i]; j++){
-                    Math.floor(Math.random()*members.length)
-                    // newSchedule[i][j] = {name: }
+                    let r = Math.floor(Math.random()*members.length)
+                    newSchedule[i][j] = {name: members[r].first_name+' '+members[r].last_name, email: members[r].email, date:date}
                 }
             }
+
+            console.log(newSchedule);
+
+            // $.post('https://peddiecs.peddie.org/nodejs/csfellows/adminSchedule',{
+            //     token: getCookie('credential'),
+            //     schedule: newSchedule
+            // },function (res) {
+            //     console.log(res);
+            // });
         });
 
 
