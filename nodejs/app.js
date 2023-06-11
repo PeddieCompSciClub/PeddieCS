@@ -617,9 +617,7 @@ app.get('/csfellows/schedule', (req,res) => {
 //removes an event from the calendar
 app.post('/csfellows/schedule/cancel', (req, res) => {
     const token = req.body.token;
-    const datetime = new Date(req.body.datetime);
-    console.log(datetime);
-    console.log(datetime.getFullYear())
+    const id = new Date(req.body.id);
 
     verifyCredentialPermission(token,'csfellow', function (success, email) {
         if (!success) {
@@ -639,7 +637,8 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
             con.connect(function (err) {
                 if (err) throw err;
                 //INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');
-                con.query(`DELETE FROM csfellows WHERE email='${email}' AND datetime=''`, function (err, result, fields) {
+                console.log(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`)
+                con.query(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({"message":"success"});
                     return res.end();
