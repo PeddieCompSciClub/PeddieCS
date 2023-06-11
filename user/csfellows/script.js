@@ -240,7 +240,7 @@ function DEBUGfillCalendar(year, month){
             var schedule = res.schedule;
             var month = [];
             for(let i=0; i<monthDays[date.getMonth()]; i++) month[i] = 0;
-            for(let i=0; i<schedule.length; i++) month[new Date(schedule[i].substring(0,schedule[i].length-1))]++;
+            for(let i=0; i<schedule.length; i++) month[new Date(schedule[i].date.substring(0,schedule[i].length-1))]++;
             console.log(month);
         });
 
