@@ -653,8 +653,6 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
 app.post('/csfellows/schedule/month', (req, res) => {
     const token = req.body.token;
     const schedule = req.body.schedule;
-    console.log("test");
-    console.log(schedule);
 
     verifyCredentialPermission(token, 'admin', function (success, email) {
         if (!success) {
@@ -671,8 +669,7 @@ app.post('/csfellows/schedule/month', (req, res) => {
             });
 
             for (let i = 0; i < schedule.length; i++) {
-                console.log(schedule[i]);
-                for (let j = 0; j < schedule[i].lenght; j++) {
+                for (let j = 0; j < schedule[i].length; j++) {
                     var event = schedule[i][j];
                     console.log(schedule[i][j]);
                     //var dateString = 
