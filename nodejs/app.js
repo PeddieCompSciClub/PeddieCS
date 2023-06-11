@@ -673,7 +673,7 @@ app.post('/csfellows/schedule/month', (req, res) => {
                     });
 
                     var event = schedule[i][j];
-                    console.log(schedule[i][j]);
+                    console.log(i,j,schedule[i][j]);
 
                     const date = new Date(event.date);
                     const mysqlDate = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
