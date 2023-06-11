@@ -617,7 +617,7 @@ app.get('/csfellows/schedule', (req,res) => {
 //removes an event from the calendar
 app.post('/csfellows/schedule/cancel', (req, res) => {
     const token = req.body.token;
-    const id = new Date(req.body.id);
+    const id = req.body.id;
 
     verifyCredentialPermission(token,'csfellow', function (success, email) {
         if (!success) {
