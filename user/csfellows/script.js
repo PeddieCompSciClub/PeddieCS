@@ -224,7 +224,9 @@ function cancelEvent(id){
 
 
 function DEBUGfillCalendar(year, month){
-    var date = new Date(year, month);
+    var date;
+    if(year && month) date = new Date(year, month);
+    else date = new Date();
     console.log(date);
 
     //get all members
