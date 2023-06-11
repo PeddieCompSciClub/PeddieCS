@@ -211,13 +211,12 @@ function cancelEvent(id){
                 document.getElementById('fellows-preview').innerText = "(no fellows scheduled)"
             }
             var events = loadedMonths.get([saveDate.getFullYear(), saveDate.getMonth()].toString());
-            console.log(events);
             for(let i=events.length-1; i>=0; i--){
                 if(events[i].id == id){
                     events.splice(i,1);
                 }
             }
-            console.log(events);
+            console.log("Removed event-"+id);
             
         }
     });
