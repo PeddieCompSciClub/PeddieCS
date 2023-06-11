@@ -653,7 +653,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
 app.post('/csfellows/schedule/month', (req, res) => {
     const token = req.body.token;
     const schedule = req.body.schedule;
-
+    console.log(schedule);
     verifyCredentialPermission(token, 'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
@@ -668,19 +668,19 @@ app.post('/csfellows/schedule/month', (req, res) => {
                 port: 3306
             });
 
-            for (let i = 0; i < schedule.length; i++) {
-                for (let j = 0; j < schedule[i].length; j++) {
+            for (let i = 0; i < 1; i++) {
+                for (let j = 0; j < 1; j++) {
                     var event = schedule[i][j];
                     console.log(schedule[i][j]);
-                    //var dateString = 
-                    // con.connect(function (err) {
-                    //     if (err) throw err;
-                    //     con.query(``, function (err, result, fields) {
-                    //         if (err) throw err;
-                    //         res.json({ "message": "success" });
-                    //         return res.end();
-                    //     });
-                    // });
+
+                    const date = new Date(event.date);
+                    const mysqlDate = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
+                    con.connect(function (err) {
+                        if (err) throw err;
+                        con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
+                            if (err) throw err;
+                        });
+                    });
                 }
             }
 
