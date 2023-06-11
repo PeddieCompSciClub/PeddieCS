@@ -197,7 +197,7 @@ function selectCalendarDate(element, date) {
     }
 }
 
-var save;
+
 function cancelEvent(id){
     $.post("https://peddiecs.peddie.org/nodejs/csfellows/schedule/cancel", {
         token: getCookie('credential'),
@@ -210,8 +210,7 @@ function cancelEvent(id){
             if(document.getElementById('fellows-preview').childElementCount==0){
                 document.getElementById('fellows-preview').innerText = "(no fellows scheduled)"
             }
-            var events = loadedMonths.get([saveDate.getFullYear(), saveDate.getMonth()].toString()).data;
-            save = events;
+            var events = loadedMonths.get([saveDate.getFullYear(), saveDate.getMonth()].toString())[0]
             console.log(events);
         }
     });
