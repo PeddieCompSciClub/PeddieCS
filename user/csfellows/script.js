@@ -221,3 +221,9 @@ function cancelEvent(id){
         }
     });
 }
+
+
+function DEBUGfillCalendar(year, month){
+    var date = new Date(year, month);
+    console.log(date);
+}
