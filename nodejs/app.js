@@ -661,7 +661,7 @@ app.post('/csfellows/schedule/month', (req, res) => {
         }
         else {
 
-            recursiveAdd(con, schedule, 0, 0);
+            recursiveAdd(schedule, 0, 0);
 
             // for (let i = 0; i < schedule.length; i++) {
             //     for (let j = 0; j < schedule[i].length; j++) {
@@ -709,7 +709,7 @@ function recursiveAdd(schedule, i, j) {
             
             j = (j+1)%schedule[i].length;
             if(j==0) i++;
-            if(i < schedule.length) setTimeout(() => { con.end(); recursiveAdd(schedule, i, j);}, 5000);
+            if(i < schedule.length){con.end(); setTimeout(() => {recursiveAdd(schedule, i, j);}, 5000);}
             else con.end();
         });
     });
