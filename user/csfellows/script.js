@@ -176,11 +176,14 @@ function selectCalendarDate(element, date) {
     var fellowsCount = 0;//number of fellows on a given day
     var time8=0, time9=0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
     var userScheduled = false;
+    var pastEvent = false;
+    if(date < currentDate || date.toDateString() == currentDate.toDateString()) pastEvent = true;
+
     [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
         if (eventDate.getDate() == date.getDate()) {
             console.log(event);
-            loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, (date.getYearFull()<currentDate.getFullYear()));
+            loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
             fellowsCount++;
             if(eventDate.getHours()==20) time8++;
             if(eventDate.getHours()==21) time9++;
