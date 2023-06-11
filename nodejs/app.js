@@ -661,8 +661,8 @@ app.post('/csfellows/schedule/month', (req, res) => {
         }
         else {
             
-            for (let i = 0; i < schedule.length; i++) {
-                for (let j = 0; j < schedule[i].length; j++) {
+            for (let i = 0; i < 1; i++) {
+                for (let j = 0; j < 1; j++) {
 
                     var con = mysql.createConnection({
                         host: "localhost",
