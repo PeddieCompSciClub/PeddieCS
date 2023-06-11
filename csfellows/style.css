@@ -1,6 +1,6 @@
 .main{
     display: grid;
-    grid-template-columns: calc(100vw - 20vmin) min-content;
+    grid-template-columns: calc(100vw - 80vmin) 80vmin;
     grid-template-rows: 12em min-content;
 }
 
