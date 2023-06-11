@@ -671,9 +671,10 @@ app.post('/csfellows/schedule/month', (req, res) => {
             });
 
             for (let i = 0; i < schedule.length; i++) {
+                console.log(schedule[i]);
                 for (let j = 0; j < schedule[i].lenght; j++) {
                     var event = schedule[i][j];
-                    console.log(event);
+                    console.log(schedule[i][j]);
                     //var dateString = 
                     // con.connect(function (err) {
                     //     if (err) throw err;
