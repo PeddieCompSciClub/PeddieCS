@@ -709,7 +709,7 @@ function recursiveAdd(schedule, i, j) {
             
             j = (j+1)%schedule[i].length;
             if(j==0) i++;
-            if(i < schedule.length){con.end(); setTimeout(() => {recursiveAdd(schedule, i, j);}, 5000);}
+            if(i < schedule.length){con.end(); setTimeout(() => {recursiveAdd(schedule, i, j);}, 250);}
             else con.end();
         });
     });
