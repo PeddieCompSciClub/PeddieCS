@@ -75,7 +75,7 @@ function addCalendarEvents(year, month, data, firstLoad) {
         var event = data[i]
         var eventDate = new Date(event.date.substring(0, event.date.length - 1));
 
-        document.getElementById('day-' + eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" >${event.name}</div>`;
+        document.getElementById('day-' + eventDate.getDate()).innerHTML += `<div class="event" id="event-${event.id}" style="background-color:${stringToColor(event.email)}; border-color:#00000000" >${event.name}</div>`;
         //removed onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')" from above
 
         if (eventDate.toDateString() == currentDate.toDateString() && firstLoad) {
@@ -99,12 +99,12 @@ function loadPopup(email, name, hour, minute) {
     popup.style = "display:block";
 }
 
-function loadPreview(email, name, hour, minute,id) {
+function loadPreview(email, name, hour, minute, id) {
     let hour2 = (hour % 12) + 1;
     hour = ((parseInt(hour) + 11) % 12) + 1;
 
     document.getElementById('fellows-preview').innerHTML +=
-        `<div class="icon">
+        `<div class="icon" id="fellow-${id}">
             <div class="memberItem">
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
