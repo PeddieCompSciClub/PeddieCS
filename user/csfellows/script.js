@@ -226,4 +226,11 @@ function cancelEvent(id){
 function DEBUGfillCalendar(year, month){
     var date = new Date(year, month);
     console.log(date);
+
+    //get all members
+    $.get("/admin/getAllMembers", {
+        token: getCookie('credential')
+    }, function(res){
+        console.log(res);
+    });
 }
