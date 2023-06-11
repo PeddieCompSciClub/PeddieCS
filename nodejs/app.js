@@ -604,8 +604,8 @@ app.get('/csfellows/schedule', (req,res) => {
     });
     con.connect(function (err) {
         if (err) throw err;
-        console.log(`SELECT name, email, date FROM csfellows WHERE MONTH(date)=${date.getMonth()+1}`);
-        con.query(`SELECT name, email, date FROM csfellows WHERE MONTH(date)=${date.getMonth()+1}`, function (err, result, fields) {
+        console.log(`SELECT name, email, date, id FROM csfellows WHERE MONTH(date)=${date.getMonth()+1}`);
+        con.query(`SELECT name, email, date, id FROM csfellows WHERE MONTH(date)=${date.getMonth()+1}`, function (err, result, fields) {
             if (err) throw err;
             res.json({"message":"success","schedule":result});
             return res.end();
