@@ -653,7 +653,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
 app.post('/csfellows/schedule/month', (req, res) => {
     const token = req.body.token;
     const schedule = req.body.schedule;
-    console.log(schedule);
+
     verifyCredentialPermission(token, 'admin', function (success, email) {
         if (!success) {
             res.json({ 'message': 'failed' });
@@ -668,8 +668,8 @@ app.post('/csfellows/schedule/month', (req, res) => {
                 port: 3306
             });
 
-            for (let i = 0; i < 1; i++) {
-                for (let j = 0; j < 1; j++) {
+            for (let i = 0; i < schedule.length; i++) {
+                for (let j = 0; j < schedule[i].length; j++) {
                     var event = schedule[i][j];
                     console.log(schedule[i][j]);
 
