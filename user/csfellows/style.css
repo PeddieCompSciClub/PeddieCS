@@ -42,7 +42,7 @@
     grid-template-columns: repeat(7,calc(100%/7));
     grid-template-rows:repeat(4,5%) repeat(6,13.333%);
     height:100%;
-
+    aspect-ratio: 1/1;
     grid-column:1;
     grid-row:1;
     /* border: solid 1px var(--navbar); */
