@@ -99,7 +99,7 @@ function loadPopup(email, name, hour, minute) {
     popup.style = "display:block";
 }
 
-function loadPreview(email, name, hour, minute, id) {
+function loadPreview(email, name, hour, minute, id, hideDelete) {
     let hour2 = (hour % 12) + 1;
     hour = ((parseInt(hour) + 11) % 12) + 1;
 
@@ -109,7 +109,7 @@ function loadPreview(email, name, hour, minute, id) {
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
                 <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute < 10 ? '0' : '') + minute}</p>
-                ${email == userData.email ?'<button class="fellows-remove delete memberItem" onclick="cancelEvent('+id+');">Cancel Sign Up</button>':''}
+                ${email == userData.email && !hideDelete ?'<button class="fellows-remove delete memberItem" onclick="cancelEvent('+id+');">Cancel Sign Up</button>':''}
             </div>
         </div>`;
 
@@ -180,7 +180,7 @@ function selectCalendarDate(element, date) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
         if (eventDate.getDate() == date.getDate()) {
             console.log(event);
-            loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id);
+            loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, (date.getYearFull()<currentDate.getFullYear()));
             fellowsCount++;
             if(eventDate.getHours()==20) time8++;
             if(eventDate.getHours()==21) time9++;
