@@ -673,7 +673,6 @@ app.post('/csfellows/schedule/month', (req, res) => {
                     });
 
                     var event = schedule[i][j];
-                    console.log(i,j,schedule[i][j]);
 
                     const date = new Date(event.date);
                     const mysqlDate = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
@@ -681,6 +680,7 @@ app.post('/csfellows/schedule/month', (req, res) => {
                         if (err) throw err;
                         con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
                             if (err) throw err;
+                            console.log(i,j,schedule[i][j]);
                         });
                     });
 
