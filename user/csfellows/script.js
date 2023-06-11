@@ -231,6 +231,13 @@ function DEBUGfillCalendar(year, month){
     $.get("/nodejs/admin/getAllMembers", {
         token: getCookie('credential')
     }, function(res){
-        console.log(res);
+        var members = res.message;
+        $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
+            date: date
+        }, function (res) {
+            console.log(res);
+        });
+
+
     });
 }
