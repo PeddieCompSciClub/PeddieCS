@@ -699,8 +699,7 @@ function recursiveAdd(schedule, i, j) {
 
     var event = schedule[i][j];
     const date = new Date(event.date);
-    const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + date.getHours() + ':00:00';
-    console.log(date+" "+date.getHours()+" "+mysqlDate);
+    const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + (j%2==0?'20':'21') + ':00:00';
     
     con.connect(function (err) {
         if (err) throw err;
