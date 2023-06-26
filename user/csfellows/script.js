@@ -194,7 +194,7 @@ function selectCalendarDate(element, date) {
             if(event.email == userData.email) userScheduled = true;
         }
     });
-    console.log(time8,time9);
+    console.log(time8,time9,fellowsCount);
     if(fellowsCount<4){
         let preview = document.getElementById('fellows-preview');
         let signup = document.createElement('div');
