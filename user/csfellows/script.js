@@ -190,13 +190,11 @@ function selectCalendarDate(element, date) {
             if(event.email == userData.email) userScheduled = true;
         }
     });
-    if(userScheduled){
-        
-    }
     if(fellowsCount<4){
         if(fellowsCount==0){
             document.getElementById('fellows-preview').innerHTML = "(no fellows scheduled)";
         }
+        
     }
 }
 

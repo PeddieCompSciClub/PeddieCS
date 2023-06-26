@@ -219,6 +219,19 @@
     justify-content: space-evenly;
 }
 
+.fellows .memberItem{
+    margin-top: 0;
+}
+
+.fellows .add-event h1{
+    font-size: 6em;
+    margin:5% auto 0;
+    height: 3em;
+    padding:0.8em 0 0 0;
+    position: relative;
+    user-select: none;
+}
+
 .join-zoom {
     border: none;
     border-radius: 8px;
