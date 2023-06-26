@@ -200,6 +200,7 @@ function selectCalendarDate(element, date) {
         let signup = document.createElement('div');
         if(time8<2){
             preview.insertBefore(signup, preview.childNodes[time8]);
+            console.log(preview);
         }
         
     }
