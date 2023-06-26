@@ -196,8 +196,10 @@ function selectCalendarDate(element, date) {
     });
     console.log(time8,time9);
     if(fellowsCount<4){
-        if(fellowsCount==0){
-            document.getElementById('fellows-preview').innerHTML = "(no fellows scheduled)";
+        let preview = document.getElementById('fellows-preview');
+        let signup = document.createElement('div');
+        if(time8<2){
+            preview.insertBefore(signup, preview.childNodes[time8]);
         }
         
     }
