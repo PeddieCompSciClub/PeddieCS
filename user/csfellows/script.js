@@ -202,7 +202,7 @@ function selectCalendarDate(element, date) {
             preview.insertBefore(signup, preview.childNodes[time8]);
         }
         signup = signup.cloneNode;
-        signup.getElementsByTagName('h1')[0].innerText='9:00';
+        signup.innerHTML=`<div class="memberItem add-event"><h1>9:00</h1><a>Sign Up</a><p style="opacity:0">9:00</p></div>`
         if(time9<2){
             preview.appendChild(signup);
         }
