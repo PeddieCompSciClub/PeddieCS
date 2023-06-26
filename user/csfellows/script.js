@@ -189,8 +189,6 @@ function selectCalendarDate(element, date) {
             console.log(event);
             loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
             fellowsCount++;
-            if(eventDate.getHours()==20) time8++;
-            if(eventDate.getHours()==21) time9++;
             if(event.email == userData.email) userScheduled = true;
         }
     });
