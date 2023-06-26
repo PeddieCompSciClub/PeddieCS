@@ -204,7 +204,7 @@ function selectCalendarDate(element, date) {
         signup = document.createElement('div');
         signup.onclick = `console.log('signup')`;
         signup.classList.add('icon');
-        signup.innerHTML=`<div class="memberItem add-event" onclick="console.log('signup-9');"><h1>9:00</h1><a>Sign Up</a><p style="opacity:0">9:00</p></div>`;
+        signup.innerHTML=`<div class="memberItem add-event" onclick="console.log('signup-9'); signup('${date}',9)"><h1>9:00</h1><a>Sign Up</a><p style="opacity:0">9:00</p></div>`;
         if(time9<2){
             preview.appendChild(signup);
         }
