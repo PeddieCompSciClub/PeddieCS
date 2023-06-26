@@ -63,6 +63,7 @@ function loadMonth(date, firstLoad) {
         $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
             date: date
         }, function (res) {
+            console.log(res);
             loadedMonths.set([date.getFullYear(), date.getMonth()].toString(), res.schedule)
             addCalendarEvents(date.getYear(), date.getMonth(), loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), firstLoad);
         });
