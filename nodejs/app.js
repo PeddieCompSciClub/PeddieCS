@@ -609,7 +609,7 @@ app.get('/csfellows/schedule', (req, res) => {
             if (err) throw err;
             console.log(result);
             result.sort(function(a, b) {
-                console.log(a.date,b);
+                console.log(a.date.localeCompare("test"),b);
                 return -1;
             });
             res.json({ "message": "success", "schedule": result });
