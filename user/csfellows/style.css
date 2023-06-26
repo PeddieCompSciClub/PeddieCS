@@ -224,6 +224,15 @@
     margin-top: 0;
 }
 
+.fellows .add-event{
+    transition: 0.25s;
+}
+
+.fellows .add-event:hover{
+    border-color: var(--text);
+    cursor: pointer;
+}
+
 .fellows .add-event h1{
     font-size: 6em;
     margin:5% auto 0;
@@ -232,6 +241,7 @@
     position: relative;
     user-select: none;
 }
+
 
 .join-zoom {
     border: none;
