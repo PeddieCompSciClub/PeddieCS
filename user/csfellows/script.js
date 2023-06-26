@@ -255,6 +255,7 @@ function DEBUGfillCalendar(year, month){
                 for(let j=0; j<4-month[i]; j++){
                     let r = Math.floor(Math.random()*members.length)
                     date.setHours(j%2==0?20:21);
+                    console.log(date);
                     newSchedule[i][j] = {name: members[r].first_name+' '+members[r].last_name, email: members[r].email, date:date}
                 }
             }
