@@ -608,7 +608,8 @@ app.get('/csfellows/schedule', (req, res) => {
         con.query(`SELECT name, email, date, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
             if (err) throw err;
             result.sort(function(a, b) {
-                return a.date.localeCompare(b.date);
+                console.log(a,b);
+                return -1;
             });
             res.json({ "message": "success", "schedule": result });
             return res.end();
