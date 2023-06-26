@@ -685,7 +685,7 @@ app.post('/csfellows/schedule/month', (req, res) => {
         }
     });
 });
-
+//recursivly add events to the schedule
 function recursiveAdd(schedule, i, j) {
     console.log(i,j)
 
