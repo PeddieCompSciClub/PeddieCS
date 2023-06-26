@@ -562,6 +562,8 @@ app.post('/admin/updateUserImage', (req, res) => {
 //schedules a cs fellow for a specific time slot
 app.post('/csfellows/schedule', (req, res) => {
     const token = req.body.token;
+    const name = req.body.name;
+    const date = req.body.date;
 
     verifyCredentialPermission(token, 'csfellow', function (success, email) {
         if (!success) {
@@ -579,7 +581,8 @@ app.post('/csfellows/schedule', (req, res) => {
 
             con.connect(function (err) {
                 if (err) throw err;
-                con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');`, function (err, result, fields) {
+                const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':00:00';
+                con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('${name}', '${email}', '${mysqlDate}');`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ "message": "success" });
                     return res.end();
