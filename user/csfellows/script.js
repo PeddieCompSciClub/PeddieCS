@@ -200,7 +200,10 @@ function selectCalendarDate(element, date) {
         signup.innerHTML=`<div class="memberItem add-event"><h1>8:00</h1><a>Sign Up</a><p style="opacity:0">8:00</p></div>`
         if(time8<2){
             preview.insertBefore(signup, preview.childNodes[time8]);
-            console.log(preview);
+        }
+        signup.getElementsByTagName('h1')[0].innerText='9:00';
+        if(time9<2){
+            preview.appendChild(signup);
         }
         
     }
