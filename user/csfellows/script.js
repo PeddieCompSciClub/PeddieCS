@@ -244,7 +244,7 @@ function signup(date,hour){
 
     $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule',{
         token: getCookie('credential'),
-        name: userDate.name,
+        name: userData.name,
         date: date
     },function (res) {
         console.log(res);
