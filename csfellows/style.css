@@ -87,6 +87,7 @@
 .calendar .day{
     background-color: var(--light);
     padding: 0 0.2em;
+    overflow:hidden;
     border:solid 1px var(--hover);
 }
 .calendar .off{

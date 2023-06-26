@@ -91,6 +91,7 @@
     padding: 0 0.2em;
     border:solid 1px var(--hover);
     transition: 0s;
+    overflow:hidden;
 }
 
 .calendar .day:hover{
