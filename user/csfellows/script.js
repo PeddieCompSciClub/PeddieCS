@@ -179,8 +179,11 @@ function selectCalendarDate(element, date) {
     var pastEvent = false;
     if(new Date(date.toDateString()) < new Date(currentDate.toDateString())) pastEvent = true;
 
+
     [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
+        if(eventDate.getHours()==20) time8++;
+        if(eventDate.getHours()==21) time9++;
         if (eventDate.getDate() == date.getDate()) {
             console.log(event);
             loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
@@ -190,6 +193,7 @@ function selectCalendarDate(element, date) {
             if(event.email == userData.email) userScheduled = true;
         }
     });
+    console.log(time8,time9);
     if(fellowsCount<4){
         if(fellowsCount==0){
             document.getElementById('fellows-preview').innerHTML = "(no fellows scheduled)";
