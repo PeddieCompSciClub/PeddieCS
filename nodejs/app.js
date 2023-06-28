@@ -563,7 +563,7 @@ app.post('/admin/updateUserImage', (req, res) => {
 app.post('/csfellows/schedule', (req, res) => {
     const token = req.body.token;
     const name = req.body.name;
-    const date = req.body.date;
+    const date = new Date(req.body.date);
 
     verifyCredentialPermission(token, 'csfellow', function (success, email) {
         if (!success) {
@@ -584,7 +584,7 @@ app.post('/csfellows/schedule', (req, res) => {
                 const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':00:00';
                 con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('${name}', '${email}', '${mysqlDate}');`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({ "message": "success" });
+                    res.json({ "message": "success", "result":result});
                     return res.end();
                 });
                 con.end();
