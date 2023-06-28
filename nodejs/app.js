@@ -582,7 +582,7 @@ app.post('/csfellows/schedule', (req, res) => {
             con.connect(function (err) {
                 if (err) throw err;
                 const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':00:00';
-                con.query(`INSERT INTO csfellows (name, email, datetime) VALUES ('${name}', '${email}', '${mysqlDate}');`, function (err, result, fields) {
+                con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${name}', '${email}', '${mysqlDate}');`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ "message": "success", "result":result});
                     return res.end();
