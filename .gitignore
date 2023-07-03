@@ -2,3 +2,4 @@
 /nodejs/node_modules/
 /nodejs/secure.json
 /members/user-images/
+/clubs/*/
