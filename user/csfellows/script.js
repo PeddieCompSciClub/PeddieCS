@@ -197,14 +197,14 @@ function selectCalendarDate(element, date) {
         let preview = document.getElementById('fellows-preview');
         let signup = document.createElement('div');
         signup.classList.add('icon');
-        signup.innerHTML=`<div class="memberItem add-event" onclick="console.log('signup-8'); signup('${date}',8)"><h1>8:00</h1><a>Sign Up</a><p style="opacity:0">8:00</p></div>`
+        signup.innerHTML=`<div class="memberItem add-event" onclick="console.log('signup-8'); signup('${date}',20)"><h1>8:00</h1><a>Sign Up</a><p style="opacity:0">8:00</p></div>`
         if(time8<2){
             preview.insertBefore(signup, preview.childNodes[time8]);
         }
         signup = document.createElement('div');
         signup.onclick = `console.log('signup')`;
         signup.classList.add('icon');
-        signup.innerHTML=`<div class="memberItem add-event" onclick="console.log('signup-9'); signup('${date}',9)"><h1>9:00</h1><a>Sign Up</a><p style="opacity:0">9:00</p></div>`;
+        signup.innerHTML=`<div class="memberItem add-event" onclick="console.log('signup-9'); signup('${date}',21)"><h1>9:00</h1><a>Sign Up</a><p style="opacity:0">9:00</p></div>`;
         if(time9<2){
             preview.appendChild(signup);
         }
