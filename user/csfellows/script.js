@@ -221,11 +221,10 @@ function cancelEvent(id){
     }, function (res) {
         console.log(res);
         if(res.message == "success"){
+            var day = document.getElementById('event-'+id).parentElement;
             document.getElementById('event-'+id).remove();
             document.getElementById('fellow-'+id).remove();
-            if(document.getElementById('fellows-preview').childElementCount==0){
-                document.getElementById('fellows-preview').innerText = "(no fellows scheduled)"
-            }
+            
             var events = loadedMonths.get([saveDate.getFullYear(), saveDate.getMonth()].toString());
             for(let i=events.length-1; i>=0; i--){
                 if(events[i].id == id){
@@ -233,6 +232,7 @@ function cancelEvent(id){
                 }
             }
             console.log("Removed event-"+id);
+            console.log(day);
             
         }
     });
