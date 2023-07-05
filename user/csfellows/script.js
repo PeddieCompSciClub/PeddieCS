@@ -192,8 +192,9 @@ function selectCalendarDate(element, date) {
             if(event.email == userData.email) userScheduled = true;
         }
     });
-    console.log(time8,time9,fellowsCount);
-    if(fellowsCount<4){
+
+    //add signup buttons
+    if(fellowsCount<4 && !pastEvent){
         let preview = document.getElementById('fellows-preview');
         let signup = document.createElement('div');
         signup.classList.add('icon');
