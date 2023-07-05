@@ -584,7 +584,7 @@ app.post('/csfellows/schedule', (req, res) => {
                 const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':00:00';
                 con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${name}', '${email}', '${mysqlDate}');`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({ "message": "success", "result":result});
+                    res.json({ "message": "success", "result":result, "fields":fields});
                     return res.end();
                 });
                 con.end();
@@ -646,7 +646,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
                 console.log(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`)
                 con.query(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({ "message": "success" });
+                    res.json({ "message": "success", "result":result, "fields":fields});
                     return res.end();
                 });
                 con.end();
