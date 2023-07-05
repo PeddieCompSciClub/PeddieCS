@@ -232,7 +232,7 @@ function cancelEvent(id){
                 }
             }
             console.log("Removed event-"+id);
-            console.log(day);
+            day.click();//(there is a better way to do this) reload current day
             
         }
     });
