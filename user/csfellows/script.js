@@ -249,6 +249,9 @@ function signup(date,hour){
         date: date
     },function (res) {
         console.log(res);
+        if(res.message=='success'){
+            
+        }
     });
 }
 
