@@ -250,7 +250,7 @@ function signup(date,hour){
     },function (res) {
         console.log(res);
         if(res.message=='success'){
-            
+            document.getElementById('day-'+date.getDate()).innerHTML += `<div class="event" id="event-${'event-'+res.id}" style="background-color:${stringToColor(userData.email)}; border-color:#00000000" >${userData.first_name+' '+userData.last_name}</div>`;
         }
     });
 }
