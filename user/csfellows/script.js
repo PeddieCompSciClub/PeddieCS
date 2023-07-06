@@ -252,7 +252,7 @@ function signup(date,hour){
         if(res.message=='success'){
             
             console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
-            loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).add({'name':userData.first_name+' '+userData.last_name, 'email':userData.email});
+            loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).push({'name':userData.first_name+' '+userData.last_name, 'email':userData.email});
             console.log(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
 
             document.getElementById('day-'+date.getDate()).innerHTML += `<div class="event" id="event-${'event-'+res.id}" style="background-color:${stringToColor(userData.email)}; border-color:#00000000" >${userData.first_name+' '+userData.last_name}</div>`;
