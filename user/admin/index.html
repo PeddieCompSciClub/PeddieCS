@@ -66,7 +66,7 @@
 	<div class="tabcontainer" id="maintabs">
 		<div class="tab">
 			<button class="tablinks maintablinks active" onclick="openMainTab(event, 'members')">Members</button>
-			<!-- <button class="tablinks maintablinks" onclick="openMainTab(event, 'permissions')">Permissions</button> -->
+			<button class="tablinks maintablinks" onclick="openMainTab(event, 'permissions')">Permissions</button>
 		</div>
 
 		<!-- Tab content -->
@@ -206,6 +206,61 @@
 		</div>
 
 		<div id="permissions" class="tabcontent maintabcontent">
+			<div class="tabcontainer">
+				<div class="tab">
+					<button class="tablinks permissiontablinks" onclick="openPermissionTab(event, 'Freshmen')">Freshmen</button>
+					<button class="tablinks permissiontablinks" onclick="openPermissionTab(event, 'Sophomores')">Sophomores</button>
+					<button class="tablinks permissiontablinks" onclick="openPermissionTab(event, 'Juniors')">Juniors</button>
+					<button class="tablinks permissiontablinks" onclick="openPermissionTab(event, 'Seniors')">Seniors</button>
+					<button class="tablinks permissiontablinks" onclick="openPermissionTab(event, 'Alumni')">Alumni</button>
+					<button class="tablinks permissiontablinks" onclick="openPermissionTab(event, 'Faculty')">Faculty</button>
+					<button class="tablinks permissiontablinks active" onclick="openPermissionTab(event, 'all')">All</button>
+				</div>
+
+				<div class="permissiondisplay">
+					<!-- Menu background -->
+					<div style="background-color: var(--table);position: absolute;width: 20%;height: calc(100vh - 169px);z-index: -2;bottom: 0;"></div>
+					<input class="search memberbtn" id="permissionsearch" placeholder="Search &#128269;" onclick="this.select()">
+
+					<!-- Tab content -->
+					<div id="Freshmen" class="tabcontent permissiontabcontent" style="display:block">
+						<div class="memberlist"></div>
+					</div>
+					<div id="Sophomores" class="tabcontent permissiontabcontent" style="display:block">
+						<div class="memberlist"></div>
+					</div>
+					<div id="Juniors" class="tabcontent permissiontabcontent" style="display:block">
+						<div class="memberlist"></div>
+					</div>
+					<div id="Seniors" class="tabcontent permissiontabcontent" style="display:block">
+						<div class="memberlist"></div>
+					</div>
+					<div id="Alumni" class="tabcontent permissiontabcontent" style="display:block">
+						<div class="memberlist"></div>
+					</div>
+					<div id="Faculty" class="tabcontent permissiontabcontent" style="display:block">
+						<div class="memberlist"></div>
+					</div>
+
+				</div>
+				<script>
+					//open the tab with the corresponding name
+					function openPermissionTab(evt, tabName) {
+						var i, tabcontent, tablinks;
+						tabcontent = document.getElementsByClassName("permissiontabcontent");
+						for (i = 0; i < tabcontent.length; i++) {
+							if(tabName!='all')tabcontent[i].style.display = "none";
+							else tabcontent[i].style.display = "block";
+						}
+						tablinks = document.getElementsByClassName("permissiontablinks");
+						for (i = 0; i < tablinks.length; i++) {
+							tablinks[i].className = tablinks[i].className.replace(" active", "");
+						}
+						if(tabName!='all') document.getElementById(tabName).style.display = "block";
+						evt.currentTarget.className += " active";
+					}
+				</script>
+			</div>
 		</div>
 
 

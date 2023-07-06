@@ -21,10 +21,15 @@
 .tabcontainer #members{
     padding:0;
 }
+.tabcontainer #permissions{
+    padding:0;
+}
 .tabcontent{
     border: 0 solid var(--table);
 }
 
+
+/* MEMBER PAGE */
 #members .tabcontent{
     padding:0;
     grid-column: 1;
@@ -98,4 +103,51 @@
 }
 #members .updatevalid:hover{
     background-color: var(--btn-green-hover)!important;
+}
+/* PERMISSION PAGE */
+#permissions .tabcontent{
+    padding:0;
+    grid-column: 1;
+}
+
+#permissions .permissiondisplay{
+    padding:0;
+    display: grid;
+    grid-template-columns: 20% auto;
+    grid-template-rows: 1.5em repeat(6,min-content);
+    font-size: 20px;
+    height: calc(100vh - 169px); /* adjust as needed based on your navbar height */
+}
+
+#permissions .search{
+    padding: 0 0.5em;
+    border-radius: 0;
+    cursor: text !important;
+    background-color: var(--table) !important;
+    border-top: 1px solid var(--hover) !important;
+    border-bottom: 1px solid var(--hover) !important;
+    display:block !important;
+    text-align: right;
+}
+
+#permissions .memberlist{
+    display:flex;
+    flex-direction: column;
+    height:100%;
+    background-color: var(--table);
+}
+
+#permissions .memberbtn{
+    border:0;
+    width:100%;
+    height: 1.5em;
+    background-color: var(--table);
+    cursor: pointer;
+    /* transition: 0.3s; */
+}
+#permissions .memberbtn:hover{
+    background-color: var(--hover);
+}
+#permissions .memberbtn.active{
+    background-color: var(--select);
 }
