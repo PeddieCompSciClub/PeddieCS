@@ -91,7 +91,7 @@ function loadMember(email) {
     for (var i = 0; i < members.length; i++) {
         members[i].classList.remove('active')
     }
-    document.getElementById('members_' + email.substring(0, user.email.indexOf("@peddie.org"))).classList.add('active');
+    document.getElementById('members-' + email.substring(0, user.email.indexOf("@peddie.org"))).classList.add('active');
 }
 
 function changeMember(email) {
