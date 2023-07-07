@@ -25,7 +25,7 @@ function loadmembers() {
                 var memberButton = `<button class="memberbtn" id="members-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="changeMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
                 document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
 
-                var permissionButton = `<button class="permissionbtn" id="permissions-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="">${user.first_name + ' ' + user.last_name}</button>`;
+                var permissionButton = `<button class="memberbtn" id="permissions-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="">${user.first_name + ' ' + user.last_name}</button>`;
                 document.getElementById('permission'+getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += permissionButton;
             }
 
