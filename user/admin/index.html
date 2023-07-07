@@ -256,7 +256,7 @@
 						for (i = 0; i < tablinks.length; i++) {
 							tablinks[i].className = tablinks[i].className.replace(" active", "");
 						}
-						if(tabName!='all') document.getElementById(tabName).style.display = "block";
+						if(tabName!='all') document.getElementById('permission'+tabName).style.display = "block";
 						evt.currentTarget.className += " active";
 					}
 				</script>
