@@ -22,8 +22,11 @@ function loadmembers() {
             //add members to button list
             for (let i = 0; i < res.message.length; i++) {
                 var user = res.message[i];
-                var button = `<button class="memberbtn" id="members_${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="changeMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
-                document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += button;
+                var memberButton = `<button class="memberbtn" id="members_${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="changeMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
+                document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
+
+                var projectButton = `<button class="memberbtn" id="permissions_${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="changeMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
+                document.getElementById('permissions'+getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
             }
 
             //set active view active
