@@ -253,7 +253,7 @@ function signup(date,hour){
             var formatDate = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate() + ' ' + hour + ':00:00.000';
             loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).push({'name':userData.first_name+' '+userData.last_name, 'email':userData.email, 'date':formatDate, 'id':res.id});
 
-            document.getElementById('day-'+date.getDate()).innerHTML += `<div class="event" id="event-${'event-'+res.id}" style="background-color:${stringToColor(userData.email)}; border-color:#00000000" >${userData.first_name+' '+userData.last_name}</div>`;
+            document.getElementById('day-'+date.getDate()).innerHTML += `<div class="event" id="event-${res.id}" style="background-color:${stringToColor(userData.email)}; border-color:#00000000" >${userData.first_name+' '+userData.last_name}</div>`;
 
             document.getElementById('day-'+date.getDate()).click();//again, this is a better way
         }
