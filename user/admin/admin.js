@@ -25,14 +25,24 @@ function loadmembers() {
                 var memberButton = `<button class="memberbtn" id="members-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="changeMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
                 document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
 
-                var projectButton = `<button class="memberbtn" id="permissions-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="">${user.first_name + ' ' + user.last_name}</button>`;
-                document.getElementById('permission'+getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
+                var permissionButton = `<button class="permissionbtn" id="permissions-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="">${user.first_name + ' ' + user.last_name}</button>`;
+                document.getElementById('permission'+getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += permissionButton;
             }
 
             //set active view active
             document.getElementById("membersearch").addEventListener("input", function () {
+                var text = document.getElementById("membersearch").value;
+                search(text);
+                document.getElementById("permissionsearch").value = text;
+            });
+            document.getElementById("permissionsearch").addEventListener("input", function () {
+                var text = document.getElementById("permissionsearch").value;
+                search(text);
+                document.getElementById("membersearch").value = text;
+            });
+            function search(text){
                 var members = document.getElementsByClassName("memberbtn");
-                var search = document.getElementById("membersearch").value.toLowerCase();
+                var search = text.toLowerCase();
                 for (var i = 0; i < members.length; i++) {
                     if (members[i].innerText.toLowerCase().includes(search) || members[i].id.substring(8).includes(search)) {
                         members[i].style.display = 'block';
@@ -41,7 +51,7 @@ function loadmembers() {
                         members[i].style.display = 'none';
                     }
                 }
-            });
+            }
 
             //set listeners for profile
             const memberProfile = document.getElementById('memberprofile');
