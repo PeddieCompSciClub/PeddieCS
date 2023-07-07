@@ -26,7 +26,7 @@ function loadmembers() {
                 document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
 
                 var projectButton = `<button class="memberbtn" id="permissions_${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="changeMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
-                document.getElementById('permissions'+getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
+                document.getElementById('permission'+getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
             }
 
             //set active view active
