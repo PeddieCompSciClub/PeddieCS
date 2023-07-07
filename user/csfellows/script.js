@@ -183,6 +183,7 @@ function selectCalendarDate(element, date) {
 
     [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
+        console.log(date, eventDate);
         if (eventDate.getDate() == date.getDate()) {
             if(eventDate.getHours()==20) time8++;
             if(eventDate.getHours()==21) time9++;
