@@ -45,9 +45,7 @@ function displayMemberProfile(json) {
             document.getElementById('groups').innerHTML = `<h3>Club Groups</h3><p>${json.groups}</p>`
         }
     }
-    if(!json.bio){
-        description += (json.university ? `| ${email} | ${decodeURIComponent(json.university)}` : '');
-    }
+
 
     //update description
     document.querySelector('meta[name="description"]').setAttribute("content", description);
