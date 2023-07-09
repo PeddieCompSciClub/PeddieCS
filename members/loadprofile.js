@@ -40,10 +40,14 @@ function displayMemberProfile(json) {
         if (json.bio) {
             document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${htmlEncode(decodeURIComponent(json.bio))}</p>`;
             description = decodeURIComponent(json.bio);
+        }
         //add groups (not a thing yet)
         if (json.groups) {
             document.getElementById('groups').innerHTML = `<h3>Club Groups</h3><p>${json.groups}</p>`
         }
+    }
+    if(!json.bio){
+        description += (json.university ? `| ${email} | ${decodeURIComponent(json.university)}` : '');
     }
 
 
