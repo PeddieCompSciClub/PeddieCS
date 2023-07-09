@@ -23,7 +23,8 @@ function getMember(email) {
 function displayMemberProfile(json) {
     var name = json.first_name + " " + json.last_name;
     console.log("Loading data for " + name);
-    document.title = name + ` '${username.substring(username.lastIndexOf('-')+1)} | PeddieCS`;
+    var description = name + ` '${username.substring(username.lastIndexOf('-')+1)}`;
+    document.title = description + ' | PeddieCS';
 
     //add user display-icon
     var img = document.getElementById('image');
@@ -37,14 +38,17 @@ function displayMemberProfile(json) {
         document.getElementById('icon').style = "grid-column:1";
         //add bio
         if (json.bio) {
-            // console.log(htmlEncode(decodeURIComponent(json.bio)));
             document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${htmlEncode(decodeURIComponent(json.bio))}</p>`;
+            description = decodeURIComponent(json.bio);
         }
         //add groups (not a thing yet)
         if (json.groups) {
             document.getElementById('groups').innerHTML = `<h3>Club Groups</h3><p>${json.groups}</p>`
         }
     }
+
+    //update description
+    document.querySelector('meta[name="description"]').setAttribute("content", description);
 
     //load projects
     if (json.projects.length > 0) {
