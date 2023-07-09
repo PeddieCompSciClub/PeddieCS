@@ -25,7 +25,7 @@ function displayMemberProfile(json) {
     console.log("Loading data for " + name);
     var description = name + ` '${username.substring(username.lastIndexOf('-')+1)}`;
     document.title = description + ' | PeddieCS';
-    description += ' | ${email}' + (json.university ? ` | ${decodeURIComponent(json.university)}` : '');
+    description += ` | ${email}` + (json.university ? ` | ${decodeURIComponent(json.university)}` : '');
 
     //add user display-icon
     var img = document.getElementById('image');
