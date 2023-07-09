@@ -25,6 +25,7 @@ function displayMemberProfile(json) {
     console.log("Loading data for " + name);
     var description = name + ` '${username.substring(username.lastIndexOf('-')+1)}`;
     document.title = description + ' | PeddieCS';
+    description += ' | ${email}' + (json.university ? ` | ${decodeURIComponent(json.university)}` : '');
 
     //add user display-icon
     var img = document.getElementById('image');
@@ -45,9 +46,6 @@ function displayMemberProfile(json) {
         if (json.groups) {
             document.getElementById('groups').innerHTML = `<h3>Club Groups</h3><p>${json.groups}</p>`
         }
-    }
-    if(!json.bio){
-        description += (json.university ? `| ${email} | ${decodeURIComponent(json.university)}` : '');
     }
 
 
