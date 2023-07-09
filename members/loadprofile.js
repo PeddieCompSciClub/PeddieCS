@@ -23,6 +23,7 @@ function getMember(email) {
 function displayMemberProfile(json) {
     var name = json.first_name + " " + json.last_name;
     console.log("Loading data for " + name);
+    document.title = name + `'${email.substring(email.lastIndexOf('-'))} | PeddieCS`;
 
     //add user display-icon
     var img = document.getElementById('image');
