@@ -23,7 +23,7 @@ function getMember(email) {
 function displayMemberProfile(json) {
     var name = json.first_name + " " + json.last_name;
     console.log("Loading data for " + name);
-    var description = name + ` '${username.substring(username.lastIndexOf('-')+1)}`;
+    var description = name + (json.year != '0' ? (" '" + json.year.toString().slice(-2)) : '');
     document.title = description + ' | PeddieCS';
     description += ` | ${email}` + (json.university ? ` | ${decodeURIComponent(json.university)}` : '');
 
@@ -40,7 +40,7 @@ function displayMemberProfile(json) {
         //add bio
         if (json.bio) {
             document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${htmlEncode(decodeURIComponent(json.bio))}</p>`;
-            description = (json.university ? `${decodeURIComponent(json.university)} | ` : '') + decodeURIComponent(json.bio);
+            description = (json.university ? `${decodeURIComponent(json.university)} | ` : '') + htmlEncode(decodeURIComponent(json.bio));
         }
         //add groups (not a thing yet)
         if (json.groups) {
