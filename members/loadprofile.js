@@ -40,7 +40,7 @@ function displayMemberProfile(json) {
         //add bio
         if (json.bio) {
             document.getElementById('bio').innerHTML = `<h3>Bio</h3><p>${htmlEncode(decodeURIComponent(json.bio))}</p>`;
-            description = (json.university ? `${decodeURIComponent(json.university)} | ` : '') + htmlEncode(decodeURIComponent(json.bio));
+            description = (json.university ? `${decodeURIComponent(json.university)} | ` : '') + decodeURIComponent(json.bio);
         }
         //add groups (not a thing yet)
         if (json.groups) {
