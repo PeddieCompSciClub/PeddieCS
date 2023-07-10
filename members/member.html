@@ -26,6 +26,28 @@
 
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="/main.css">
+	<style>
+		/* hides navbar when width<1000px */
+		/* IMPORTANT: eventually move to style.css, currently there are issues b/c /user/profile.html and other uses */
+		@media screen and (max-width: 992px) {
+			.profile {
+				font-size: 2em;
+			}
+
+			.profile .icon {
+				grid-column: 1/-1 !important;
+			}
+
+			.profile .icon .memberItem {
+				max-width: 80vw;
+			}
+
+			.profile .bio {
+				grid-column: 1/-1;
+				grid-row: 2;
+			}
+		}
+	</style>
 	<link rel="icon" href="/favicon.ico">
 
 </head>
