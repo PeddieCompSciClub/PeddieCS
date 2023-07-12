@@ -40,7 +40,7 @@ h1 {
     font-size: 80px;
     color: var(--text);
     font-weight: bold;
-    padding: 15px;
+    padding: 15px 0;
 }
 
 h3 {
