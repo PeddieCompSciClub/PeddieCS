@@ -17,7 +17,7 @@
 }
 
 .title p{
-    width:80ch;
+    /* width:80ch; */
     max-width: 90vw;
     margin:auto;
     text-align: center;
@@ -219,6 +219,10 @@
         margin:auto;
         padding-bottom: 0;
         padding-left:0;
+    }
+
+    .title p{
+        width:80ch;
     }
     
     .calendar{

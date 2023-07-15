@@ -1,4 +1,28 @@
+/* Home page stuff */
+.title {
+  margin: 0 1ch;
+}
 
+.group {
+  width:80vw;
+  margin:auto;
+}
+
+#about h4 {
+  margin: 0;
+  text-align: center;
+}
+
+#events {
+  display: grid;
+  width:fit-content;
+  grid-template-columns: auto min-content;
+}
+
+#events h3 {
+  margin: auto;
+  font-size: 2.5em;
+}
 
 /*Error 404 redirect page*/
 .err404 {

@@ -151,3 +151,55 @@
 #permissions .memberbtn.active{
     background-color: var(--select);
 }
+
+#permissions .permissiontable{
+    background-color: #FF00FF44;
+    grid-column: 2;
+    grid-row:1/-1;
+    padding-top: 2em;
+    display: flex;
+    justify-content: space-around;
+}
+
+#permissions .permissionitem{
+    border: 1px solid #000;
+    width: 20%;
+    margin:0;
+}
+
+#permissions .permissionitem .label{
+    background-color: var(--select);
+    text-align: center;
+    font-weight: bold;
+}
+
+#permissions .permissionitem li{
+    margin:0;
+    padding-left: 0.5ch;
+}
+#permissions .permissionitem li:nth-child(odd){
+    background-color: var(--hover);
+}
+#permissions .permissionitem li:nth-child(even){
+    background-color: var(--table);
+}
+#permissions .permissionitem button{
+    position: relative;
+    width:2ch;
+    height:2ch;
+    text-align: center;
+    vertical-align:middle;
+    line-height: 1.1em;
+    background-color: var(--btn-red);
+    border: 1px solid var(--btn-red-border);
+    color:var(--btn-red-border);
+    border-radius: 0.2em;
+    float:right;
+    margin: 3px 3px 3px 0;
+}
+#permissions .permissionitem button:hover{
+    background-color:var(--btn-red-hover);
+}
+#permissions .permissionitem .search{
+    text-align: left;
+}

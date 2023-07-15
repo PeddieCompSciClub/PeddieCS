@@ -34,6 +34,15 @@ html {
     overflow-x: hidden;
 }
 
+hr {
+    height: 1px;
+    border:none;
+    /* background: linear-gradient(to right, #00000000 2%, var(--text) 25% , var(--text) 75% , #00000000 98%); */
+    background-color: var(--text);
+    width:90%;
+    margin:auto;
+}
+
 h1 {
     text-align: center;
     font-family: 'Raleway', serif;
