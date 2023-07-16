@@ -8,6 +8,24 @@
   margin:auto;
 }
 
+.group h3 {
+  margin: auto;
+  font-size: 3em;
+  text-align: center;
+}
+
+.group .dev {
+  font-size: 2.5em;
+  color: black;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin-bottom: 2em;
+  gap: 5vw;
+}
+
 #about h4 {
   margin: 0;
   text-align: center;
@@ -19,10 +37,6 @@
   grid-template-columns: auto min-content;
 }
 
-#events h3 {
-  margin: auto;
-  font-size: 2.5em;
-}
 
 /*Error 404 redirect page*/
 .err404 {
