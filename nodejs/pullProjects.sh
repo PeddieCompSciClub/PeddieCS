@@ -3,5 +3,8 @@
 #
 #cd; cd /var/www/CSProjects/live/Project; git pull
 
-#Peddie Women in Tech
+#Peddie Women in Tech (7-2023)
 cd; cd /var/www/CSProjects/clubs/women-in-tech; git pull
+
+#ChatGPT Name Generator (Tomaz Chevres 7-16-2023)
+cd; cd /var/www/CSProjects/live/Name-Generator; git pull
