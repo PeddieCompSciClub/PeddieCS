@@ -61,12 +61,11 @@ function addCalendarEvents(year, month, data) {
         var event = data[i]
         var eventDate = new Date(event.date.substring(0,event.date.length-1));
         
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.email)}; border-color:#00000000" onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.name}</div>`;
+        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.club)}; border-color:#00000000" onclick="loadPopup('${event.club}','${event.event}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.event}</div>`;
 
         if(eventDate.toDateString() == currentDate.toDateString() && loadIcons){
-            tempLoadIcons = 
-            console.log("Today's Fellow: "+event.name);
-            loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
+            console.log("Today's Fellow: "+event.event);
+            loadPreview(event.club,event.event,eventDate.getHours(),eventDate.getMinutes());
         };
     }
     loadIcons = false;
