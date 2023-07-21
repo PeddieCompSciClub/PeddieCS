@@ -19,6 +19,13 @@
   color: black;
 }
 
+.group .grid {
+  display: grid;
+  width:fit-content;
+  grid-template-columns: auto min-content;
+  margin:auto;
+}
+
 .split {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -31,10 +38,28 @@
   text-align: center;
 }
 
-#events {
-  display: grid;
-  width:fit-content;
-  grid-template-columns: auto min-content;
+
+
+/* event calendar */
+#events .events{
+  padding:0;
+}
+#events .events h3{
+ white-space: nowrap;
+}
+
+.calendar{
+  width: 60vmin;
+  max-width:60vw;
+  height:60vmin;
+  background-color: #00000000;
+  font-size: 1.25vmin;
+  user-select: none;
+  display:grid;
+}
+
+.calendar .calendar-body{
+  padding:0 0 0 5%;
 }
 
 
