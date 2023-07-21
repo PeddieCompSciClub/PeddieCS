@@ -47,6 +47,9 @@
 #events .events h3{
  white-space: nowrap;
 }
+#events .grid{
+  margin-bottom: 1em;
+}
 
 .calendar{
   width: 60vmin;
