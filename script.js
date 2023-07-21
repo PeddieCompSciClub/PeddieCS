@@ -71,19 +71,20 @@ function addCalendarEvents(year, month, data) {
     loadIcons = false;
 }
 
+// come back to this later
 function loadPopup(email, name, hour, minute){
-    const popup = document.getElementById("calendar-popup");
+    // const popup = document.getElementById("calendar-popup");
 
-    let hour2 = (hour%12)+1;
-    hour = ((parseInt(hour)+11)%12)+1;
+    // let hour2 = (hour%12)+1;
+    // hour = ((parseInt(hour)+11)%12)+1;
     
-    const time = (hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute
+    // const time = (hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute
 
-    popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
-    popup.querySelector('#popup-name').innerText=name;
-    popup.querySelector('#popup-time').innerText=time;
+    // popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
+    // popup.querySelector('#popup-name').innerText=name;
+    // popup.querySelector('#popup-time').innerText=time;
 
-    popup.style="display:block";
+    // popup.style="display:block";
 }
 
 function loadPreview(email,name,hour,minute){
