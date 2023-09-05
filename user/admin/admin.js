@@ -25,7 +25,7 @@ function loadmembers() {
                 var memberButton = `<button class="memberbtn" id="members-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="changeMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
                 document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
 
-                var permissionButton = `<button class="memberbtn" id="permissions-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="">${user.first_name + ' ' + user.last_name}</button>`;
+                var permissionButton = `<button class="memberbtn" id="permissions-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="loadPermissionMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
                 document.getElementById('permission'+getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += permissionButton;
             }
 
@@ -94,6 +94,21 @@ function loadMember(email) {
     document.getElementById('members-' + email.substring(0, user.email.indexOf("@peddie.org"))).classList.add('active');
 }
 
+function loadPermissionMember(email) {
+    const user = memberData.filter(function (item) { return item.email == email; })[0];
+    
+    const members = document.getElementsByClassName('memberbtn');
+    for (var i = 0; i < members.length; i++) {
+        members[i].classList.remove('active')
+    }
+    document.getElementById('permissions-' + email.substring(0, user.email.indexOf("@peddie.org"))).classList.add('active');
+}
+
+function selectActiveMember(email){
+
+}
+
+// checks for unsaved changes before loading new member
 function changeMember(email) {
     if (memberSaved) {
         loadMember(email);
