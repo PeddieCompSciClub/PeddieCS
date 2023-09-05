@@ -163,6 +163,7 @@
 
 #permissions .permissionitem{
     border: 1px solid #000;
+    min-width: 16ch;
     width: 20%;
     height: fit-content;
     margin:0;
