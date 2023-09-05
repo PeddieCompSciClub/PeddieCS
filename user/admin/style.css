@@ -153,7 +153,7 @@
 }
 
 #permissions .permissiontable{
-    background-color: #FF00FF44;
+    /* background-color: #FF00FF44; */
     grid-column: 2;
     grid-row:1/-1;
     padding-top: 2em;
@@ -176,6 +176,8 @@
 #permissions .permissionitem li{
     margin:0;
     padding-left: 0.5ch;
+    display: grid;
+    grid-template-columns: auto 2.25ch;
 }
 #permissions .permissionitem li:nth-child(odd){
     background-color: var(--hover);
@@ -184,9 +186,6 @@
     background-color: var(--table);
 }
 #permissions .permissionitem button{
-    position: relative;
-    width:2ch;
-    height:2ch;
     text-align: center;
     vertical-align:middle;
     line-height: 1.1em;
@@ -194,7 +193,6 @@
     border: 1px solid var(--btn-red-border);
     color:var(--btn-red-border);
     border-radius: 0.2em;
-    float:right;
     margin: 3px 3px 3px 0;
 }
 #permissions .permissionitem button:hover{
