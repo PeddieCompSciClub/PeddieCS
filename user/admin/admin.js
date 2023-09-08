@@ -109,7 +109,12 @@ function loadPermissionMember(email) {
     table.getElementsByClassName("label")[0].innerText = user.first_name + ' ' + user.last_name;
     var tableListItems = table.getElementsByTagName("li");
     while(tableListItems.length > 0) tableListItems[0].parentNode.removeChild(tableListItems[0]);
-    user.permissions.split(',')
+    const perms = user.permissions.split(',');
+    for(let i=0; i<perms; i++){
+        let li = document.createElement('li');
+        li.innerHTML = `${perms[i]}<button>X<button>`;//add appropriate script to buttons (removePermission)
+        table.insertBefore(table.getElementById("permissionsearch-studentperms"));
+    }
 }
 
 // checks for unsaved changes before loading new member
