@@ -107,7 +107,9 @@ function loadPermissionMember(email) {
     //load user permission table
     const table = document.getElementById("permission-student");
     table.getElementsByClassName("label")[0].innerText = user.first_name + ' ' + user.last_name;
-    console.log(user);
+    var tableListItems = table.getElementsByTagName("li");
+    while(elements.length > 0) tableListItems[0].parentNode.removeChild(elements[0]);
+    user.permissions.split(',')
 }
 
 // checks for unsaved changes before loading new member
