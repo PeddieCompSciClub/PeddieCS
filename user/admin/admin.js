@@ -96,16 +96,18 @@ function loadMember(email) {
 
 function loadPermissionMember(email) {
     const user = memberData.filter(function (item) { return item.email == email; })[0];
-    
+
+    // visually select user
     const members = document.getElementsByClassName('memberbtn');
     for (var i = 0; i < members.length; i++) {
         members[i].classList.remove('active')
     }
     document.getElementById('permissions-' + email.substring(0, user.email.indexOf("@peddie.org"))).classList.add('active');
-}
 
-function selectActiveMember(email){
-
+    //load user permission table
+    const table = document.getElementById("permission-student");
+    table.getElementsByClassName("label")[0].innerText = user.first_name + ' ' + user.last_name;
+    console.log(user);
 }
 
 // checks for unsaved changes before loading new member
