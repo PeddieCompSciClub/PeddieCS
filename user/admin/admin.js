@@ -61,6 +61,7 @@ function loadmembers() {
             //default compsciclub@peddie.org
             document.getElementById('members_compsciclub').classList.add('active');
             loadMember('compsciclub@peddie.org');
+            loadPermissionMember('compsciclub@peddie.org');
         }
     });
 }
@@ -74,6 +75,7 @@ function requireMemberSave(require) {
     }
 }
 
+//loads profile for selected member
 function loadMember(email) {
     const user = memberData.filter(function (item) { return item.email == email; })[0];
     const memberProfile = document.getElementById('memberprofile');
@@ -94,6 +96,7 @@ function loadMember(email) {
     document.getElementById('members-' + email.substring(0, user.email.indexOf("@peddie.org"))).classList.add('active');
 }
 
+//loads permissions for selected member
 function loadPermissionMember(email) {
     const user = memberData.filter(function (item) { return item.email == email; })[0];
 
