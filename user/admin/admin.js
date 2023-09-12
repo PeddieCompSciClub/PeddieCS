@@ -113,6 +113,7 @@ function loadPermissionMember(email) {
     table.getElementsByClassName("label")[0].innerText = user.first_name + ' ' + user.last_name;
     var tableListItems = table.getElementsByTagName("li");
     while(tableListItems.length > 0) tableListItems[0].parentNode.removeChild(tableListItems[0]);
+    console.log(perms);
     const perms = user.permissions.split(',');
     for(let i=0; i<perms; i++){
         let li = document.createElement('li');
