@@ -59,7 +59,8 @@ function loadmembers() {
             memberProfile.querySelector('#bio').addEventListener('input', function () { requireMemberSave(true); })
 
             //default compsciclub@peddie.org
-            document.getElementById('members_compsciclub').classList.add('active');
+            document.getElementById('members-compsciclub').classList.add('active');
+            document.getElementById('permissions-compsciclub').classList.add('active');
             loadMember('compsciclub@peddie.org');
             loadPermissionMember('compsciclub@peddie.org');
         }
