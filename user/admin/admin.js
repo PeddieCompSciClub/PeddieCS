@@ -117,7 +117,7 @@ function loadPermissionMember(email) {
     for (let i = 0; i < perms.length; i++) {
         if (perms[i].length > 0) {
             let li = document.createElement('li');
-            li.innerHTML = `${perms[i]}<button onclick="removeUserPermission(${user.email},${perms[i]})">X</button>`;//add appropriate script to buttons (removePermission)
+            li.innerHTML = `${perms[i]}<button onclick="removeUserPermission("${user.email}","${perms[i]}")">X</button>`;//add appropriate script to buttons (removePermission)
             table.insertBefore(li, document.getElementById("permissionsearch-studentperms"));
         }
     }
