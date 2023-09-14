@@ -216,7 +216,7 @@ function getCurrentYear() {
 
 
 function removeUserPermission(email,permission){
-    $.get("https://peddiecs.peddie.org/nodejs/admin/getAllMembers", {
+    $.get("https://peddiecs.peddie.org/nodejs/admin/permissions/remove", {
         token: getCookie('credential'),
         email: email,
         permission: permission
