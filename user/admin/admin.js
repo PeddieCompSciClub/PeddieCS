@@ -118,7 +118,7 @@ function loadPermissionMember(email) {
         if (perms[i].length > 0) {
             let li = document.createElement('li');
             li.innerHTML = `${perms[i]}<button>X</button>`;//add appropriate script to buttons (removePermission)
-            table.insertBefore(li, table.lastChild);
+            table.insertBefore(li, document.getElementById("permissionsearch-studentperms"));
         }
     }
 }
