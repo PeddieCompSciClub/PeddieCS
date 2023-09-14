@@ -562,6 +562,7 @@ app.post('/admin/updateUserImage', (req, res) => {
 app.post('/admin/permissions/remove', (req, res) => {
     const token = req.body.token;
     const userEmail = req.body.email;
+    const perm = req.body.permission;
 
     verifyCredentialPermission(token, "admin", function (success, email) {
         if (!success) {
@@ -569,7 +570,23 @@ app.post('/admin/permissions/remove', (req, res) => {
             res.end();
         }
         else {
-            
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+
+            con.connect(function (err) {
+                if (err) throw err;
+                con.query(`SELECT permissions FROM members WHERE email=${userEmail}`, function (err, result, fields) {
+                    if (err) throw err;
+                    res.json({ "error": false, "message": result });
+                    return res.end();
+                })
+                con.end();
+            })
         }
     });
 });
