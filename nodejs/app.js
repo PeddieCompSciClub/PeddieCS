@@ -580,7 +580,7 @@ app.post('/admin/permissions/remove', (req, res) => {
 
             con.connect(function (err) {
                 if (err) throw err;
-                con.query(`SELECT permissions FROM members WHERE email=${userEmail}`, function (err, result, fields) {
+                con.query(`SELECT permissions FROM members WHERE email="${userEmail}"`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ "error": false, "message": result });
                     return res.end();
