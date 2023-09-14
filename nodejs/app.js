@@ -583,6 +583,14 @@ app.post('/admin/permissions/remove', (req, res) => {
                 con.query(`SELECT permissions FROM members WHERE email="${userEmail}"`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ "error": false, "message": result });
+                    if(result[0].permissions.contains(perm)){
+                        let permArr = result[0].permissions.split(",");
+                        for(let i=permArr.length-1; i>=0; i--){
+                            if(permArr[i] == perm){
+                                permArr.splice(i,1);
+                            }
+                        }//still working here
+                    }
                     return res.end();
                 })
                 con.end();
