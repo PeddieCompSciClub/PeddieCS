@@ -557,6 +557,23 @@ app.post('/admin/updateUserImage', (req, res) => {
     }
 });
 
+//removes permission from member
+//updates the user's profile image
+app.post('/admin/permissions/remove', (req, res) => {
+    const token = req.body.token;
+    const userEmail = req.body.email;
+
+    verifyCredentialPermission(token, "admin", function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            
+        }
+    });
+});
+
 
 //cs fellows
 //schedules a cs fellow for a specific time slot
@@ -584,7 +601,7 @@ app.post('/csfellows/schedule', (req, res) => {
                 const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':00:00';
                 con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${name}', '${email}', '${mysqlDate}');`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({ "message": "success", "id":result.insertId});
+                    res.json({ "message": "success", "id": result.insertId });
                     return res.end();
                 });
                 con.end();
@@ -610,8 +627,8 @@ app.get('/csfellows/schedule', (req, res) => {
         console.log(`SELECT name, email, date, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
         con.query(`SELECT name, email, date, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
             if (err) throw err;
-            result.sort(function(a, b) {
-                return a.date-b.date;
+            result.sort(function (a, b) {
+                return a.date - b.date;
             });
             res.json({ "message": "success", "schedule": result });
             return res.end();
@@ -646,7 +663,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
                 console.log(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`)
                 con.query(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`, function (err, result, fields) {
                     if (err) throw err;
-                    res.json({ "message": "success"});
+                    res.json({ "message": "success" });
                     return res.end();
                 });
                 con.end();
@@ -693,7 +710,7 @@ app.post('/csfellows/schedule/month', (req, res) => {
 });
 //recursivly add events to the schedule
 function recursiveAdd(schedule, i, j) {
-    console.log(i,j)
+    console.log(i, j)
 
     var con = mysql.createConnection({
         host: "localhost",
@@ -705,17 +722,17 @@ function recursiveAdd(schedule, i, j) {
 
     var event = schedule[i][j];
     const date = new Date(event.date);
-    const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + (j%2==0?'20':'21') + ':00:00';
-    
+    const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + (j % 2 == 0 ? '20' : '21') + ':00:00';
+
     con.connect(function (err) {
         if (err) throw err;
         con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
             if (err) throw err;
             console.log(i, j, schedule[i][j]);
-            
-            j = (j+1)%schedule[i].length;
-            if(j==0) i++;
-            if(i < schedule.length){con.end(); setTimeout(() => {recursiveAdd(schedule, i, j);}, 100);}
+
+            j = (j + 1) % schedule[i].length;
+            if (j == 0) i++;
+            if (i < schedule.length) { con.end(); setTimeout(() => { recursiveAdd(schedule, i, j); }, 100); }
             else con.end();
         });
     });
@@ -740,8 +757,8 @@ app.get('/events/schedule', (req, res) => {
         // console.log(`SELECT name, date, id FROM events WHERE MONTH(date)=${date.getMonth() + 1}`);
         con.query(`SELECT event, date, id, club FROM events WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
             if (err) throw err;
-            result.sort(function(a, b) {
-                return a.date-b.date;
+            result.sort(function (a, b) {
+                return a.date - b.date;
             });
             res.json({ "message": "success", "schedule": result });
             return res.end();
