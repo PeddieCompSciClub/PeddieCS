@@ -26,7 +26,7 @@ function loadmembers() {
                 document.getElementById(getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += memberButton;
 
                 var permissionButton = `<button class="memberbtn" id="permissions-${user.email.substring(0, user.email.indexOf("@peddie.org"))}" onclick="loadPermissionMember('${user.email}');">${user.first_name + ' ' + user.last_name}</button>`;
-                document.getElementById('permission'+getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += permissionButton;
+                document.getElementById('permission' + getGrade(user.year)).getElementsByClassName("memberlist")[0].innerHTML += permissionButton;
             }
 
             //set active view active
@@ -40,7 +40,7 @@ function loadmembers() {
                 search(text);
                 document.getElementById("membersearch").value = text;
             });
-            function search(text){
+            function search(text) {
                 var members = document.getElementsByClassName("memberbtn");
                 var search = text.toLowerCase();
                 for (var i = 0; i < members.length; i++) {
@@ -112,12 +112,14 @@ function loadPermissionMember(email) {
     const table = document.getElementById("permission-student");
     table.getElementsByClassName("label")[0].innerText = user.first_name + ' ' + user.last_name;
     var tableListItems = table.getElementsByTagName("li");
-    while(tableListItems.length > 0) tableListItems[0].parentNode.removeChild(tableListItems[0]);
+    while (tableListItems.length > 0) tableListItems[0].parentNode.removeChild(tableListItems[0]);
     const perms = user.permissions.split(',');
-    for(let i=0; i<perms.length; i++){
-        let li = document.createElement('li');
-        li.innerHTML = `${perms[i]}<button>X</button>`;//add appropriate script to buttons (removePermission)
-        table.insertBefore(li, table.lastChild);
+    for (let i = 0; i < perms.length; i++) {
+        if (perms[i].length > 0) {
+            let li = document.createElement('li');
+            li.innerHTML = `${perms[i]}<button>X</button>`;//add appropriate script to buttons (removePermission)
+            table.insertBefore(li, table.lastChild);
+        }
     }
 }
 
