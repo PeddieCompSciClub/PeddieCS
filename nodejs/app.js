@@ -558,7 +558,6 @@ app.post('/admin/updateUserImage', (req, res) => {
 });
 
 //removes permission from member
-//updates the user's profile image
 app.post('/admin/permissions/remove', (req, res) => {
     const token = req.body.token;
     const userEmail = req.body.email;
@@ -583,7 +582,6 @@ app.post('/admin/permissions/remove', (req, res) => {
                 con.query(`SELECT permissions FROM members WHERE email="${userEmail}"`, function (err, result, fields) {
                     //get current permissions
                     if (err) throw err;
-                    console.log("Permissions: "+result[0].permissions);
                     if (result[0].permissions.includes(perm)) {
                         let permArr = result[0].permissions.split(",");
                         for (let i = permArr.length - 1; i >= 0; i--) {
@@ -594,7 +592,7 @@ app.post('/admin/permissions/remove', (req, res) => {
                         con.query(`UPDATE members SET permissions="${permArr.join(',')}" WHERE email="${userEmail}"`, function (err, result, fields) {
                             //update with new permissions
                             if (err) throw err;
-                            res.json({ "error": false, "message": result });
+                            res.json({ "error": false, "message": "success" });
                             return res.end();
                         });
                         con.end();
@@ -605,6 +603,48 @@ app.post('/admin/permissions/remove', (req, res) => {
         }
     });
 });
+app.post('/admin/permissions/add', (req, res) => {
+    const token = req.body.token;
+    const userEmail = req.body.email;
+    const perm = req.body.permission;
+
+    verifyCredentialPermission(token, "admin", function (success, email) {
+        if (!success) {
+            res.json({ 'message': 'failed' });
+            res.end();
+        }
+        else {
+            var con = mysql.createConnection({
+                host: "localhost",
+                user: "admincs",
+                password: "BeatBlair1864",
+                database: "peddieCS",
+                port: 3306
+            });
+
+            con.connect(function (err) {
+                if (err) throw err;
+                con.query(`SELECT permissions FROM members WHERE email="${userEmail}"`, function (err, result, fields) {
+                    //get current permissions
+                    if (err) throw err;
+                    if (!result[0].permissions.includes(perm)) {
+                        let permArr = result[0].permissions.split(",");
+                        permArr.push(perm);
+                        con.query(`UPDATE members SET permissions="${permArr.join(',')}" WHERE email="${userEmail}"`, function (err, result, fields) {
+                            //update with new permissions
+                            if (err) throw err;
+                            res.json({ "error": false, "message": "success" });
+                            return res.end();
+                        });
+                        con.end();
+                    }
+                    else con.end();
+                })
+            })
+        }
+    });
+});
+
 
 
 //cs fellows

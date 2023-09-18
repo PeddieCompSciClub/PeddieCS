@@ -238,7 +238,7 @@ function removeUserPermission(email, permission) {
 }
 
 function addUserPermission(email, permission){
-    // $.put("https://peddiecs.peddie.org/nodejs/admin/permissions/add", {
+    // $.post("https://peddiecs.peddie.org/nodejs/admin/permissions/add", {
     //     token: getCookie('credential'),
     //     email: email,
     //     permission: permission
