@@ -584,7 +584,7 @@ app.post('/admin/permissions/remove', (req, res) => {
                     //get current permissions
                     if (err) throw err;
                     console.log("Permissions: "+result[0].permissions);
-                    if (result[0].permissions.contains(perm)) {
+                    if (result[0].permissions.includes(perm)) {
                         let permArr = result[0].permissions.split(",");
                         for (let i = permArr.length - 1; i >= 0; i--) {
                             if (permArr[i] == perm) {
