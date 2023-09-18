@@ -238,14 +238,13 @@ function removeUserPermission(email, permission) {
 }
 
 function addUserPermission(email, permission){
-    // $.post("https://peddiecs.peddie.org/nodejs/admin/permissions/add", {
-    //     token: getCookie('credential'),
-    //     email: email,
-    //     permission: permission
-    // }, function (res) {
-    //     console.log(res);
-    //     //write res --- add button
-    // });
+    $.post("https://peddiecs.peddie.org/nodejs/admin/permissions/add", {
+        token: getCookie('credential'),
+        email: email,
+        permission: permission
+    }, function (res) {
+        console.log(res);
+        //write res --- add button
+    });
 
-    console.log(email,permission);
 }
