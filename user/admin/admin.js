@@ -118,6 +118,7 @@ function loadPermissionMember(email) {
 
     //load user permission table
     const table = document.getElementById("permission-student");
+    table.id.add("test");
     table.getElementsByClassName("label")[0].innerText = user.first_name + ' ' + user.last_name;
     var tableListItems = table.getElementsByTagName("li");
     while (tableListItems.length > 0) tableListItems[0].parentNode.removeChild(tableListItems[0]);
@@ -230,6 +231,18 @@ function removeUserPermission(email, permission) {
         permission: permission
     }, function (res) {
         console.log(res);
+        //write res --- remove button
     });
 
+}
+
+function addUserPermission(email, permission){
+    $.put("https://peddiecs.peddie.org/nodejs/admin/permissions/add", {
+        token: getCookie('credential'),
+        email: email,
+        permission: permission
+    }, function (res) {
+        console.log(res);
+        //write res --- add button
+    });
 }
