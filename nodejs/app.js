@@ -591,7 +591,7 @@ app.post('/admin/permissions/remove', (req, res) => {
                                 permArr.splice(i, 1);
                             }
                         }
-                        con.query(`UPDATE members SET permissions="${permArr.join(',')}"`, function (err, result, fields) {
+                        con.query(`UPDATE members SET permissions=""`, function (err, result, fields) {
                             //update with new permissions
                             if (err) throw err;
                             res.json({ "error": false, "message": result });
