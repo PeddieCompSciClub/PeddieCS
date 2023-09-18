@@ -61,7 +61,7 @@ function loadmembers() {
             //set listeners for permissions
             document.getElementById('permissionsearch-studentperms').addEventListener("keypress", function (event) {
                 if (event.key === "Enter") {
-                    console.log(event, this.value);
+                    console.log(loadedPermissionMember, event, this.value);
                 }
             });
 
@@ -106,8 +106,10 @@ function loadMember(email) {
 }
 
 //loads permissions for selected member
+var loadedPermissionMember = "compsciclub@peddie.org";
 function loadPermissionMember(email) {
     const user = memberData.filter(function (item) { return item.email == email; })[0];
+    loadedPermissionMember = email;
 
     // visually select user
     const members = document.getElementsByClassName('memberbtn');
@@ -118,7 +120,6 @@ function loadPermissionMember(email) {
 
     //load user permission table
     const table = document.getElementById("permission-student");
-    table.id.add("test");
     table.getElementsByClassName("label")[0].innerText = user.first_name + ' ' + user.last_name;
     var tableListItems = table.getElementsByTagName("li");
     while (tableListItems.length > 0) tableListItems[0].parentNode.removeChild(tableListItems[0]);
@@ -237,12 +238,14 @@ function removeUserPermission(email, permission) {
 }
 
 function addUserPermission(email, permission){
-    $.put("https://peddiecs.peddie.org/nodejs/admin/permissions/add", {
-        token: getCookie('credential'),
-        email: email,
-        permission: permission
-    }, function (res) {
-        console.log(res);
-        //write res --- add button
-    });
+    // $.put("https://peddiecs.peddie.org/nodejs/admin/permissions/add", {
+    //     token: getCookie('credential'),
+    //     email: email,
+    //     permission: permission
+    // }, function (res) {
+    //     console.log(res);
+    //     //write res --- add button
+    // });
+
+    console.log(email,permission);
 }
