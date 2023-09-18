@@ -61,7 +61,7 @@ function loadmembers() {
             //set listeners for permissions
             document.getElementById('permissionsearch-studentperms').addEventListener("keypress", function (event) {
                 if (event.key === "Enter") {
-                    addUserPermission(loadedPermissionMember, permission);
+                    addUserPermission(loadedPermissionMember, this.value);
                 }
             });
 
