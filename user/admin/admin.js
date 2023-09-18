@@ -58,6 +58,14 @@ function loadmembers() {
             memberProfile.querySelector('#university').addEventListener('input', function () { requireMemberSave(true); })
             memberProfile.querySelector('#bio').addEventListener('input', function () { requireMemberSave(true); })
 
+            //set listeners for permissions
+            document.getElementById('permissionsearch-studentperms').addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    console.log(event);
+                }
+            });
+
+
             //default compsciclub@peddie.org
             document.getElementById('members-compsciclub').classList.add('active');
             document.getElementById('permissions-compsciclub').classList.add('active');
@@ -215,7 +223,7 @@ function getCurrentYear() {
 
 
 
-function removeUserPermission(email,permission){
+function removeUserPermission(email, permission) {
     $.post("https://peddiecs.peddie.org/nodejs/admin/permissions/remove", {
         token: getCookie('credential'),
         email: email,
