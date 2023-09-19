@@ -233,7 +233,7 @@ function removeUserPermission(email, permission, element) {
     }, function (res) {
         console.log(res);
         if(res.message == "success"){
-            element.remove();
+            element.parentNode.remove();
         }
     });
 
