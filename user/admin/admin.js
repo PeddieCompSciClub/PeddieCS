@@ -247,9 +247,10 @@ function addUserPermission(email, permission){
         console.log(res);
         if(res.message == "success"){
             // insert html button to list
+            let element = document.getElementById("permissionsearch-studentperms");
             let li = document.createElement('li');
             li.innerHTML = `${permission}<button onclick="removeUserPermission('${email}','${permission}',this)">X</button>`;//add appropriate script to buttons (removePermission)
-            table.insertBefore(li, document.getElementById("permissionsearch-studentperms"));
+            element.parentNode.insertBefore(li, element);
         }
     });
 
