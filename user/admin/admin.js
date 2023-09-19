@@ -127,7 +127,7 @@ function loadPermissionMember(email) {
     for (let i = 0; i < perms.length; i++) {
         if (perms[i].length > 0) {
             let li = document.createElement('li');
-            li.innerHTML = `${perms[i]}<button onclick="removeUserPermission('${user.email}','${perms[i]}')">X</button>`;//add appropriate script to buttons (removePermission)
+            li.innerHTML = `${perms[i]}<button onclick="removeUserPermission('${user.email}','${perms[i]}',this)">X</button>`;//add appropriate script to buttons (removePermission)
             table.insertBefore(li, document.getElementById("permissionsearch-studentperms"));
         }
     }
@@ -225,14 +225,16 @@ function getCurrentYear() {
 
 
 
-function removeUserPermission(email, permission) {
+function removeUserPermission(email, permission, element) {
     $.post("https://peddiecs.peddie.org/nodejs/admin/permissions/remove", {
         token: getCookie('credential'),
         email: email,
         permission: permission
     }, function (res) {
         console.log(res);
-        //write res --- remove button
+        if(res.message == "success"){
+            element.remove();
+        }
     });
 
 }
