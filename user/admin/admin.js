@@ -235,7 +235,6 @@ function removeUserPermission(email, permission, element) {
             element.parentNode.remove();
         }
     });
-
 }
 
 function addUserPermission(email, permission){
@@ -252,5 +251,4 @@ function addUserPermission(email, permission){
             element.parentNode.insertBefore(li, element);
         }
     });
-
 }
