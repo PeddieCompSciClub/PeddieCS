@@ -1,0 +1,34 @@
+{
+    "schedule":{
+        "mon":[
+            {
+                "time":19.5,
+                "duration":1,
+                "fellows":2,
+
+                "note":"Mon. math cntr (7:30-8:30)"
+            },
+            {
+                "time":20.5,
+                "duration":1,
+                "fellows":2,
+
+                "note":"Mon. math cntr (8:30-9:30)"
+            }
+        ],
+        "tue":[
+            {
+                "time":10.333,
+                "duration":1,
+                "fellows":2,
+
+                "note":"DMX (10:20-11:20)"
+            }
+        ],
+        "wed":[],
+        "thu":[],
+        "fri":[],
+        "sat":[],
+        "sun":[]
+    }
+}
