@@ -3,32 +3,80 @@
         "mon":[
             {
                 "time":19.5,
-                "duration":1,
+                "duration":60,
                 "fellows":2,
 
-                "note":"Mon. math cntr (7:30-8:30)"
+                "note":"math cntr (7:30-8:30)"
             },
             {
                 "time":20.5,
-                "duration":1,
+                "duration":60,
                 "fellows":2,
 
-                "note":"Mon. math cntr (8:30-9:30)"
+                "note":"math cntr (8:30-9:30)"
             }
         ],
         "tue":[
             {
                 "time":10.333,
-                "duration":1,
+                "duration":60,
                 "fellows":2,
 
                 "note":"DMX (10:20-11:20)"
             }
         ],
-        "wed":[],
-        "thu":[],
+        "wed":[
+            {
+                "time":19,
+                "duration":60,
+                "fellows":2,
+
+                "note":"math cntr (7:00-8:00)"
+            },
+            {
+                "time":20,
+                "duration":60,
+                "fellows":2,
+
+                "note":"math cntr (8:00-9:00)"
+            }
+        ],
+        "thu":[
+            {
+                "time":10.333,
+                "duration":60,
+                "fellows":2,
+
+                "note":"DMX (10:20-11:20)"
+            },
+            {
+                "time":19,
+                "duration":60,
+                "fellows":2,
+
+                "note":"math cntr (7:00-8:00)"
+            },
+            {
+                "time":20,
+                "duration":60,
+                "fellows":2,
+
+                "note":"math cntr (8:00-9:00)"
+            }
+        ],
         "fri":[],
         "sat":[],
         "sun":[]
-    }
+    },
+
+    "exceptions":[
+        {
+            "date":"01-29-23",
+            "time":19,
+            "duration":60,
+            "fellows":2,
+
+            "note":"math cntr (7:00-8:00)"
+        }
+    ]
 }
