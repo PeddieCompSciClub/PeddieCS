@@ -23,7 +23,7 @@ const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 var scheduleJSON;
-loadScheduleJSON.then((result) => {scheduleJSON=result})
+loadScheduleJSON().then((result) => {scheduleJSON=result})
 
 async function loadScheduleJSON(){
     const response = await fetch('https://peddiecs.peddie.org/csfellows/schedule.json');
