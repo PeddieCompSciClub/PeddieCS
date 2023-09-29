@@ -1,6 +1,6 @@
 {
     "schedule":{
-        "mon":[
+        "Monday":[
             {
                 "time":19.5,
                 "duration":60,
@@ -16,7 +16,7 @@
                 "note":"math cntr (8:30-9:30)"
             }
         ],
-        "tue":[
+        "Tuesday":[
             {
                 "time":10.333,
                 "duration":60,
@@ -25,7 +25,7 @@
                 "note":"DMX (10:20-11:20)"
             }
         ],
-        "wed":[
+        "Wednesday":[
             {
                 "time":19,
                 "duration":60,
@@ -41,7 +41,7 @@
                 "note":"math cntr (8:00-9:00)"
             }
         ],
-        "thu":[
+        "Thursday":[
             {
                 "time":10.333,
                 "duration":60,
@@ -64,9 +64,9 @@
                 "note":"math cntr (8:00-9:00)"
             }
         ],
-        "fri":[],
-        "sat":[],
-        "sun":[]
+        "Friday":[],
+        "Saturday":[],
+        "Sunday":[]
     },
 
     "exceptions":[
