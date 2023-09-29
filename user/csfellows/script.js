@@ -26,9 +26,13 @@ var scheduleJSON = loadScheduleJSON();
 
 async function loadScheduleJSON(){
     const response = await fetch('https://peddiecs.peddie.org/csfellows/schedule.json');
-    const data = await response.json();
-    console.log(data);
-    return data;
+    // const data = await response.json();
+    // console.log(data);
+    // return data;
+    response.json().then((json)=>{
+        console.log(json);
+        return json;
+    });
 };
 
 function loadCalendarDates(date) {
