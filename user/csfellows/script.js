@@ -27,6 +27,7 @@ var scheduleJSON = loadScheduleJSON();
 async function loadScheduleJSON(){
     const response = await fetch('https://peddiecs.peddie.org/csfellows/schedule.json');
     const data = await response.json();
+    console.log(data);
     return data;
 };
 
