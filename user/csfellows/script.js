@@ -22,6 +22,14 @@ const monthNames = ["January", "February", "March", "April", "May", "June", "Jul
 const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+var scheduleJSON = loadScheduleJSON();
+
+async function loadScheduleJSON(){
+    const response = await fetch('https://peddiecs.peddie.org/csfellows/schedule.json');
+    const data = await response.json();
+    return data;
+};
+
 function loadCalendarDates(date) {
     console.log(date);
     //load month
@@ -210,6 +218,7 @@ function selectCalendarDate(element, date) {
         if(time9<2){
             preview.appendChild(signup);
         }
+
         
     }
 }
@@ -260,7 +269,6 @@ function signup(date,hour){
         }
     });
 }
-
 
 function DEBUGfillCalendar(year, month){
     var date;
