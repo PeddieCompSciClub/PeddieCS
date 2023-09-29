@@ -244,7 +244,7 @@ function addUserPermission(email, permission){
         email: email,
         permission: permission
     }, function (res) {
-        console.log(res);
+        // console.log(res);
         if(res.message == "success"){
             // insert html button to list
             let element = document.getElementById("permissionsearch-studentperms");
