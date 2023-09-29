@@ -235,7 +235,6 @@ function removeUserPermission(email, permission, element) {
             element.parentNode.remove();
         }
     });
-
 }
 
 function addUserPermission(email, permission){
@@ -244,7 +243,10 @@ function addUserPermission(email, permission){
         email: email,
         permission: permission
     }, function (res) {
+<<<<<<< HEAD
         // console.log(res);
+=======
+>>>>>>> da0146697643efbf737233518dad6dece4ab780e
         if(res.message == "success"){
             // insert html button to list
             let element = document.getElementById("permissionsearch-studentperms");
@@ -253,5 +255,4 @@ function addUserPermission(email, permission){
             element.parentNode.insertBefore(li, element);
         }
     });
-
 }
