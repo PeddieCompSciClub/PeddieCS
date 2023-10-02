@@ -4,14 +4,14 @@
             {
                 "time":19.5,
                 "duration":60,
-                "fellows":2,
+                "maxFellows":2,
 
                 "note":"math cntr (7:30-8:30)"
             },
             {
                 "time":20.5,
                 "duration":60,
-                "fellows":2,
+                "maxFellows":2,
 
                 "note":"math cntr (8:30-9:30)"
             }
@@ -20,7 +20,7 @@
             {
                 "time":10.333,
                 "duration":60,
-                "fellows":2,
+                "maxFellows":2,
 
                 "note":"DMX (10:20-11:20)"
             }
@@ -29,14 +29,14 @@
             {
                 "time":19,
                 "duration":60,
-                "fellows":2,
+                "maxFellows":2,
 
                 "note":"math cntr (7:00-8:00)"
             },
             {
                 "time":20,
                 "duration":60,
-                "fellows":2,
+                "maxFellows":2,
 
                 "note":"math cntr (8:00-9:00)"
             }
@@ -45,21 +45,21 @@
             {
                 "time":10.333,
                 "duration":60,
-                "fellows":2,
+                "maxFellows":2,
 
                 "note":"DMX (10:20-11:20)"
             },
             {
                 "time":19,
                 "duration":60,
-                "fellows":2,
+                "maxFellows":2,
 
                 "note":"math cntr (7:00-8:00)"
             },
             {
                 "time":20,
                 "duration":60,
-                "fellows":2,
+                "maxFellows":2,
 
                 "note":"math cntr (8:00-9:00)"
             }
@@ -74,7 +74,7 @@
             "date":"01-29-23",
             "time":19,
             "duration":60,
-            "fellows":2,
+            "maxFellows":2,
 
             "note":"math cntr (7:00-8:00)"
         }

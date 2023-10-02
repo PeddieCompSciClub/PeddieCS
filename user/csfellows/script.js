@@ -227,7 +227,10 @@ function selectCalendarDate(element, date) {
 
     daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
     daySchedule.forEach((session)=>{
-        console.log(session);
+        // console.log(session);
+        if(loadedTImes[Math.round(session.time * 60)] < session.maxFellows){
+            console.log(session);
+        }
     })
 }
 
