@@ -187,8 +187,8 @@ function selectCalendarDate(element, date) {
     var time8=0, time9=0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
     var userScheduled = false;
     var pastEvent = false;
+    var loadedTimes = [];//keeps track of all loaded times
     if(new Date(date.toDateString()) < new Date(currentDate.toDateString())) pastEvent = true;
-
 
     [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
@@ -199,8 +199,12 @@ function selectCalendarDate(element, date) {
             console.log(event);
             loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
             fellowsCount++;
+            let time = loadedTimes[Math.round(eventDate.getHours()*60)]
+            if(!time) time=1;
+            else time++;
             if(event.email == userData.email) userScheduled = true;
         }
+        console.log(loadedTimes);
     });
 
     //add signup buttons
