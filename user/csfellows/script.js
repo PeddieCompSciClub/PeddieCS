@@ -199,13 +199,13 @@ function selectCalendarDate(element, date) {
             console.log(event);
             loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
             fellowsCount++;
-            let time = loadedTimes[Math.round(eventDate.getHours()*60)]
-            if(!time) time=1;
-            else time++;
+            let timeMinutes = Math.round(eventDate.getHours()*60);
+            if(!loadedTimes[timeMinutes]) loadedTimes[timeMinutes]=1;
+            else loadedTimes[timeMinutes]++;
             if(event.email == userData.email) userScheduled = true;
         }
-        console.log(loadedTimes);
     });
+    console.log(loadedTimes);
 
     //add signup buttons
     if(fellowsCount<4 && !pastEvent){
