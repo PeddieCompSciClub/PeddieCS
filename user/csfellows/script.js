@@ -23,9 +23,9 @@ const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 var scheduleJSON;
-loadScheduleJSON().then((result) => {scheduleJSON=result})
+loadScheduleJSON().then((result) => { scheduleJSON = result })
 
-async function loadScheduleJSON(){
+async function loadScheduleJSON() {
     const response = await fetch('https://peddiecs.peddie.org/csfellows/schedule.json');
     const data = await response.json();
     return data;
@@ -119,7 +119,7 @@ function loadPreview(email, name, hour, minute, id, hideDelete) {
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
                 <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute < 10 ? '0' : '') + minute}</p>
-                ${email == userData.email && !hideDelete ?'<button class="fellows-remove delete memberItem" onclick="cancelEvent('+id+');">Cancel Sign Up</button>':''}
+                ${email == userData.email && !hideDelete ? '<button class="fellows-remove delete memberItem" onclick="cancelEvent(' + id + ');">Cancel Sign Up</button>' : ''}
             </div>
         </div>`;
 
@@ -184,25 +184,25 @@ function selectCalendarDate(element, date) {
     document.getElementById('fellows-preview').innerHTML = "";
 
     var fellowsCount = 0;//number of fellows on a given day
-    var time8=0, time9=0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
+    var time8 = 0, time9 = 0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
     var userScheduled = false;
     var pastEvent = false;
     var loadedTimes = [];//keeps track of all loaded times
-    if(new Date(date.toDateString()) < new Date(currentDate.toDateString())) pastEvent = true;
+    if (new Date(date.toDateString()) < new Date(currentDate.toDateString())) pastEvent = true;
 
     [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
         // console.log(date, eventDate);
         if (eventDate.getDate() == date.getDate()) {
-            if(eventDate.getHours()==20) time8++;
-            if(eventDate.getHours()==21) time9++;
+            if (eventDate.getHours() == 20) time8++;
+            if (eventDate.getHours() == 21) time9++;
             // console.log(event);
             loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
             fellowsCount++;
-            let timeMinutes = "_"+Math.round(eventDate.getHours()*60);
-            if(!loadedTimes[timeMinutes]) loadedTimes[timeMinutes]=1;
+            let timeMinutes = "_" + Math.round(eventDate.getHours() * 60);
+            if (!loadedTimes[timeMinutes]) loadedTimes[timeMinutes] = 1;
             else loadedTimes[timeMinutes]++;
-            if(event.email == userData.email) userScheduled = true;
+            if (event.email == userData.email) userScheduled = true;
         }
     });
     console.log(loadedTimes);
@@ -229,98 +229,104 @@ function selectCalendarDate(element, date) {
     //loop for every session on a day
     daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
     console.log(daySchedule);
-    daySchedule.forEach((session)=>{
-        if(loadedTimes["_"+Math.round(session.time * 60)] < session.maxFellows){
-            //only display signup button if
+    daySchedule.forEach((session) => {
+        let remainingSlots = session.maxFellows - loadedTimes["_" + Math.round(session.time * 60)]
+        if (remainingSlots > 0) {
+            //only display signup button if available slots
             console.log(session);
+            signup = document.createElement('div');
+            signup.onclick = `console.log('signup')`;
+            signup.classList.add('icon');
+            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time})"><h1>${session.time%12}:${Math.floor((session.time%1)*60)}}</h1><a>Sign Up</a><p style="opacity:0">Test Text</p></div>`;
+            preview.appendChild(signup);
         }
     })
 }
 
 
-function cancelEvent(id){
+function cancelEvent(id) {
     $.post("https://peddiecs.peddie.org/nodejs/csfellows/schedule/cancel", {
         token: getCookie('credential'),
         id: id
     }, function (res) {
         console.log(res);
-        if(res.message == "success"){
-            var day = document.getElementById('event-'+id).parentElement;
-            document.getElementById('event-'+id).remove();
-            document.getElementById('fellow-'+id).remove();
-            
+        if (res.message == "success") {
+            var day = document.getElementById('event-' + id).parentElement;
+            document.getElementById('event-' + id).remove();
+            document.getElementById('fellow-' + id).remove();
+
             var events = loadedMonths.get([saveDate.getFullYear(), saveDate.getMonth()].toString());
-            for(let i=events.length-1; i>=0; i--){
-                if(events[i].id == id){
-                    events.splice(i,1);
+            for (let i = events.length - 1; i >= 0; i--) {
+                if (events[i].id == id) {
+                    events.splice(i, 1);
                 }
             }
-            console.log("Removed event-"+id);
+            console.log("Removed event-" + id);
             day.click();//(there is a better way to do this) reload current day
-            
+
         }
     });
 }
 
-function signup(date,hour){
+function signup(date, hour) {
     //over complicated b/c of how the date-time is saved in app.js (GMT+00:00) and then loaded, fix later
     date = new Date(date);
     date.setUTCHours(hour);
 
-    $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule',{
+    $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
         token: getCookie('credential'),
-        name: userData.first_name+" "+userData.last_name,
+        name: userData.first_name + " " + userData.last_name,
         date: date
-    },function (res) {
+    }, function (res) {
         console.log(res);
-        if(res.message=='success'){
-            var formatDate = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + hour + ':00:00.000';
-            loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).push({'name':userData.first_name+' '+userData.last_name, 'email':userData.email, 'date':formatDate, 'id':res.id});
+        if (res.message == 'success') {
+            var formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + hour + ':00:00.000';
+            loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).push({ 'name': userData.first_name + ' ' + userData.last_name, 'email': userData.email, 'date': formatDate, 'id': res.id });
 
-            document.getElementById('day-'+date.getDate()).innerHTML += `<div class="event" id="event-${res.id}" style="background-color:${stringToColor(userData.email)}; border-color:#00000000" >${userData.first_name+' '+userData.last_name}</div>`;
+            document.getElementById('day-' + date.getDate()).innerHTML += `<div class="event" id="event-${res.id}" style="background-color:${stringToColor(userData.email)}; border-color:#00000000" >${userData.first_name + ' ' + userData.last_name}</div>`;
 
-            document.getElementById('day-'+date.getDate()).click();//again, this is a better way
+            document.getElementById('day-' + date.getDate()).click();//again, this is a better way
         }
     });
 }
 
-function DEBUGfillCalendar(year, month){
+function DEBUGfillCalendar(year, month) {
     var date;
-    if(year && month) date = new Date(year, month);
+    if (year && month) date = new Date(year, month);
     else date = new Date();
     console.log(date);
 
     //get all members
     $.get("/nodejs/admin/getAllMembers", {
         token: getCookie('credential')
-    }, function(res){
+    }, function (res) {
         var members = res.message;
         $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
             date: date
         }, function (res) {
             var schedule = res.schedule;
             var month = [];
-            for(let i=0; i<monthDays[date.getMonth()]; i++) month[i] = 0;
-            for(let i=0; i<schedule.length; i++) month[new Date(schedule[i].date.substring(0,schedule[i].date.length-1)).getDate()-1]++;
+            for (let i = 0; i < monthDays[date.getMonth()]; i++) month[i] = 0;
+            for (let i = 0; i < schedule.length; i++) month[new Date(schedule[i].date.substring(0, schedule[i].date.length - 1)).getDate() - 1]++;
 
             console.log(members);
 
             var newSchedule = [];
-            for(let i=0; i<month.length; i++){
+            for (let i = 0; i < month.length; i++) {
                 newSchedule[i] = [];
-                for(let j=0; j<4-month[i]; j++){
-                    let r = Math.floor(Math.random()*members.length)
+                for (let j = 0; j < 4 - month[i]; j++) {
+                    let r = Math.floor(Math.random() * members.length)
                     console.log(date);
-                    newSchedule[i][j] = {name: members[r].first_name+' '+members[r].last_name, email: members[r].email, date:date}
+                    newSchedule[i][j] = { name: members[r].first_name + ' ' + members[r].last_name, email: members[r].email, date: date }
                 }
             }
 
             console.log(newSchedule);
 
-            $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule/month',{
+            $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule/month', {
                 token: getCookie('credential'),
                 schedule: newSchedule
-            },function (res) {
+            }, function (res) {
                 console.log(res);
             });
         });
