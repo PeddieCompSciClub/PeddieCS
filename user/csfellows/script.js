@@ -230,7 +230,7 @@ function selectCalendarDate(element, date) {
     daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
     console.log(daySchedule);
     daySchedule.forEach((session)=>{
-        if(loadedTimes[Math.round(session.time * 60)] < session.maxFellows){
+        if(loadedTimes["_"+Math.round(session.time * 60)] < session.maxFellows){
             //only display signup button if
             console.log(session);
         }
