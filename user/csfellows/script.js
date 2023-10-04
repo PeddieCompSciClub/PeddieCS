@@ -192,11 +192,11 @@ function selectCalendarDate(element, date) {
 
     [].forEach.call(loadedMonths.get([date.getFullYear(), date.getMonth()].toString()), function (event) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
-        console.log(date, eventDate);
+        // console.log(date, eventDate);
         if (eventDate.getDate() == date.getDate()) {
             if(eventDate.getHours()==20) time8++;
             if(eventDate.getHours()==21) time9++;
-            console.log(event);
+            // console.log(event);
             loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
             fellowsCount++;
             let timeMinutes = "_"+Math.round(eventDate.getHours()*60);
@@ -208,6 +208,7 @@ function selectCalendarDate(element, date) {
     console.log(loadedTimes);
 
     //add signup buttons
+    /* //OLD SYSTEM --- HARD CODED FOR 8:00 & 9:00 (BAD) 
     if(fellowsCount<4 && !pastEvent){
         let preview = document.getElementById('fellows-preview');
         let signup = document.createElement('div');
@@ -223,12 +224,13 @@ function selectCalendarDate(element, date) {
         if(time9<2){
             preview.appendChild(signup);
         }        
-    }
+    }*/
 
+    //loop for every session on a day
     daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
     daySchedule.forEach((session)=>{
-        // console.log(session);
         if(loadedTimes[Math.round(session.time * 60)] < session.maxFellows){
+            //only display signup button if
             console.log(session);
         }
     })
