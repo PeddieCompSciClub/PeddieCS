@@ -54,7 +54,7 @@ function loadMonth(date) {
 
 var loadIcons=true;
 function addCalendarEvents(year, month, data) {
-    console.log({year:year,month:month,data:data});
+    // console.log({year:year,month:month,data:data});
     for(var i=0; i<data.length; i++){
         var event = data[i]
         var eventDate = new Date(event.date.substring(0,event.date.length-1));
