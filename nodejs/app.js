@@ -653,6 +653,7 @@ app.post('/csfellows/schedule', (req, res) => {
     const token = req.body.token;
     const name = req.body.name;
     const date = new Date(req.body.date);
+    const duration = req.body.duration;
 
     verifyCredentialPermission(token, 'csfellow', function (success, email) {
         if (!success) {
@@ -671,7 +672,7 @@ app.post('/csfellows/schedule', (req, res) => {
             con.connect(function (err) {
                 if (err) throw err;
                 const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':'+ (date.getUTCMinutes()) +':00';
-                con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${name}', '${email}', '${mysqlDate}');`, function (err, result, fields) {
+                con.query(`INSERT INTO csfellows (name, email, date, duration) VALUES ('${name}', '${email}', '${mysqlDate}', ${duration});`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ "message": "success", "id": result.insertId });
                     return res.end();

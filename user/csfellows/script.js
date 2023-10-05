@@ -246,7 +246,7 @@ function selectCalendarDate(element, date) {
             let preview = document.getElementById('fellows-preview');
             let signup = document.createElement('div');
             signup.classList.add('icon');
-            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time})"><h1>${sessionTimeString}</h1><p>${(session.location ? session.location : "")}</p><a>Sign Up</a></div>`;
+            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time},${session.duration})"><h1>${sessionTimeString}</h1><p>${(session.location ? session.location : "")}</p><a>Sign Up</a></div>`;
             preview.appendChild(signup);
         }
     })
@@ -277,7 +277,7 @@ function cancelEvent(id) {
     });
 }
 
-function signup(date, hour) {
+function signup(date, hour, duration) {
     //over complicated b/c of how the date-time is saved in app.js (GMT+00:00) and then loaded, fix later
     date = new Date(date);
     date.setUTCHours(Math.floor(hour));
@@ -287,7 +287,8 @@ function signup(date, hour) {
     $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
         token: getCookie('credential'),
         name: userData.first_name + " " + userData.last_name,
-        date: date
+        date: date,
+        duration: duration
     }, function (res) {
         console.log(res);
         if (res.message == 'success') {
