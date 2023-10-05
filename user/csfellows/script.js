@@ -288,7 +288,7 @@ function signup(date, hour, duration) {
         token: getCookie('credential'),
         name: userData.first_name + " " + userData.last_name,
         date: date,
-        duration: duration
+        duration: 123
     }, function (res) {
         console.log(res);
         if (res.message == 'success') {
