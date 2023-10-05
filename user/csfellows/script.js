@@ -84,7 +84,7 @@ function addCalendarEvents(year, month, data, firstLoad) {
     for (var i = 0; i < data.length; i++) {
         var event = data[i]
         var eventDate = new Date(event.date.substring(0, event.date.length - 1));
-        console.log(eventDate);
+        // console.log(eventDate);
         document.getElementById('day-' + eventDate.getDate()).innerHTML += `<div class="event" id="event-${event.id}" style="background-color:${stringToColor(event.email)}; border-color:#00000000" >${event.name}</div>`;
         //removed onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')" from above
 
@@ -114,6 +114,7 @@ function loadPreview(email, name, datetime, duration, id, hideDelete) {
     let hour = datetime.getHours()%12;
     let hour2 = datetime.getHours()+1;
     let minute = datetime.getMinutes();
+    console.log(datetime, hour,hour2,minute)
 
     document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon" id="fellow-${id}">
