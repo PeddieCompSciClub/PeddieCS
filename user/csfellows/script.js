@@ -226,6 +226,7 @@ function selectCalendarDate(element, date) {
         }        
     }*/
 
+    //add signup buttons
     //loop for every session on a day
     daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
     console.log(daySchedule);
@@ -234,13 +235,14 @@ function selectCalendarDate(element, date) {
         console.log(session.maxFellows, loadedTimes["_" + Math.round(session.time * 60)], remainingSlots);
         if (remainingSlots > 0) {
             //only display signup button if available slots
-            let sessionTime = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60);
+            let sessionTimeString = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60).getLocaleTimeStiring('en-US');
+            sessionTimeString = sessionTimeString.substring(sessionTimeString.lastIndexOf(":"));
 
-            console.log(session, sessionTime);
+            console.log(session, sessionTimeString);
             let preview = document.getElementById('fellows-preview');
             let signup = document.createElement('div');
             signup.classList.add('icon');
-            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time})"><h1>${session.time % 12}:${Math.floor((session.time % 1) * 60)}}</h1><a>Sign Up</a><p style="opacity:0">Test Text</p></div>`;
+            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time})"><h1>${sessionTimeString}}</h1><a>Sign Up</a><p style="opacity:0">Test Text</p></div>`;
             preview.appendChild(signup);
         }
     })
