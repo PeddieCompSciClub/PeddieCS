@@ -89,7 +89,7 @@ function addCalendarEvents(year, month, data, firstLoad) {
         //removed onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')" from above
 
         if (eventDate.toDateString() == currentDate.toDateString() && firstLoad) {
-            loadPreview(event.email, event.name, eventDate.toString(), event.duration, event.id);
+            loadPreview(event.email, event.name, eventDate.toString(), event.duration, event.location, event.id);
         };
     }
 }
@@ -109,7 +109,7 @@ function loadPopup(email, name, hour, minute) {
     popup.style = "display:block";
 }
 
-function loadPreview(email, name, datetime, duration, id, hideDelete) {
+function loadPreview(email, name, datetime, duration, location, id, hideDelete) {
     datetime = new Date(datetime);
     let hour = datetime.getHours()%12;
     let minute = datetime.getMinutes();
@@ -124,6 +124,7 @@ function loadPreview(email, name, datetime, duration, id, hideDelete) {
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
                 <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute2 < 10 ? '0' : '') + minute2} ${datetime.getHours()<12 ? 'AM':'PM'}</p>
+                ${location?'</p>'+location+'</p>':''}
                 ${email == userData.email && !hideDelete ? '<button class="fellows-remove delete memberItem" onclick="cancelEvent(' + id + ');">Cancel Sign Up</button>' : ''}
             </div>
         </div>`;
@@ -201,7 +202,7 @@ function selectCalendarDate(element, date) {
             if (eventDate.getHours() == 20) time8++;
             if (eventDate.getHours() == 21) time9++;
             // console.log(event);
-            loadPreview(event.email, event.name, eventDate.toString(), event.duration, event.id, pastEvent);
+            loadPreview(event.email, event.name, eventDate.toString(), event.duration, event.location, event.id, pastEvent);
             fellowsCount++;
             let timeMinutes = "_" + Math.round(eventDate.getHours() * 60 + eventDate.getMinutes());
             if (!loadedTimes[timeMinutes]) loadedTimes[timeMinutes] = 1;
