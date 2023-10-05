@@ -110,9 +110,10 @@ function loadPopup(email, name, hour, minute) {
 }
 
 function loadPreview(email, name, datetime, duration, id, hideDelete) {
+    console.log(datetime);
     datetime = new Date(datetime);
     let hour = datetime.getHours()%12;
-    let hour2 = datetime.getHours()+1;
+    let hour2 = (datetime.getHours()+1)%12;
     let minute = datetime.getMinutes();
     console.log(datetime, hour,hour2,minute)
 
