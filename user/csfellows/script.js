@@ -199,7 +199,7 @@ function selectCalendarDate(element, date) {
             // console.log(event);
             loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
             fellowsCount++;
-            let timeMinutes = "_" + Math.round(eventDate.getHours() * 60);
+            let timeMinutes = "_" + Math.round(eventDate.getHours() * 60 + eventDate.getMinutes());
             if (!loadedTimes[timeMinutes]) loadedTimes[timeMinutes] = 1;
             else loadedTimes[timeMinutes]++;
             if (event.email == userData.email) userScheduled = true;
