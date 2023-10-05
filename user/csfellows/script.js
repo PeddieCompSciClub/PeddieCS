@@ -233,7 +233,9 @@ function selectCalendarDate(element, date) {
         let remainingSlots = session.maxFellows - loadedTimes["_" + Math.round(session.time * 60)]
         if (remainingSlots > 0) {
             //only display signup button if available slots
-            console.log(session);
+            let sessionTime = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60);
+
+            console.log(session, sessionTime);
             let preview = document.getElementById('fellows-preview');
             let signup = document.createElement('div');
             signup.classList.add('icon');
