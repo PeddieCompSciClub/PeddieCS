@@ -227,6 +227,7 @@ function selectCalendarDate(element, date) {
     }*/
 
     //loop for every session on a day
+    console.log(scheduleJSON.schedule);
     daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
     console.log(daySchedule);
     daySchedule.forEach((session) => {
