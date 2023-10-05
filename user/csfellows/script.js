@@ -201,7 +201,7 @@ function selectCalendarDate(element, date) {
             if (eventDate.getHours() == 20) time8++;
             if (eventDate.getHours() == 21) time9++;
             // console.log(event);
-            loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id, pastEvent);
+            loadPreview(event.email, event.name, eventDate.toString(), event.duration, event.id, pastEvent);
             fellowsCount++;
             let timeMinutes = "_" + Math.round(eventDate.getHours() * 60 + eventDate.getMinutes());
             if (!loadedTimes[timeMinutes]) loadedTimes[timeMinutes] = 1;
