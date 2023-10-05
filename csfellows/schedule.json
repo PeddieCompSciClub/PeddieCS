@@ -35,6 +35,7 @@
                 "time":10.333,
                 "duration":60,
                 "maxFellows":2,
+                "location":"Innovation Lab",
 
                 "note":"DMX (10:20-11:20)"
             },
@@ -42,6 +43,7 @@
                 "time":19,
                 "duration":120,
                 "maxFellows":2,
+                "location":"Annenberg 310",
 
                 "note":"math cntr (7:00-9:00)"
             }

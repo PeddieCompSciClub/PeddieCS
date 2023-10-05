@@ -228,6 +228,7 @@
 .fellows .add-event{
     transition: 0.25s;
     height: 100%;
+    padding-top: 40%;
 }
 
 .fellows .add-event:hover{
