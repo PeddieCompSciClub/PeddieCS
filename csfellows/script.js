@@ -54,7 +54,7 @@ function loadMonth(date) {
 
 var loadIcons=true;
 function addCalendarEvents(year, month, data) {
-    console.log({year:year,month:month,data:data});
+    // console.log({year:year,month:month,data:data});
     for(var i=0; i<data.length; i++){
         var event = data[i]
         var eventDate = new Date(event.date.substring(0,event.date.length-1));
@@ -63,7 +63,7 @@ function addCalendarEvents(year, month, data) {
 
         if(eventDate.toDateString() == currentDate.toDateString() && loadIcons){
             console.log("Today's Fellow: "+event.name);
-            loadPreview(event.email,event.name,eventDate.getHours(),eventDate.getMinutes());
+            loadPreview(event.email,event.name,eventDate.toString(),eventDate.duration);
         };
     }
     loadIcons = false;
@@ -84,16 +84,20 @@ function loadPopup(email, name, hour, minute){
     popup.style="display:block";
 }
 
-function loadPreview(email,name,hour,minute){
-    let hour2 = (hour%12)+1;
-    hour = ((parseInt(hour)+11)%12)+1;
+function loadPreview(email,name,datetime,duration){
+    datetime = new Date(datetime);
+    let hour = datetime.getHours()%12;
+    let minute = datetime.getMinutes();
+    datetime.setMinutes(datetime.getMinutes()+duration);
+    let hour2 = datetime.getHours()%12;
+    let minute2 = datetime.getMinutes();
 
     document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon">
             <div class="memberItem">
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
-                <p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute}</p>
+                <p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute2<10?'0':'') + minute2}  ${datetime.getHours()<12 ? 'AM':'PM'}</p>
             </div>
         </div>`;
     

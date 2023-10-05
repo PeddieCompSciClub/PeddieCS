@@ -116,7 +116,7 @@ function loadPreview(email, name, datetime, duration, id, hideDelete) {
     datetime.setMinutes(datetime.getMinutes()+duration);
     let hour2 = datetime.getHours()%12;
     let minute2 = datetime.getMinutes();
-    console.log(datetime, hour,hour2,minute)
+    // console.log(datetime, hour,hour2,minute)
 
     document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon" id="fellow-${id}">
@@ -127,7 +127,6 @@ function loadPreview(email, name, datetime, duration, id, hideDelete) {
                 ${email == userData.email && !hideDelete ? '<button class="fellows-remove delete memberItem" onclick="cancelEvent(' + id + ');">Cancel Sign Up</button>' : ''}
             </div>
         </div>`;
-
 }
 
 
