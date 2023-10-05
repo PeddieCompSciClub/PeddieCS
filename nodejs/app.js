@@ -654,6 +654,7 @@ app.post('/csfellows/schedule', (req, res) => {
     const name = req.body.name;
     const date = new Date(req.body.date);
     const duration = req.body.duration;
+    const location = req.body.location;
 
     verifyCredentialPermission(token, 'csfellow', function (success, email) {
         if (!success) {
@@ -672,7 +673,7 @@ app.post('/csfellows/schedule', (req, res) => {
             con.connect(function (err) {
                 if (err) throw err;
                 const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':'+ (date.getUTCMinutes()) +':00';
-                con.query(`INSERT INTO csfellows (name, email, date, duration) VALUES ('${name}', '${email}', '${mysqlDate}', ${duration});`, function (err, result, fields) {
+                con.query(`INSERT INTO csfellows (name, email, date, duration, location) VALUES ('${name}', '${email}', '${mysqlDate}', ${duration}, '${location}');`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ "message": "success", "id": result.insertId });
                     return res.end();
@@ -698,7 +699,7 @@ app.get('/csfellows/schedule', (req, res) => {
     con.connect(function (err) {
         if (err) throw err;
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
-        con.query(`SELECT name, email, date, duration, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
+        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
             if (err) throw err;
             result.sort(function (a, b) {
                 return a.date - b.date;

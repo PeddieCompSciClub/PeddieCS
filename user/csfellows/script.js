@@ -245,7 +245,7 @@ function selectCalendarDate(element, date) {
             let preview = document.getElementById('fellows-preview');
             let signup = document.createElement('div');
             signup.classList.add('icon');
-            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time},${session.duration})"><h1>${sessionTimeString}</h1><p>${(session.location ? session.location : "")}</p><a>Sign Up</a></div>`;
+            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time},${session.duration},'${session.location}')"><h1>${sessionTimeString}</h1><p>${(session.location ? session.location : "")}</p><a>Sign Up</a></div>`;
             preview.appendChild(signup);
         }
     })
@@ -276,7 +276,7 @@ function cancelEvent(id) {
     });
 }
 
-function signup(date, hour, duration) {
+function signup(date, hour, duration, location) {
     //over complicated b/c of how the date-time is saved in app.js (GMT+00:00) and then loaded, fix later
     date = new Date(date);
     date.setUTCHours(Math.floor(hour));
@@ -287,7 +287,8 @@ function signup(date, hour, duration) {
         token: getCookie('credential'),
         name: userData.first_name + " " + userData.last_name,
         date: date,
-        duration: duration
+        duration: duration,
+        location: location
     }, function (res) {
         console.log(res);
         if (res.message == 'success') {
