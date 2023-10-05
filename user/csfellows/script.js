@@ -232,11 +232,10 @@ function selectCalendarDate(element, date) {
     console.log(daySchedule);
     daySchedule.forEach((session) => {
         let remainingSlots = (loadedTimes["_" + Math.round(session.time * 60)]? session.maxFellows - loadedTimes["_" + Math.round(session.time * 60)] : session.maxFellows) //default 0 signed up
-        console.log(session.maxFellows, loadedTimes["_" + Math.round(session.time * 60)], remainingSlots);
         if (remainingSlots > 0) {
             //only display signup button if available slots
             let sessionTimeString = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60).toLocaleTimeString('en-US');
-            sessionTimeString = sessionTimeString.substring(sessionTimeString.lastIndexOf(":"),sessionTimeString.lastIndexOf(":")+3);
+            sessionTimeString = sessionTimeString.substring(0,sessionTimeString.lastIndexOf(":")) + sessionTimeString.substring(0,sessionTimeString.lastIndexOf(" "));
 
             console.log(session, sessionTimeString);
             let preview = document.getElementById('fellows-preview');
