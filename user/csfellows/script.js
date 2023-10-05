@@ -111,8 +111,9 @@ function loadPopup(email, name, hour, minute) {
 
 function loadPreview(email, name, datetime, duration, id, hideDelete) {
     datetime = new Date(datetime);
-    hour = datetime.getHours()%12;
-    hour2 = datetime.getHours()+1;
+    let hour = datetime.getHours()%12;
+    let hour2 = datetime.getHours()+1;
+    let minute = datetime.getMinutes();
 
     document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon" id="fellow-${id}">
