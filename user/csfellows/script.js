@@ -235,7 +235,7 @@ function selectCalendarDate(element, date) {
         if (remainingSlots > 0) {
             //only display signup button if available slots
             let sessionTimeString = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60).toLocaleTimeString('en-US');
-            sessionTimeString = sessionTimeString.substring(0,sessionTimeString.lastIndexOf(":")) + sessionTimeString.substring(0,sessionTimeString.lastIndexOf(" "));
+            sessionTimeString = sessionTimeString.substring(0,sessionTimeString.lastIndexOf(":")) + sessionTimeString.substring(sessionTimeString.lastIndexOf(" "));
 
             console.log(session, sessionTimeString);
             let preview = document.getElementById('fellows-preview');
