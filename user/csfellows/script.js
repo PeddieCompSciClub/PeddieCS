@@ -288,12 +288,12 @@ function signup(date, hour, duration) {
         token: getCookie('credential'),
         name: userData.first_name + " " + userData.last_name,
         date: date,
-        duration: 123
+        duration: duration
     }, function (res) {
         console.log(res);
         if (res.message == 'success') {
             var formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getUTCHours() + ':'+ date.getUTCMinutes() +':00.000';
-            loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).push({ 'name': userData.first_name + ' ' + userData.last_name, 'email': userData.email, 'date': formatDate, 'id': res.id });
+            loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).push({ 'name': userData.first_name + ' ' + userData.last_name, 'email': userData.email, 'date': formatDate, 'duration':duration, 'id': res.id });
 
             document.getElementById('day-' + date.getDate()).innerHTML += `<div class="event" id="event-${res.id}" style="background-color:${stringToColor(userData.email)}; border-color:#00000000" >${userData.first_name + ' ' + userData.last_name}</div>`;
 
