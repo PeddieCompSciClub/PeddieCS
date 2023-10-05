@@ -227,11 +227,11 @@ function selectCalendarDate(element, date) {
     }*/
 
     //loop for every session on a day
-    console.log(scheduleJSON.schedule);
     daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
     console.log(daySchedule);
     daySchedule.forEach((session) => {
         let remainingSlots = session.maxFellows - loadedTimes["_" + Math.round(session.time * 60)]
+        console.log(session.maxFellows - loadedTimes["_" + Math.round(session.time * 60)], remainingSlots);
         if (remainingSlots > 0) {
             //only display signup button if available slots
             let sessionTime = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60);
