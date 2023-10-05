@@ -234,10 +234,10 @@ function selectCalendarDate(element, date) {
         if (remainingSlots > 0) {
             //only display signup button if available slots
             console.log(session);
-            signup = document.createElement('div');
-            signup.onclick = `console.log('signup')`;
+            let preview = document.getElementById('fellows-preview');
+            let signup = document.createElement('div');
             signup.classList.add('icon');
-            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time})"><h1>${session.time%12}:${Math.floor((session.time%1)*60)}}</h1><a>Sign Up</a><p style="opacity:0">Test Text</p></div>`;
+            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time})"><h1>${session.time % 12}:${Math.floor((session.time % 1) * 60)}}</h1><a>Sign Up</a><p style="opacity:0">Test Text</p></div>`;
             preview.appendChild(signup);
         }
     })

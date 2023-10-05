@@ -3,17 +3,11 @@
         "Monday":[
             {
                 "time":19.5,
-                "duration":60,
+                "duration":120,
                 "maxFellows":2,
+                "location":"Efros",
 
-                "note":"math cntr (7:30-8:30)"
-            },
-            {
-                "time":20.5,
-                "duration":60,
-                "maxFellows":2,
-
-                "note":"math cntr (8:30-9:30)"
+                "note":"math cntr (7:30-9:30)"
             }
         ],
         "Tuesday":[
@@ -21,6 +15,7 @@
                 "time":10.333,
                 "duration":60,
                 "maxFellows":2,
+                "location":"Innovation Lab",
 
                 "note":"DMX (10:20-11:20)"
             }
@@ -28,17 +23,11 @@
         "Wednesday":[
             {
                 "time":19,
-                "duration":60,
+                "duration":120,
                 "maxFellows":2,
+                "location":"Efros",
 
-                "note":"math cntr (7:00-8:00)"
-            },
-            {
-                "time":20,
-                "duration":60,
-                "maxFellows":2,
-
-                "note":"math cntr (8:00-9:00)"
+                "note":"math cntr (7:00-9:00)"
             }
         ],
         "Thursday":[
@@ -51,17 +40,10 @@
             },
             {
                 "time":19,
-                "duration":60,
+                "duration":120,
                 "maxFellows":2,
 
-                "note":"math cntr (7:00-8:00)"
-            },
-            {
-                "time":20,
-                "duration":60,
-                "maxFellows":2,
-
-                "note":"math cntr (8:00-9:00)"
+                "note":"math cntr (7:00-9:00)"
             }
         ],
         "Friday":[],
@@ -76,7 +58,7 @@
             "duration":60,
             "maxFellows":2,
 
-            "note":"math cntr (7:00-8:00)"
+            "note":"EXCEPTIONS NOT IMPLEMENTED YET - math cntr (7:00-8:00)"
         }
     ]
 }
