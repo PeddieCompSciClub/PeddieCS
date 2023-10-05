@@ -80,11 +80,11 @@ function loadMonth(date, firstLoad) {
 }
 
 function addCalendarEvents(year, month, data, firstLoad) {
-    console.log({ year: year, month: month, data: data });
+    // console.log({ year: year, month: month, data: data });
     for (var i = 0; i < data.length; i++) {
         var event = data[i]
         var eventDate = new Date(event.date.substring(0, event.date.length - 1));
-
+        console.log(eventDate);
         document.getElementById('day-' + eventDate.getDate()).innerHTML += `<div class="event" id="event-${event.id}" style="background-color:${stringToColor(event.email)}; border-color:#00000000" >${event.name}</div>`;
         //removed onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')" from above
 
