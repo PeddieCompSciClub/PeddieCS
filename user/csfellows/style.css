@@ -202,6 +202,7 @@
 .info .fellows-remove{
     display:block;
     margin:0 auto 0.2em;
+    height: auto;
 }
 
 .delete {
@@ -223,7 +224,8 @@
 
 .fellows .memberItem{
     margin-top: 0;
-    height: 22em;
+    min-height: 22em;
+    height: auto;
 }
 
 .fellows .add-event{
