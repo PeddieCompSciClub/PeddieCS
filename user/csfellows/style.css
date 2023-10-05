@@ -223,11 +223,12 @@
 
 .fellows .memberItem{
     margin-top: 0;
+    height: 22em;
 }
 
 .fellows .add-event{
     transition: 0.25s;
-    height: 100%;
+    /* height: 100%; */
     padding-top: 40%;
 }
 
