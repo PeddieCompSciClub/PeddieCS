@@ -63,7 +63,7 @@ function addCalendarEvents(year, month, data) {
 
         if(eventDate.toDateString() == currentDate.toDateString() && loadIcons){
             console.log("Today's Fellow: "+event.name);
-            loadPreview(event.email,event.name,eventDate.toString(),eventDate.duration);
+            loadPreview(event.email,event.name,eventDate.toString(),event.duration);
         };
     }
     loadIcons = false;
@@ -85,7 +85,6 @@ function loadPopup(email, name, hour, minute){
 }
 
 function loadPreview(email,name,datetime,duration){
-    console.log(datetime,duration);
     datetime = new Date(datetime);
     let hour = datetime.getHours()%12;
     let minute = datetime.getMinutes();
