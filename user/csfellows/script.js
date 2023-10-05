@@ -277,6 +277,7 @@ function signup(date, hour) {
     date = new Date(date);
     date.setUTCHours(Math.floor(hour));
     date.setUTCMinutes(Math.round((hour%1)*60));
+    console.log(date);
 
     $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
         token: getCookie('credential'),
