@@ -202,7 +202,7 @@
 .info .fellows-remove{
     display:block;
     margin:0 auto 0.2em;
-    min-height: none !important;
+    min-height: unset !important;
 }
 
 .delete {
