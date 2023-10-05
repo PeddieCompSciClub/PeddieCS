@@ -110,11 +110,12 @@ function loadPopup(email, name, hour, minute) {
 }
 
 function loadPreview(email, name, datetime, duration, id, hideDelete) {
-    console.log(datetime);
     datetime = new Date(datetime);
     let hour = datetime.getHours()%12;
-    let hour2 = (datetime.getHours()+1)%12;
     let minute = datetime.getMinutes();
+    datetime.setMinutes(datetime.getMinutes()+duration);
+    let hour2 = datetime.getHours()%12;
+    let minute2 = datetime.getMinutes();
     console.log(datetime, hour,hour2,minute)
 
     document.getElementById('fellows-preview').innerHTML +=
@@ -122,7 +123,7 @@ function loadPreview(email, name, datetime, duration, id, hideDelete) {
             <div class="memberItem">
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
-                <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute < 10 ? '0' : '') + minute}</p>
+                <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute2 < 10 ? '0' : '') + minute2}</p>
                 ${email == userData.email && !hideDelete ? '<button class="fellows-remove delete memberItem" onclick="cancelEvent(' + id + ');">Cancel Sign Up</button>' : ''}
             </div>
         </div>`;
