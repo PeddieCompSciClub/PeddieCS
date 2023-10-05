@@ -111,10 +111,10 @@ function loadPopup(email, name, hour, minute) {
 
 function loadPreview(email, name, datetime, duration, location, id, hideDelete) {
     datetime = new Date(datetime);
-    let hour = datetime.getHours()%12;
+    let hour = datetime.getHours() % 12;
     let minute = datetime.getMinutes();
-    datetime.setMinutes(datetime.getMinutes()+duration);
-    let hour2 = datetime.getHours()%12;
+    datetime.setMinutes(datetime.getMinutes() + duration);
+    let hour2 = datetime.getHours() % 12;
     let minute2 = datetime.getMinutes();
     // console.log(datetime, hour,hour2,minute)
 
@@ -123,8 +123,8 @@ function loadPreview(email, name, datetime, duration, location, id, hideDelete) 
             <div class="memberItem">
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
-                <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute2 < 10 ? '0' : '') + minute2} ${datetime.getHours()<12 ? 'AM':'PM'}</p>
-                ${location?'<p>'+location+'</p>':''}
+                <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute2 < 10 ? '0' : '') + minute2} ${datetime.getHours() < 12 ? 'AM' : 'PM'}</p>
+                ${location ? '<p>' + location + '</p>' : ''}
                 ${email == userData.email && !hideDelete ? '<button class="fellows-remove delete memberItem" onclick="cancelEvent(' + id + ');">Cancel Sign Up</button>' : ''}
             </div>
         </div>`;
@@ -233,23 +233,25 @@ function selectCalendarDate(element, date) {
 
     //add signup buttons
     //loop for every session on a day
-    daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
-    console.log(daySchedule);
-    daySchedule.forEach((session) => {
-        let remainingSlots = (loadedTimes["_" + Math.round(session.time * 60)]? session.maxFellows - loadedTimes["_" + Math.round(session.time * 60)] : session.maxFellows) //default 0 signed up
-        if (remainingSlots > 0) {
-            //only display signup button if available slots
-            let sessionTimeString = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time%1)*60)).toLocaleTimeString('en-US');
-            sessionTimeString = sessionTimeString.substring(0,sessionTimeString.lastIndexOf(":")) + sessionTimeString.substring(sessionTimeString.lastIndexOf(" "));
+    if (!pastEvent) {//dont add signups for past days
+        daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
+        console.log(daySchedule);
+        daySchedule.forEach((session) => {
+            let remainingSlots = (loadedTimes["_" + Math.round(session.time * 60)] ? session.maxFellows - loadedTimes["_" + Math.round(session.time * 60)] : session.maxFellows) //default 0 signed up
+            if (remainingSlots > 0) {
+                //only display signup button if available slots
+                let sessionTimeString = new Date(date.toLocaleDateString() + " " + Math.floor(session.time) + ":" + Math.round((session.time % 1) * 60)).toLocaleTimeString('en-US');
+                sessionTimeString = sessionTimeString.substring(0, sessionTimeString.lastIndexOf(":")) + sessionTimeString.substring(sessionTimeString.lastIndexOf(" "));
 
-            console.log((date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time%1)*60)), sessionTimeString);
-            let preview = document.getElementById('fellows-preview');
-            let signup = document.createElement('div');
-            signup.classList.add('icon');
-            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time},${session.duration},'${session.location}')"><h1>${sessionTimeString}</h1><p>${(session.location ? session.location : "")}</p><a>Sign Up</a></div>`;
-            preview.appendChild(signup);
-        }
-    })
+                console.log((date.toLocaleDateString() + " " + Math.floor(session.time) + ":" + Math.round((session.time % 1) * 60)), sessionTimeString);
+                let preview = document.getElementById('fellows-preview');
+                let signup = document.createElement('div');
+                signup.classList.add('icon');
+                signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time},${session.duration},'${session.location}')"><h1>${sessionTimeString}</h1><p>${(session.location ? session.location : "")}</p><a>Sign Up</a></div>`;
+                preview.appendChild(signup);
+            }
+        })
+    }
 }
 
 
@@ -281,7 +283,7 @@ function signup(date, hour, duration, location) {
     //over complicated b/c of how the date-time is saved in app.js (GMT+00:00) and then loaded, fix later
     date = new Date(date);
     date.setUTCHours(Math.floor(hour));
-    date.setUTCMinutes(Math.round((hour%1)*60));
+    date.setUTCMinutes(Math.round((hour % 1) * 60));
     console.log(date);
 
     $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
@@ -293,8 +295,8 @@ function signup(date, hour, duration, location) {
     }, function (res) {
         console.log(res);
         if (res.message == 'success') {
-            var formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getUTCHours() + ':'+ date.getUTCMinutes() +':00.000';
-            loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).push({ 'name': userData.first_name + ' ' + userData.last_name, 'email': userData.email, 'date': formatDate, 'duration':duration, 'id': res.id });
+            var formatDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':00.000';
+            loadedMonths.get([date.getFullYear(), date.getMonth()].toString()).push({ 'name': userData.first_name + ' ' + userData.last_name, 'email': userData.email, 'date': formatDate, 'duration': duration, 'id': res.id });
 
             document.getElementById('day-' + date.getDate()).innerHTML += `<div class="event" id="event-${res.id}" style="background-color:${stringToColor(userData.email)}; border-color:#00000000" >${userData.first_name + ' ' + userData.last_name}</div>`;
 
