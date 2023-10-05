@@ -227,6 +227,7 @@
 
 .fellows .add-event{
     transition: 0.25s;
+    height: 100%;
 }
 
 .fellows .add-event:hover{
@@ -235,7 +236,7 @@
 }
 
 .fellows .add-event h1{
-    font-size: 6em;
+    font-size: 3em;
     margin:5% auto 0;
     height: 3em;
     padding:0.8em 0 0 0;
