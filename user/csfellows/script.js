@@ -237,7 +237,7 @@ function selectCalendarDate(element, date) {
             let sessionTimeString = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60).toLocaleTimeString('en-US');
             sessionTimeString = sessionTimeString.substring(0,sessionTimeString.lastIndexOf(":")) + sessionTimeString.substring(sessionTimeString.lastIndexOf(" "));
 
-            console.log(session, sessionTimeString);
+            console.log(new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60), sessionTimeString);
             let preview = document.getElementById('fellows-preview');
             let signup = document.createElement('div');
             signup.classList.add('icon');
@@ -275,7 +275,8 @@ function cancelEvent(id) {
 function signup(date, hour) {
     //over complicated b/c of how the date-time is saved in app.js (GMT+00:00) and then loaded, fix later
     date = new Date(date);
-    date.setUTCHours(hour);
+    date.setUTCHours(Math.floor(hour));
+    date.setUTCMinutes(Math.round((hour%1)*60));
 
     $.post('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
         token: getCookie('credential'),
