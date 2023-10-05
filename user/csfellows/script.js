@@ -89,7 +89,7 @@ function addCalendarEvents(year, month, data, firstLoad) {
         //removed onclick="loadPopup('${event.email}','${event.name}','${eventDate.getHours()}','${eventDate.getMinutes()}')" from above
 
         if (eventDate.toDateString() == currentDate.toDateString() && firstLoad) {
-            loadPreview(event.email, event.name, eventDate.getHours(), eventDate.getMinutes(), event.id);
+            loadPreview(event.email, event.name, eventDate.toString(), event.duration, event.id);
         };
     }
 }
@@ -109,9 +109,10 @@ function loadPopup(email, name, hour, minute) {
     popup.style = "display:block";
 }
 
-function loadPreview(email, name, hour, minute, id, hideDelete) {
-    let hour2 = (hour % 12) + 1;
-    hour = ((parseInt(hour) + 11) % 12) + 1;
+function loadPreview(email, name, datetime, duration, id, hideDelete) {
+    datetime = new Date(datetime);
+    hour = datetime.getHours()%12;
+    hour2 = datetime.getHours()+1;
 
     document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon" id="fellow-${id}">
