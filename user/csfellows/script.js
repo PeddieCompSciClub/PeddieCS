@@ -241,7 +241,7 @@ function selectCalendarDate(element, date) {
             let preview = document.getElementById('fellows-preview');
             let signup = document.createElement('div');
             signup.classList.add('icon');
-            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time})"><h1>${sessionTimeString}</h1><a>Sign Up</a><p>${session.location}</p></div>`;
+            signup.innerHTML = `<div class="memberItem add-event" onclick="console.log('signup-${session.time}'); signup('${date}',${session.time})"><h1>${sessionTimeString}</h1><a>Sign Up</a><p>${(session.location ? session.location : "")}</p></div>`;
             preview.appendChild(signup);
         }
     })
