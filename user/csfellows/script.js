@@ -237,7 +237,7 @@ function selectCalendarDate(element, date) {
             let sessionTimeString = new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60).toLocaleTimeString('en-US');
             sessionTimeString = sessionTimeString.substring(0,sessionTimeString.lastIndexOf(":")) + sessionTimeString.substring(sessionTimeString.lastIndexOf(" "));
 
-            console.log(new Date(date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60), sessionTimeString);
+            console.log((date.toLocaleDateString() + " " + Math.floor(session.time)+":"+Math.round((session.time)%1)*60), sessionTimeString);
             let preview = document.getElementById('fellows-preview');
             let signup = document.createElement('div');
             signup.classList.add('icon');
