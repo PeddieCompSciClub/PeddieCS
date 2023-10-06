@@ -135,8 +135,6 @@ function stringToHash(string) {
 
 
 //----CSFellows Preview-----------------------------------
-loadFellows();
-
 function loadFellows() {
     var fellows;
     $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule/day', {
