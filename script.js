@@ -153,6 +153,8 @@ function loadFellowsPreview(email,name,datetime,duration,location){
     datetime.setMinutes(datetime.getMinutes()+duration);
     let hour2 = datetime.getHours()%12;
     let minute2 = datetime.getMinutes();
+    console.log(email,name,datetime,duration,location);
+    console.log(hour, minute, hour2, minute2);
 
     document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon">
