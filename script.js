@@ -141,7 +141,7 @@ function loadFellows() {
 
             if(eventDate.toDateString() == currentDate.toDateString()){
                 console.log("Today's Fellow: "+event.name);
-                loadPreview(fellow.email,fellow.name,eventDate.toString(),fellow.duration,fellow.location);
+                loadFellowsPreview(fellow.email,fellow.name,eventDate.toString(),fellow.duration,fellow.location);
             };
         }
     });
