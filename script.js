@@ -144,6 +144,10 @@ function loadFellows() {
                 loadFellowsPreview(fellow.email,fellow.name,eventDate.toString(),fellow.duration,fellow.location);
             };
         }
+
+        if(fellows.length==0){
+            loadFellowsSchedule();
+        }
     });
 }
 function loadFellowsPreview(email,name,datetime,duration,location){
@@ -167,5 +171,13 @@ function loadFellowsPreview(email,name,datetime,duration,location){
         </div>`;
 }
 function loadFellowsSchedule(){
-
+    loadFellowsScheduleJSON().then((response) => {
+        console.log(response);
+    });
 }
+
+async function loadFellowsScheduleJSON() {
+    const response = await fetch('https://peddiecs.peddie.org/csfellows/schedule.json');
+    const data = await response.json();
+    return data;
+};
