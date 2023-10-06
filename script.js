@@ -64,7 +64,7 @@ function addCalendarEvents(year, month, data) {
         document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.club)}; border-color:#00000000" onclick="loadPopup('${event.club}','${event.event}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.event}</div>`;
 
         if(eventDate.toDateString() == currentDate.toDateString() && loadIcons){
-            console.log("Today's Fellow: "+event.event);
+            console.log("Today's Event: "+event.event);
             loadPreview(event.club,event.event,eventDate.getHours(),eventDate.getMinutes());
         };
     }
@@ -129,4 +129,20 @@ function stringToHash(string) {
         hash = hash & hash;
     }
     return hash;
+}
+
+
+
+
+//----CSFellows Preview-----------------------------------
+
+
+function loadFellows(){
+    var fellows;
+    $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule/day', {
+            date: date
+        }, function (res) {
+            fellows=res.schedule
+            console.log(fellows);
+        });
 }

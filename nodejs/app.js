@@ -711,6 +711,33 @@ app.get('/csfellows/schedule', (req, res) => {
     });
 });
 
+//gets the cs fellows for a specific day
+app.get('/csfellows/schedule/day', (req, res) => {
+    const date = new Date(req.query.date);
+    const mysqlDate = date.getFullYear() + '-' + date.getMonth() + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "admincs",
+        password: "BeatBlair1864",
+        database: "peddieCS",
+        port: 3306
+    });
+    con.connect(function (err) {
+        if (err) throw err;
+        // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
+        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate() + 1}`, function (err, result, fields) {
+            if (err) throw err;
+            result.sort(function (a, b) {
+                return a.date - b.date;
+            });
+            res.json({ "message": "success", "schedule": result });
+            return res.end();
+        });
+        con.end();
+    });
+});
+
 //removes an event from the calendar
 app.post('/csfellows/schedule/cancel', (req, res) => {
     const token = req.body.token;
