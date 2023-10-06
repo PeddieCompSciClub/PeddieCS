@@ -142,5 +142,36 @@ function loadFellows() {
     }, function (res) {
         fellows = res.schedule
         console.log(res);
+
+        for(let i=0; i<fellows.length; i++){
+            var fellow = fellows[i];
+            var eventDate = new Date(fellow.date.substring(0,fellow.date.length-1));
+
+            if(eventDate.toDateString() == currentDate.toDateString()){
+                console.log("Today's Fellow: "+event.name);
+                loadPreview(fellow.email,fellow.name,eventDate.toString(),fellow.duration,fellow.location);
+            };
+        }
     });
+}
+function loadFellowsPreview(email,name,datetime,duration,location){
+    datetime = new Date(datetime);
+    let hour = datetime.getHours()%12;
+    let minute = datetime.getMinutes();
+    datetime.setMinutes(datetime.getMinutes()+duration);
+    let hour2 = datetime.getHours()%12;
+    let minute2 = datetime.getMinutes();
+
+    document.getElementById('fellows-preview').innerHTML +=
+        `<div class="icon">
+            <div class="memberItem">
+                <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
+                <a>${name}</a>
+                <p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute2<10?'0':'') + minute2}  ${datetime.getHours()<12 ? 'AM':'PM'}</p>
+                ${location?'<p>'+location+'</p>':''}
+            </div>
+        </div>`;
+}
+function loadFellowsSchedule(){
+
 }
