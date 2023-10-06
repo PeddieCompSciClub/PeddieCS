@@ -28,7 +28,6 @@ function addSignoutButton(name) {
     const nav = document.getElementById("navbar-main");
     const button = document.createElement("button");
     button.classList.add("user", "sign-out");
-    button.id.add("sign-out-button");
     button.textContent = name;
     button.setAttribute("onclick","console.log(test)");
     // button.addEventListener("click", function () {
