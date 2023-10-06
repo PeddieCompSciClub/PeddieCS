@@ -731,7 +731,6 @@ app.get('/csfellows/schedule/day', (req, res) => {
             result.sort(function (a, b) {
                 return a.date - b.date;
             });
-            console.log(result);
             res.json({ "message": "success", "schedule": result });
             return res.end();
         });
