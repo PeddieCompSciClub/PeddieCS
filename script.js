@@ -100,14 +100,6 @@ function loadPreview(email, name, hour, minute) {
             </div>
         </div>`;
 
-    displayPreview();
-}
-
-function displayPreview() {
-    if (!displayTodaysFellows) {
-        displayTodaysFellows = true;
-        document.getElementById('info-fellows').style = 'display:block;'
-    }
 }
 
 function stringToColor(text) {
