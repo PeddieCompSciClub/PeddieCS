@@ -140,7 +140,7 @@ loadFellows();
 function loadFellows(){
     var fellows;
     $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule/day', {
-            date: currentDate.toDateString();
+            date: currentDate.toDateString()
         }, function (res) {
             fellows=res.schedule
             console.log(fellows);
