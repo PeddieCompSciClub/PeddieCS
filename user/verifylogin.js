@@ -29,7 +29,7 @@ function addSignoutButton(name) {
     const button = document.createElement("button");
     button.classList.add("user", "sign-out");
     button.textContent = name;
-    button.setAttribute("onclick","console.log(test)");
+    button.setAttribute("onclick",'removeCookie("credential"); window.location.href = "/index.html";');
     // button.addEventListener("click", function () {
     //     removeCookie("credential");
     //     window.location.href = "/index.html";
