@@ -42,42 +42,42 @@ const loadedMonths = new Map();
 function loadMonth(date) {
     console.log([date.getMonth(), date.getFullYear()].toString());
     if (loadedMonths.has([date.getFullYear(), date.getMonth()].toString())) {
-        addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
+        addCalendarEvents(date.getYear(), date.getMonth(), loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
     } else {
         console.log('loading data');
         $.get('https://peddiecs.peddie.org/nodejs/events/schedule', {
             date: date
         }, function (res) {
-            loadedMonths.set([date.getFullYear(), date.getMonth()].toString(),res.schedule)
-            addCalendarEvents(date.getYear(),date.getMonth(),loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
+            loadedMonths.set([date.getFullYear(), date.getMonth()].toString(), res.schedule)
+            addCalendarEvents(date.getYear(), date.getMonth(), loadedMonths.get([date.getFullYear(), date.getMonth()].toString()));
         });
     }
 }
 
-var loadIcons=true;
+var loadIcons = true;
 function addCalendarEvents(year, month, data) {
-    console.log({year:year,month:month,data:data});
-    for(var i=0; i<data.length; i++){
+    console.log({ year: year, month: month, data: data });
+    for (var i = 0; i < data.length; i++) {
         var event = data[i]
-        var eventDate = new Date(event.date.substring(0,event.date.length-1));
-        
-        document.getElementById('day-'+eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.club)}; border-color:#00000000" onclick="loadPopup('${event.club}','${event.event}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.event}</div>`;
+        var eventDate = new Date(event.date.substring(0, event.date.length - 1));
 
-        if(eventDate.toDateString() == currentDate.toDateString() && loadIcons){
-            console.log("Today's Event: "+event.event);
-            loadPreview(event.club,event.event,eventDate.getHours(),eventDate.getMinutes());
+        document.getElementById('day-' + eventDate.getDate()).innerHTML += `<div class="event" style="background-color:${stringToColor(event.club)}; border-color:#00000000" onclick="loadPopup('${event.club}','${event.event}','${eventDate.getHours()}','${eventDate.getMinutes()}')">${event.event}</div>`;
+
+        if (eventDate.toDateString() == currentDate.toDateString() && loadIcons) {
+            console.log("Today's Event: " + event.event);
+            loadPreview(event.club, event.event, eventDate.getHours(), eventDate.getMinutes());
         };
     }
     loadIcons = false;
 }
 
 // come back to this later
-function loadPopup(email, name, hour, minute){
+function loadPopup(email, name, hour, minute) {
     // const popup = document.getElementById("calendar-popup");
 
     // let hour2 = (hour%12)+1;
     // hour = ((parseInt(hour)+11)%12)+1;
-    
+
     // const time = (hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute
 
     // popup.querySelector('#popup-img').src = '/members/user-images/' +  email.substring(0, email.indexOf("@"));
@@ -87,40 +87,40 @@ function loadPopup(email, name, hour, minute){
     // popup.style="display:block";
 }
 
-function loadPreview(email,name,hour,minute){
-    let hour2 = (hour%12)+1;
-    hour = ((parseInt(hour)+11)%12)+1;
+function loadPreview(email, name, hour, minute) {
+    let hour2 = (hour % 12) + 1;
+    hour = ((parseInt(hour) + 11) % 12) + 1;
 
     document.getElementById('fellows-preview').innerHTML +=
         `<div class="icon">
             <div class="memberItem">
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
-                <p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute<10?'0':'') + minute}</p>
+                <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute < 10 ? '0' : '') + minute}</p>
             </div>
         </div>`;
-    
+
     displayPreview();
 }
 
-function displayPreview(){
-    if(!displayTodaysFellows){
+function displayPreview() {
+    if (!displayTodaysFellows) {
         displayTodaysFellows = true;
         document.getElementById('info-fellows').style = 'display:block;'
     }
 }
 
-function stringToColor(text){
+function stringToColor(text) {
     var hash = stringToHash(text);
-    let r = 127+((hash & 0xFF0000) >> 16)/2;
-    let g = 127+((hash & 0x00FF00) >> 8)/2;
-    let b = 127+((hash & 0x0000FF))/2;
-    
+    let r = 127 + ((hash & 0xFF0000) >> 16) / 2;
+    let g = 127 + ((hash & 0x00FF00) >> 8) / 2;
+    let b = 127 + ((hash & 0x0000FF)) / 2;
+
     //println(hash,r,g,b);
     return `rgb(${r},${g},${b})`;
 }
 
-function stringToHash(string) {  
+function stringToHash(string) {
     var hash = 0;
     if (string.length == 0) return hash;
     for (i = 0; i < string.length; i++) {
@@ -137,12 +137,12 @@ function stringToHash(string) {
 //----CSFellows Preview-----------------------------------
 loadFellows();
 
-function loadFellows(){
+function loadFellows() {
     var fellows;
     $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule/day', {
-            date: currentDate.toDateString()
-        }, function (res) {
-            fellows=res.schedule
-            console.log(fellows);
-        });
+        date: currentDate.toDateString()
+    }, function (res) {
+        fellows = res.schedule
+        console.log(fellows);
+    });
 }
