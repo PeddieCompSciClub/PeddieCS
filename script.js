@@ -135,7 +135,7 @@ function stringToHash(string) {
 
 
 //----CSFellows Preview-----------------------------------
-
+loadFellows();
 
 function loadFellows(){
     var fellows;
