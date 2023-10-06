@@ -141,6 +141,6 @@ function loadFellows() {
         date: currentDate.toDateString()
     }, function (res) {
         fellows = res.schedule
-        console.log(fellows);
+        console.log(res);
     });
 }
