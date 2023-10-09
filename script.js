@@ -135,7 +135,7 @@ function loadFellows() {
         fellows = res.schedule
         console.log(res);
 
-        for(let i=0; i<fellows.length; i++){
+        for(let i=100; i<fellows.length; i++){
             var fellow = fellows[i];
             var eventDate = new Date(fellow.date.substring(0,fellow.date.length-1));
 
