@@ -66,6 +66,70 @@
   margin:0 0 0 5%;
 }
 
+/* cs fellows stuff */
+#csfellows #fellows-schedule{
+  /* height 200px; */
+  width:fit-content;
+  max-width: none;
+  display:flex;
+  margin-bottom: 1em;
+}
+
+.fellows-schedule-item{
+  /* width:20ch; */
+  border: solid 2px;
+  border-image: linear-gradient(to bottom, transparent 10%, var(--background) 10%, var(--background) 90%, transparent 90%) 2 1;
+  border-top: none;
+  border-bottom: none;
+  border-right: none;
+
+  width: 16ch;
+  padding-bottom: 0.5em;
+}
+.fellows-schedule-item:first-child{
+  border-left:none;
+}
+
+.fellows-schedule-item h4{
+  color: var(--background);
+  text-align: center;
+  margin:0;
+  padding-bottom: 0;
+}
+.fellows-schedule-item p{
+  color: black;
+  text-align: center;
+  margin:0;
+  padding-bottom: 0;
+}
+
+.fellows-schedule-item .event{
+  user-select: none;
+  width:90%;
+  margin: auto;
+  border-radius: 0.5em;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+@media screen and (max-width: 992px) {
+  #fellows-schedule{
+    flex-direction: column;
+  }
+  .fellows-schedule-item{
+    /* width:20ch; */
+    border-image: linear-gradient(to right, transparent 10%, var(--background) 10%, var(--background) 90%, transparent 90%) 2 1;
+    border-left: none;
+    border-right: none;
+    border-bottom:none;
+    border-top: solid;
+  }
+  .fellows-schedule-item:first-child{
+    border-top:none;
+  }
+}
+
 
 /*Error 404 redirect page*/
 .err404 {

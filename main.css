@@ -221,6 +221,10 @@ nav div {
 
 /* hides navbar when width<1000px */
 @media screen and (max-width: 992px) {
+    html{
+        font-size: 2em;
+    }
+    
     nav div {
         font-size: 18px;
     }
