@@ -134,8 +134,9 @@ function loadFellows() {
     }, function (res) {
         fellows = res.schedule
         console.log(res);
+        fellows = [];//remove after testing
 
-        for(let i=100; i<fellows.length; i++){
+        for(let i=0; i<fellows.length; i++){
             var fellow = fellows[i];
             var eventDate = new Date(fellow.date.substring(0,fellow.date.length-1));
 
@@ -176,7 +177,7 @@ const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 function loadFellowsSchedule(){
     loadFellowsScheduleJSON().then((response) => {
         let schedule = response.schedule;
-        // console.log(schedule);
+        console.log(schedule);
         element = document.createElement('div');
         for(let i=0; i<dayNames.length; i++){
             if(i=0 && schedule["Sunday"].length==0) i++;
