@@ -188,6 +188,8 @@ function loadFellowsSchedule(){
             item = document.createElement('div');
             item.classList.add('fellows-schedule-item');
             item.innerHTML = `<h4>${dayNames[i]}</h4>`
+
+            list.appendChild(item);
         }
         console.log(list);
     });
