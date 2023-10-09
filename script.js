@@ -180,7 +180,7 @@ function loadFellowsSchedule(){
         console.log(schedule);
         element = document.createElement('div');
         for(let i=0; i<dayNames.length; i++){
-            if(i=0 && schedule["Sunday"].length==0) i++;
+            if(i==0 && schedule["Sunday"].length==0) i++;
             console.log(schedule[dayNames[i]]);
         }
     });
