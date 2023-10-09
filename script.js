@@ -178,11 +178,15 @@ function loadFellowsSchedule(){
     loadFellowsScheduleJSON().then((response) => {
         let schedule = response.schedule;
         console.log(schedule);
-        element = document.createElement('div');
+        list = document.createElement('div');
+        list.classList.add('memberItem');
+        list.setAttibute('id','fellows-schedule');
+
         for(let i=0; i<dayNames.length; i++){
             if(i==0 && schedule["Sunday"].length==0) i++;
             console.log(schedule[dayNames[i]]);
         }
+        console.log(list);
     });
 }
 
