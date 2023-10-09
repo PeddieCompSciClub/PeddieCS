@@ -185,6 +185,9 @@ function loadFellowsSchedule(){
         for(let i=0; i<dayNames.length; i++){
             if(i==0 && schedule["Sunday"].length==0) i++;
             console.log(schedule[dayNames[i]]);
+            item = document.createElement('div');
+            item.classList.add('fellows-schedule-item');
+            item.innerHTML = `<h4>${dayNames[i]}</h4>`
         }
         console.log(list);
     });
