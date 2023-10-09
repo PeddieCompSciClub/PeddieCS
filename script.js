@@ -180,7 +180,7 @@ function loadFellowsSchedule(){
         console.log(schedule);
         list = document.createElement('div');
         list.classList.add('memberItem');
-        list.setAttibute('id','fellows-schedule');
+        list.setAttribute('id','fellows-schedule');
 
         for(let i=0; i<dayNames.length; i++){
             if(i==0 && schedule["Sunday"].length==0) i++;
