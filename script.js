@@ -164,9 +164,9 @@ function loadFellows() {
             };
         }*/
 
-        if(fellows.length==0){
-            loadFellowsSchedule();
-        }
+        //if(fellows.length==0){
+            loadFellowsSchedule(fellows);
+        //}
     });
 }
 function loadFellowsPreview(email,name,datetime,duration,location){
@@ -192,7 +192,7 @@ function loadFellowsPreview(email,name,datetime,duration,location){
 
 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-function loadFellowsSchedule(){
+function loadFellowsSchedule(week){
     loadFellowsScheduleJSON().then((response) => {
         let schedule = response.schedule;
         console.log(schedule);
