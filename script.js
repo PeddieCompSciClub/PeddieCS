@@ -143,6 +143,7 @@ function loadFellows() {
         max.setDate(max.getDate() + 6-max.getDay());
         max.setHours(24,0,0,0);
         for(let i=fellows.length-1; i>=0; i--){
+            let fellow = fellows[i];
             let date = new Date(fellow.date.substring(0,fellow.date.length-1));
             if(min>date || date>=max){
                 fellows.remove(i);
