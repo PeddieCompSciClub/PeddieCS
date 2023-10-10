@@ -229,7 +229,7 @@ function loadFellowsSchedule(week) {
                         time.setMinutes(time.getMinutes() + fellow.duration);
                         let hour2 = time.getHours() % 12;
                         let minute2 = time.getMinutes();
-                        item.innerHTML += `<p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute2<10?'0':'') + minute2}  ${datetime.getHours()<12 ? 'AM':'PM'}</p>`;
+                        item.innerHTML += `<p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute2<10?'0':'') + minute2}  ${time.getHours()<12 ? 'AM':'PM'}</p>`;
                         console.log(fellow.email,hour,minute,hour2,minute2);
                     }
                 }
