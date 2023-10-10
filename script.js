@@ -198,10 +198,11 @@ function loadFellowsSchedule(week) {
         const dateB = new Date(b.date);
         return dateB - dateA;
     });
+    console.log(week);
 
     loadFellowsScheduleJSON().then((response) => {
         let schedule = response.schedule;
-        console.log(schedule);
+        // console.log(schedule);
         list = document.createElement('div');
         list.classList.add('memberItem');
         list.setAttribute('id', 'fellows-schedule');
@@ -209,7 +210,7 @@ function loadFellowsSchedule(week) {
         //the can be done in O(n)
         for (let i = 0; i < dayNames.length; i++) {
             if (i == 0 && schedule["Sunday"].length == 0) i++;
-            console.log(schedule[dayNames[i]]);
+            // console.log(schedule[dayNames[i]]);
             item = document.createElement('div');
             item.classList.add('fellows-schedule-item');
             item.innerHTML = `<h4>${dayNames[i]}</h4>`
