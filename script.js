@@ -200,12 +200,19 @@ function loadFellowsSchedule(week){
         list.classList.add('memberItem');
         list.setAttribute('id','fellows-schedule');
 
+        //the can be done in O(n)
         for(let i=0; i<dayNames.length; i++){
             if(i==0 && schedule["Sunday"].length==0) i++;
             console.log(schedule[dayNames[i]]);
             item = document.createElement('div');
             item.classList.add('fellows-schedule-item');
             item.innerHTML = `<h4>${dayNames[i]}</h4>`
+            for(let j=0; j<week.length; j++){
+                let fellow = week[i];
+                if(new Date(fellow.date.substring(0,fellow.date.length-1)).getDay()==i){
+                    console.log(i,fellow);
+                }
+            }
 
             list.appendChild(item);
         }
