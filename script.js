@@ -134,7 +134,8 @@ function loadFellows() {
     }, function (res) {
         fellows = res.schedule
         console.log(res);
-        weekFellows;
+
+        //filter fellows to only be from the current week
         let min = new Date();
         min.setDate(min.getDate() - min.getDay());//sets min to prev monday
         min.setHours(0,0,0,0);
@@ -143,7 +144,7 @@ function loadFellows() {
         max.setHours(24,0,0,0);
         for(let i=fellows.length-1; i>=0; i--){
             let date = new Date(fellow.date.substring(0,fellow.date.length-1));
-            if(min>date || date>max){
+            if(min>date || date>=max){
                 fellows.remove(i);
             }
         }
