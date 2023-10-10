@@ -196,7 +196,7 @@ function loadFellowsSchedule(week) {
     week.sort((a, b) => {
         const dateA = new Date(a.date);
         const dateB = new Date(b.date);
-        return dateB - dateA;
+        return dateA - dateB;
     });
     console.log(week);
 
