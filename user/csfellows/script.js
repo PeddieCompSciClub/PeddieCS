@@ -5,7 +5,7 @@ function load(user) {
     userData = user;
     if (permissions.includes('csfellow')) {
         loadMonth(new Date(), true);
-        loadZoomLink();
+        // loadZoomLink();
     }
     else {
         window.location.href = '/user/'

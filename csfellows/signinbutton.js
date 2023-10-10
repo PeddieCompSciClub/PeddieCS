@@ -1,5 +1,5 @@
 //csfellows has a special extra sign-in bit to display the zoom link
-zoom = false; //toggle if it appears
+zoom = false; //toggle if zoom button appears
 
 // redirects user to login if they have an invalid login
 function verifyLogin() {
