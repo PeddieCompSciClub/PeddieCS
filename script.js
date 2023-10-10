@@ -147,7 +147,7 @@ function loadFellows() {
             let date = new Date(fellow.date.substring(0,fellow.date.length-1));
             // console.log(fellow, min, date, max, (min>date || date>=max));
             if(min>date || date>=max){
-                fellows.pop(i);
+                fellows.splice(i, 1);
             }
         }
 
