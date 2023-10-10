@@ -773,7 +773,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
-//removes an event from the calendar
+//fills in an entire month of events DEBUG ONLY
 app.post('/csfellows/schedule/month', (req, res) => {
     const token = req.body.token;
     const schedule = req.body.schedule;

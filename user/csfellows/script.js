@@ -189,7 +189,7 @@ function selectCalendarDate(element, date) {
     document.getElementById('fellows-preview').innerHTML = "";
 
     var fellowsCount = 0;//number of fellows on a given day
-    var time8 = 0, time9 = 0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
+    //var time8 = 0, time9 = 0;//number of fellows scheduled for 8:00pm or 9:00pm in a given day
     var userScheduled = false;
     var pastEvent = false;
     var loadedTimes = [];//keeps track of all loaded times
@@ -199,8 +199,8 @@ function selectCalendarDate(element, date) {
         eventDate = new Date(event.date.substring(0, event.date.length - 1));
         // console.log(date, eventDate);
         if (eventDate.getDate() == date.getDate()) {
-            if (eventDate.getHours() == 20) time8++;
-            if (eventDate.getHours() == 21) time9++;
+            // if (eventDate.getHours() == 20) time8++;
+            // if (eventDate.getHours() == 21) time9++;
             // console.log(event);
             loadPreview(event.email, event.name, eventDate.toString(), event.duration, event.location, event.id, pastEvent);
             fellowsCount++;
