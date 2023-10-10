@@ -238,7 +238,7 @@ function loadFellowsSchedule(week) {
 
             list.appendChild(item);
         }
-        console.log(list);
+        document.getElementById("fellows-preview").appendChild(list);
     });
 }
 
