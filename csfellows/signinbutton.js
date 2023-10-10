@@ -1,4 +1,5 @@
 //csfellows has a special extra sign-in bit to display the zoom link
+zoom = false; //toggle if it appears
 
 // redirects user to login if they have an invalid login
 function verifyLogin() {
@@ -36,20 +37,22 @@ function addProfileButton(name) {
     });
     nav.appendChild(button);
 
-    //add zoom link (sign in button)
-    document.getElementById('info').innerHTML += `<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Join</h3></button>`
+    if(zoom){
+        //add zoom link (sign in button)
+        document.getElementById('info').innerHTML += `<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Join</h3></button>`
 
-    $.get("https://peddiecs.peddie.org/nodejs/csfellows/getZoomLink", {
-        token: getCookie('credential')
-    }, function (res) {
-        if (res.message == "failed") {
-            console.log("Failed to get zoom link")
-        } else {
-            document.getElementById('join-zoom').addEventListener("click", function () {
-                window.location.href = res.link;
-            });     
-        }
-    });
+        $.get("https://peddiecs.peddie.org/nodejs/csfellows/getZoomLink", {
+            token: getCookie('credential')
+        }, function (res) {
+            if (res.message == "failed") {
+                console.log("Failed to get zoom link")
+            } else {
+                document.getElementById('join-zoom').addEventListener("click", function () {
+                    window.location.href = res.link;
+                });
+            }
+        });
+    }
 }
 
 function addSigninButton() {
@@ -65,11 +68,13 @@ function addSigninButton() {
     nav.appendChild(button);
 
     //add zoom link (sign in button)
-    document.getElementById('info').innerHTML += `<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Sign In</h3></button>`
-    document.getElementById('join-zoom').addEventListener("click", function () {
-        removeCookie("credential");
-        window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
-    });
+    if (zoom) {
+        document.getElementById('info').innerHTML += `<h3>Connect to Zoom</h3><button class="join-zoom" id="join-zoom"><h3>Sign In</h3></button>`
+        document.getElementById('join-zoom').addEventListener("click", function () {
+            removeCookie("credential");
+            window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
+        });
+    }
 }
 
 
