@@ -232,6 +232,7 @@ function loadFellowsSchedule(week) {
                         item.innerHTML += `<p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute2<10?'0':'') + minute2}  ${time.getHours()<12 ? 'AM':'PM'}</p>`;
                         console.log(fellow.email,hour,minute,hour2,minute2);
                     }
+                    item.innerHTML += `<div class="event" style="background-color:${stringToColor(fellow.email)}; border-color:#00000000">${fellow.name}</div>`
                 }
             }
 
