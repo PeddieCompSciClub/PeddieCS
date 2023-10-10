@@ -150,6 +150,8 @@ function loadFellows() {
             }
         }
 
+        console.log(fellows)
+
         /* //display csfellows for the day (uses 'https://peddiecs.peddie.org/nodejs/csfellows/schedule/day')
         for(let i=0; i<fellows.length; i++){
             var fellow = fellows[i];
