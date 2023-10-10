@@ -208,7 +208,7 @@ function loadFellowsSchedule(week){
             item.classList.add('fellows-schedule-item');
             item.innerHTML = `<h4>${dayNames[i]}</h4>`
             for(let j=0; j<week.length; j++){
-                let fellow = week[i];
+                let fellow = week[j];
                 if(new Date(fellow.date.substring(0,fellow.date.length-1)).getDay()==i){
                     console.log(i,fellow);
                 }
