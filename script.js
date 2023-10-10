@@ -138,15 +138,15 @@ function loadFellows() {
         //filter fellows to only be from the current week
         let min = new Date();
         min.setDate(min.getDate() - min.getDay());//sets min to prev monday
-        min.setHours(0,0,0,0);
+        min.setHours(0, 0, 0, 0);
         let max = new Date();
-        max.setDate(max.getDate() + 6-max.getDay());
-        max.setHours(24,0,0,0);
-        for(let i=fellows.length-1; i>=0; i--){
+        max.setDate(max.getDate() + 6 - max.getDay());
+        max.setHours(24, 0, 0, 0);
+        for (let i = fellows.length - 1; i >= 0; i--) {
             let fellow = fellows[i];
-            let date = new Date(fellow.date.substring(0,fellow.date.length-1));
+            let date = new Date(fellow.date.substring(0, fellow.date.length - 1));
             // console.log(fellow, min, date, max, (min>date || date>=max));
-            if(min>date || date>=max){
+            if (min > date || date >= max) {
                 fellows.splice(i, 1);
             }
         }
@@ -165,16 +165,16 @@ function loadFellows() {
         }*/
 
         //if(fellows.length==0){
-            loadFellowsSchedule(fellows);
+        loadFellowsSchedule(fellows);
         //}
     });
 }
-function loadFellowsPreview(email,name,datetime,duration,location){
+function loadFellowsPreview(email, name, datetime, duration, location) {
     datetime = new Date(datetime);
-    let hour = datetime.getHours()%12;
+    let hour = datetime.getHours() % 12;
     let minute = datetime.getMinutes();
-    datetime.setMinutes(datetime.getMinutes()+duration);
-    let hour2 = datetime.getHours()%12;
+    datetime.setMinutes(datetime.getMinutes() + duration);
+    let hour2 = datetime.getHours() % 12;
     let minute2 = datetime.getMinutes();
     // console.log(email,name,datetime,duration,location);
     // console.log(hour, minute, hour2, minute2);
@@ -184,33 +184,54 @@ function loadFellowsPreview(email,name,datetime,duration,location){
             <div class="memberItem">
                 <img src="/members/user-images/${email.substring(0, email.indexOf("@"))}" alt="member image"onError="this.onerror=null;this.src='/members/user-images/missing.jpg';">
                 <a>${name}</a>
-                <p>${(hour)+':'+(minute<10?'0':'') + minute + '-' + (hour2)+':'+(minute2<10?'0':'') + minute2}  ${datetime.getHours()<12 ? 'AM':'PM'}</p>
-                ${location?'<p>'+location+'</p>':''}
+                <p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute2 < 10 ? '0' : '') + minute2}  ${datetime.getHours() < 12 ? 'AM' : 'PM'}</p>
+                ${location ? '<p>' + location + '</p>' : ''}
             </div>
         </div>`;
 }
 
 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-function loadFellowsSchedule(week){
+function loadFellowsSchedule(week) {
+    week.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB - dateA;
+    });
+
     loadFellowsScheduleJSON().then((response) => {
         let schedule = response.schedule;
         console.log(schedule);
         list = document.createElement('div');
         list.classList.add('memberItem');
-        list.setAttribute('id','fellows-schedule');
+        list.setAttribute('id', 'fellows-schedule');
 
         //the can be done in O(n)
-        for(let i=0; i<dayNames.length; i++){
-            if(i==0 && schedule["Sunday"].length==0) i++;
+        for (let i = 0; i < dayNames.length; i++) {
+            if (i == 0 && schedule["Sunday"].length == 0) i++;
             console.log(schedule[dayNames[i]]);
             item = document.createElement('div');
             item.classList.add('fellows-schedule-item');
             item.innerHTML = `<h4>${dayNames[i]}</h4>`
-            for(let j=0; j<week.length; j++){
+
+            times = [];
+            for (let j = 0; j < week.length; j++) {
                 let fellow = week[j];
-                if(new Date(fellow.date.substring(0,fellow.date.length-1)).getDay()==i){
-                    console.log(i,fellow);
+                let time = new Date(fellow.date.substring(0, fellow.date.length - 1));
+                if (time.getDay() == i) {
+                    timeMin = time.getHours() * 60 + time.getMinutes();
+                    if (times[timeMin]) times[timeMin]++;
+                    else {
+                        times[timeMin] = 1;
+
+                        let hour = time.getHours() % 12;
+                        let minute = time.getMinutes();
+                        time.setMinutes(time.getMinutes() + fellow.duration);
+                        let hour2 = time.getHours() % 12;
+                        let minute2 = time.getMinutes();
+                        item.innerHTML += `<p>${""}</p>`;
+                        console.log(fellow.email,hour,minute,hour2,minute2);
+                    }
                 }
             }
 
