@@ -129,22 +129,35 @@ function stringToHash(string) {
 //----CSFellows Preview-----------------------------------
 function loadFellows() {
     var fellows;
-    $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule/day', {
+    $.get('https://peddiecs.peddie.org/nodejs/csfellows/schedule', {
         date: currentDate.toDateString()
     }, function (res) {
         fellows = res.schedule
         console.log(res);
-        fellows = [];//remove after testing
+        weekFellows;
+        let min = new Date();
+        min.setDate(min.getDate() - min.getDay());//sets min to prev monday
+        min.setHours(0,0,0,0);
+        let max = new Date();
+        max.setDate(max.getDate() + 6-max.getDay());
+        max.setHours(24,0,0,0);
+        for(let i=fellows.length-1; i>=0; i--){
+            let date = new Date(fellow.date.substring(0,fellow.date.length-1));
+            if(min>date || date>max){
+                fellows.remove(i);
+            }
+        }
 
+        /* //display csfellows for the day (uses 'https://peddiecs.peddie.org/nodejs/csfellows/schedule/day')
         for(let i=0; i<fellows.length; i++){
             var fellow = fellows[i];
             var eventDate = new Date(fellow.date.substring(0,fellow.date.length-1));
 
             if(eventDate.toDateString() == currentDate.toDateString()){
-                console.log("Today's Fellow: "+event.name);
+                console.log("Today's Fellow: "+fellow.name);
                 loadFellowsPreview(fellow.email,fellow.name,eventDate.toString(),fellow.duration,fellow.location);
             };
-        }
+        }*/
 
         if(fellows.length==0){
             loadFellowsSchedule();
