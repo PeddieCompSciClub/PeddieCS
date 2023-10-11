@@ -204,7 +204,7 @@ function selectCalendarDate(element, date) {
             // console.log(event);
             loadPreview(event.email, event.name, eventDate.toString(), event.duration, event.location, event.id, pastEvent);
             fellowsCount++;
-            let timeMinutes = "_" + Math.round(eventDate.getHours() * 60 + eventDate.getMinutes());
+            let timeMinutes = Math.round(eventDate.getHours() * 60 + eventDate.getMinutes());
             if (!loadedTimes[timeMinutes]) loadedTimes[timeMinutes] = 1;
             else loadedTimes[timeMinutes]++;
             if (event.email == userData.email) userScheduled = true;
@@ -237,7 +237,7 @@ function selectCalendarDate(element, date) {
         daySchedule = scheduleJSON.schedule[dayNames[date.getDay()]];
         console.log(daySchedule);
         daySchedule.forEach((session) => {
-            let remainingSlots = (loadedTimes["_" + Math.round(session.time * 60)] ? session.maxFellows - loadedTimes["_" + Math.round(session.time * 60)] : session.maxFellows) //default 0 signed up
+            let remainingSlots = (loadedTimes[Math.round(session.time * 60)] ? session.maxFellows - loadedTimes[Math.round(session.time * 60)] : session.maxFellows) //default 0 signed up
             if (remainingSlots > 0) {
                 //only display signup button if available slots
                 let sessionTimeString = new Date(date.toLocaleDateString() + " " + Math.floor(session.time) + ":" + Math.round((session.time % 1) * 60)).toLocaleTimeString('en-US');
