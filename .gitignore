@@ -3,4 +3,4 @@
 /nodejs/secure.json
 /members/user-images/
 /clubs/*/
-/exp/*
+#/exp/*
