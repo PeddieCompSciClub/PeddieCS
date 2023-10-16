@@ -774,6 +774,18 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
+scheduleFellowsReminder();
+function scheduleFellowsReminder(){
+    console.log("Creating schedule...")
+    const job = schedule.scheduleJob('/1 * * * *', function(){
+        console.log("Job run at "+new Date());
+    })
+}
+
+function emailFellowsReminder(){
+
+}
+
 /*
 //fills in an entire month of events DEBUG ONLY
 app.post('/csfellows/schedule/month', (req, res) => {
