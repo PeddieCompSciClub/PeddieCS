@@ -799,10 +799,10 @@ function emailFellowsReminder(){
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
         con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()} AND reminder=1`, function (err, result, fields) {
             if (err) throw err;
-            console.log(result);
+            // console.log(result);
             for(let i=0; i<result.length; i++){
                 var fellow = result[i]
-                var fellowDate = new Date(fellow.date.substring(0,fellow.date.length-1));
+                var fellowDate = new Date(fellow.date);
                 console.log(fellow,fellowDate);
             }
         });
