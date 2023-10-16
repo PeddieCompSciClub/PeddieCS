@@ -779,11 +779,32 @@ function scheduleFellowsReminder(){
     console.log("Creating schedule...")
     const job = schedule.scheduleJob('0 * * * *', function(){
         console.log("Job run at "+new Date());
+        emailFellowsReminder();
     })
 }
 
 function emailFellowsReminder(){
+    let date = new Date();
 
+    //get all csfellows on the day
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "admincs",
+        password: "BeatBlair1864",
+        database: "peddieCS",
+        port: 3306
+    });
+    con.connect(function (err) {
+        if (err) throw err;
+        // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
+        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()}`, function (err, result, fields) {
+            if (err) throw err;
+            console.log(result);
+
+            
+        });
+        con.end();
+    });
 }
 
 /*
