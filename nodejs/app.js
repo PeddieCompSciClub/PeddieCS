@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const validator = require('email-validator');
+const schedule = require('node-schedule');//used to schedule automatic emails
 const nodemailer = require("nodemailer");
 // const sharp = require('sharp');
 
@@ -773,6 +774,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
+/*
 //fills in an entire month of events DEBUG ONLY
 app.post('/csfellows/schedule/month', (req, res) => {
     const token = req.body.token;
@@ -838,7 +840,7 @@ function recursiveAdd(schedule, i, j) {
         });
     });
 }
-
+*/
 
 //events
 //gets the cs fellow for a specific month
