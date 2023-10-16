@@ -774,7 +774,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
-scheduleFellowsReminder();
+emailFellowsReminder();
 function scheduleFellowsReminder(){
     console.log("Creating schedule...")
     const job = schedule.scheduleJob('0 * * * *', function(){
@@ -797,10 +797,10 @@ function emailFellowsReminder(){
     con.connect(function (err) {
         if (err) throw err;
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
-        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()}`, function (err, result, fields) {
+        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()} AND reminder=1`, function (err, result, fields) {
             if (err) throw err;
             console.log(result);
-
+            for(let i=0; i<result.length; i++){}
             
         });
         con.end();
