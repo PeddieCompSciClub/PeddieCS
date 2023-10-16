@@ -803,7 +803,9 @@ function emailFellowsReminder(){
             for(let i=0; i<result.length; i++){
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
-                console.log(fellow,fellowDate.toDateString());
+                if(fellowDate - date < 3*3600000){
+                    console.log(fellow,fellowDate);
+                }
             }
         });
         con.end();
