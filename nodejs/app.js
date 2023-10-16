@@ -803,7 +803,7 @@ function emailFellowsReminder(){
             for(let i=0; i<result.length; i++){
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
-                console.log(fellow,fellowDate);
+                console.log(fellow,fellowDate.toDateString());
             }
         });
         con.end();
