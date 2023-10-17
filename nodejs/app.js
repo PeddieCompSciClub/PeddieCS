@@ -800,15 +800,28 @@ function emailFellowsReminder(){
         con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()} AND reminder=1`, function (err, result, fields) {
             if (err) throw err;
             // console.log(result);
-            for(let i=0; i<result.length; i++){
+            for(let i=result.length-1; i>=0; i--){
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
-                if(fellowDate - date < 3*3600000){
-                    console.log(fellow,fellowDate);
+                if(fellowDate - date > 3*3600000){
+                    result.splice(i,1);
                 }
             }
+
+            if(result.length>0){
+                let query = "id="+result[0].id;
+                for(let i=1; i<result.length; i++){
+                    query += "OR id="+result[i].id;
+                }
+
+                con.query(`UPDATE csfellows SET reminder=-1 WHERE ${query}`,function (err, result, fields) {
+                    if (err) throw err;
+                    console.log(result);
+                });
+            } else {
+                con.end();
+            }
         });
-        con.end();
     });
 }
 
