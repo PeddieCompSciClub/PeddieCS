@@ -811,7 +811,7 @@ function emailFellowsReminder(){
             if(result.length>0){
                 let query = "id="+result[0].id;
                 for(let i=1; i<result.length; i++){
-                    query += "OR id="+result[i].id;
+                    query += " OR id="+result[i].id;
                 }
 
                 con.query(`UPDATE csfellows SET reminder=-1 WHERE ${query}`,function (err, result, fields) {
