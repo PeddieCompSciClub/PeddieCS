@@ -785,6 +785,9 @@ function scheduleFellowsReminder(){
 
 function emailFellowsReminder(){
     let date = new Date();
+    console.log(date);
+    console.log(date.toLocaleTimeString('en-US', { timeZone: 'America/New_York' }));
+    date.setHours(date.getHours)
 
     //get all csfellows on the day
     var con = mysql.createConnection({
