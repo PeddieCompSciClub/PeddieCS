@@ -673,7 +673,7 @@ app.post('/csfellows/schedule', (req, res) => {
 
             con.connect(function (err) {
                 if (err) throw err;
-                const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':'+ (date.getUTCMinutes()) +':00';
+                const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':' + (date.getUTCMinutes()) + ':00';
                 con.query(`INSERT INTO csfellows (name, email, date, duration, location) VALUES ('${name}', '${email}', '${mysqlDate}', ${duration}, '${location}');`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ "message": "success", "id": result.insertId });
@@ -775,18 +775,22 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
 });
 
 emailFellowsReminder();
-function scheduleFellowsReminder(){
+function scheduleFellowsReminder() {
     console.log("Creating schedule...")
-    const job = schedule.scheduleJob('0 * * * *', function(){
-        console.log("Job run at "+new Date());
+    const job = schedule.scheduleJob('0 * * * *', function () {
+        console.log("Job run at " + new Date());
         emailFellowsReminder();
     })
 }
 
-function emailFellowsReminder(){
-    let date = new Date();
-    console.log(date);
-    console.log(date.toLocaleTimeString('en-US', { timeZone: 'America/New_York' }));
+function emailFellowsReminder() {
+    //set date as eastern time (complicated b/c of daylight savings)
+    const date = new Date();
+    const etOffsetMinutes = new Date().toLocaleTimeString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }).split(' ')[1] * 60;
+    const date2 = new Date(date.getTime() - etOffsetMinutes * 60000);
+
+    console.log('Original Date (UTC):', date.toISOString());
+    console.log('Converted Date (ET):', date2.toISOString());
 
     //get all csfellows on the day
     var con = mysql.createConnection({
@@ -802,23 +806,23 @@ function emailFellowsReminder(){
         con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()} AND reminder=1`, function (err, result, fields) {
             if (err) throw err;
             // console.log(result);
-            for(let i=result.length-1; i>=0; i--){
+            for (let i = result.length - 1; i >= 0; i--) {
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
-                console.log(fellow.name, fellowDate, date, fellowDate - date,fellowDate - date > 3*3600000)
-                if(fellowDate - date > 3*3600000){
-                    result.splice(i,1);
+                console.log(fellow.name, fellowDate, date, fellowDate - date, fellowDate - date > 3 * 3600000)
+                if (fellowDate - date > 3 * 3600000) {
+                    result.splice(i, 1);
                     console.log(result.length);
                 }
             }
 
-            if(result.length>0){
-                let query = "id="+result[0].id;
-                for(let i=1; i<result.length; i++){
-                    query += " OR id="+result[i].id;
+            if (result.length > 0) {
+                let query = "id=" + result[0].id;
+                for (let i = 1; i < result.length; i++) {
+                    query += " OR id=" + result[i].id;
                 }
 
-                con.query(`UPDATE csfellows SET reminder=-1 WHERE ${query}`,function (err, result, fields) {
+                con.query(`UPDATE csfellows SET reminder=-1 WHERE ${query}`, function (err, result, fields) {
                     if (err) throw err;
                     console.log(result);
                 });
