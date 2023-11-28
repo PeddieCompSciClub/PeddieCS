@@ -786,11 +786,11 @@ function scheduleFellowsReminder() {
 function emailFellowsReminder() {
     //set date as eastern time (complicated b/c of daylight savings)
     const date = new Date();
-    // const etOffsetMinutes = new Date().toLocaleTimeString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }).split(' ')[1] * 60;
-    // const date2 = new Date(date.getTime() - etOffsetMinutes * 60000);
+    const etOffsetMinutes = new Date().toLocaleTimeString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }).split(' ')[1] * 60;
+    const date2 = new Date(date.getTime() - etOffsetMinutes * 60000);
 
-    // console.log('Original Date (UTC):', date.toISOString());
-    // console.log('Converted Date (ET):', date2.toISOString());
+    console.log('Original Date (UTC):', date.toISOString());
+    console.log('Converted Date (ET):', date2.toISOString());
 
     //get all csfellows on the day
     var con = mysql.createConnection({
