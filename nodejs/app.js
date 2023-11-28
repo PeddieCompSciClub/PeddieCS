@@ -786,9 +786,8 @@ function scheduleFellowsReminder() {
 function emailFellowsReminder() {
     //set date as eastern time (complicated b/c of daylight savings)
     const date = new Date();
-    const etOffsetMinutes = new Date().toLocaleTimeString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }).split(' ')[1] * 60;
+    const date2 = new Date(date.toLocaleTimeString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }).split(' E')[0]); //detect ex. 2:43:18 PM EST
     // const date2 = new Date(date.getTime() - etOffsetMinutes * 60000);
-    console.log(etOffsetMinutes, new Date().toLocaleTimeString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }))
     console.log('Original Date (UTC):', date.toISOString());
     console.log('Converted Date (ET):', date2.toISOString());
 
