@@ -786,8 +786,8 @@ function scheduleFellowsReminder() {
 function emailFellowsReminder() {
     //set date as eastern time (complicated b/c of daylight savings)
     const date = new Date();
-    const localeString = date.toLocaleString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }); 
-    const dateET = new Date(localeString.substring(0,localeString.lastIndexOf(' '))); //detect ex. 2:43:18 PM EST
+    const localeString = date.toLocaleString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' });
+    const dateET = new Date(localeString.substring(0, localeString.lastIndexOf(' '))); //detect ex. 2:43:18 PM EST
     // const date2 = new Date(date.getTime() - etOffsetMinutes * 60000);
     // console.log('Original Date (UTC):', date.toISOString());
     // console.log('Converted Date (ET):', date2.toISOString());
@@ -816,14 +816,19 @@ function emailFellowsReminder() {
                 }
             }
 
-            for(let i=0; i<result.length; i++){
+            for (let i = 0; i < result.length; i++) {
                 let mailOptions = {
                     from: secure.email.user,
                     to: result[i].email,
                     subject: 'CS Fellows Reminder',
                     text: 'This is a test'
                 };
-                console.log(mailOptions);
+                transport.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                    console.log('Message sent: ', info.messageId);
+                });
 
             }
 
