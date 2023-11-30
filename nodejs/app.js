@@ -809,8 +809,8 @@ function emailFellowsReminder() {
             for (let i = result.length - 1; i >= 0; i--) {
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
-                console.log(fellow.name, fellow.id, fellowDate, date, date - fellowDate, fellowDate - date > 3 * 3600000)
-                if (0 < date - fellowDate < 3 * 3600000) {
+                console.log(fellow.name, fellow.id, fellowDate, date, date - fellowDate, 0 < fellowDate - date < 3 * 3600000)
+                if (0 < fellowDate - date < 3 * 3600000) {
                     result.splice(i, 1);
                     console.log(result.length);
                 }
@@ -828,7 +828,7 @@ function emailFellowsReminder() {
                     if (error) {
                         console.log(error);
                     }
-                    console.log('Message sent: ', info.messageId);
+                    console.log('Message sent: ', info.messageId, result[i].id);
                 });
 
             }
