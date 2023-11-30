@@ -823,7 +823,7 @@ function emailFellowsReminder() {
                     subject: 'CS Fellows',
                     text: '',
                     html: `<p>You are scheduled for CS Fellows Today!</p>
-                            <h3>${result[i].location}, ${new Date(result[i].date).toLocaleTimeString('en-US')}</h3>`
+                            <h3>${result[i].location}, ${new Date(result[i].date).toLocaleTimeString('en-US',{timeStyle: 'short'})}</h3>`
                 };
                 transport.sendMail(mailOptions, (error, info) => {
                     if (error) {
