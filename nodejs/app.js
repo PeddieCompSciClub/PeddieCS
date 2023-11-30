@@ -822,7 +822,8 @@ function emailFellowsReminder() {
                     to: result[i].email,
                     subject: 'CS Fellows Reminder',
                     text: 'This is a test'
-                  };
+                };
+                console.log(mailOptions);
 
             }
 
