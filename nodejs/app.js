@@ -774,7 +774,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
-// emailFellowsReminder();
+emailFellowsReminder();
 function scheduleFellowsReminder() {
     console.log("Creating schedule...")
     const job = schedule.scheduleJob('0 * * * *', function () {
@@ -837,11 +837,12 @@ function emailFellowsReminder() {
                 for (let i = 1; i < result.length; i++) {
                     query += " OR id=" + result[i].id;
                 }
-
+                /*
                 con.query(`UPDATE csfellows SET reminder=-1 WHERE ${query}`, function (err, result, fields) {
                     if (err) throw err;
                     console.log(result);
-                });
+                    con.end();
+                });*/
             } else {
                 con.end();
             }
