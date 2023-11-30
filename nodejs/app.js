@@ -21,7 +21,7 @@ const secureData = fs.readFileSync('secure.json');
 const secure = JSON.parse(secureData);
 
 //transporter to send emails with (for security reasons auth is held in a seperate json)
-const transporter = nodemailer.createTransport({
+const transport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: secure.email.user,
