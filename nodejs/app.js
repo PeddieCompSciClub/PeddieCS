@@ -820,7 +820,7 @@ function emailFellowsReminder() {
                 let mailOptions = {
                     from: secure.email.user,
                     to: result[i].email,
-                    subject: 'CS Fellows Reminder',
+                    subject: 'CS Fellows',
                     text: '',
                     html: `<p>You are scheduled for CS Fellows Today!</p>
                             <h3>${result[i].location}, ${new Date(result[i].date).toLocaleTimeString('en-US')}</h3>`
