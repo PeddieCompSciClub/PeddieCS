@@ -805,7 +805,7 @@ function emailFellowsReminder() {
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
         con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${dateET.getFullYear()} AND MONTH(date)=${dateET.getMonth() + 1} AND DAY(date)=${dateET.getDate()} AND reminder=1`, function (err, result, fields) {
             if (err) throw err;
-            console.log(result);
+            // console.log(result);
             for (let i = result.length - 1; i >= 0; i--) {
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
@@ -814,6 +814,16 @@ function emailFellowsReminder() {
                     result.splice(i, 1);
                     console.log(result.length);
                 }
+            }
+
+            for(let i=0; i<result.length; i++){
+                let mailOptions = {
+                    from: secure.email.user,
+                    to: result[i].email,
+                    subject: 'CS Fellows Reminder',
+                    text: 'This is a test'
+                  };
+
             }
 
             if (result.length > 0) {
