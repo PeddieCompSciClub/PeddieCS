@@ -787,10 +787,10 @@ function emailFellowsReminder() {
     //set date as eastern time (complicated b/c of daylight savings)
     const date = new Date();
     const localeString = date.toLocaleString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }); 
-    const date2 = new Date(localeString.substring(0,localeString.lastIndexOf(' '))); //detect ex. 2:43:18 PM EST
+    const dateET = new Date(localeString.substring(0,localeString.lastIndexOf(' '))); //detect ex. 2:43:18 PM EST
     // const date2 = new Date(date.getTime() - etOffsetMinutes * 60000);
-    console.log('Original Date (UTC):', date.toISOString());
-    console.log('Converted Date (ET):', date2.toISOString());
+    // console.log('Original Date (UTC):', date.toISOString());
+    // console.log('Converted Date (ET):', date2.toISOString());
 
     //get all csfellows on the day
     var con = mysql.createConnection({
@@ -803,9 +803,9 @@ function emailFellowsReminder() {
     con.connect(function (err) {
         if (err) throw err;
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
-        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()} AND reminder=1`, function (err, result, fields) {
+        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${dateET.getFullYear()} AND MONTH(date)=${dateET.getMonth() + 1} AND DAY(date)=${dateET.getDate()} AND reminder=1`, function (err, result, fields) {
             if (err) throw err;
-            // console.log(result);
+            console.log(result);
             for (let i = result.length - 1; i >= 0; i--) {
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
