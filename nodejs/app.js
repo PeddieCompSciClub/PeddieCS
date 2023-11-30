@@ -821,8 +821,9 @@ function emailFellowsReminder() {
                     from: secure.email.user,
                     to: result[i].email,
                     subject: 'CS Fellows Reminder',
-                    text: 'This is a test',
-                    html: '<h1>TEST</h1>'
+                    text: '',
+                    html: `<p>You are scheduled for CS Fellows Today!</p>
+                            <h3>${result[i].location}, ${new Date(result[i].date).toLocaleTimeString('en-US')}</h3>`
                 };
                 transport.sendMail(mailOptions, (error, info) => {
                     if (error) {
