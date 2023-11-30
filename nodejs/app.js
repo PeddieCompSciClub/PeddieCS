@@ -821,7 +821,8 @@ function emailFellowsReminder() {
                     from: secure.email.user,
                     to: result[i].email,
                     subject: 'CS Fellows Reminder',
-                    text: 'This is a test'
+                    text: 'This is a test',
+                    html: '<h1>TEST</h1>'
                 };
                 transport.sendMail(mailOptions, (error, info) => {
                     if (error) {
