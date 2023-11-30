@@ -774,7 +774,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
-emailFellowsReminder();
+// emailFellowsReminder();
 function scheduleFellowsReminder() {
     console.log("Creating schedule...")
     const job = schedule.scheduleJob('0 * * * *', function () {
