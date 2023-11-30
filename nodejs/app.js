@@ -810,7 +810,7 @@ function emailFellowsReminder() {
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
                 console.log(fellow.name, fellow.id, fellowDate, date, date - fellowDate, fellowDate - date > 3 * 3600000)
-                if (date - fellowDate < 3 * 3600000) {
+                if (0 < date - fellowDate < 3 * 3600000) {
                     result.splice(i, 1);
                     console.log(result.length);
                 }
