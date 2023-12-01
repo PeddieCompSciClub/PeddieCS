@@ -860,7 +860,7 @@ function emailFellowsReminder() {
 }
 
 function emailFellowsWeekly(){
-    
+
 }
 
 /*
