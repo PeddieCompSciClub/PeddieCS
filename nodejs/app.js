@@ -774,12 +774,15 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
-emailFellowsReminder();
+
 function scheduleFellowsReminder() {
     console.log("Creating schedule...")
     const job = schedule.scheduleJob('0 * * * *', function () {
-        console.log("Job run at " + new Date());
+        // console.log("Job run at " + new Date());
         emailFellowsReminder();
+    })
+    const weekly = schedule.scheduleJob('0 12 * * * 1', function(){
+        emailFellowsWeekly();
     })
 }
 
@@ -831,6 +834,10 @@ function emailFellowsReminder() {
             }
         });
     });
+}
+
+function emailFellowsWeekly(){
+    
 }
 
 /*
