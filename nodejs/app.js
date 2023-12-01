@@ -21,7 +21,7 @@ const secureData = fs.readFileSync('secure.json');
 const secure = JSON.parse(secureData);
 
 //transporter to send emails with (for security reasons auth is held in a seperate json)
-const transporter = nodemailer.createTransport({
+const transport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: secure.email.user,
@@ -774,7 +774,11 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 
+=======
+scheduleFellowsReminder();
+>>>>>>> 87a1eef3224e19219ce95f7dadbfef04a9a74b48
 function scheduleFellowsReminder() {
     console.log("Creating schedule...")
     const job = schedule.scheduleJob('0 * * * *', function () {
@@ -789,11 +793,11 @@ function scheduleFellowsReminder() {
 function emailFellowsReminder() {
     //set date as eastern time (complicated b/c of daylight savings)
     const date = new Date();
-    const localeString = date.toLocaleString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' }); 
-    const date2 = new Date(localeString.substring(0,localeString.lastIndexOf(' '))); //detect ex. 2:43:18 PM EST
+    const localeString = date.toLocaleString('en-US', { timeZoneName: 'short', timeZone: 'America/New_York' });
+    const dateET = new Date(localeString.substring(0, localeString.lastIndexOf(' '))); //detect ex. 2:43:18 PM EST
     // const date2 = new Date(date.getTime() - etOffsetMinutes * 60000);
-    console.log('Original Date (UTC):', date.toISOString());
-    console.log('Converted Date (ET):', date2.toISOString());
+    // console.log('Original Date (UTC):', date.toISOString());
+    // console.log('Converted Date (ET):', date2.toISOString());
 
     //get all csfellows on the day
     var con = mysql.createConnection({
@@ -806,17 +810,35 @@ function emailFellowsReminder() {
     con.connect(function (err) {
         if (err) throw err;
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
-        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()} AND reminder=1`, function (err, result, fields) {
+        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${dateET.getFullYear()} AND MONTH(date)=${dateET.getMonth() + 1} AND DAY(date)=${dateET.getDate()} AND reminder=1`, function (err, result, fields) {
             if (err) throw err;
             // console.log(result);
             for (let i = result.length - 1; i >= 0; i--) {
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
-                console.log(fellow.name, fellowDate, date, fellowDate - date, fellowDate - date > 3 * 3600000)
-                if (fellowDate - date > 3 * 3600000) {
+                console.log(fellow.name, fellow.id, fellowDate, dateET, fellowDate - dateET, fellowDate - dateET < 3 * 3600000)
+                if (dateET>fellowDate || fellowDate - dateET > 3 * 3600000) {
                     result.splice(i, 1);
                     console.log(result.length);
                 }
+            }
+
+            for (let i = 0; i < result.length; i++) {
+                let mailOptions = {
+                    from: secure.email.user,
+                    to: result[i].email,
+                    subject: 'CS Fellows',
+                    text: '',
+                    html: `<p>You are scheduled for CS Fellows Today!</p>
+                            <h3>${result[i].location}, ${new Date(result[i].date).toLocaleTimeString('en-US',{timeStyle: 'short'})}</h3>`
+                };
+                transport.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                    console.log('Message sent: ', info.messageId, result[i].id);
+                });
+
             }
 
             if (result.length > 0) {
@@ -824,10 +846,11 @@ function emailFellowsReminder() {
                 for (let i = 1; i < result.length; i++) {
                     query += " OR id=" + result[i].id;
                 }
-
+                
                 con.query(`UPDATE csfellows SET reminder=-1 WHERE ${query}`, function (err, result, fields) {
                     if (err) throw err;
                     console.log(result);
+                    con.end();
                 });
             } else {
                 con.end();
