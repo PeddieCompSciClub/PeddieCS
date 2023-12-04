@@ -72,13 +72,7 @@ function getCurrentYear() {
 
 //return the name, year, and email of all saved members
 app.get('/getAllMembers', (req, res) => {
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "admincs",
-        password: "BeatBlair1864",
-        database: "peddieCS",
-        port: 3306
-    });
+    var con = mysql.createConnection(secure.mysql);
 
     con.connect(function (err) {
         if (err) throw err;
@@ -774,11 +768,6 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-
-=======
-scheduleFellowsReminder();
->>>>>>> 87a1eef3224e19219ce95f7dadbfef04a9a74b48
 function scheduleFellowsReminder() {
     console.log("Creating schedule...")
     const job = schedule.scheduleJob('0 * * * *', function () {
