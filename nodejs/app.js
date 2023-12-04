@@ -91,13 +91,7 @@ app.get('/getMemberData', (req, res) => {
     console.log(email);
     var member;//json containing member's info
 
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "admincs",
-        password: "BeatBlair1864",
-        database: "peddieCS",
-        port: 3306
-    });
+    var con = mysql.createConnection(secure.mysql);
 
     if (email) {
         con.connect(function (err) {
@@ -222,13 +216,7 @@ app.post('/authenticateUser', (req, res) => {
             } else {
 
                 //check if the user is already registered in the database
-                var con = mysql.createConnection({
-                    host: "localhost",
-                    user: "admincs",
-                    password: "BeatBlair1864",
-                    database: "peddieCS",
-                    port: 3306
-                });
+                var con = mysql.createConnection(secure.mysql);
                 con.connect(function (err) {
                     if (err) throw err;
                     con.query(`SELECT first_name, last_name, email, year, permissions FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
@@ -274,13 +262,7 @@ app.post('/addMember', function (req, res) {
                 res.end();
             } else {
                 //check if the user is already registered in the database
-                var con = mysql.createConnection({
-                    host: "localhost",
-                    user: "admincs",
-                    password: "BeatBlair1864",
-                    database: "peddieCS",
-                    port: 3306
-                });
+                var con = mysql.createConnection(secure.mysql);
                 con.connect(function (err) {
                     if (err) throw err;
                     con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
@@ -326,13 +308,7 @@ app.post('/updateBio', (req, res) => {
         }
         else {
             console.log(email);
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
             con.query(`UPDATE members SET bio="${bio}" WHERE email="${email}"`, function (err, result, fields) {
                 if (err) throw err;
                 console.log(bio);
@@ -353,13 +329,7 @@ app.post('/updateUniversity', (req, res) => {
         }
         else {
 
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
             con.query(`UPDATE members SET university="${uni}" WHERE email="${email}" AND year = ${getCurrentYear()}`, function (err, result, fields) {
                 if (err) throw err;
                 // console.log(uni);
@@ -382,13 +352,7 @@ app.post('/updateVisibility', (req, res) => {
                 res.end();
             }
             else {
-                var con = mysql.createConnection({
-                    host: "localhost",
-                    user: "admincs",
-                    password: "BeatBlair1864",
-                    database: "peddieCS",
-                    port: 3306
-                });
+                var con = mysql.createConnection(secure.mysql);
                 con.query(`UPDATE members SET public=${newVal} WHERE email="${email}"`, function (err, result, fields) {
                     if (err) throw err;
                     res.json({ 'message': 'success', 'newVal': newVal });
@@ -439,13 +403,7 @@ app.post('/deleteUser', (req, res) => {
             res.end();
         }
         else {
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
             con.query(`DELETE FROM members WHERE email="${email}"`, function (err, result, fields) {
                 if (err) throw err;
                 console.log('Deleted user ' + email);
@@ -467,13 +425,7 @@ app.get('/admin/getAllMembers', (req, res) => {
             res.end();
         }
         else {
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
                 if (err) throw err;
@@ -502,13 +454,7 @@ app.post('/admin/updateUserProfile', (req, res) => {
             res.end();
         }
         else {
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
                 if (err) throw err;
@@ -564,13 +510,7 @@ app.post('/admin/permissions/remove', (req, res) => {
             res.end();
         }
         else {
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
                 if (err) throw err;
@@ -609,13 +549,7 @@ app.post('/admin/permissions/add', (req, res) => {
             res.end();
         }
         else {
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
                 if (err) throw err;
@@ -657,13 +591,7 @@ app.post('/csfellows/schedule', (req, res) => {
             res.end();
         }
         else {
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
                 if (err) throw err;
@@ -684,13 +612,7 @@ app.get('/csfellows/schedule', (req, res) => {
     const date = new Date(req.query.date);
     const mysqlDate = date.getFullYear() + '-' + date.getMonth() + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
 
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "admincs",
-        password: "BeatBlair1864",
-        database: "peddieCS",
-        port: 3306
-    });
+    var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
         if (err) throw err;
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
@@ -711,13 +633,7 @@ app.get('/csfellows/schedule/day', (req, res) => {
     const date = new Date(req.query.date);
     const mysqlDate = date.getFullYear() + '-' + date.getMonth() + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
 
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "admincs",
-        password: "BeatBlair1864",
-        database: "peddieCS",
-        port: 3306
-    });
+    var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
         if (err) throw err;
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
@@ -744,13 +660,7 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
             res.end();
         }
         else {
-            var con = mysql.createConnection({
-                host: "localhost",
-                user: "admincs",
-                password: "BeatBlair1864",
-                database: "peddieCS",
-                port: 3306
-            });
+            var con = mysql.createConnection(secure.mysql);
 
             //var dateString = 
             con.connect(function (err) {
@@ -789,13 +699,7 @@ function emailFellowsReminder() {
     // console.log('Converted Date (ET):', date2.toISOString());
 
     //get all csfellows on the day
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "admincs",
-        password: "BeatBlair1864",
-        database: "peddieCS",
-        port: 3306
-    });
+    var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
         if (err) throw err;
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
@@ -893,13 +797,7 @@ app.post('/csfellows/schedule/month', (req, res) => {
 function recursiveAdd(schedule, i, j) {
     console.log(i, j)
 
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "admincs",
-        password: "BeatBlair1864",
-        database: "peddieCS",
-        port: 3306
-    });
+    var con = mysql.createConnection(secure.mysql);
 
     var event = schedule[i][j];
     const date = new Date(event.date);
@@ -926,13 +824,7 @@ app.get('/events/schedule', (req, res) => {
     const date = new Date(req.query.date);
     const mysqlDate = date.getFullYear() + '-' + date.getMonth() + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
 
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "admincs",
-        password: "BeatBlair1864",
-        database: "peddieCS",
-        port: 3306
-    });
+    var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
         if (err) throw err;
         // console.log(`SELECT name, date, id FROM events WHERE MONTH(date)=${date.getMonth() + 1}`);
@@ -980,13 +872,7 @@ function verifyCredential(token, callback) {
                 callback(false);
             } else {
                 //check if the user is already registered in the database
-                var con = mysql.createConnection({
-                    host: "localhost",
-                    user: "admincs",
-                    password: "BeatBlair1864",
-                    database: "peddieCS",
-                    port: 3306
-                });
+                var con = mysql.createConnection(secure.mysql);
                 con.connect(function (err) {
                     if (err) throw err;
                     con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
@@ -1026,13 +912,7 @@ function verifyCredentialPermission(token, permission, callback) {
                 callback(false);
             } else {
                 //check if the user is already registered in the database
-                var con = mysql.createConnection({
-                    host: "localhost",
-                    user: "admincs",
-                    password: "BeatBlair1864",
-                    database: "peddieCS",
-                    port: 3306
-                });
+                var con = mysql.createConnection(secure.mysql);
                 con.connect(function (err) {
                     if (err) throw err;
                     con.query(`SELECT email FROM members WHERE email = '${payload['email']}' AND FIND_IN_SET('${permission}', permissions) > 0`, function (err, result, fields) {
