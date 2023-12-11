@@ -943,7 +943,7 @@ function logError(error) {
     const timestamp = new Date().toISOString();
 
     // Format the log entry
-    const logEntry = `${timestamp} - ${error}\n`;
+    const logEntry = `\n${timestamp}\n${error}\n`;
 
     // Specify the path to the log file
     const logFilePath = path.join(__dirname, 'error.log');
