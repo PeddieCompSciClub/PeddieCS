@@ -1,6 +1,6 @@
 /live/
-/nodejs/node_modules/
-/nodejs/secure.json
+/nodejs/
+!/nodejs/app.js
 /members/user-images/
 /clubs/*/
 #/exp/*

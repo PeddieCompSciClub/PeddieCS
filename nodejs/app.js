@@ -934,3 +934,31 @@ function verifyCredentialPermission(token, permission, callback) {
     }
     verify().catch(console.error);
 }
+
+
+
+function logError(error) {
+    console.error(error);
+  // Get the current timestamp
+  const timestamp = new Date().toISOString();
+
+  // Format the log entry
+  const logEntry = `${timestamp} - ${error}\n`;
+
+  // Specify the path to the log file
+  const logFilePath = path.join(__dirname, 'error.log');
+
+  // Append the log entry to the file
+  fs.appendFile(logFilePath, logEntry, (err) => {
+    if (err) {
+      // Handle the error, e.g., log it to the console
+      console.error(`Error appending to log file: ${err.message}`);
+    } else {
+      console.log('Error logged successfully.');
+    }
+  });
+}
+
+// Example usage:
+const errorMessage = 'This is an example error message.';
+logError(errorMessage);
