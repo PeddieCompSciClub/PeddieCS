@@ -275,7 +275,7 @@
 }
 
 /* hides navbar when width<1000px */
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1400px) {
     .main{
         grid-template-rows: auto min-content;
     }
