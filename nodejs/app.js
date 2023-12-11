@@ -684,7 +684,7 @@ function scheduleFellowsReminder() {
         // console.log("Job run at " + new Date());
         emailFellowsReminder();
     })
-    const weekly = schedule.scheduleJob('0 12 * * * 1', function(){
+    const weekly = schedule.scheduleJob('0 12 * * * 1', function () {
         emailFellowsWeekly();
     })
 }
@@ -710,7 +710,7 @@ function emailFellowsReminder() {
                 var fellow = result[i]
                 var fellowDate = new Date(fellow.date);
                 console.log(fellow.name, fellow.id, fellowDate, dateET, fellowDate - dateET, fellowDate - dateET < 3 * 3600000)
-                if (dateET>fellowDate || fellowDate - dateET > 3 * 3600000) {
+                if (dateET > fellowDate || fellowDate - dateET > 3 * 3600000) {
                     result.splice(i, 1);
                     console.log(result.length);
                 }
@@ -723,7 +723,7 @@ function emailFellowsReminder() {
                     subject: 'CS Fellows',
                     text: '',
                     html: `<p>You are scheduled for CS Fellows Today!</p>
-                            <h3>${result[i].location}, ${new Date(result[i].date).toLocaleTimeString('en-US',{timeStyle: 'short'})}</h3>`
+                            <h3>${result[i].location}, ${new Date(result[i].date).toLocaleTimeString('en-US', { timeStyle: 'short' })}</h3>`
                 };
                 transport.sendMail(mailOptions, (error, info) => {
                     if (error) {
@@ -739,7 +739,7 @@ function emailFellowsReminder() {
                 for (let i = 1; i < result.length; i++) {
                     query += " OR id=" + result[i].id;
                 }
-                
+
                 con.query(`UPDATE csfellows SET reminder=-1 WHERE ${query}`, function (err, result, fields) {
                     if (err) throw err;
                     console.log(result);
@@ -752,7 +752,7 @@ function emailFellowsReminder() {
     });
 }
 
-function emailFellowsWeekly(){
+function emailFellowsWeekly() {
 
 }
 
@@ -874,9 +874,9 @@ function verifyCredential(token, callback) {
                 //check if the user is already registered in the database
                 var con = mysql.createConnection(secure.mysql);
                 con.connect(function (err) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     con.query(`SELECT email FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
-                        if (err) throw err;
+                        if (err) logError(err);
                         if (result.length > 0) {
                             callback(true, payload['email']);
                         } else {
@@ -914,9 +914,9 @@ function verifyCredentialPermission(token, permission, callback) {
                 //check if the user is already registered in the database
                 var con = mysql.createConnection(secure.mysql);
                 con.connect(function (err) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     con.query(`SELECT email FROM members WHERE email = '${payload['email']}' AND FIND_IN_SET('${permission}', permissions) > 0`, function (err, result, fields) {
-                        if (err) throw err;
+                        if (err) logError(err);
                         if (result.length > 0) {
                             callback(true, payload['email']);
                         } else {
@@ -939,26 +939,37 @@ function verifyCredentialPermission(token, permission, callback) {
 
 function logError(error) {
     console.error(error);
-  // Get the current timestamp
-  const timestamp = new Date().toISOString();
+    // Get the current timestamp
+    const timestamp = new Date().toISOString();
 
-  // Format the log entry
-  const logEntry = `${timestamp} - ${error}\n`;
+    // Format the log entry
+    const logEntry = `${timestamp} - ${error}\n`;
 
-  // Specify the path to the log file
-  const logFilePath = path.join(__dirname, 'error.log');
+    // Specify the path to the log file
+    const logFilePath = path.join(__dirname, 'error.log');
 
-  // Append the log entry to the file
-  fs.appendFile(logFilePath, logEntry, (err) => {
-    if (err) {
-      // Handle the error, e.g., log it to the console
-      console.error(`Error appending to log file: ${err.message}`);
-    } else {
-      console.log('Error logged successfully.');
-    }
-  });
+    // Append the log entry to the file
+    fs.appendFile(logFilePath, logEntry, (err) => {
+        if (err) {
+            // Handle the error, e.g., log it to the console
+            console.error(`Error appending to log file: ${err.message}`);
+        } else {
+            //   console.log('Error logged successfully.');
+        }
+    });
 }
 
-// Example usage:
-const errorMessage = 'This is an example error message.';
-logError(errorMessage);
+simulateError();
+function simulateError() {
+    try {
+      // Intentionally throwing an error for testing purposes
+      throw new Error('This is a simulated error.');
+    } catch (err) {
+      // Log the error using the logError function
+      logError(err.message);
+    }
+  }
+  
+  // Call the function to simulate an error and log it
+  simulateError();
+  
