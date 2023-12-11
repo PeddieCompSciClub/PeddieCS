@@ -958,18 +958,3 @@ function logError(error) {
         }
     });
 }
-
-simulateError();
-function simulateError() {
-    try {
-      // Intentionally throwing an error for testing purposes
-      throw new Error('This is a simulated error.');
-    } catch (err) {
-      // Log the error using the logError function
-      logError(err.message);
-    }
-  }
-  
-  // Call the function to simulate an error and log it
-  simulateError();
-  
