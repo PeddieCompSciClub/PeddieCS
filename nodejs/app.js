@@ -963,11 +963,10 @@ function logError(error) {
 function log(msg){
     console.log(msg);
     const timestamp = new Date().toISOString();
-    const logEntry = `\n${timestamp}\n${error}\n`;
+    const logEntry = `\n${timestamp}\n${msg}\n`;
     const logFilePath = path.join(__dirname, 'console.log');
     fs.appendFile(logFilePath, logEntry, (err) => {
         if (err) {
-            // Handle the error, e.g., log it to the console
             console.error(`Error appending to log file: ${err.message}`);
         } else {
         }
