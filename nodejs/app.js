@@ -75,9 +75,9 @@ app.get('/getAllMembers', (req, res) => {
     var con = mysql.createConnection(secure.mysql);
 
     con.connect(function (err) {
-        if (err) throw err;
+        if (err) logError(err);
         con.query("SELECT first_name, last_name, email, year FROM members WHERE public>=1", function (err, result, fields) {
-            if (err) throw err;
+            if (err) logError(err);
             res.json({ "error": false, "message": result });
             return res.end();
         })
@@ -95,17 +95,17 @@ app.get('/getMemberData', (req, res) => {
 
     if (email) {
         con.connect(function (err) {
-            if (err) throw err;
+            if (err) logError(err);
 
             con.query(`SELECT * FROM members WHERE email = '${email}'`, function (err, result, fields) {
-                if (err) throw err;
+                if (err) logError(err);
                 if (result.length > 0) {
                     member = result[0];
 
 
                     //get user's project info
                     con.query(`SELECT * FROM projects WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
-                        if (err) throw err;
+                        if (err) logError(err);
                         for (var i = 0; i < result.length; i++) {
                             //result[i].contributors is saved as a jsonArray, but needs to be parsed (also sorted)
                             //look into new versions for MariaDB to support acutal JSON datatypes?
@@ -139,7 +139,7 @@ app.get('/getMemberData', (req, res) => {
 
                         //get user's article info
                         con.query(`SELECT * FROM articles WHERE REPLACE(contributors, ' ', '') LIKE '%"email":"${email}"%'`, function (err, result, fields) {
-                            if (err) throw err;
+                            if (err) logError(err);
                             for (var i = 0; i < result.length; i++) {
                                 //result[i].contributors is saved as a jsonArray, but needs to be parsed (also sorted)
                                 //look into new versions for MariaDB to support acutal JSON datatypes?
@@ -208,7 +208,8 @@ app.post('/authenticateUser', (req, res) => {
                 audience: CLIENT_ID
             });
             const payload = ticket.getPayload();
-            console.log(payload);
+            log(`authenticateUser\n ${payload['name']}\n ${payload['email']}\n ${payload['hd']}`);
+            
 
             if (payload['hd'] != 'peddie.org') {
                 res.json({ "message": "failed", "credential": payload });
@@ -218,9 +219,9 @@ app.post('/authenticateUser', (req, res) => {
                 //check if the user is already registered in the database
                 var con = mysql.createConnection(secure.mysql);
                 con.connect(function (err) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     con.query(`SELECT first_name, last_name, email, year, permissions FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
-                        if (err) throw err;
+                        if (err) logError(err);
                         if (result.length > 0) {
                             res.json({ "message": "success", "credential": payload, "user": result[0] });
                             res.end();
@@ -264,9 +265,9 @@ app.post('/addMember', function (req, res) {
                 //check if the user is already registered in the database
                 var con = mysql.createConnection(secure.mysql);
                 con.connect(function (err) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
-                        if (err) throw err;
+                        if (err) logError(err);
                         if (result.length > 0) {
                             //the member should not already be in the database
                             res.json({ "message": "success" });
@@ -275,7 +276,7 @@ app.post('/addMember', function (req, res) {
                         } else {
                             //add member
                             con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])})`, function (err, result, fields) {
-                                if (err) throw err;
+                                if (err) logError(err);
 
                                 res.json({ "message": "success" });
                                 res.end();
@@ -310,7 +311,7 @@ app.post('/updateBio', (req, res) => {
             console.log(email);
             var con = mysql.createConnection(secure.mysql);
             con.query(`UPDATE members SET bio="${bio}" WHERE email="${email}"`, function (err, result, fields) {
-                if (err) throw err;
+                if (err) logError(err);
                 console.log(bio);
                 res.json({ 'message': 'success' });
             });
@@ -331,7 +332,7 @@ app.post('/updateUniversity', (req, res) => {
 
             var con = mysql.createConnection(secure.mysql);
             con.query(`UPDATE members SET university="${uni}" WHERE email="${email}" AND year = ${getCurrentYear()}`, function (err, result, fields) {
-                if (err) throw err;
+                if (err) logError(err);
                 // console.log(uni);
                 res.json({ 'message': 'success' });
             });
@@ -354,7 +355,7 @@ app.post('/updateVisibility', (req, res) => {
             else {
                 var con = mysql.createConnection(secure.mysql);
                 con.query(`UPDATE members SET public=${newVal} WHERE email="${email}"`, function (err, result, fields) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     res.json({ 'message': 'success', 'newVal': newVal });
                     res.end();
                 });
@@ -405,7 +406,7 @@ app.post('/deleteUser', (req, res) => {
         else {
             var con = mysql.createConnection(secure.mysql);
             con.query(`DELETE FROM members WHERE email="${email}"`, function (err, result, fields) {
-                if (err) throw err;
+                if (err) logError(err);
                 console.log('Deleted user ' + email);
                 res.json({ 'message': 'success' });
                 res.end();
@@ -428,9 +429,9 @@ app.get('/admin/getAllMembers', (req, res) => {
             var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
-                if (err) throw err;
+                if (err) logError(err);
                 con.query("SELECT * FROM members", function (err, result, fields) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     res.json({ "error": false, "message": result });
                     return res.end();
                 })
@@ -457,9 +458,9 @@ app.post('/admin/updateUserProfile', (req, res) => {
             var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
-                if (err) throw err;
+                if (err) logError(err);
                 con.query(`UPDATE members SET public=${public}, bio="${bio}", university="${university}" WHERE email="${userEmail}"`, function (err, result, fields) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     res.json({ "message": "success" });
                     return res.end();
                 });
@@ -513,10 +514,10 @@ app.post('/admin/permissions/remove', (req, res) => {
             var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
-                if (err) throw err;
+                if (err) logError(err);
                 con.query(`SELECT permissions FROM members WHERE email="${userEmail}"`, function (err, result, fields) {
                     //get current permissions
-                    if (err) throw err;
+                    if (err) logError(err);
                     if (result[0].permissions.includes(perm)) {
                         let permArr = result[0].permissions.split(",");
                         for (let i = permArr.length - 1; i >= 0; i--) {
@@ -526,7 +527,7 @@ app.post('/admin/permissions/remove', (req, res) => {
                         }
                         con.query(`UPDATE members SET permissions="${permArr.join(',')}" WHERE email="${userEmail}"`, function (err, result, fields) {
                             //update with new permissions
-                            if (err) throw err;
+                            if (err) logError(err);
                             res.json({ "error": false, "message": "success" });
                             return res.end();
                         });
@@ -552,16 +553,16 @@ app.post('/admin/permissions/add', (req, res) => {
             var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
-                if (err) throw err;
+                if (err) logError(err);
                 con.query(`SELECT permissions FROM members WHERE email="${userEmail}"`, function (err, result, fields) {
                     //get current permissions
-                    if (err) throw err;
+                    if (err) logError(err);
                     if (!result[0].permissions.includes(perm)) {
                         let permArr = result[0].permissions.split(",");
                         permArr.push(perm);
                         con.query(`UPDATE members SET permissions="${permArr.join(',')}" WHERE email="${userEmail}"`, function (err, result, fields) {
                             //update with new permissions
-                            if (err) throw err;
+                            if (err) logError(err);
                             res.json({ "error": false, "message": "success" });
                             return res.end();
                         });
@@ -594,10 +595,10 @@ app.post('/csfellows/schedule', (req, res) => {
             var con = mysql.createConnection(secure.mysql);
 
             con.connect(function (err) {
-                if (err) throw err;
+                if (err) logError(err);
                 const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate()) + ' ' + (date.getUTCHours()) + ':' + (date.getUTCMinutes()) + ':00';
                 con.query(`INSERT INTO csfellows (name, email, date, duration, location) VALUES ('${name}', '${email}', '${mysqlDate}', ${duration}, '${location}');`, function (err, result, fields) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     res.json({ "message": "success", "id": result.insertId });
                     return res.end();
                 });
@@ -614,10 +615,10 @@ app.get('/csfellows/schedule', (req, res) => {
 
     var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
-        if (err) throw err;
+        if (err) logError(err);
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
         con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
-            if (err) throw err;
+            if (err) logError(err);
             result.sort(function (a, b) {
                 return a.date - b.date;
             });
@@ -635,10 +636,10 @@ app.get('/csfellows/schedule/day', (req, res) => {
 
     var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
-        if (err) throw err;
+        if (err) logError(err);
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
         con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1} AND DAY(date)=${date.getDate()}`, function (err, result, fields) {
-            if (err) throw err;
+            if (err) logError(err);
             result.sort(function (a, b) {
                 return a.date - b.date;
             });
@@ -664,11 +665,11 @@ app.post('/csfellows/schedule/cancel', (req, res) => {
 
             //var dateString = 
             con.connect(function (err) {
-                if (err) throw err;
+                if (err) logError(err);
                 //INSERT INTO csfellows (name, email, datetime) VALUES ('test', '${email}', '2023-05-17 20:00:00');
                 console.log(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`)
                 con.query(`DELETE FROM csfellows WHERE email='${email}' AND id=${id}`, function (err, result, fields) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     res.json({ "message": "success" });
                     return res.end();
                 });
@@ -701,10 +702,10 @@ function emailFellowsReminder() {
     //get all csfellows on the day
     var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
-        if (err) throw err;
+        if (err) logError(err);
         // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
         con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${dateET.getFullYear()} AND MONTH(date)=${dateET.getMonth() + 1} AND DAY(date)=${dateET.getDate()} AND reminder=1`, function (err, result, fields) {
-            if (err) throw err;
+            if (err) logError(err);
             // console.log(result);
             for (let i = result.length - 1; i >= 0; i--) {
                 var fellow = result[i]
@@ -741,7 +742,7 @@ function emailFellowsReminder() {
                 }
 
                 con.query(`UPDATE csfellows SET reminder=-1 WHERE ${query}`, function (err, result, fields) {
-                    if (err) throw err;
+                    if (err) logError(err);
                     console.log(result);
                     con.end();
                 });
@@ -781,9 +782,9 @@ app.post('/csfellows/schedule/month', (req, res) => {
             //         const date = new Date(event.date);
             //         const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + date.getHours() + ':00:00';
             //         con.connect(function (err) {
-            //             if (err) throw err;
+            //             if (err) logError(err);
             //             con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
-            //                 if (err) throw err;
+            //                 if (err) logError(err);
             //                 console.log(i, j, schedule[i][j]);
             //                 con.end();
             //             });
@@ -804,9 +805,9 @@ function recursiveAdd(schedule, i, j) {
     const mysqlDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (i + 1) + ' ' + (j % 2 == 0 ? '20' : '21') + ':00:00';
 
     con.connect(function (err) {
-        if (err) throw err;
+        if (err) logError(err);
         con.query(`INSERT INTO csfellows (name, email, date) VALUES ('${event.name}', '${event.email}', '${mysqlDate}');`, function (err, result, fields) {
-            if (err) throw err;
+            if (err) logError(err);
             console.log(i, j, schedule[i][j]);
 
             j = (j + 1) % schedule[i].length;
@@ -826,10 +827,10 @@ app.get('/events/schedule', (req, res) => {
 
     var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
-        if (err) throw err;
+        if (err) logError(err);
         // console.log(`SELECT name, date, id FROM events WHERE MONTH(date)=${date.getMonth() + 1}`);
         con.query(`SELECT event, date, id, club FROM events WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
-            if (err) throw err;
+            if (err) logError(err);
             result.sort(function (a, b) {
                 return a.date - b.date;
             });
@@ -955,6 +956,20 @@ function logError(error) {
             console.error(`Error appending to log file: ${err.message}`);
         } else {
             //   console.log('Error logged successfully.');
+        }
+    });
+}
+
+function log(msg){
+    console.log(msg);
+    const timestamp = new Date().toISOString();
+    const logEntry = `\n${timestamp}\n${error}\n`;
+    const logFilePath = path.join(__dirname, 'console.log');
+    fs.appendFile(logFilePath, logEntry, (err) => {
+        if (err) {
+            // Handle the error, e.g., log it to the console
+            console.error(`Error appending to log file: ${err.message}`);
+        } else {
         }
     });
 }
