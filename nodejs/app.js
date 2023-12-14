@@ -996,6 +996,9 @@ function compressLogFile(filename) {
     writeStream.on('close', () => {
       // Remove the original log file
       fs.unlinkSync(originalLogFilePath);
+
+      //empty original log file
+      fs.writeFileSync(originalLogFilePath, '');
   
       console.log('Log file compressed and saved successfully.');
     });
