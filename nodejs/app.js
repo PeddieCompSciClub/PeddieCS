@@ -6,7 +6,7 @@ const path = require('path');
 const validator = require('email-validator');
 const schedule = require('node-schedule');//used to schedule automatic emails
 const nodemailer = require("nodemailer");
-// const sharp = require('sharp');
+const zlib = require('zlib');
 
 //used to set port to listen on
 const port = 5622;
@@ -938,6 +938,8 @@ function verifyCredentialPermission(token, permission, callback) {
 
 
 
+
+//Logging functions
 function logError(error) {
     console.error(error);
     // Get the current timestamp
@@ -972,3 +974,36 @@ function log(msg){
         }
     });
 }
+
+function compressLogFile(filename) {
+    // Specify the paths for the original and compressed log files
+    const originalLogFilePath = path.join(__dirname, 'oldDir');
+    const compressedLogFilePath = path.join(__dirname, 'log', filename+'.gz');
+  
+    // Create a read stream from the original log file
+    const readStream = fs.createReadStream(originalLogFilePath);
+  
+    // Create a write stream for the compressed log file
+    const writeStream = fs.createWriteStream(compressedLogFilePath);
+  
+    // Create a gzip transform stream
+    const gzip = zlib.createGzip();
+  
+    // Pipe the read stream through the gzip stream and then to the write stream
+    readStream.pipe(gzip).pipe(writeStream);
+  
+    // Handle events when the compression is complete
+    writeStream.on('close', () => {
+      // Remove the original log file
+      fs.unlinkSync(originalLogFilePath);
+  
+      console.log('Log file compressed and saved successfully.');
+    });
+  
+    // Handle errors during the compression process
+    writeStream.on('error', (err) => {
+      console.error(`Error compressing log file: ${err.message}`);
+    });
+  }
+  
+compressLogFile('console.log');
