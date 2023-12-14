@@ -1009,4 +1009,4 @@ function compressLogFile(filename) {
     });
   }
   
-compressLogFile('console.log');
+// compressLogFile('console.log');
