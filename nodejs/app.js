@@ -977,7 +977,7 @@ function log(msg){
 
 function compressLogFile(filename) {
     // Specify the paths for the original and compressed log files
-    const originalLogFilePath = path.join(__dirname, 'oldDir');
+    const originalLogFilePath = path.join(__dirname, oldDir);
     const compressedLogFilePath = path.join(__dirname, 'log', filename+'.gz');
   
     // Create a read stream from the original log file
