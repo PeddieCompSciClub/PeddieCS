@@ -772,10 +772,14 @@ function emailFellowsWeekly() {
                 let list = [];
 
                 async function loadFellowsScheduleJSON() {
-                    const response = await fetch('https://peddiecs.peddie.org/csfellows/schedule.json');
-                    const data = await response.json();
-                    return data;
-                };
+                    try {
+                        const jsonData = await fs.readFile('./csfellows/schedule.json', 'utf-8');
+                        return JSON.parse(jsonData);
+                    } catch (error) {
+                        console.error('Error reading schedule file:', error.message);
+                        throw error;
+                    }
+                }
                 loadFellowsScheduleJSON().then((response) => {
                     let schedule = response.schedule;
 
