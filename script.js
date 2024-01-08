@@ -207,7 +207,7 @@ function loadFellowsSchedule(week) {
         list.classList.add('memberItem');
         list.setAttribute('id', 'fellows-schedule');
 
-        //the can be done in O(n)
+        //the can be done in O(n) ...probably
         for (let i = 0; i < dayNames.length; i++) {
             if (i == 0 && schedule["Sunday"].length == 0) i++;
             // console.log(schedule[dayNames[i]]);

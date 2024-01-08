@@ -209,7 +209,7 @@ app.post('/authenticateUser', (req, res) => {
             });
             const payload = ticket.getPayload();
             log(`authenticateUser\n ${payload['name']}\n ${payload['email']}\n ${payload['hd']}`);
-            
+
 
             if (payload['hd'] != 'peddie.org') {
                 res.json({ "message": "failed", "credential": payload });
@@ -766,12 +766,50 @@ function emailFellowsWeekly() {
                 return a.date - b.date;
             });
             let fellows = result;
-            if(result.length>0){
+            if (result.length > 0) {
                 console.log(fellows);
-                let parse = [];
-                fellows.forEach((fellow)=>{
-                    console.log(fellow)
-                })
+                const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                let list = [];
+
+                async function loadFellowsScheduleJSON() {
+                    const response = await fetch('https://peddiecs.peddie.org/csfellows/schedule.json');
+                    const data = await response.json();
+                    return data;
+                };
+                loadFellowsScheduleJSON().then((response) => {
+                    let schedule = response.schedule;
+
+                    for (let i = 0; i < dayNames.length; i++) {
+                        if (i == 0 && schedule["Sunday"].length == 0) i++;
+                        // console.log(schedule[dayNames[i]]);
+                        list[dayNames[i]] = [];
+                    }
+
+                    let times = [];
+                    for (let j = 0; j < fellows.length; j++) {
+                        let fellow = fellows[j];
+                        let time = new Date(fellow.date.substring(0, fellow.date.length - 1));
+                        if (time.getDay() == i) {
+                            timeMin = time.getHours() * 60 + time.getMinutes();
+                            if (times[timeMin]) times[timeMin]++;
+                            else {
+                                times[timeMin] = 1;
+
+                                let hour = time.getHours() % 12;
+                                let minute = time.getMinutes();
+                                time.setMinutes(time.getMinutes() + fellow.duration);
+                                let hour2 = time.getHours() % 12;
+                                let minute2 = time.getMinutes();
+                                list[dayNames[i]].append(`<p>${(hour) + ':' + (minute < 10 ? '0' : '') + minute + '-' + (hour2) + ':' + (minute2 < 10 ? '0' : '') + minute2}  ${time.getHours() < 12 ? 'AM' : 'PM'}</p>`);
+                                // console.log(fellow.email, hour, minute, hour2, minute2);
+                            }
+                            list[dayNames[i]].append(`<div class="event" style="background-color:${stringToColor(fellow.email)}; border-color:#00000000">${fellow.name}</div>`);
+                            // item.innerHTML += 
+                        }
+                    }
+                    console.log("List\n"+=list);
+                });
+
             }
             else con.end();
         });
@@ -983,7 +1021,7 @@ function logError(error) {
     });
 }
 
-function log(msg){
+function log(msg) {
     console.log(msg);
     const timestamp = new Date().toISOString();
     const logEntry = `\n${timestamp}\n${msg}\n`;
@@ -999,35 +1037,58 @@ function log(msg){
 function compressLogFile(filename) {
     // Specify the paths for the original and compressed log files
     const originalLogFilePath = path.join(__dirname, filename);
-    const compressedLogFilePath = path.join(__dirname, 'log', filename+'.gz');
-  
+    const compressedLogFilePath = path.join(__dirname, 'log', filename + '.gz');
+
     // Create a read stream from the original log file
     const readStream = fs.createReadStream(originalLogFilePath);
-  
+
     // Create a write stream for the compressed log file
     const writeStream = fs.createWriteStream(compressedLogFilePath);
-  
+
     // Create a gzip transform stream
     const gzip = zlib.createGzip();
-  
+
     // Pipe the read stream through the gzip stream and then to the write stream
     readStream.pipe(gzip).pipe(writeStream);
-  
+
     // Handle events when the compression is complete
     writeStream.on('close', () => {
-      // Remove the original log file
-      fs.unlinkSync(originalLogFilePath);
+        // Remove the original log file
+        fs.unlinkSync(originalLogFilePath);
 
-      //empty original log file
-      fs.writeFileSync(originalLogFilePath, '');
-  
-      console.log('Log file compressed and saved successfully.');
+        //empty original log file
+        fs.writeFileSync(originalLogFilePath, '');
+
+        console.log('Log file compressed and saved successfully.');
     });
-  
+
     // Handle errors during the compression process
     writeStream.on('error', (err) => {
-      console.error(`Error compressing log file: ${err.message}`);
+        console.error(`Error compressing log file: ${err.message}`);
     });
-  }
-  
+}
+
 // compressLogFile('console.log');
+
+
+//Just some nice color hashing :)
+function stringToColor(text) {
+    var hash = stringToHash(text);
+    let r = 127 + ((hash & 0xFF0000) >> 16) / 2;
+    let g = 127 + ((hash & 0x00FF00) >> 8) / 2;
+    let b = 127 + ((hash & 0x0000FF)) / 2;
+
+    //println(hash,r,g,b);
+    return `rgb(${r},${g},${b})`;
+}
+
+function stringToHash(string) {
+    var hash = 0;
+    if (string.length == 0) return hash;
+    for (i = 0; i < string.length; i++) {
+        char = string.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return hash;
+}
