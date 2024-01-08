@@ -807,7 +807,7 @@ function emailFellowsWeekly() {
                             // item.innerHTML += 
                         }
                     }
-                    console.log("List\n"+=list);
+                    console.log("List\n"+list);
                 });
 
             }
