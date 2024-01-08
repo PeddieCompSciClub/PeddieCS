@@ -611,7 +611,6 @@ app.post('/csfellows/schedule', (req, res) => {
 //gets the cs fellow for a specific month
 app.get('/csfellows/schedule', (req, res) => {
     const date = new Date(req.query.date);
-    const mysqlDate = date.getFullYear() + '-' + date.getMonth() + '-' + (date.getDate() + 1) + ' ' + date.getHours() + ':00:00';
 
     var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
@@ -753,8 +752,26 @@ function emailFellowsReminder() {
     });
 }
 
+emailFellowsWeekly();
 function emailFellowsWeekly() {
+    const date = new Date();
 
+    var con = mysql.createConnection(secure.mysql);
+    con.connect(function (err) {
+        if (err) logError(err);
+        // console.log(`SELECT name, email, date, duration, id FROM csfellows WHERE MONTH(date)=${date.getMonth() + 1}`);
+        con.query(`SELECT name, email, date, duration, location, id FROM csfellows WHERE YEAR(date)=${date.getFullYear()} AND MONTH(date)=${date.getMonth() + 1}`, function (err, result, fields) {
+            if (err) logError(err);
+            result.sort(function (a, b) {
+                return a.date - b.date;
+            });
+            let fellows = result;
+            if(result.length>0){
+                console.log(fellows);
+            }
+            else con.end();
+        });
+    });
 }
 
 /*
