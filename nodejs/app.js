@@ -770,7 +770,7 @@ function emailFellowsWeekly() {
                 console.log(fellows);
                 let parse = [];
                 for(fellow in fellows){
-                    console.log(fellow.name)
+                    console.log(fellow)
                 }
             }
             else con.end();
