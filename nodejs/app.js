@@ -768,6 +768,10 @@ function emailFellowsWeekly() {
             let fellows = result;
             if(result.length>0){
                 console.log(fellows);
+                let parse = [];
+                for(fellow in fellows){
+                    console.log(fellow.name)
+                }
             }
             else con.end();
         });
