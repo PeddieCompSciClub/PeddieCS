@@ -769,9 +769,9 @@ function emailFellowsWeekly() {
             if(result.length>0){
                 console.log(fellows);
                 let parse = [];
-                for(fellow in fellows){
+                fellows.forEach((fellow)=>{
                     console.log(fellow)
-                }
+                })
             }
             else con.end();
         });
