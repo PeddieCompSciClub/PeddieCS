@@ -771,16 +771,16 @@ function emailFellowsWeekly() {
                 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 let list = [];
 
-                async function loadFellowsScheduleJSON() {
-                    try {
-                        const jsonData = await fs.readFile('./csfellows/schedule.json', 'utf-8');
-                        return JSON.parse(jsonData);
-                    } catch (error) {
-                        console.error('Error reading schedule file:', error.message);
-                        throw error;
-                    }
-                }
-                loadFellowsScheduleJSON().then((response) => {
+                // async function loadFellowsScheduleJSON() {
+                //     try {
+                //         const jsonData = await fs.readFile('./csfellows/schedule.json', 'utf-8');
+                //         return JSON.parse(jsonData);
+                //     } catch (error) {
+                //         console.error('Error reading schedule file:', error.message);
+                //         throw error;
+                //     }
+                // }
+                fs.readFile('./csfellows/schedule.json', 'utf-8', (response) => {
                     let schedule = response.schedule;
 
                     for (let i = 0; i < dayNames.length; i++) {
