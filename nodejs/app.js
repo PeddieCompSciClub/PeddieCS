@@ -777,6 +777,7 @@ function emailFellowsWeekly() {
                         return;
                     }
                     let schedule = JSON.parse(data);
+                    console.log(schedule);
 
                     for (let i = 0; i < dayNames.length; i++) {
                         if (i == 0 && schedule["Sunday"].length == 0) i++;
