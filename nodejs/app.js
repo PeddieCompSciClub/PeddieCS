@@ -787,8 +787,7 @@ function emailFellowsWeekly() {
                     let times = [];
                     for (let j = 0; j < fellows.length; j++) {
                         let fellow = fellows[j];
-                        console.log(fellow+"\n"+fellow.date+"\n"+(""+fellow.date).substring(2));
-                        let time = new Date(fellow.date.substring(0, fellow.date.length - 1));
+                        let time = fellow.date;
                         if (time.getDay() == i) {
                             timeMin = time.getHours() * 60 + time.getMinutes();
                             if (times[timeMin]) times[timeMin]++;
