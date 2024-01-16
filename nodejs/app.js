@@ -776,8 +776,7 @@ function emailFellowsWeekly() {
                         console.error('Error reading schedule file:', err.message);
                         return;
                     }
-                    let schedule = JSON.parse(data);
-                    console.log(schedule.schedule);
+                    let schedule = JSON.parse(data).schedule;
 
                     for (let i = 0; i < dayNames.length; i++) {
                         if (i == 0 && schedule["Sunday"].length == 0) i++;
