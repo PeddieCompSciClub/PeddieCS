@@ -771,7 +771,7 @@ function emailFellowsWeekly() {
                 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 let list = [];
 
-                fs.readFile('./csfellows/schedule.json', 'utf-8', (err, data) => {
+                fs.readFile('../csfellows/schedule.json', 'utf-8', (err, data) => {
                     if (err) {
                         console.error('Error reading schedule file:', err.message);
                         return;
