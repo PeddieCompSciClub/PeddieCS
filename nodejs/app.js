@@ -685,7 +685,7 @@ function scheduleFellowsReminder() {
         emailFellowsReminder();
     })
     const weekly = schedule.scheduleJob('0 12 * * * 1', function () {
-        emailFellowsWeekly();
+        //emailFellowsWeekly();
     })
 }
 
@@ -751,7 +751,7 @@ function emailFellowsReminder() {
         });
     });
 }
-
+/*
 emailFellowsWeekly();
 function emailFellowsWeekly() {
     const date = new Date();
@@ -813,7 +813,7 @@ function emailFellowsWeekly() {
             else con.end();
         });
     });
-}
+}*/
 
 /*
 //fills in an entire month of events DEBUG ONLY
