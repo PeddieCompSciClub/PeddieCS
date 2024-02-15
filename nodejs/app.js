@@ -685,7 +685,7 @@ function scheduleFellowsReminder() {
         emailFellowsReminder();
     })
     const weekly = schedule.scheduleJob('0 12 * * * 1', function () {
-        emailFellowsWeekly();
+        //emailFellowsWeekly();
     })
 }
 
@@ -751,8 +751,8 @@ function emailFellowsReminder() {
         });
     });
 }
-
-// emailFellowsWeekly();
+/*
+emailFellowsWeekly();
 function emailFellowsWeekly() {
 /*    const date = new Date();
 
@@ -771,12 +771,12 @@ function emailFellowsWeekly() {
                 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 let list = [];
 
-                fs.readFile('./csfellows/schedule.json', 'utf-8', (err, data) => {
+                fs.readFile('../csfellows/schedule.json', 'utf-8', (err, data) => {
                     if (err) {
                         console.error('Error reading schedule file:', err.message);
                         return;
                     }
-                    let schedule = JSON.parse(data);
+                    let schedule = JSON.parse(data).schedule;
 
                     for (let i = 0; i < dayNames.length; i++) {
                         if (i == 0 && schedule["Sunday"].length == 0) i++;
@@ -787,7 +787,7 @@ function emailFellowsWeekly() {
                     let times = [];
                     for (let j = 0; j < fellows.length; j++) {
                         let fellow = fellows[j];
-                        let time = new Date(fellow.date.substring(0, fellow.date.length - 1));
+                        let time = fellow.date;
                         if (time.getDay() == i) {
                             timeMin = time.getHours() * 60 + time.getMinutes();
                             if (times[timeMin]) times[timeMin]++;
@@ -812,8 +812,8 @@ function emailFellowsWeekly() {
             }
             else con.end();
         });
-    });*/
-}
+    });
+}*/
 
 /*
 //fills in an entire month of events DEBUG ONLY
