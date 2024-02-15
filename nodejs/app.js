@@ -752,9 +752,9 @@ function emailFellowsReminder() {
     });
 }
 
-emailFellowsWeekly();
+// emailFellowsWeekly();
 function emailFellowsWeekly() {
-    const date = new Date();
+/*    const date = new Date();
 
     var con = mysql.createConnection(secure.mysql);
     con.connect(function (err) {
@@ -812,7 +812,7 @@ function emailFellowsWeekly() {
             }
             else con.end();
         });
-    });
+    });*/
 }
 
 /*

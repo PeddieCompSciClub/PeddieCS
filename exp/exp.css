@@ -1,0 +1,28 @@
+header{
+    padding: 1em;
+}
+
+header h3{
+    text-align: center;
+    font-size: 3em;
+    padding:0;
+    text-wrap: balance;
+}
+
+header h4{
+    text-align: center;
+    margin: 0;
+    padding:0;
+}
+
+.body{
+    display: grid;
+    margin: 1em;
+}
+
+.body #poster{
+    width:50%;
+    /* height:600px; */
+    aspect-ratio: 4/3;
+
+}
