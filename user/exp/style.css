@@ -1,0 +1,36 @@
+.main{
+    margin:2em;
+    display: grid;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#form{
+    grid-column: 1/2;
+}
+
+hr{
+    color: var(--text);
+    border-top: 1px solid var(--text);
+}
+
+label{
+    margin-bottom: 0;
+}
+
+#form #title-input{
+    padding-left: 1ch;
+}
+
+.preview #title-preview{
+    text-align: center;
+    text-wrap: balance;
+}
+
+.text-buttons button{
+    width: 3ch;
+    height: 3ch;
+}

@@ -1,28 +1,128 @@
-header{
+header {
     padding: 1em;
 }
 
-header h3{
+header h3 {
     text-align: center;
     font-size: 3em;
-    padding:0;
+    padding: 0;
     text-wrap: balance;
 }
 
-header h4{
+header h4 {
     text-align: center;
     margin: 0;
-    padding:0;
+    padding: 0;
 }
 
-.body{
+.body {
     display: grid;
     margin: 1em;
+    grid-template-columns: 50% 50%;
 }
 
-.body #poster{
-    width:50%;
+.body #poster {
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
     /* height:600px; */
     aspect-ratio: 4/3;
+}
+
+.body #abstract {
+    grid-row: 1;
+    grid-column: 2;
+    padding-left: 2em;
+}
+
+.body #video {
+    grid-column: 1/-1;
+    margin: 2em auto;
+    width: 1000px;
+    /* just to not take up full screen? */
+    aspect-ratio: 560/315;
+    /* Default size - changeto auto??? */
+    max-width: 100%;
+}
+
+.body #paper {
+    grid-column: 1/-1;
+    width: 8.8in;
+    max-width: 100%;
+    aspect-ratio: 8.5/11;
+    margin: auto;
+}
+
+
+/* SLIDESHOW IMAGES */
+#slideshow {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 400px;
+    grid-column: 1/-1;
+    margin-bottom: 2em;
+}
+
+.slide {
+    width: fit-content;
+    height: 100%;
+    display: block;
+    opacity: 0;
+    margin:auto;
+    transition: ease-in-out 0.3s;
+
+    position: absolute;
+    top:0;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.slide img{
+    height:100%;
+    max-width: 90vw;
+    user-select: none;
+    object-fit: cover;
+}
+
+.prev:hover,.next:hover{
+    opacity: 1.0 !important;
+}
+
+#slideshow .active{
+    display: block;
+    opacity: 1.0;
+}
+
+.prev {
+    display:block;
+    
+    transform: translateX(-175%);
+    opacity: 0.5;
+}
+.next {
+    display:block;
+    position: absolute;
+    transform: translateX(75%);
+    opacity: 0.5;
+    top:0;
+    left:50%;
+}
+
+
+@media screen and (max-width: 992px) {
+    header {
+        font-size: 0.5em;
+    }
+
+    .body #poster {
+        grid-column: 1/-1;
+    }
+
+    .body #abstract {
+        grid-row: 2;
+        grid-column: 1/-1;
+        padding: 0;
+    }
 
 }

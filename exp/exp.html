@@ -67,16 +67,128 @@
   </nav>
 
   <header>
-    <h3><!--Signature Experience EXP- TITLE--><i>Pyrosoma atlanticum</i> Grazing in the Southern California Current Ecosystem</h3>
-    <h4><!--Signature Experience EXP- Contributors-->Sophia Wu<sup>1</sup>, Grace Cawley<sup>2</sup>, Nilusha Wanniappa<sup>2</sup>, Dr. Moira Décima<sup>2</sup></h4>
-    <h4><!--Signature Experience EXP- Organisations--><sup>1</sup>Peddie School, Hightstown NJ, <sup>2</sup>Scripps Institution of Oceanography, San Diego CA</h4>
+    <h3><!--Signature Experience EXP- TITLE--><i>Pyrosoma atlanticum</i> Grazing in the Southern California Current
+      Ecosystem</h3>
+    <h4><!--Signature Experience EXP- Contributors-->Sophia Wu<sup>1</sup>, Grace Cawley<sup>2</sup>, Nilusha
+      Wanniappa<sup>2</sup>, Dr. Moira Décima<sup>2</sup></h4>
+    <h4><!--Signature Experience EXP- Organisations--><sup>1</sup>Peddie School, Hightstown NJ, <sup>2</sup>Scripps
+      Institution of Oceanography, San Diego CA</h4>
   </header>
   <hr>
   <div class="body">
     <embed id="poster" src="posters/swu-24.pdf#view=Fit&toolbar=0" scrollbar=0 type="application/pdf">
-    <div class="abstract">
-
+    <div id="abstract">
+      <h4>Abstract</h4>
+      <p>The significant expansion and density increase of Pyrosoma atlanticum off the west coast of the
+        United States and British Columbia coupled with resulting massive blooms may have lasting
+        effects on the ecosystem dynamics of California Current Large Marine Ecosystem (CCLME) and
+        West Coast human industries. While previous studies have determined the effects of P.
+        atlanticum in the Indian Ocean and the Northern California Current on phytoplankton or have
+        used stable isotope and fatty acid analysis to examine the general trophic level pyrosomes
+        occupied in the CCMLE, no research approaches have used gut pigment analysis and stable
+        isotope analysis in the Southern California Current to analyze phytoplankton consumption,
+        which is what this research aims to do. Pyrosomes collected in oblique bongo tows from the
+        CCE-P2107 cruise under the CCE-LTER Process cruises aboard the R/V Roger Revelle through
+        July and August 2021 were halved, with chlorophyll a extracted with acetone in half for gut
+        pigment, and half dried for stable isotope analysis. Length was found to vary significantly based
+        on location, as offshore samples were significantly shorter than nearshore samples
+        (Kruskal-Wallis, p &lt;0.05). In addition to longitude and latitude, factors such as temperature,
+        salinity, and sunlight may also impact phytoplankton consumption, as there was a significant
+        difference in gut pigment normalized by wet weight between the closely located pair of
+        nearshore samples. Diel vertical migration may also influence the length and gut pigment of
+        pyrosomes collected in hauls, as longer pyrosomes with greater gut pigment normalized by wet
+        weight are found in night tows compared to day tows. Observations regarding length and
+        consumption will impact research working to convert gut pigment into grazing rate per day,
+        which will be used to calculate the grazing impact of the SCC pyrosome population.</p>
     </div>
+    <iframe id="video" src="https://www.youtube.com/embed/E7eOgNgBf_k?si=dzzZzfDPGQZSMNS8" title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+    <div id="slideshow">
+      <!-- <div class="slide prev"><img src="images/swu-24/IMG_0623.JPG"></div>
+      <div class="slide active"><img src="images/swu-24/IMG_0631.JPG"></div>
+      <div class="slide next"><img src="images/swu-24/IMG_0699.JPG"></div>
+      <div class="slide"><img src="images/swu-24/IMG_0759.JPG"></div>
+      <div class="slide"><img src="images/swu-24/IMG_0774.JPG"></div>
+      <div class="slide"><img src="images/swu-24/IMG_5628.JPG"></div> -->
+      <script>
+        //load images
+        function loadImages(folder, count){
+          $.ajax({
+            url: folder,
+            success: function (data) {
+              $(data).find("a").attr("href", function (i, val) {
+                if (val.match(/\.(jpe?g|JPE?G|png|gif)$/)) {
+                  let type = "";
+                  if (count == 0) type = " prev"
+                  else if (count == 1) type = " active"
+                  else if (count == 2) type = " next"
+                  $("#slideshow").append("<div class='slide" + type + "'> <img src='" + val + "'></div>");
+                  count++;
+                }
+              });
+              console.log("COUNT: ",count)
+              if(count<=3) loadImages(folder,count);
+            }
+          });
+        }
+
+        let timer = setInterval(nextSlide, 10000);
+
+        function changeSlide(e) {
+          console.log(e.screenX, e.clientX)
+          clearInterval(timer);
+          timer = setInterval(nextSlide, 10000);
+          if (e.clientX > document.documentElement.clientWidth / 2) {
+            nextSlide()
+          } else {
+            prevSlide()
+          }
+        }
+
+        function nextSlide() {
+          let slides = document.getElementsByClassName("slide");
+          let stop = 0;
+          for (let i = slides.length - 1; i >= stop; i--) {
+            if (slides[i].classList.contains("next")) {
+              slides[i].classList.remove("next");
+              slides[i].classList.add("active");
+              slides[(i + 1) % slides.length].classList.add("next")
+              if (i == slides.length - 1) { stop = 1 };
+            } else if (slides[i].classList.contains("active")) {
+              slides[i].classList.remove("active");
+              slides[i].classList.add("prev");
+            } else if (slides[i].classList.contains("prev")) {
+              slides[i].classList.remove("prev");
+            }
+          }
+        }
+
+        function prevSlide() {
+          let slides = document.getElementsByClassName("slide");
+          let stop = slides.length;
+          for (let i = 0; i < stop; i++) {
+            if (slides[i].classList.contains("prev")) {
+              slides[i].classList.remove("prev");
+              slides[i].classList.add("active");
+              slides[(i - 1 + slides.length) % slides.length].classList.add("prev")
+              if (i == 0) { stop = slides.length - 1 };
+            } else if (slides[i].classList.contains("active")) {
+              slides[i].classList.remove("active");
+              slides[i].classList.add("next");
+            } else if (slides[i].classList.contains("next")) {
+              slides[i].classList.remove("next");
+            }
+          }
+        }
+
+        loadImages("images/swu-24/",0);
+        document.getElementById("slideshow").addEventListener("click", changeSlide);
+      </script>
+    </div>
+    <embed id="paper" src="papers/swu-24.pdf#view=FitW" scrollbar=0 type="application/pdf">
+  </div>
   </div>
 
 </body>
