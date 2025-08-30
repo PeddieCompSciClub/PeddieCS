@@ -51,6 +51,7 @@
             $.post("https://peddiecs.peddie.org/nodejs/addMember", {
                 token: getCookie("credential")
             }, function (res) {
+                console.log(res)
                 if (res.message = "success") {
                     const urlParams = new URLSearchParams(window.location.search);
                     if (urlParams.get('redirect'))
@@ -58,6 +59,7 @@
                     else
                         window.location.href = 'index.html';
                 } else {
+                    console.log('new user error')
                     document.getElementById("err").style = "opacity:1";
                 }
             });
