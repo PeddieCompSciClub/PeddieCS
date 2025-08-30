@@ -13,7 +13,7 @@ function verifyLogin() {
                 } else if (res.message == "new-user") {
                     console.log("new user");
                     window.location.href = `/user/new-user.html?redirect=${encodeURIComponent(window.location)}`;
-                    reject(new Error('User is not authenticated.'));
+                    reject(new Error('NEW User is not authenticated.'));
                 } else {
                     console.log("failed to validate user");
                     window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
