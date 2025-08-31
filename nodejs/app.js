@@ -259,7 +259,7 @@ app.post('/addMember', function (req, res) {
             const payload = ticket.getPayload();
             //check that it is a peddie user
             if (payload['hd'] != 'peddie.org') {
-                res.json({ "message": "failed" });
+                res.json({ "message": "failed", "reason": "Payload isn't peddie server" });
                 res.end();
             } else {
                 //check if the user is already registered in the database
@@ -290,12 +290,14 @@ app.post('/addMember', function (req, res) {
 
 
         } catch (error) {
-            console.error(error);
-            res.json({ "message": "failed" });
+            console.error("Error when trying to verify in nodejs/app.js", error);
+            res.json({ "message": "failed", "reason": "Verification failed" });
             res.end();
         }
     }
-    verify().catch(console.error);
+    verify().catch((err) => {
+        console.error("Unhandled error in nodejs/app.js /addMember function:", err);
+    });
 });
 
 //updates the user's bio
