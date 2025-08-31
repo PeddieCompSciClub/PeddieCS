@@ -37,10 +37,10 @@
                     console.log("Preexisting user, redirecting to home");
                     const urlParams = new URLSearchParams(window.location.search);
                     console.log(urlParams)
-                    if (urlParams.get('redirect'))
-                        window.location.href = urlParams.get('redirect');
-                    else
-                        window.location.href = 'index.html';
+                    // if (urlParams.get('redirect'))
+                    //     window.location.href = urlParams.get('redirect');
+                    // else
+                    //     window.location.href = 'index.html';
                 } else if (res.message == "new-user") {
                     console.log('whatever')
                     document.getElementById("name").innerText = res.credential['name'];
