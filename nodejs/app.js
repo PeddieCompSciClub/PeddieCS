@@ -271,12 +271,14 @@ app.post('/addMember', function (req, res) {
                     con.query(`SELECT * FROM members WHERE email = '${payload['email']}'`, function (err, result, fields) {
                         if (err) logError(err);
                         if (result.length > 0) {
+                            console.log('already registered')
                             //the member should not already be in the database
                             res.json({ "message": "success" });
                             res.end();
                             con.end();
                         } else {
                             //add member
+                            console.log('adding member')
                             con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])})`, function (err, result, fields) {
                                 if (err) logError(err);
 
