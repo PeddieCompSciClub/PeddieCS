@@ -56,11 +56,11 @@
                 if (res.message == "success") {
                     const urlParams = new URLSearchParams(window.location.search);
                     console.log(urlParams)
-                    // if (urlParams.get('redirect')){
-                    //     console.log('redirect')
-                    //     window.location.href = urlParams.get('redirect');
-                    // }
-                    // else
+                    if (urlParams.get('redirect')){
+                        console.log('redirect')
+                        window.location.href = urlParams.get('redirect');
+                    }
+                    else
                         window.location.href = 'index.html';
                 } else {
                     console.log('new user error')
