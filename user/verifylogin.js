@@ -5,18 +5,16 @@ function verifyLogin() {
             $.post("https://peddiecs.peddie.org/nodejs/authenticateUser", {
                 token: getCookie('credential'),
             }, function (res) {
-                if (res.message == "success" || res.message=="new-user") {
+                if (res.message == "success") {
                     console.log("user validated");
                     addSignoutButton(res.credential.name);
                     appendNavbar(res.user.permissions);
                     resolve(res.user);
-                } 
-                // else if (res.message == "new-user") {
-                //     console.log("new user");
-                //     window.location.href = `/user/new-user.html?redirect=${encodeURIComponent(window.location)}`;
-                //     reject(new Error('NEW User is not authenticated.'));
-                // } 
-                else {
+                } else if (res.message == "new-user") {
+                    console.log("new user");
+                    window.location.href = `/user/new-user.html?redirect=${encodeURIComponent(window.location)}`;
+                    reject(new Error('NEW User is not authenticated.'));
+                } else {
                     console.log("failed to validate user");
                     window.location.href = `/user/login.html?redirect=${encodeURIComponent(window.location)}`;
                     reject(new Error('User is not authenticated.'));
