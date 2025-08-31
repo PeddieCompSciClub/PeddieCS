@@ -36,6 +36,7 @@
                 if (res.message == "success") {
                     console.log("Preexisting user, redirecting to home");
                     const urlParams = new URLSearchParams(window.location.search);
+                    console.log(urlParams)
                     if (urlParams.get('redirect'))
                         window.location.href = urlParams.get('redirect');
                     else
