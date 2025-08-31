@@ -212,7 +212,7 @@ app.post('/authenticateUser', (req, res) => {
 
 
             if (payload['hd'] != 'peddie.org') {
-                res.json({ "message": "failed", "credential": payload });
+                res.json({ "message": "failed", "credential": payload, "reason":"Payload isn't peddie server"});
                 res.end();
             } else {
 
@@ -236,11 +236,13 @@ app.post('/authenticateUser', (req, res) => {
 
         } catch (error) {
             console.error(error);
-            res.json({ "message": "failed" });
+            res.json({ "message": "failed", "reason" : "verification failed in /authenticateUser"});
             res.end();
         }
     }
-    verify().catch(console.error);
+    verify().catch((err) => {
+        console.error("Unhandled error in /authenticateUser", err);
+    });
 });
 
 //add member from google user credential
