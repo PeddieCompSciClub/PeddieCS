@@ -52,7 +52,7 @@
                 token: getCookie("credential")
             }, function (res) {
                 console.log(res)
-                if (res.message = "success") {
+                if (res.message == "success") {
                     const urlParams = new URLSearchParams(window.location.search);
                     if (urlParams.get('redirect'))
                         window.location.href = urlParams.get('redirect');
