@@ -273,7 +273,7 @@ app.post('/addMember', function (req, res) {
                         if (result.length > 0) {
                             console.log('already registered')
                             //the member should not already be in the database
-                            res.json({ "message": "success" });
+                            res.json({ "message": "success", "reason" : "already registered"});
                             res.end();
                             con.end();
                         } else {
@@ -282,7 +282,7 @@ app.post('/addMember', function (req, res) {
                             con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])})`, function (err, result, fields) {
                                 if (err) logError(err);
 
-                                res.json({ "message": "success" });
+                                res.json({ "message": "success", "reason" : "added member"});
                                 res.end();
                                 con.end();
                             });
