@@ -52,7 +52,7 @@
             $.post("https://peddiecs.peddie.org/nodejs/addMember", {
                 token: getCookie("credential")
             }, function (res) {
-                console.log(res.reason)
+                console.log(res.json)
                 if (res.message == "success") {
                     const urlParams = new URLSearchParams(window.location.search);
                     console.log(urlParams)
