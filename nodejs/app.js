@@ -212,7 +212,7 @@ app.post('/authenticateUser', (req, res) => {
 
 
             if (payload['hd'] != 'peddie.org') {
-                res.json({ "message": "failed", "credential": payload, "reason":"Payload isn't peddie server"});
+                res.json({ "message": "failed", "credential": payload, "reason": "Payload isn't peddie server" });
                 res.end();
             } else {
 
@@ -236,7 +236,7 @@ app.post('/authenticateUser', (req, res) => {
 
         } catch (error) {
             console.error(error);
-            res.json({ "message": "failed", "reason" : "verification failed in /authenticateUser"});
+            res.json({ "message": "failed", "reason": "verification failed in /authenticateUser" });
             res.end();
         }
     }
@@ -273,16 +273,16 @@ app.post('/addMember', function (req, res) {
                         if (result.length > 0) {
                             console.log('already registered')
                             //the member should not already be in the database
-                            res.json({ "message": "success", "reason" : "already registered"});
+                            res.json({ "message": "success", "reason": "already registered" });
                             res.end();
                             con.end();
                         } else {
                             //add member
                             console.log('adding member')
-                            con.query(`INSERT INTO members (first_name, last_name, email, year) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])})`, function (err, result, fields) {
+                            con.query(`INSERT INTO members (first_name, last_name, email, year, bio) VALUES ('${payload['given_name']}', '${payload['family_name']}', '${payload['email']}', ${getEmailYear(payload['email'])}, 'Put bio here.')`, function (err, result, fields) {
                                 if (err) logError(err);
 
-                                res.json({ "message": "success", "reason" : "added member"});
+                                res.json({ "message": "success", "reason": "added member" });
                                 res.end();
                                 con.end();
                             });
