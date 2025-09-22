@@ -112,6 +112,12 @@
   text-align: center;
 }
 
+iframe{
+    display: block;
+    margin: auto;
+    width: 1004px;
+    height: 400px;
+}
 
 @media screen and (max-width: 992px) {
   #fellows-schedule{
