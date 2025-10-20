@@ -14,11 +14,15 @@ header h4 {
     margin: 0;
     padding: 0;
 }
+:root {
+    --table: #f1f1f1;
+    --hover: #ddd;
+    --select: #ccc;
+}
 
 .body {
     display: grid;
     margin: 1em;
-    grid-template-columns: 50% 50%;
 }
 
 .body #poster {
@@ -51,6 +55,65 @@ header h4 {
     max-width: 100%;
     aspect-ratio: 8.5/11;
     margin: auto;
+}
+
+.tabcontainer {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid var(--select);
+    background-color: var(--table);
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: var(--table);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: var(--select);
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid var(--select);
+    border-top: none;
+}
+
+.memberTable {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+}
+
+.memberItem {
+    min-width: 200px;
+    max-width: 400px;
+    width: 16em;
+    height: auto;
+    border: 1px solid var(--select);
+    border-radius: 10px;
+    background-color: var(--table);
+    margin: auto;
+    margin-top: 10px;
 }
 
 
