@@ -73,40 +73,85 @@
   <div class="body">
   <div class="tabcontainer">
     <div class="tab">
-      <button class="tablinks active" onclick="openTab(event, 'Alvin')">Alvin Lyuh</button>
       <button class="tablinks" onclick="openTab(event, 'Jingyi')" onmouseenter="this.textContent = 'Jingyi Han - Autism-Related Mutations'" onmouseout="this.textContent='Jingyi Han'">Jingyi Han</button>
+      <button class="tablinks" onclick="openTab(event, 'Jayden')" onmouseenter="this.textContent = 'Jayden Li - File System'" onmouseout="this.textContent='Jayden Li'">Jayden Li</button>
+      <button class="tablinks" onclick="openTab(event, 'Jerry Liu')" onmouseenter="this.textContent = 'Jerry Liu - Fall Detection/Hyperplane Arrangements'" onmouseout="this.textContent='Jerry Liu'">Jerry Liu</button>
+      <button class="tablinks" onclick="openTab(event, 'Alvin')" onmouseenter="this.textContent = 'Alvin Lyuh - Failure Detection'" onmouseout="this.textContent='Alvin Lyuh'">Alvin Lyuh</button>
+      <button class="tablinks" onclick="openTab(event, 'Eloise')" onmouseenter="this.textContent = 'Eloise Mendelssohn - Fitness Startup'" onmouseout="this.textContent='Eloise Mendelson'">Eloise Mendelson</button>
+      <button class="tablinks" onclick="openTab(event, 'Izzy')" onmouseenter="this.textContent = 'Izzy Naso - Real Estate Trends'" onmouseout="this.textContent='Izzy Naso'">Izzy Naso</button>
+      <button class="tablinks" onclick="openTab(event, 'Yixing')" onmouseenter="this.textContent = 'Yixing Shi - VR Rendering'" onmouseout="this.textContent='Yixing Shi'">Yixing Shi</button>
       <button class="tablinks" onclick="openTab(event, 'Jerry Wang')" onmouseenter="this.textContent = 'Jerry Wang - Child Online Safety'" onmouseout="this.textContent='Jerry Wang'">Jerry Wang</button>
-      <!-- <button class="tablinks" onclick="openTab(event, 'Jerry Liu')">Jerry Liu</button>
-      <button class="tablinks" onclick="openTab(event, 'Yixing')">Yixing Shi</button>
-      <button class="tablinks" onclick="openTab(event, 'Eloise')">Eloise Mendelssohn</button> -->
     </div>
 
     <!-- Tab content -->
+    <div id="Jingyi" class="tabcontent">
+      <h3 id="name">Jingyi Han - Using Machine Learning to Detect Autism-Related Mutations in Noncoding Regions</h3>
+      <h4 id="school">Columbia University Irving Medical Center</h4>
+        <div class="poster">
+          <embed id="poster" src="posters/2026/jhan-26.pdf" scrollbar=0 type="application/pdf">
+        </div>
+    </div>
+    
+    <div id="Jayden" class="tabcontent">
+      <h3 id="name">Jayden Li - A Crash-Resilient Contiguous File System for Embedded Systems</h3>
+      <h4 id="school">Simons Summer Research Program, Stony Brook University </h4>
+        <div class="poster">
+            <embed id="poster" src="posters/2026/cli-26.pdf" scrollbar=0 type="application/pdf">
+        </div>
+    </div>
+
+    <div id="Jerry Liu" class="tabcontent">
+      <h3 id="name">Jerry Liu - TriFallNet: An AI System for Detecting Falls Early and Severity Assessment</h3>
+      <h4 id="school">Research Science Institute (RSI), Massachusetts Institute of Technology</h4>
+        <div class="poster">
+          <embed id="poster" src="posters/2026/jliu-26a.pdf" scrollbar=0 type="application/pdf">
+        </div>
+      <h3 id="name">Jerry Liu - Full-Twist Presentations for Fundamental Groups of Complements of Complexified Hyperplane Arrangements </h3>
+      <h4 id="school">Program for Research in Mathematics, Engineering, and Science (PRIMES), Massachusetts Institute of Technology </h4>
+        <div class="poster">
+          <embed id="poster" src="posters/2026/jliu-26b.pdf" scrollbar=0 type="application/pdf">
+        </div>
+    </div>
+
     <div id="Alvin" class="tabcontent" style="display:block">
-      <h3 id="name">Alvin Lyuh</h3>
+      <h3 id="name">Alvin Lyuh - Can Confidence Detect Failure in Visual LLMs?</h3>
+      <h4 id="school">Laboratory Learning Program, Princeton University</h4>
       <div class="poster">
-        <embed id="poster" src="posters/swu-24.pdf" scrollbar=0 type="application/pdf">
+        <embed id="poster" src="posters/2026/alyuh-26.pdf" scrollbar=0 type="application/pdf">
       </div>
     </div>
 
-    <div id="Jingyi" class="tabcontent">
-      <h3 id="name">Jingyi Han - Using Machine Learning to Detect Autism-Related Mutations in Noncoding Regions</h3>
-      <h4 id="school"> Columbia University Irving Medical Center</h4>
-        <div class="poster">
-          <!-- <embed id="poster" src="posters/jhan-26.pdf" scrollbar=0 type="application/pdf"> -->
-          <iframe id="poster" src="https://docs.google.com/presentation/d/e/2PACX-1vRtb7mjUKqFMTQLg8p_FeCmao8plRI73EXurrD41FXTu3KxRB15N16Rwi4u3FSapw/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="4608" height="3485" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+    <div id="Eloise" class="tabcontent">
+      <h3 id="name">Eloise Mendelson - Scaling a Startup: Product, Marketing, and Operations for a Fitness App</h3>
+      <h4 id="school">PaceLine</h4>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/emendelson-26.pdf" scrollbar=0 type="application/pdf">
+      </div>
+    </div>
+    
+    <div id="Izzy" class="tabcontent">
+      <h3 id="name">Izzy Naso - Using Unusual Indicators in Commercial Real Estate to Predict Community Trends</h3>
+      <h4 id="school">BentallGreenOak</h4>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/inaso-26.pdf" scrollbar=0 type="application/pdf">
+      </div>
+    </div>
+    
+    <div id="Yixing" class="tabcontent">
+      <h3 id="name">Yixing Shi - Content-Aware Rendering for Efficient Virtual Reality</h3>
+      <h4 id="school">New York University</h4>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/yshi-26.pdf" scrollbar=0 type="application/pdf">
       </div>
     </div>
 
     <div id="Jerry Wang" class="tabcontent">
       <h3 id="name">Jerry Wang - Navigating the Complexities of Child Online Safety</h3>
       <h4 id="school"> The University of California, Santa Cruz</h4>
-        <div class="poster">
-            <!-- <embed id="poster" src="posters/twen-24.pdf" scrollbar=0 type="application/pdf"> -->
-            <iframe id="poster" src="https://docs.google.com/presentation/d/e/2PACX-1vRzqWGtpIU_PZnQoSmXnmBOCPmQcyzE-G-LJaLI_TS0AU1x7yaui-2jexJxNY2iaw/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="4608" height="3485" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/jwang-26.pdf" scrollbar=0 type="application/pdf">
       </div>
     </div>
-
 
     <script>
       //open the tab with the corresponding name
