@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Signature Experience | PeddieCS</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link
+    href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+    href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="exp.css">
+  <link rel="stylesheet" href="/main.css">
+  <link rel="icon" href="/favicon.ico">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+  <script src="members.js"></script>
+  <script src="/signinbutton.js"></script>
+</head>
+
+<body onload="verifyLogin(); getMembers();">
+
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+    <!-- Main Navbar -->
+    <div class="navbar-full navbar-nav mr-auto">
+      <a href="/"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
+      <a href="/">Home</a>
+      <a href="/projects/">Projects</a>
+      <a href="/articles/">Articles</a>
+      <a href="/exp/">Signature Experience</a>
+      <a href="/members/">Members</a>
+      <a href="/clubs/">Clubs</a>
+      <a href="/csfellows/">CS Fellows</a>
+      <a href="mailto:compsciclub@peddie.org"><img src="/WebsitePictures/email.png"></a>
+      <a href="https://peddiehacks.peddie.org"><img src="/WebsitePictures/peddiehacks.jpg"></a>
+      <!-- <button class="user sign-out" onclick="removeCookie('credential'); window.location.href='/index.html'">NAME</button> -->
+    </div>
+
+    <!-- Mobile Navbar -->
+    <div class="navbar-short navbar-nav mr-auto">
+      <a href="/"><img src="/WebsitePictures/logo.jpg" class="logo"></a>
+      <div class="dropdown">
+        <button><a>Members</a></button>
+        <div class="dropdown-content">
+          <a href="/">Home</a>
+          <a href="/projects/">Projects</a>
+          <a href="/articles/">Articles</a>
+          <a href="/exp/">Signature Experience</a>
+          <!-- <a href="/members/">Members</a> -->
+          <a href="/clubs/">Clubs</a>
+          <a href="/csfellows/">CS Fellows</a>
+        </div>
+      </div>
+      <a href="mailto:compsciclub@peddie.org"><img src="/WebsitePictures/email.png"></a>
+      <a href="https://peddiehacks.peddie.org"><img src="/WebsitePictures/peddiehacks.jpg"></a>
+      </li>
+    </div>
+  </nav>
+
+  <header>
+    <h3>Peddie Signature Experience 2025</h3>
+  </header>
+  <hr>
+  <div class="body">
+  <div class="tabcontainer">
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'Jingyi')" onmouseenter="this.textContent = 'Jingyi Han - Autism-Related Mutations'" onmouseout="this.textContent='Jingyi Han'">Jingyi Han</button>
+      <button class="tablinks" onclick="openTab(event, 'Jayden')" onmouseenter="this.textContent = 'Jayden Li - File System'" onmouseout="this.textContent='Jayden Li'">Jayden Li</button>
+      <button class="tablinks" onclick="openTab(event, 'Jerry Liu')" onmouseenter="this.textContent = 'Jerry Liu - Fall Detection/Hyperplane Arrangements'" onmouseout="this.textContent='Jerry Liu'">Jerry Liu</button>
+      <button class="tablinks" onclick="openTab(event, 'Alvin')" onmouseenter="this.textContent = 'Alvin Lyuh - Failure Detection'" onmouseout="this.textContent='Alvin Lyuh'">Alvin Lyuh</button>
+      <button class="tablinks" onclick="openTab(event, 'Eloise')" onmouseenter="this.textContent = 'Eloise Mendelssohn - Fitness Startup'" onmouseout="this.textContent='Eloise Mendelson'">Eloise Mendelson</button>
+      <button class="tablinks" onclick="openTab(event, 'Izzy')" onmouseenter="this.textContent = 'Izzy Naso - Real Estate Trends'" onmouseout="this.textContent='Izzy Naso'">Izzy Naso</button>
+      <button class="tablinks" onclick="openTab(event, 'Yixing')" onmouseenter="this.textContent = 'Yixing Shi - VR Rendering'" onmouseout="this.textContent='Yixing Shi'">Yixing Shi</button>
+      <button class="tablinks" onclick="openTab(event, 'Jerry Wang')" onmouseenter="this.textContent = 'Jerry Wang - Child Online Safety'" onmouseout="this.textContent='Jerry Wang'">Jerry Wang</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="Jingyi" class="tabcontent">
+      <h3 id="name">Jingyi Han - Using Machine Learning to Detect Autism-Related Mutations in Noncoding Regions</h3>
+      <h4 id="school">Columbia University Irving Medical Center</h4>
+        <div class="poster">
+          <embed id="poster" src="posters/2026/jhan-26.pdf" scrollbar=0 type="application/pdf">
+        </div>
+    </div>
+    
+    <div id="Jayden" class="tabcontent">
+      <h3 id="name">Jayden Li - A Crash-Resilient Contiguous File System for Embedded Systems</h3>
+      <h4 id="school">Simons Summer Research Program, Stony Brook University </h4>
+        <div class="poster">
+            <embed id="poster" src="posters/2026/cli-26.pdf" scrollbar=0 type="application/pdf">
+        </div>
+    </div>
+
+    <div id="Jerry Liu" class="tabcontent">
+      <h3 id="name">Jerry Liu - TriFallNet: An AI System for Detecting Falls Early and Severity Assessment</h3>
+      <h4 id="school">Research Science Institute (RSI), Massachusetts Institute of Technology</h4>
+        <div class="poster">
+          <embed id="poster" src="posters/2026/jliu-26a.pdf" scrollbar=0 type="application/pdf">
+        </div>
+      <h3 id="name">Jerry Liu - Full-Twist Presentations for Fundamental Groups of Complements of Complexified Hyperplane Arrangements </h3>
+      <h4 id="school">Program for Research in Mathematics, Engineering, and Science (PRIMES), Massachusetts Institute of Technology </h4>
+        <div class="poster">
+          <embed id="poster" src="posters/2026/jliu-26b.pdf" scrollbar=0 type="application/pdf">
+        </div>
+    </div>
+
+    <div id="Alvin" class="tabcontent" style="display:block">
+      <h3 id="name">Alvin Lyuh - Can Confidence Detect Failure in Visual LLMs?</h3>
+      <h4 id="school">Laboratory Learning Program, Princeton University</h4>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/alyuh-26.pdf" scrollbar=0 type="application/pdf">
+      </div>
+    </div>
+
+    <div id="Eloise" class="tabcontent">
+      <h3 id="name">Eloise Mendelson - Scaling a Startup: Product, Marketing, and Operations for a Fitness App</h3>
+      <h4 id="school">PaceLine</h4>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/emendelson-26.pdf" scrollbar=0 type="application/pdf">
+      </div>
+    </div>
+    
+    <div id="Izzy" class="tabcontent">
+      <h3 id="name">Izzy Naso - Using Unusual Indicators in Commercial Real Estate to Predict Community Trends</h3>
+      <h4 id="school">BentallGreenOak</h4>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/inaso-26.pdf" scrollbar=0 type="application/pdf">
+      </div>
+    </div>
+    
+    <div id="Yixing" class="tabcontent">
+      <h3 id="name">Yixing Shi - Content-Aware Rendering for Efficient Virtual Reality</h3>
+      <h4 id="school">New York University</h4>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/yshi-26.pdf" scrollbar=0 type="application/pdf">
+      </div>
+    </div>
+
+    <div id="Jerry Wang" class="tabcontent">
+      <h3 id="name">Jerry Wang - Navigating the Complexities of Child Online Safety</h3>
+      <h4 id="school"> The University of California, Santa Cruz</h4>
+      <div class="poster">
+        <embed id="poster" src="posters/2026/jwang-26.pdf" scrollbar=0 type="application/pdf">
+      </div>
+    </div>
+
+    <script>
+      //open the tab with the corresponding name
+      function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+    </script>
+  </div>
+  </div>
+  </div>
+
+</body>
+
+</html>
