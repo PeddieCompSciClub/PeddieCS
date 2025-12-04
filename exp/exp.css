@@ -20,6 +20,18 @@ header h4 {
     --select: #ccc;
 }
 
+/* Style the buttons w/ images */
+.buttonimg {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.imagetab {
+    max-width: 300px; 
+    max-height: 300px;
+}
+
 .body {
     display: grid;
     margin: 1em;
@@ -67,17 +79,6 @@ header h4 {
     overflow: hidden;
     border: 1px solid var(--select);
     background-color: var(--table);
-}
-
-/* Style the buttons that are used to open the tab content */
-.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
 }
 
 /* Change background color of buttons on hover */
